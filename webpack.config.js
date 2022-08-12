@@ -5,7 +5,7 @@ module.exports = {
   entry: path.resolve(__dirname, 'src/index.js'),
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'my-plugin.js',
+    filename: 'terrator-plugin.js',
     libraryTarget: 'commonjs',
   },
   resolve: {

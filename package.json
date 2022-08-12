@@ -1,9 +1,9 @@
 {
-  "name": "leto-modelizer-plugin-template",
+  "name": "terrator-plugin",
   "version": "0.1.0",
-  "description": "Template for plugin creation",
-  "main": "dist/my-plugin.js",
-  "exports": "./dist/my-plugin.js",
+  "description": "Terraform plugin for Leto-Modelizer.",
+  "main": "dist/terrator-plugin.js",
+  "exports": "./dist/terrator-plugin.js",
   "scripts": {
     "build": "webpack",
     "build:resources": "node scripts/generateResources.js",
@@ -15,18 +15,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ditrit/leto-modelizer-plugin-template.git"
+    "url": "git+https://github.com/ditrit/terrator-plugin.git"
   },
   "keywords": [
     "Leto-modelizer",
-    "plugin-template"
+    "terrator-plugin",
+    "terraform"
   ],
   "author": "Vincent Moittie <moittie.vincent@gmail.com>",
   "license": "Mozilla Public License 2.0",
   "bugs": {
-    "url": "https://github.com/ditrit/leto-modelizer-plugin-template/issues"
+    "url": "https://github.com/ditrit/terrator-plugin/issues"
   },
-  "homepage": "https://github.com/ditrit/leto-modelizer-plugin-template#readme",
+  "homepage": "https://github.com/ditrit/terrator-plugin#readme",
   "dependencies": {
     "leto-modelizer-plugin-core": "github:ditrit/leto-modelizer-plugin-core#0.2.0"
   },

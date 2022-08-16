@@ -75,9 +75,9 @@ export default {
 
 ## Write your metadata
 
-To make your plugin work we need to have an array of [ComponentDefinitions](https://github.com/ditrit/leto-modelizer-plugin-core/blob/main/src/models/ComponentDefinition.js).
+To make your plugin work we need to have an array of [ComponentDefinitions](https://github.com/ditrit/leto-modelizer-plugin-core/blob/0.2.0/src/models/ComponentDefinition.js).
 
-The [DefaultMetadata](https://github.com/ditrit/leto-modelizer-plugin-core/blob/main/src/metadata/DefaultMetadata.js) provides two methods:
+The [DefaultMetadata](https://github.com/ditrit/leto-modelizer-plugin-core/blob/0.2.0/src/metadata/DefaultMetadata.js) provides two methods:
 * `validate` to validate the metadata
 * `getComponentDefinitions` to get all ComponentDefinitions from your provided metadata
 

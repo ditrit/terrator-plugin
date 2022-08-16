@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/ditrit/leto-modelizer-plugin-template#readme",
   "dependencies": {
-    "leto-modelizer-plugin-core": "github:ditrit/leto-modelizer-plugin-core"
+    "leto-modelizer-plugin-core": "github:ditrit/leto-modelizer-plugin-core#0.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.9",

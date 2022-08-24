@@ -11,5 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Setup GitHub workflow
 - Setup default plugin structure
+- Set default metadata parser and validator
+- Add metadata for aws
 
 [Unreleased]: https://github.com/ditrit/terrator-plugin/blob/main/changelog.md

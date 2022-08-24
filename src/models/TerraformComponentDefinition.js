@@ -6,7 +6,7 @@ import { ComponentDefinition } from 'leto-modelizer-plugin-core';
  */
 class TerraformComponentDefinition extends ComponentDefinition {
   /**
-   * Override ComponentDefinition construction with blockType and provider properties.
+   * Override ComponentDefinition constructor with blockType and provider properties.
    * @param {String} [props.blockType] - Type of Terraform block.
    * @param {String} [props.provider] - Related provider of terraform block.
    * @see ComponentDefinition

@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/ditrit/terrator-plugin#readme",
   "dependencies": {
-    "leto-modelizer-plugin-core": "github:ditrit/leto-modelizer-plugin-core#0.2.0"
+    "leto-modelizer-plugin-core": "github:ditrit/leto-modelizer-plugin-core#0.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.18.9",

@@ -1,0 +1,62 @@
+{
+  "name": "aws",
+  "model": "DefaultModel",
+  "icon": "Aws",
+  "isContainer": false,
+  "attributes": [],
+  "data": [],
+  "modules": [],
+  "resources": [
+    {
+      "type": "aws_internet_gateway",
+      "model": "DefaultModel",
+      "icon": "AwsInternetGateway",
+      "isContainer": false,
+      "attributes": [
+        {
+          "name": "not_a_link",
+          "type": "String",
+          "required": false,
+          "attributes": [],
+          "rules": {}
+        },
+        {
+          "name": "contain_a_link",
+          "type": "Object",
+          "required": false,
+          "attributes": [
+            {
+              "name": "vpc_id2",
+              "type": "Link",
+              "linkType": "Default",
+              "linkRef": "aws_vpc_2",
+              "required": false,
+              "attributes": [],
+              "rules": {}
+            }
+          ],
+          "rules": {}
+        },
+        {
+          "name": "vpc_id1",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "aws_vpc",
+          "required": false,
+          "attributes": [],
+          "rules": {}
+        },
+        {
+          "name": "vpc_id2",
+          "type": "Link",
+          "linkType": "Reverse",
+          "linkRef": "aws_vpc",
+          "required": false,
+          "attributes": [],
+          "rules": {}
+        }
+      ]
+    }
+  ],
+  "variables": []
+}

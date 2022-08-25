@@ -1,0 +1,62 @@
+{
+  "name": "provider",
+  "model": "provider_model",
+  "icon": "provider_icon",
+  "attributes": [{
+    "name": "name1",
+    "type": "String"
+  }],
+  "data": [{
+    "type": "data_type",
+    "model": "data_model",
+    "icon": "data_icon",
+    "isContainer": false,
+    "attributes": [{
+      "name": "boolean1",
+      "type": "Boolean"
+    }, {
+      "name": "number1",
+      "type": "Number"
+    }, {
+      "name": "array1",
+      "type": "Array"
+    }, {
+      "name": "object1",
+      "type": "Object",
+      "attributes": [{
+        "name": "name2",
+        "type": "String"
+      }]
+    }]
+  }],
+  "modules": [{
+    "type": "module_type",
+    "model": "module_model",
+    "icon": "module_icon",
+    "isContainer": false,
+    "attributes": []
+  }],
+  "resources": [{
+    "type": "resource_type",
+    "model": "resource_model",
+    "icon": "resource_icon",
+    "isContainer": true,
+    "attributes": [{
+      "name": "name3",
+      "type": "String"
+    }, {
+      "name": "link1",
+      "type": "Link",
+      "linkType": "Default",
+      "linkRef": "module_type"
+    }]
+  }],
+  "variables": [{
+    "type": "variable_type",
+    "model": "variable_model",
+    "icon": "variable_icon",
+    "isContainer": false,
+    "required": false,
+    "attributes": []
+  }]
+}

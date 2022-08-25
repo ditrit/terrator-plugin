@@ -1,0 +1,35 @@
+{
+  "name": "aws",
+  "model": "DefaultModel",
+  "icon": "Aws",
+  "isContainer": false,
+  "attributes": [],
+  "data": [],
+  "modules": [],
+  "resources": [
+    {
+      "type": "aws_vpc",
+      "model": "DefaultContainer",
+      "icon": "AwsVpc",
+      "isContainer": true,
+      "attributes": []
+    },
+    {
+      "type": "aws_internet_gateway",
+      "model": "DefaultModel",
+      "icon": "AwsInternetGateway",
+      "isContainer": false,
+      "attributes": [
+        {
+          "name": "vpc_id",
+          "type": "Reference",
+          "required": false,
+          "containerRef": "aws_vpc",
+          "attributes": [],
+          "rules": {}
+        }
+      ]
+    }
+  ],
+  "variables": []
+}

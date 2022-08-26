@@ -1,0 +1,46 @@
+{
+  "name": "awsLink",
+  "model": "DefaultModel",
+  "icon": "Aws",
+  "isContainer": false,
+  "attributes": [],
+  "data": [],
+  "modules": [],
+  "resources": [
+    {
+      "type": "parent",
+      "model": "DefaultModel",
+      "icon": "Parent",
+      "isContainer": false,
+      "attributes": [
+        {
+          "name": "toChild",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "child",
+          "required": false,
+          "attributes": [],
+          "rules": {}
+        },
+        {
+          "name": "fromChild",
+          "type": "Link",
+          "linkType": "Reverse",
+          "linkRef": "child",
+          "required": false,
+          "attributes": [],
+          "rules": {}
+        }
+      ]
+    },
+    {
+      "type": "child",
+      "model": "DefaultModel",
+      "icon": "Child",
+      "isContainer": false,
+      "attributes": [
+      ]
+    }
+  ],
+  "variables": []
+}

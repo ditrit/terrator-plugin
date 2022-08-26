@@ -6,8 +6,20 @@
     "type": "String",
     "required": true
   }],
-  "data": [],
-  "modules": [],
+  "data": [{
+    "type": "aws_ami",
+    "model": "DefaultModel",
+    "icon": "AwsAmi",
+    "isContainer": false,
+    "attributes": []
+  }],
+  "modules": [{
+    "type": "server",
+    "model": "DefaultModel",
+    "icon": "server",
+    "isContainer": false,
+    "attributes": []
+  }],
   "resources": [{
     "type": "aws_security_group",
     "model": "DefaultModel",
@@ -297,5 +309,11 @@
     "isContainer": false,
     "attributes": []
   }],
-  "variables": []
+  "variables": [{
+    "type": "image_id",
+    "model": "DefaultModel",
+    "icon": "ImageId",
+    "isContainer": false,
+    "attributes": []
+  }]
 }

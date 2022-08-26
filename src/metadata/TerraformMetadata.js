@@ -101,6 +101,8 @@ class TerraformMetadata extends DefaultMetadata {
       linkDefinition.targetRef = definedAttribute.linkRef;
     }
 
+    linkDefinition.attributeRef = definedAttribute.name;
+
     linkDefinitions.push(linkDefinition);
   }
 

@@ -60,7 +60,12 @@ describe('Test TerraformParser', () => {
 
     describe('Test method: parse', () => {
       describe('Test default parse', () => {
-        const parser = new TerraformParser();
+        const definitions = new TerraformMetadata({
+          metadata: {
+            aws: JSON.parse(fs.readFileSync('tests/resources/metadata/container.json', 'utf8')),
+          },
+        }).getDefinitions();
+        const parser = new TerraformParser(definitions);
         expect(parser.parse()).toEqual({
           components: [],
           links: [],

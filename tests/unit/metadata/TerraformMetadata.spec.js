@@ -185,16 +185,19 @@ describe('Test TerraformMetadata', () => {
       const components = metadata.getComponentDefinitions();
       expect(metadata.getLinkDefinitions(components)).toEqual([
         new ComponentLinkDefinition({
+          attributeRef: 'vpc_id2',
           sourceRef: 'aws_internet_gateway',
           targetRef: 'aws_vpc_2',
           type: 'Default',
         }),
         new ComponentLinkDefinition({
+          attributeRef: 'vpc_id1',
           sourceRef: 'aws_internet_gateway',
           targetRef: 'aws_vpc',
           type: 'Default',
         }),
         new ComponentLinkDefinition({
+          attributeRef: 'vpc_id2',
           sourceRef: 'aws_vpc',
           targetRef: 'aws_internet_gateway',
           type: 'Reverse',

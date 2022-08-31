@@ -9,14 +9,14 @@
   "data": [{
     "type": "aws_ami",
     "model": "DefaultModel",
-    "icon": "AwsAmi",
+    "icon": "Aws_EC2_AMI",
     "isContainer": false,
     "attributes": []
   }],
   "modules": [{
     "type": "server",
     "model": "DefaultModel",
-    "icon": "server",
+    "icon": "Aws_Servers",
     "isContainer": false,
     "attributes": []
   }],
@@ -37,7 +37,7 @@
   }, {
     "type": "aws_instance",
     "model": "DefaultModel",
-    "icon": "AwsInstance",
+    "icon": "Aws_EC2-Instance",
     "isContainer": false,
     "attributes": [{
       "name": "security_groups",
@@ -67,7 +67,7 @@
   }, {
     "type": "aws_volume_attachment",
     "model": "DefaultModel",
-    "icon": "AwsVolumeAttachment",
+    "icon": "Aws_Elastic-Block-Store_Volume",
     "isContainer": false,
     "attributes": [{
       "name": "device_name",
@@ -93,7 +93,7 @@
   }, {
     "type": "aws_ebs_volume",
     "model": "DefaultModel",
-    "icon": "AwsEbsVolume",
+    "icon": "Aws_Elastic-Block-Store_Volume",
     "isContainer": false,
     "attributes": [{
       "name": "availability_zone",
@@ -105,7 +105,7 @@
   }, {
     "type": "aws_elb",
     "model": "DefaultModel",
-    "icon": "AwsElb",
+    "icon": "Aws_Elastic-Load-Balancing_Network-Load-Balancer",
     "isContainer": false,
     "attributes": [{
       "name": "listener",
@@ -165,14 +165,14 @@
   }, {
     "type": "aws_vpc",
     "model": "DefaultModel",
-    "icon": "AwsVpc",
+    "icon": "Aws_Virtual-Private-Cloud",
     "isContainer": true,
     "containerRef": [],
     "attributes": []
   }, {
     "type": "aws_internet_gateway",
     "model": "DefaultModel",
-    "icon": "AwsInternetGateway",
+    "icon": "Aws_VPC_Internet-Gateway",
     "isContainer": false,
     "required": false,
     "attributes": [{
@@ -186,7 +186,7 @@
   }, {
     "type": "aws_route",
     "model": "DefaultModel",
-    "icon": "AwsRoute",
+    "icon": "Aws_Route-53",
     "isContainer": false,
     "attributes": [{
       "name": "route_table_id",
@@ -242,7 +242,7 @@
   }, {
     "type": "aws_route53_zone",
     "model": "DefaultModel",
-    "icon": "AwsRoute53Zone",
+    "icon": "Aws_Route-53-Hosted-Zone",
     "isContainer": true,
     "attributes": [{
       "name": "name",
@@ -256,7 +256,7 @@
   }, {
     "type": "aws_route53_record",
     "model": "DefaultModel",
-    "icon": "AwsRoute53Record",
+    "icon": "Aws_Route-53_Route-Table",
     "isContainer": false,
     "attributes": [{
       "name": "zone_id",
@@ -305,14 +305,14 @@
   }, {
     "type": "aws_key_pair",
     "model": "DefaultModel",
-    "icon": "AwsKeyPair",
+    "icon": "Aws_Identity-Access-Management_Long-Term-Security-Credential",
     "isContainer": false,
     "attributes": []
   }],
   "variables": [{
     "type": "image_id",
     "model": "DefaultModel",
-    "icon": "ImageId",
+    "icon": "variable",
     "isContainer": false,
     "attributes": []
   }]

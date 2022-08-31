@@ -127,7 +127,7 @@ describe('Test TerraformParser', () => {
               definition: new TerraformComponentDefinition({
                 blockType: 'module',
                 provider: 'aws',
-                icon: 'server',
+                icon: 'Aws_Servers',
                 type: 'server',
                 model: 'DefaultModel',
               }),
@@ -144,7 +144,7 @@ describe('Test TerraformParser', () => {
                 blockType: 'data',
                 provider: 'aws',
                 type: 'aws_ami',
-                icon: 'AwsAmi',
+                icon: 'Aws_EC2_AMI',
                 model: 'DefaultModel',
               }),
               attributes: [
@@ -178,7 +178,7 @@ describe('Test TerraformParser', () => {
                 blockType: 'resource',
                 provider: 'aws',
                 type: 'aws_route53_zone',
-                icon: 'AwsRoute53Zone',
+                icon: 'Aws_Route-53-Hosted-Zone',
                 model: 'DefaultModel',
                 isContainer: true,
                 definedAttributes: [new ComponentAttributeDefinition({
@@ -207,7 +207,7 @@ describe('Test TerraformParser', () => {
                 blockType: 'variable',
                 provider: 'aws',
                 type: 'image_id',
-                icon: 'ImageId',
+                icon: 'variable',
                 model: 'DefaultModel',
               }),
               attributes: [new ComponentAttribute({

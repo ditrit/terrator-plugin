@@ -114,8 +114,9 @@ describe('Test TerraformRenderer', () => {
         const input = fs.readFileSync('tests/resources/tf/link_default_multiple.tf', 'utf8');
         expect(new TerraformRender().render([
           new Component({
-            name: 'parent1',
-            id: 'parent1',
+            name: 'parent_default_multiple_1',
+            id: 'parent_default_multiple_1',
+            path: './link_default_multiple.tf',
             definition: new TerraformComponentDefinition({
               blockType: 'resource',
               provider: 'awsLink',
@@ -131,13 +132,14 @@ describe('Test TerraformRenderer', () => {
             }),
             attributes: [new ComponentAttribute({
               name: 'name',
-              value: 'parent1',
+              value: 'parent_default_multiple_1',
               type: 'String',
             })],
           }),
           new Component({
-            name: 'child1',
-            id: 'child1',
+            name: 'child_default_multiple_1',
+            id: 'child_default_multiple_1',
+            path: './link_default_multiple.tf',
             definition: new TerraformComponentDefinition({
               blockType: 'resource',
               provider: 'awsLink',
@@ -147,13 +149,14 @@ describe('Test TerraformRenderer', () => {
             }),
             attributes: [new ComponentAttribute({
               name: 'name',
-              value: 'child1',
+              value: 'child_default_multiple_1',
               type: 'String',
             })],
           }),
           new Component({
-            name: 'child2',
-            id: 'child2',
+            name: 'child_default_multiple_2',
+            id: 'child_default_multiple_2',
+            path: './link_default_multiple.tf',
             definition: new TerraformComponentDefinition({
               blockType: 'resource',
               provider: 'awsLink',
@@ -163,14 +166,14 @@ describe('Test TerraformRenderer', () => {
             }),
             attributes: [new ComponentAttribute({
               name: 'name',
-              value: 'child2',
+              value: 'child_default_multiple_2',
               type: 'String',
             })],
           }),
         ], [
           new ComponentLink({
-            source: 'parent1',
-            target: 'child1',
+            source: 'parent_default_multiple_1',
+            target: 'child_default_multiple_1',
             definition: new ComponentLinkDefinition({
               attributeRef: 'toChild',
               sourceRef: 'parent',
@@ -179,8 +182,8 @@ describe('Test TerraformRenderer', () => {
             }),
           }),
           new ComponentLink({
-            source: 'parent1',
-            target: 'child2',
+            source: 'parent_default_multiple_1',
+            target: 'child_default_multiple_2',
             definition: new ComponentLinkDefinition({
               attributeRef: 'toChild',
               sourceRef: 'parent',
@@ -189,8 +192,8 @@ describe('Test TerraformRenderer', () => {
             }),
           }),
           new ComponentLink({
-            source: 'parent2',
-            target: 'child1',
+            source: 'parent_default_multiple_2',
+            target: 'child_default_multiple_1',
             definition: new ComponentLinkDefinition({
               attributeRef: 'toChild',
               sourceRef: 'parent',

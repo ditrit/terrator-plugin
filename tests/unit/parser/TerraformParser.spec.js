@@ -253,8 +253,8 @@ describe('Test TerraformParser', () => {
 
           expect(parser.parse([input]).links)
             .toEqual([new ComponentLink({
-              source: 'parent1',
-              target: 'child1',
+              source: 'parent_default_single_1',
+              target: 'child_default_single_1',
               definition: new ComponentLinkDefinition({
                 attributeRef: 'toChild',
                 sourceRef: 'parent',
@@ -269,8 +269,8 @@ describe('Test TerraformParser', () => {
           expect(parser.parse([input]).links)
             .toEqual([
               new ComponentLink({
-                source: 'parent1',
-                target: 'child1',
+                source: 'parent_default_multiple_1',
+                target: 'child_default_multiple_1',
                 definition: new ComponentLinkDefinition({
                   attributeRef: 'toChild',
                   sourceRef: 'parent',
@@ -279,8 +279,8 @@ describe('Test TerraformParser', () => {
                 }),
               }),
               new ComponentLink({
-                source: 'parent1',
-                target: 'child2',
+                source: 'parent_default_multiple_1',
+                target: 'child_default_multiple_2',
                 definition: new ComponentLinkDefinition({
                   attributeRef: 'toChild',
                   sourceRef: 'parent',
@@ -294,8 +294,8 @@ describe('Test TerraformParser', () => {
           const input = fs.readFileSync('tests/resources/tf/link_reverse_single.tf', 'utf8');
           expect(parser.parse([input]).links)
             .toEqual([new ComponentLink({
-              source: 'parent1',
-              target: 'child1',
+              source: 'parent_reverse_single_1',
+              target: 'child_reverse_single_1',
               definition: new ComponentLinkDefinition({
                 attributeRef: 'fromChild',
                 sourceRef: 'child',
@@ -310,8 +310,8 @@ describe('Test TerraformParser', () => {
           expect(parser.parse([input]).links)
             .toEqual([
               new ComponentLink({
-                source: 'parent1',
-                target: 'child1',
+                source: 'parent_reverse_multiple_1',
+                target: 'child_reverse_multiple_1',
                 definition: new ComponentLinkDefinition({
                   attributeRef: 'fromChild',
                   sourceRef: 'child',
@@ -320,8 +320,8 @@ describe('Test TerraformParser', () => {
                 }),
               }),
               new ComponentLink({
-                source: 'parent1',
-                target: 'child2',
+                source: 'parent_reverse_multiple_1',
+                target: 'child_reverse_multiple_2',
                 definition: new ComponentLinkDefinition({
                   attributeRef: 'fromChild',
                   sourceRef: 'child',

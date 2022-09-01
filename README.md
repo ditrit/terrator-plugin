@@ -4,16 +4,6 @@ Plugin for managing Terraform files in [Leto-Modelizer](https://github.com/ditri
 
 ## Build your plugin
 
-Before building your plugin, your have to generate the resources of your plugin :
-
-```
-npm run build:resources
-```
-
-This command will generate a `src/assets/index.js` to export all the resources in your plugin.
-
-Once your resources are generated, you can build your plugin with this command:
-
 ```
 npm run build
 ```

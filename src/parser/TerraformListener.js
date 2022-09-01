@@ -18,9 +18,11 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
     this.currentBlockType = null;
     this.currentField = null;
     this.currentComplexeField = null;
+    this.currentFile = null;
   }
 
   addComponent() {
+    this.currentComponent.path = this.currentFile.path;
     this.components.push(this.currentComponent);
     this.currentComponent = null;
     this.currentBlockType = null;

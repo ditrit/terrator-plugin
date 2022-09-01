@@ -13,22 +13,23 @@ import Parser from 'src/antlr/terraformParser';
 class TerraformParser extends DefaultParser {
   /**
    * Indicate if this parser can parse this file.
-   * @param {String} [fileName] - Name of file.
+   * @param {FileInformation} [fileInformation] - File information.
    * @return {Boolean} - Boolean that indicates if this file can be parsed or not.
    */
-  isParsable(fileName) {
-    return /^.*\.tf$/.test(fileName);
+  isParsable(fileInformation) {
+    return /^.*\.tf$/.test(fileInformation.path);
   }
 
   /**
    * Convert the content of files into Components.
-   * @param {String[]} [inputs=[]] - Data you want to parse.
+   * @param {FileInput[]} [inputs=[]] - Data you want to parse.
    * @return {Object} - Object that contains all components, links and errors.
    */
   parse(inputs = []) {
     const listener = new TerraformListener(this.definitions.components);
     inputs.forEach((input) => {
-      const stream = new antlr4.InputStream(input);
+      listener.currentFile = input;
+      const stream = new antlr4.InputStream(input.content);
       const lexer = new Lexer(stream);
       const tokens = new antlr4.CommonTokenStream(lexer);
       const parser = new Parser(tokens);

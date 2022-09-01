@@ -5,7 +5,11 @@ import {
   Component,
   ComponentAttribute,
   ComponentAttributeDefinition,
-  ComponentDefinition, ComponentLink, ComponentLinkDefinition,
+  ComponentDefinition,
+  ComponentLink,
+  ComponentLinkDefinition,
+  FileInformation,
+  FileInput,
 } from 'leto-modelizer-plugin-core';
 import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
 
@@ -15,11 +19,15 @@ describe('Test TerraformParser', () => {
       const parser = new TerraformParser();
 
       it('Should return true on terraform file', () => {
-        expect(parser.isParsable('file.tf')).toBeTruthy();
+        expect(parser.isParsable(new FileInformation({
+          path: './file.tf',
+        }))).toBeTruthy();
       });
 
       it('Should return false on file that is not a terraform file', () => {
-        expect(parser.isParsable('file.txt')).toBeFalsy();
+        expect(parser.isParsable(new FileInformation({
+          path: './file.txt',
+        }))).toBeFalsy();
       });
     });
     describe('Test method: getParents', () => {
@@ -82,12 +90,16 @@ describe('Test TerraformParser', () => {
         const parser = new TerraformParser(metadata.getDefinitions());
 
         it('Should have all elements in tf', () => {
-          const input = fs.readFileSync('tests/resources/tf/app.tf', 'utf8');
+          const input = new FileInput({
+            path: './app.tf',
+            content: fs.readFileSync('tests/resources/tf/app.tf', 'utf8'),
+          });
           const { components } = parser.parse([input]);
           expect(components).toEqual([
             new Component({
               id: 'aws',
               name: 'aws',
+              path: './app.tf',
               definition: new TerraformComponentDefinition({
                 type: 'aws',
                 provider: 'aws',
@@ -124,6 +136,7 @@ describe('Test TerraformParser', () => {
             new Component({
               name: 'server',
               id: 'server',
+              path: './app.tf',
               definition: new TerraformComponentDefinition({
                 blockType: 'module',
                 provider: 'aws',
@@ -140,6 +153,7 @@ describe('Test TerraformParser', () => {
             new Component({
               name: 'web',
               id: 'web',
+              path: './app.tf',
               definition: new TerraformComponentDefinition({
                 blockType: 'data',
                 provider: 'aws',
@@ -174,6 +188,7 @@ describe('Test TerraformParser', () => {
             new Component({
               name: 'publicdns',
               id: 'publicdns',
+              path: './app.tf',
               definition: new TerraformComponentDefinition({
                 blockType: 'resource',
                 provider: 'aws',
@@ -203,6 +218,7 @@ describe('Test TerraformParser', () => {
             new Component({
               id: 'image_id',
               name: 'image_id',
+              path: './app.tf',
               definition: new TerraformComponentDefinition({
                 blockType: 'variable',
                 provider: 'aws',
@@ -229,7 +245,10 @@ describe('Test TerraformParser', () => {
         const parser = new TerraformParser(definitions);
 
         it('Should have valid tree', () => {
-          const input = fs.readFileSync('tests/resources/tf/container.tf', 'utf8');
+          const input = new FileInput({
+            path: './container.tf',
+            content: fs.readFileSync('tests/resources/tf/container.tf', 'utf8'),
+          });
           const { components } = parser.parse([input]);
 
           expect(components.length).toEqual(1);
@@ -249,7 +268,10 @@ describe('Test TerraformParser', () => {
         const parser = new TerraformParser(definitions);
 
         it('Should parse single default link', () => {
-          const input = fs.readFileSync('tests/resources/tf/link_default_single.tf', 'utf8');
+          const input = new FileInput({
+            path: './link_default_single.tf',
+            content: fs.readFileSync('tests/resources/tf/link_default_single.tf', 'utf8'),
+          });
 
           expect(parser.parse([input]).links)
             .toEqual([new ComponentLink({
@@ -265,7 +287,10 @@ describe('Test TerraformParser', () => {
         });
 
         it('Should parse multiple default links', () => {
-          const input = fs.readFileSync('tests/resources/tf/link_default_multiple.tf', 'utf8');
+          const input = new FileInput({
+            path: './link_default_multiple.tf',
+            content: fs.readFileSync('tests/resources/tf/link_default_multiple.tf', 'utf8'),
+          });
           expect(parser.parse([input]).links)
             .toEqual([
               new ComponentLink({
@@ -291,7 +316,10 @@ describe('Test TerraformParser', () => {
         });
 
         it('Should parse single reverse link', () => {
-          const input = fs.readFileSync('tests/resources/tf/link_reverse_single.tf', 'utf8');
+          const input = new FileInput({
+            path: './link_reverse_single.tf',
+            content: fs.readFileSync('tests/resources/tf/link_reverse_single.tf', 'utf8'),
+          });
           expect(parser.parse([input]).links)
             .toEqual([new ComponentLink({
               source: 'parent_reverse_single_1',
@@ -306,7 +334,10 @@ describe('Test TerraformParser', () => {
         });
 
         it('Should parse multiple reverse links', () => {
-          const input = fs.readFileSync('tests/resources/tf/link_reverse_multiple.tf', 'utf8');
+          const input = new FileInput({
+            path: './link_reverse_multiple.tf',
+            content: fs.readFileSync('tests/resources/tf/link_reverse_multiple.tf', 'utf8'),
+          });
           expect(parser.parse([input]).links)
             .toEqual([
               new ComponentLink({

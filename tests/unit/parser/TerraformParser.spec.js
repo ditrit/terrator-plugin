@@ -15,6 +15,55 @@ import TerraformComponentDefinition from 'src/models/TerraformComponentDefinitio
 
 describe('Test TerraformParser', () => {
   describe('Test methods', () => {
+    describe('Test method: hasParent', () => {
+      const parser = new TerraformParser();
+
+      it('Should return false on no definition', () => {
+        expect(parser.hasParent(new Component())).toBeFalsy();
+      });
+
+      it('Should return false on no parent', () => {
+        expect(parser.hasParent(new Component({
+          definition: new ComponentDefinition({
+            parentTypes: [],
+          }),
+        }))).toBeFalsy();
+      });
+
+      it('Should return false on no attribute with reference of parent', () => {
+        expect(parser.hasParent(new Component({
+          definition: new ComponentDefinition({
+            parentTypes: ['parent1'],
+          }),
+          attributes: [new ComponentAttribute({
+            name: 'test',
+            value: 'test',
+            definition: new ComponentAttributeDefinition({
+              name: 'test',
+              type: 'String',
+            }),
+          })]
+        }))).toBeFalsy();
+      });
+
+      it('Should return true on attribute with reference of parent', () => {
+        expect(parser.hasParent(new Component({
+          definition: new ComponentDefinition({
+            parentTypes: ['parent1'],
+          }),
+          attributes: [new ComponentAttribute({
+            name: 'parentId',
+            value: 'parent1',
+            definition: new ComponentAttributeDefinition({
+              name: 'parentId',
+              type: 'Reference',
+              containerRef: 'parent1'
+            }),
+          })]
+        }))).toBeTruthy();
+      });
+    });
+
     describe('Test method: isParsable', () => {
       const parser = new TerraformParser();
 

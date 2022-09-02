@@ -213,6 +213,18 @@ describe('Test TerraformParser', () => {
                     required: true,
                   }),
                 }),
+                new ComponentAttribute({
+                  name: 'image_id',
+                  value: null,
+                  type: 'String',
+                  definition: null,
+                }),
+                new ComponentAttribute({
+                  name: 'position',
+                  value: 1,
+                  type: 'Number',
+                  definition: null,
+                }),
               ],
             }),
             new Component({

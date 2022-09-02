@@ -8,7 +8,7 @@ import {
 const getText = (ctx) => ctx.getText().replaceAll('"', '').trim();
 
 class TerraformListener extends antlr4.tree.ParseTreeListener {
-  constructor(definitions = []) {
+  constructor(definitions) {
     super();
     this.definitions = definitions;
     this.components = [];
@@ -48,7 +48,6 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   enterDataDirective() {
     this.currentBlockType = 'data';
     this.currentComponent = new Component();
-    this.currentComponent.definition = this.definitions.find((definition) => definition.blockType === 'data');
   }
 
   // Exit a parse tree produced by terraformParser#dataDirective.
@@ -197,7 +196,7 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
     this.currentField.name = getText(ctx.IDENTIFIER());
     if (this.currentComplexeField) {
       this.currentComplexeField.value.push(this.currentField);
-    } else if (this.currentField.name !== null && this.currentField.value !== null) {
+    } else {
       this.currentComponent.attributes
         .push(this.currentField);
     }

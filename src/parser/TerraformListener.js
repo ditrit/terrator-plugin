@@ -56,10 +56,12 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   }
 
   // Enter a parse tree produced by terraformParser#moduleDirective.
-  enterModuleDirective() {
+  enterModuleDirective(ctx) {
     this.currentBlockType = 'module';
     this.currentComponent = new Component();
-    this.currentComponent.definition = this.definitions.find((definition) => definition.blockType === 'module');
+    const type = getText(ctx.name());
+    this.currentComponent.definition = this.definitions
+      .find((definition) => definition.blockType === 'module' && definition.type === type) || null;
   }
 
   // Exit a parse tree produced by terraformParser#moduleDirective.
@@ -81,10 +83,13 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   }
 
   // Enter a parse tree produced by terraformParser#providerDirective.
-  enterProviderDirective() {
+  enterProviderDirective(ctx) {
     this.currentBlockType = 'provider';
     this.currentComponent = new Component();
-    this.currentComponent.definition = this.definitions.find((definition) => definition.blockType === 'provider');
+    const name = getText(ctx.name());
+    this.currentComponent.definition = this.definitions
+      .find((definition) => definition.blockType === 'provider'
+        && definition.provider === name) || null;
   }
 
   // Exit a parse tree produced by terraformParser#providerDirective.
@@ -112,10 +117,12 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   }
 
   // Enter a parse tree produced by terraformParser#variableDirective.
-  enterVariableDirective() {
+  enterVariableDirective(ctx) {
+    const type = getText(ctx.name());
     this.currentBlockType = 'variable';
     this.currentComponent = new Component();
-    this.currentComponent.definition = this.definitions.find((definition) => definition.blockType === 'variable') || null;
+    this.currentComponent.definition = this.definitions
+      .find((definition) => definition.blockType === 'variable' && definition.type === type) || null;
   }
 
   // Exit a parse tree produced by terraformParser#variableDirective.
@@ -141,16 +148,15 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   }
 
   // Enter a parse tree produced by terraformParser#resourceType.
-  enterProviderType() {
+  enterProviderType(ctx) {
+    const type = getText(ctx);
+    this.currentComponent.definition = this.definitions
+      .find((definition) => definition.blockType === this.currentBlockType
+        && definition.type === type) || null;
   }
 
   // Exit a parse tree produced by terraformParser#resourceType.
-  exitProviderType(ctx) {
-    const type = getText(ctx);
-    if (this.currentBlockType === 'resource') {
-      this.currentComponent.definition = this.definitions.find((definition) => definition.blockType === 'resource'
-      && definition.type === type);
-    }
+  exitProviderType() {
   }
 
   // Enter a parse tree produced by terraformParser#type.

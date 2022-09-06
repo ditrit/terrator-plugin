@@ -1,12 +1,12 @@
-resource "parent" "parent1" {
-    name = "parent1"
-    toChild = ["child1","child2"]
+resource "parent" "parent_default_multiple_1" {
+    name = "parent_default_multiple_1"
+    toChild = ["child_default_multiple_1","child_default_multiple_2"]
 }
 
-resource "child" "child1" {
-    name = "child1"
+resource "child" "child_default_multiple_1" {
+    name = "child_default_multiple_1"
 }
 
-resource "child" "child2" {
-    name = "child2"
+resource "child" "child_default_multiple_2" {
+    name = "child_default_multiple_2"
 }

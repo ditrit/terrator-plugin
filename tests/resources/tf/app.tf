@@ -18,6 +18,8 @@ data "aws_ami" "web" {
 
 resource "aws_route53_zone" "publicdns" {
     name = "aws.domaine.fr"
+    image_id = null
+    position = 1
 }
 
 variable "image_id" {

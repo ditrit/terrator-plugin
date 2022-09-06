@@ -3,6 +3,7 @@ import template from 'src/render/TerraformTemplate';
 import {
   DefaultRender,
   ComponentAttribute,
+  FileInput,
 } from 'leto-modelizer-plugin-core';
 
 /**
@@ -23,12 +24,13 @@ class TerraformRenderer extends DefaultRender {
   }
 
   /**
-   * Convert all provided components and links in terraform file content.
-   * @param {Component[]} components - List of components you want to convert.
+   * Convert all provided components and links in terraform files.
+   * @param {Component[]} componentsTree - List of components you want to convert.
    * @param {ComponentLink[]} links - List of links you want to convert.
-   * @return {String} - Generated file content from components and links.
+   * @param {String} defaultFileName - Default file name to set in case of empty path on component.
+   * @return {FileInput[]} - Array of generated files from components and links.
    */
-  render(componentsTree, links) {
+  render(componentsTree, links, defaultFileName = './new_file.tf') {
     links.forEach((link) => {
       const component = componentsTree.find((c) => c.id === link.source);
       if (!component) {
@@ -41,9 +43,11 @@ class TerraformRenderer extends DefaultRender {
         link.target,
       );
     });
-    const components = [];
-    this.collectComponentsFromTree(components, componentsTree);
-    return `${nunjucks.renderString(this.template, { components }).trim()}\n`;
+
+    const componentsMap = new Map();
+    this.collectComponentsFromTree(componentsMap, componentsTree, defaultFileName);
+
+    return this.generateFilesFromComponentsMap(componentsMap);
   }
 
   /**
@@ -83,19 +87,54 @@ class TerraformRenderer extends DefaultRender {
   }
 
   /**
-   * Transform tree of components into an array of components.
-   * @param {Component[]} components - Final array to populate.
+   * Transform tree of components into an array of components associated by file name in a map.
+   * @param {Map<String, Component[]>} files - Final map to populate.
    * @param {Component[]} tree - Tree to get components.
+   * @param {String} defaultFileName - Default file name to set in case of empty path on component.
    */
-  collectComponentsFromTree(components, tree) {
+  collectComponentsFromTree(files, tree, defaultFileName) {
     tree.forEach((component) => {
-      components.push(component);
+      this.initComponentPath(component, defaultFileName);
+
+      if (!files.has(component.path)) {
+        files.set(component.path, [component]);
+      } else {
+        files.get(component.path).push(component);
+      }
+
       if (component.children.length === 0) {
         return;
       }
       component.children.forEach((child) => this.setContainerAttribute(component, child));
-      this.collectComponentsFromTree(components, component.children);
+      this.collectComponentsFromTree(files, component.children, component.path);
     });
+  }
+
+  /**
+   * Initialize component path if empty.
+   * @param {Component} component - Component to init.
+   * @param {String} defaultFileName - Default file name to set if empty.
+   */
+  initComponentPath(component, defaultFileName) {
+    if (!component.path) {
+      component.path = defaultFileName;
+    }
+  }
+
+  /**
+   * Render files from related components.
+   * @param {Map<String,Component>} map - Component mapped by file name.
+   * @return {FileInput[]} Render files array.
+   */
+  generateFilesFromComponentsMap(map) {
+    const files = [];
+    map.forEach((components, path) => {
+      files.push(new FileInput({
+        path,
+        content: `${nunjucks.renderString(this.template, { components }).trim()}\n`,
+      }));
+    });
+    return files;
   }
 }
 

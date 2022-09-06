@@ -1,8 +1,8 @@
-resource "parent" "parent1" {
-    name = "parent1"
-    fromChild = "child1"
+resource "parent" "parent_reverse_single_1" {
+    name = "parent_reverse_single_1"
+    fromChild = "child_reverse_single_1"
 }
 
-resource "child" "child1" {
-    name = "child1"
+resource "child" "child_reverse_single_1" {
+    name = "child_reverse_single_1"
 }

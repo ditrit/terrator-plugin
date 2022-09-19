@@ -6,14 +6,15 @@ import {
 } from 'leto-modelizer-plugin-core';
 import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
 import Schema from 'src/metadata/ValidationSchema';
+import providers from 'src/assets/metadata';
 
 /**
  * Class to validate and retrieve components definitions from Terraform metadata.
  */
 class TerraformMetadata extends DefaultMetadata {
-  constructor(resources) {
+  constructor() {
     super();
-    this.providers = resources.metadata;
+    this.providers = providers;
     this.ajv = new Ajv();
     this.schema = Schema;
     this.getAttributeDefinition = this.getAttributeDefinition.bind(this);

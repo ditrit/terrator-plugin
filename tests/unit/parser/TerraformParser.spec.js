@@ -12,6 +12,7 @@ import {
   FileInput,
 } from 'leto-modelizer-plugin-core';
 import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
+import { getTerraformMetadata } from 'tests/resources/utils';
 
 describe('Test TerraformParser', () => {
   describe('Test methods', () => {
@@ -117,11 +118,10 @@ describe('Test TerraformParser', () => {
 
     describe('Test method: parse', () => {
       describe('Test default parse', () => {
-        const definitions = new TerraformMetadata({
-          metadata: {
-            aws: JSON.parse(fs.readFileSync('tests/resources/metadata/container.json', 'utf8')),
-          },
-        }).getDefinitions();
+        const definitions = getTerraformMetadata(
+          'aws',
+          'tests/resources/metadata/container.json',
+        ).getDefinitions();
         const parser = new TerraformParser(definitions);
         expect(parser.parse()).toEqual({
           components: [],
@@ -131,11 +131,10 @@ describe('Test TerraformParser', () => {
       });
 
       describe('Test parse: app.tf', () => {
-        const metadata = new TerraformMetadata({
-          metadata: {
-            aws: JSON.parse(fs.readFileSync('src/assets/metadata/aws.json', 'utf8')),
-          },
-        });
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
         const parser = new TerraformParser(metadata.getDefinitions());
 
         it('Should have all elements in tf', () => {
@@ -298,11 +297,10 @@ describe('Test TerraformParser', () => {
       });
 
       describe('Test parse: container', () => {
-        const definitions = new TerraformMetadata({
-          metadata: {
-            aws: JSON.parse(fs.readFileSync('tests/resources/metadata/container.json', 'utf8')),
-          },
-        }).getDefinitions();
+        const definitions = getTerraformMetadata(
+          'aws',
+          'tests/resources/metadata/container.json',
+        ).getDefinitions();
         const parser = new TerraformParser(definitions);
 
         it('Should have valid tree', () => {
@@ -321,11 +319,10 @@ describe('Test TerraformParser', () => {
       });
 
       describe('Test parse: links', () => {
-        const definitions = new TerraformMetadata({
-          metadata: {
-            aws: JSON.parse(fs.readFileSync('tests/resources/tf/link.json', 'utf8')),
-          },
-        }).getDefinitions();
+        const definitions = getTerraformMetadata(
+          'aws',
+          'tests/resources/tf/link.json',
+        ).getDefinitions();
         const parser = new TerraformParser(definitions);
 
         it('Should parse single default link', () => {

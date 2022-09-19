@@ -5,20 +5,18 @@ import {
   ComponentAttributeDefinition,
   ComponentLinkDefinition,
 } from 'leto-modelizer-plugin-core';
+import { getTerraformMetadata } from 'tests/resources/utils';
 
 describe('Test TerraformMetadata', () => {
   describe('Test methods', () => {
-    const validMetadata = JSON.parse(fs.readFileSync('tests/resources/metadata/valid.json', 'utf8'));
-    const invalidMetadata = JSON.parse(fs.readFileSync('tests/resources/metadata/invalid.json', 'utf8'));
-
     describe('Test method: validate', () => {
       it('Should return true on valid metadata', () => {
-        const metadata = new TerraformMetadata({ metadata: { validMetadata } });
+        const metadata = getTerraformMetadata('validMetadata', 'tests/resources/metadata/valid.json');
         expect(metadata.validate()).toBeTruthy();
       });
 
       it('Should return false on invalid metadata', () => {
-        const metadata = new TerraformMetadata({ metadata: { invalidMetadata } });
+        const metadata = getTerraformMetadata('invalidMetadata', 'tests/resources/metadata/invalid.json');
         let error = null;
         try {
           metadata.validate();
@@ -41,7 +39,7 @@ describe('Test TerraformMetadata', () => {
     });
 
     describe('Test method: getDefinitions', () => {
-      const metadata = new TerraformMetadata({ metadata: { validMetadata } });
+      const metadata = getTerraformMetadata('validMetadata', 'tests/resources/metadata/valid.json');
 
       it('Should return components and links', () => {
         const result = metadata.getDefinitions();
@@ -55,7 +53,7 @@ describe('Test TerraformMetadata', () => {
     })
 
     describe('Test method: getComponentDefinitions', () => {
-      const metadata = new TerraformMetadata({ metadata: { validMetadata } });
+      const metadata = getTerraformMetadata('validMetadata', 'tests/resources/metadata/valid.json');
 
       it('Should return components', () => {
         expect(metadata.getComponentDefinitions()).toEqual([
@@ -126,20 +124,14 @@ describe('Test TerraformMetadata', () => {
 
   describe('Validate default metadata', () => {
     it('Validate: aws.json', () => {
-      const aws = JSON.parse(fs.readFileSync('src/assets/metadata/aws.json', 'utf8'));
-      const metadata = new TerraformMetadata({
-        metadata: {
-          aws,
-        },
-      });
+      const metadata = getTerraformMetadata('aws', 'tests/resources/metadata/valid.json');
       expect(metadata.validate()).toBeTruthy();
     });
   });
 
   describe('Test examples', () => {
     it('Test example: container.json', () => {
-      const container = JSON.parse(fs.readFileSync('tests/resources/metadata/container.json', 'utf8'));
-      const metadata = new TerraformMetadata({ metadata: { container } });
+      const metadata = getTerraformMetadata('container', 'tests/resources/metadata/container.json');
 
       expect(metadata.validate()).toBeTruthy();
       expect(metadata.getComponentDefinitions()).toEqual([
@@ -177,8 +169,7 @@ describe('Test TerraformMetadata', () => {
     });
 
     it('Test example: link.json', () => {
-      const container = JSON.parse(fs.readFileSync('tests/resources/metadata/link.json', 'utf8'));
-      const metadata = new TerraformMetadata({ metadata: { container } });
+      const metadata = getTerraformMetadata('container', 'tests/resources/metadata/link.json');
 
       expect(metadata.validate()).toBeTruthy();
 

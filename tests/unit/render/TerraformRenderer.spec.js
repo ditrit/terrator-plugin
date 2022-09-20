@@ -9,6 +9,7 @@ import {
   ComponentLink, ComponentLinkDefinition, FileInput
 } from 'leto-modelizer-plugin-core';
 import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
+import { getTerraformMetadata } from 'tests/resources/utils';
 
 describe('Test TerraformRenderer', () => {
   it('Test constructor', () => {
@@ -18,11 +19,10 @@ describe('Test TerraformRenderer', () => {
   describe('Test methods', () => {
     describe('Test method: render', () => {
       it('Should render container', () => {
-        const definitions = new TerraformMetadata({
-          metadata: {
-            aws: JSON.parse(fs.readFileSync('tests/resources/metadata/container.json', 'utf8')),
-          },
-        }).getDefinitions();
+        const definitions = getTerraformMetadata(
+          'aws',
+          'tests/resources/metadata/container.json',
+        ).getDefinitions();
         const parser = new TerraformParser(definitions);
         const input = new FileInput({
           path: './container.tf',
@@ -34,11 +34,10 @@ describe('Test TerraformRenderer', () => {
       });
 
       it('Should render container', () => {
-        const definitions = new TerraformMetadata({
-          metadata: {
-            aws: JSON.parse(fs.readFileSync('tests/resources/metadata/container.json', 'utf8')),
-          },
-        }).getDefinitions();
+        const definitions = getTerraformMetadata(
+          'aws',
+          'tests/resources/metadata/container.json',
+        ).getDefinitions();
         const parser = new TerraformParser(definitions);
         const input = new FileInput({
           path: './container.tf',
@@ -50,11 +49,10 @@ describe('Test TerraformRenderer', () => {
       });
 
       describe('Should render multiple files', () => {
-        const definitions = new TerraformMetadata({
-          metadata: {
-            aws: JSON.parse(fs.readFileSync('tests/resources/tf/link.json', 'utf8')),
-          },
-        }).getDefinitions();
+        const definitions = getTerraformMetadata(
+          'aws',
+          'tests/resources/tf/link.json',
+        ).getDefinitions();
         const parser = new TerraformParser(definitions);
         const inputs = [
           new FileInput({
@@ -81,11 +79,10 @@ describe('Test TerraformRenderer', () => {
       });
 
       it('Should render container with empty attributes', () => {
-        const definitions = new TerraformMetadata({
-          metadata: {
-            aws: JSON.parse(fs.readFileSync('tests/resources/metadata/container.json', 'utf8')),
-          },
-        }).getDefinitions();
+        const definitions = getTerraformMetadata(
+          'aws',
+          'tests/resources/metadata/container.json',
+        ).getDefinitions();
         const parser = new TerraformParser(definitions);
         const input = new FileInput({
           path: './container.tf',
@@ -99,11 +96,10 @@ describe('Test TerraformRenderer', () => {
       });
 
       it('Should render single default link', () => {
-        const definitions = new TerraformMetadata({
-          metadata: {
-            aws: JSON.parse(fs.readFileSync('tests/resources/tf/link.json', 'utf8')),
-          },
-        }).getDefinitions();
+        const definitions = getTerraformMetadata(
+          'aws',
+          'tests/resources/tf/link.json',
+        ).getDefinitions();
         const parser = new TerraformParser(definitions);
         const input = new FileInput({
           path: './link_default_single.tf',
@@ -115,11 +111,10 @@ describe('Test TerraformRenderer', () => {
       });
 
       it('Should render multiple default links', () => {
-        const definitions = new TerraformMetadata({
-          metadata: {
-            aws: JSON.parse(fs.readFileSync('tests/resources/tf/link.json', 'utf8')),
-          },
-        }).getDefinitions();
+        const definitions = getTerraformMetadata(
+          'aws',
+          'tests/resources/tf/link.json',
+        ).getDefinitions();
         const parser = new TerraformParser(definitions);
         const input = new FileInput({
           path: './link_default_multiple.tf',
@@ -131,11 +126,10 @@ describe('Test TerraformRenderer', () => {
       });
 
       it('Should render single reverse link', () => {
-        const definitions = new TerraformMetadata({
-          metadata: {
-            aws: JSON.parse(fs.readFileSync('tests/resources/tf/link.json', 'utf8')),
-          },
-        }).getDefinitions();
+        const definitions = getTerraformMetadata(
+          'aws',
+          'tests/resources/tf/link.json',
+        ).getDefinitions();
         const parser = new TerraformParser(definitions);
         const input = new FileInput({
           path: './link_reverse_single.tf',
@@ -147,11 +141,10 @@ describe('Test TerraformRenderer', () => {
       });
 
       it('Should render multiple reverse links', () => {
-        const definitions = new TerraformMetadata({
-          metadata: {
-            aws: JSON.parse(fs.readFileSync('tests/resources/tf/link.json', 'utf8')),
-          },
-        }).getDefinitions();
+        const definitions = getTerraformMetadata(
+          'aws',
+          'tests/resources/tf/link.json',
+        ).getDefinitions();
         const parser = new TerraformParser(definitions);
         const input = new FileInput({
           path: './link_reverse_multiple.tf',
@@ -163,11 +156,10 @@ describe('Test TerraformRenderer', () => {
       });
 
       it('Should render app', () => {
-        const definitions = new TerraformMetadata({
-          metadata: {
-            aws: JSON.parse(fs.readFileSync('src/assets/metadata/aws.json', 'utf8')),
-          },
-        }).getDefinitions();
+        const definitions = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        ).getDefinitions();
         const parser = new TerraformParser(definitions);
         const input = new FileInput({
           path: './app.tf',

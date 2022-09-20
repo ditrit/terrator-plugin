@@ -15,5 +15,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add metadata for aws
 - Add parser for terraform files
 - Add renderer for terraform files
+- Import metadata instead of passing it through constructor in TerraformMetadata
 
 [Unreleased]: https://github.com/ditrit/terrator-plugin/blob/main/changelog.md

@@ -23,5 +23,5 @@
               x="50" y="3em"
               style="font-size: 12px; font-style: italic">component type</text>
     </g>
-    <svg class="component-icon" x="9" y="9"></svg>
+    <svg class="component-icon" x="9" y="9" width="32" height="32"></svg>
 </svg>

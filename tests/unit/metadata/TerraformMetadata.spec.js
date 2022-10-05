@@ -120,6 +120,52 @@ describe('Test TerraformMetadata', () => {
         ]);
       });
     });
+
+    describe('Test method: setChildrenTypes', () => {
+      const input = [{
+        type: 'type1',
+        parentTypes: [
+          'type2',
+          'type3',
+        ],
+      }, {
+        type: 'type2',
+        parentTypes: [
+          'type3',
+        ],
+      }, {
+        type: 'type3',
+        parentTypes: [],
+        }];
+      const output = [{
+        type: 'type1',
+        parentTypes: [
+          'type2',
+          'type3',
+        ],
+      }, {
+        type: 'type2',
+        parentTypes: [
+          'type3',
+        ],
+        childrenTypes: [
+          'type1',
+        ],
+      }, {
+        type: 'type3',
+        parentTypes: [],
+        childrenTypes: [
+          'type1',
+          'type2',
+        ],
+      }];
+  
+      it('should make match input and output', () => {
+        const metadata = getTerraformMetadata('validMetadata', 'tests/resources/metadata/valid.json');
+        metadata.setChildrenTypes(input);
+        expect(input).toEqual(output);
+      });
+    });
   });
 
   describe('Validate default metadata', () => {
@@ -149,6 +195,7 @@ describe('Test TerraformMetadata', () => {
           icon: 'AwsVpc',
           isContainer: true,
           model: 'DefaultContainer',
+          childrenTypes: ['aws_internet_gateway'],
         }),
         new TerraformComponentDefinition({
           blockType: 'resource',

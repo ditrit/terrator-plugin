@@ -116,23 +116,30 @@ class TerraformMetadata extends DefaultMetadata {
     Object.keys(this.providers)
       .map((key) => this.providers[key])
       .forEach((provider) => {
-        definitions.push(this.getProviderDefinition(provider));
+        const providerDefinitions = [];
+        providerDefinitions.push(this.getProviderDefinition(provider));
 
-        provider.data.forEach((data) => definitions.push(
+        provider.data.forEach((data) => providerDefinitions.push(
           this.getBlockDefinition('data', provider.name, data),
         ));
 
-        provider.modules.forEach((module) => definitions.push(
+        provider.modules.forEach((module) => providerDefinitions.push(
           this.getBlockDefinition('module', provider.name, module),
         ));
 
-        provider.resources.forEach((resource) => definitions.push(
+        provider.resources.forEach((resource) => providerDefinitions.push(
           this.getBlockDefinition('resource', provider.name, resource),
         ));
 
-        provider.variables.forEach((variable) => definitions.push(
+        provider.variables.forEach((variable) => providerDefinitions.push(
           this.getBlockDefinition('variable', provider.name, variable),
         ));
+
+        this.setChildrenTypes(providerDefinitions);
+
+        providerDefinitions.forEach((def) => {
+          definitions.push(def);
+        });
       });
     return definitions;
   }
@@ -210,6 +217,26 @@ class TerraformMetadata extends DefaultMetadata {
       .forEach((ref) => parentTypes.push(ref));
 
     return parentTypes;
+  }
+
+  /**
+   * Set all possible children container types.
+   * @param {ComponentDefinition[]} componentDefinitions - Array of component definitions.
+   * container types.
+   */
+  setChildrenTypes(componentDefinitions) {
+    const children = componentDefinitions
+      .filter((def) => def.parentTypes.length > 0)
+      .reduce((acc, def) => {
+        def.parentTypes.forEach((parentType) => {
+          acc[parentType] = [...(acc[parentType] || []), def.type];
+        });
+        return acc;
+      }, {});
+    componentDefinitions.filter((def) => children[def.type])
+      .forEach((def) => {
+        def.childrenTypes = children[def.type];
+      });
   }
 }
 

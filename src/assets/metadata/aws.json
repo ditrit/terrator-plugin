@@ -1,5 +1,7 @@
 {
   "name": "aws",
+  "model": "DefaultModel",
+  "icon": "aws",
   "isContainer": false,
   "attributes": [{
     "name": "region",

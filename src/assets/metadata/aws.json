@@ -166,7 +166,7 @@
     }]
   }, {
     "type": "aws_vpc",
-    "model": "DefaultModel",
+    "model": "DefaultContainer",
     "icon": "Aws_Virtual-Private-Cloud",
     "isContainer": true,
     "containerRef": [],
@@ -230,7 +230,7 @@
     }]
   }, {
     "type": "aws_db_subnet_group",
-    "model": "DefaultModel",
+    "model": "DefaultContainer",
     "icon": "AwsDbSubnetGroup",
     "isContainer": true,
     "attributes": [{
@@ -243,7 +243,7 @@
     }]
   }, {
     "type": "aws_route53_zone",
-    "model": "DefaultModel",
+    "model": "DefaultContainer",
     "icon": "Aws_Route-53-Hosted-Zone",
     "isContainer": true,
     "attributes": [{

@@ -33,8 +33,12 @@ export default {
           pattern: '(String|Boolean|Number|Array|Object|Link|Reference)',
         },
         required: { type: 'boolean' },
-        linkType: { type: 'string' },
+        linkType: {
+          type: 'string',
+          pattern: '(Default|Reverse)',
+        },
         linkRef: { type: 'string' },
+        containerRef: { type: 'string' },
         attributes: { type: 'array', items: { $ref: '#/definitions/attribute' } },
         rules: { $ref: '#/definitions/rule' },
       },

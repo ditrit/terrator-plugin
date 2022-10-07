@@ -173,14 +173,15 @@ class TerraformMetadata extends DefaultMetadata {
    * @returns {TerraformComponentDefinition} Parsed component definition.
    */
   getBlockDefinition(blockType, providerName, block) {
+    const attributes = block.attributes || [];
     const definition = new TerraformComponentDefinition({
       blockType,
       provider: providerName,
       type: block.type,
       model: block.model,
       icon: block.icon,
-      isContainer: block.isContainer,
-      definedAttributes: block.attributes.map(this.getAttributeDefinition),
+      isContainer: block.isContainer || false,
+      definedAttributes: attributes.map(this.getAttributeDefinition),
     });
 
     definition.parentTypes = this.getParentTypes(definition);

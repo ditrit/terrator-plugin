@@ -152,6 +152,8 @@ describe('Test TerraformParser', () => {
                 type: 'aws',
                 provider: 'aws',
                 blockType: 'provider',
+                icon: 'aws',
+                model: 'DefaultModel',
                 definedAttributes: [new ComponentAttributeDefinition({
                   name: 'region',
                   type: 'String',
@@ -242,8 +244,9 @@ describe('Test TerraformParser', () => {
                 provider: 'aws',
                 type: 'aws_route53_zone',
                 icon: 'Aws_Route-53-Hosted-Zone',
-                model: 'DefaultModel',
+                model: 'DefaultContainer',
                 isContainer: true,
+                childrenTypes: ['aws_route53_record'],
                 definedAttributes: [new ComponentAttributeDefinition({
                   name: 'name',
                   type: 'String',

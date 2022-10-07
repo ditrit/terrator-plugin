@@ -1,319 +1,290 @@
 {
   "name": "aws",
-  "isContainer": false,
-  "attributes": [{
-    "name": "region",
-    "type": "String",
-    "required": true
-  }],
-  "data": [{
-    "type": "aws_ami",
-    "model": "DefaultModel",
-    "icon": "Aws_EC2_AMI",
-    "isContainer": false,
-    "attributes": []
-  }],
-  "modules": [{
-    "type": "server",
-    "model": "DefaultModel",
-    "icon": "Aws_Servers",
-    "isContainer": false,
-    "attributes": []
-  }],
-  "resources": [{
-    "type": "aws_security_group",
-    "model": "DefaultModel",
-    "icon": "AwsSecurityGroup",
-    "isContainer": false,
-    "attributes": [{
-      "name": "vpc_id",
-      "type": "Link",
-      "required": false,
-      "linkType": "default",
-      "linkRef": "aws_vpc",
-      "attributes": [],
-      "rules": {}
-    }]
-  }, {
-    "type": "aws_instance",
-    "model": "DefaultModel",
-    "icon": "Aws_EC2-Instance",
-    "isContainer": false,
-    "attributes": [{
-      "name": "security_groups",
-      "type": "Link",
-      "required": false,
-      "linkType": "inverse",
-      "linkRef": "aws_security_group",
-      "attributes": [],
-      "rules": {}
-    }, {
-      "name": "vpc_security_group_ids",
-      "type": "Link",
-      "required": false,
-      "linkType": "inverse",
-      "linkRef": "aws_security_group",
-      "attributes": [],
-      "rules": {}
-    }, {
-      "name": "subnet_id",
-      "type": "Link",
-      "required": false,
-      "linkType": "default",
-      "linkRef": "aws_subnet",
-      "attributes": [],
-      "rules": {}
-    }]
-  }, {
-    "type": "aws_volume_attachment",
-    "model": "DefaultModel",
-    "icon": "Aws_Elastic-Block-Store_Volume",
-    "isContainer": false,
-    "attributes": [{
-      "name": "device_name",
+  "model": "DefaultModel",
+  "icon": "aws",
+  "attributes": [
+    {
+      "name": "region",
       "type": "String",
-      "required": false
-    }, {
-      "name": "volume_id",
-      "type": "Link",
-      "required": false,
-      "linkType": "Default",
-      "linkRef": "aws_ebs_volume",
-      "attributes": [],
-      "rules": {}
-    }, {
-      "name": "instance_id",
-      "type": "Link",
-      "required": false,
-      "linkType": "Default",
-      "linkRef": "aws_instance",
-      "attributes": [],
-      "rules": {}
-    }]
-  }, {
-    "type": "aws_ebs_volume",
-    "model": "DefaultModel",
-    "icon": "Aws_Elastic-Block-Store_Volume",
-    "isContainer": false,
-    "attributes": [{
-      "name": "availability_zone",
-      "type": "String",
-      "required": false,
-      "attributes": [],
-      "rules": {}
-    }]
-  }, {
-    "type": "aws_elb",
-    "model": "DefaultModel",
-    "icon": "Aws_Elastic-Load-Balancing_Network-Load-Balancer",
-    "isContainer": false,
-    "attributes": [{
-      "name": "listener",
-      "type": "Object",
-      "required": true,
-      "attributes": [{
-        "name": "instance_port",
-        "type": "String",
-        "required": true,
-        "attributes": [],
-        "rules": {}
-      }, {
-        "name": "lb_port",
-        "type": "Number",
-        "required": true,
-        "attributes": [],
-        "rules": {}
-      }, {
-        "name": "lb_protocol",
-        "type": "String",
-        "required": true,
-        "attributes": [],
-        "rules": {}
-      }, {
-        "name": "instance_protocol",
-        "type": "String",
-        "required": true,
-        "attributes": [],
-        "rules": {}
-      }],
-      "rules": {}
-    }, {
-      "name": "subnets",
-      "type": "Link",
-      "required": false,
-      "linkType": "Default",
-      "linkRef": "aws_subnet",
-      "attributes": [],
-      "rules": {}
-    }, {
-      "name": "security_groups",
-      "type": "Link",
-      "required": false,
-      "linkType": "Default",
-      "linkRef": "aws_security_group",
-      "attributes": [],
-      "rules": {}
-    }, {
-      "name": "instances",
-      "type": "Link",
-      "required": false,
-      "linkType": "Default",
-      "linkRef": "aws_instance",
-      "attributes": [],
-      "rules": {}
-    }]
-  }, {
-    "type": "aws_vpc",
-    "model": "DefaultModel",
-    "icon": "Aws_Virtual-Private-Cloud",
-    "isContainer": true,
-    "containerRef": [],
-    "attributes": []
-  }, {
-    "type": "aws_internet_gateway",
-    "model": "DefaultModel",
-    "icon": "Aws_VPC_Internet-Gateway",
-    "isContainer": false,
-    "required": false,
-    "attributes": [{
-      "name": "vpc_id",
-      "type": "Reference",
-      "required": false,
-      "reference": "aws_vpc",
-      "attributes": [],
-      "rules": {}
-    }]
-  }, {
-    "type": "aws_route",
-    "model": "DefaultModel",
-    "icon": "Aws_Route-53",
-    "isContainer": false,
-    "attributes": [{
-      "name": "route_table_id",
-      "type": "Reference",
-      "required": true,
-      "linkType": "",
-      "reference": "aws_route",
-      "attributes": [],
-      "rules": {}
-    }, {
-      "name": "gateway_id",
-      "type": "Link",
-      "required": false,
-      "linkType": "Default",
-      "linkRef": "aws_internet_gateway",
-      "attributes": [],
-      "rules": {}
-    }]
-  }, {
-    "type": "aws_subnet",
-    "model": "DefaultModel",
-    "icon": "AwsSubnet",
-    "isContainer": false,
-    "attributes": [{
-      "name": "vpc_id",
-      "type": "Reference",
-      "required": false,
-      "reference": "aws_vpc",
-      "attributes": [],
-      "rules": {}
-    }, {
-      "name": "gateway_id",
-      "type": "Link",
-      "required": false,
-      "linkType": "Default",
-      "linkRef": "aws_internet_gateway",
-      "attributes": [],
-      "rules": {}
-    }]
-  }, {
-    "type": "aws_db_subnet_group",
-    "model": "DefaultModel",
-    "icon": "AwsDbSubnetGroup",
-    "isContainer": true,
-    "attributes": [{
-      "name": "subnet_ids",
-      "type": "Reference",
-      "required": true,
-      "reference": "aws_subnet",
-      "attributes": [],
-      "rules": {}
-    }]
-  }, {
-    "type": "aws_route53_zone",
-    "model": "DefaultModel",
-    "icon": "Aws_Route-53-Hosted-Zone",
-    "isContainer": true,
-    "attributes": [{
-      "name": "name",
-      "type": "String",
-      "required": true,
-      "linkType": "",
-      "linkRef": "",
-      "attributes": [],
-      "rules": {}
-    }]
-  }, {
-    "type": "aws_route53_record",
-    "model": "DefaultModel",
-    "icon": "Aws_Route-53_Route-Table",
-    "isContainer": false,
-    "attributes": [{
-      "name": "zone_id",
-      "type": "Reference",
-      "required": true,
-      "reference": "aws_route53_zone",
-      "attributes": [],
-      "rules": {}
-    }, {
-      "name": "records",
-      "type": "Link",
-      "required": false,
-      "linkType": "Default",
-      "linkRef": "aws_route53_record",
-      "attributes": [],
-      "rules": {}
-    }]
-  }, {
-    "type": "aws_db_instance",
-    "model": "DefaultModel",
-    "icon": "",
-    "isContainer": false,
-    "attributes": [{
-      "name": "instance_class",
-      "type": "String",
-      "required": true,
-      "attributes": [],
-      "rules": {}
-    }, {
-      "name": "db_subnet_group_name",
-      "type": "Link",
-      "required": false,
-      "linkType": "Default",
-      "linkRef": "aws_db_subnet_group",
-      "attributes": [],
-      "rules": {}
-    }, {
-      "name": "vpc_security_group_ids",
-      "type": "Link",
-      "required": true,
-      "linkType": "Default",
-      "linkRef": "aws_security_group",
-      "attributes": [],
-      "rules": {}
-    }]
-  }, {
-    "type": "aws_key_pair",
-    "model": "DefaultModel",
-    "icon": "Aws_Identity-Access-Management_Long-Term-Security-Credential",
-    "isContainer": false,
-    "attributes": []
-  }],
-  "variables": [{
-    "type": "image_id",
-    "model": "DefaultModel",
-    "icon": "variable",
-    "isContainer": false,
-    "attributes": []
-  }]
+      "required": true
+    }
+  ],
+  "data": [
+    {
+      "type": "aws_ami",
+      "model": "DefaultModel",
+      "icon": "Aws_EC2_AMI"
+    }
+  ],
+  "modules": [
+    {
+      "type": "server",
+      "model": "DefaultModel",
+      "icon": "Aws_Servers"
+    }
+  ],
+  "resources": [
+    {
+      "type": "aws_security_group",
+      "model": "DefaultModel",
+      "icon": "AwsSecurityGroup",
+      "attributes": [
+        {
+          "name": "vpc_id",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "aws_vpc"
+        }
+      ]
+    },
+    {
+      "type": "aws_instance",
+      "model": "DefaultModel",
+      "icon": "Aws_EC2-Instance",
+      "attributes": [
+        {
+          "name": "security_groups",
+          "type": "Link",
+          "linkType": "Reverse",
+          "linkRef": "aws_security_group"
+        },
+        {
+          "name": "vpc_security_group_ids",
+          "type": "Link",
+          "linkType": "Reverse",
+          "linkRef": "aws_security_group"
+        },
+        {
+          "name": "subnet_id",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "aws_subnet"
+        }
+      ]
+    },
+    {
+      "type": "aws_volume_attachment",
+      "model": "DefaultModel",
+      "icon": "Aws_Elastic-Block-Store_Volume",
+      "attributes": [
+        {
+          "name": "device_name",
+          "type": "String"
+        },
+        {
+          "name": "volume_id",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "aws_ebs_volume"
+        },
+        {
+          "name": "instance_id",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "aws_instance"
+        }
+      ]
+    },
+    {
+      "type": "aws_ebs_volume",
+      "model": "DefaultModel",
+      "icon": "Aws_Elastic-Block-Store_Volume",
+      "attributes": [
+        {
+          "name": "availability_zone",
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "type": "aws_elb",
+      "model": "DefaultModel",
+      "icon": "Aws_Elastic-Load-Balancing_Network-Load-Balancer",
+      "attributes": [
+        {
+          "name": "listener",
+          "type": "Object",
+          "required": true,
+          "attributes": [
+            {
+              "name": "instance_port",
+              "type": "String",
+              "required": true
+            },
+            {
+              "name": "lb_port",
+              "type": "Number",
+              "required": true
+            },
+            {
+              "name": "lb_protocol",
+              "type": "String",
+              "required": true
+            },
+            {
+              "name": "instance_protocol",
+              "type": "String",
+              "required": true
+            }
+          ]
+        },
+        {
+          "name": "subnets",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "aws_subnet"
+        },
+        {
+          "name": "security_groups",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "aws_security_group"
+        },
+        {
+          "name": "instances",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "aws_instance"
+        }
+      ]
+    },
+    {
+      "type": "aws_vpc",
+      "model": "DefaultContainer",
+      "icon": "Aws_Virtual-Private-Cloud",
+      "isContainer": true
+    },
+    {
+      "type": "aws_internet_gateway",
+      "model": "DefaultModel",
+      "icon": "Aws_VPC_Internet-Gateway",
+      "attributes": [
+        {
+          "name": "vpc_id",
+          "type": "Reference",
+          "containerRef": "aws_vpc"
+        }
+      ]
+    },
+    {
+      "type": "aws_route",
+      "model": "DefaultModel",
+      "icon": "Aws_Route-53",
+      "attributes": [
+        {
+          "name": "route_table_id",
+          "type": "Reference",
+          "required": true,
+          "containerRef": "aws_route"
+        },
+        {
+          "name": "gateway_id",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "aws_internet_gateway"
+        }
+      ]
+    },
+    {
+      "type": "aws_subnet",
+      "model": "DefaultModel",
+      "icon": "AwsSubnet",
+      "attributes": [
+        {
+          "name": "vpc_id",
+          "type": "Reference",
+          "containerRef": "aws_vpc"
+        },
+        {
+          "name": "gateway_id",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "aws_internet_gateway"
+        }
+      ]
+    },
+    {
+      "type": "aws_db_subnet_group",
+      "model": "DefaultContainer",
+      "icon": "AwsDbSubnetGroup",
+      "isContainer": true,
+      "attributes": [
+        {
+          "name": "subnet_ids",
+          "type": "Reference",
+          "required": true,
+          "containerRef": "aws_subnet"
+        }
+      ]
+    },
+    {
+      "type": "aws_route53_zone",
+      "model": "DefaultContainer",
+      "icon": "Aws_Route-53-Hosted-Zone",
+      "isContainer": true,
+      "attributes": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        }
+      ]
+    },
+    {
+      "type": "aws_route53_record",
+      "model": "DefaultModel",
+      "icon": "Aws_Route-53_Route-Table",
+      "attributes": [
+        {
+          "name": "zone_id",
+          "type": "Reference",
+          "required": true,
+          "containerRef": "aws_route53_zone"
+        },
+        {
+          "name": "records",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "aws_route53_record"
+        }
+      ]
+    },
+    {
+      "type": "aws_db_instance",
+      "model": "DefaultModel",
+      "icon": "Aws_EC2_DB-Instance",
+      "attributes": [
+        {
+          "name": "instance_class",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "db_subnet_group_name",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "aws_db_subnet_group"
+        },
+        {
+          "name": "vpc_security_group_ids",
+          "type": "Link",
+          "required": true,
+          "linkType": "Default",
+          "linkRef": "aws_security_group"
+        }
+      ]
+    },
+    {
+      "type": "aws_key_pair",
+      "model": "DefaultModel",
+      "icon": "Aws_Identity-Access-Management_Long-Term-Security-Credential"
+    }
+  ],
+  "variables": [
+    {
+      "type": "image_id",
+      "model": "DefaultModel",
+      "icon": "variable"
+    }
+  ]
 }

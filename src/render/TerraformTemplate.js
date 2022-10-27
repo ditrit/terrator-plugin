@@ -1,5 +1,5 @@
 const TerraformTemplate = `{% for _block in components %}
-{{ _block.definition.blockType }} {% if ['resource','data'].includes(_block.definition.blockType) %}"{{ _block.definition.type }}" {% endif %}"{{ _block.name }}" {
+{{ _block.definition.blockType }} {% if ['resource','data'].includes(_block.definition.blockType) %}"{{ _block.definition.type }}" {% endif %}{% if 'provider' === _block.definition.blockType %}"{{ _block.definition.type }}"{% else %}"{{ _block.name }}"{% endif %} {
 {% for attribute in _block.attributes %}
     {% if attribute.type == 'Object' %}
     {{ attribute.name }} {

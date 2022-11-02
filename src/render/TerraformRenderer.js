@@ -31,59 +31,10 @@ class TerraformRenderer extends DefaultRender {
    * @return {FileInput[]} - Array of generated files from components and links.
    */
   render(componentsTree, links, defaultFileName = './new_file.tf') {
-    links.forEach((link) => {
-      const component = componentsTree.find((c) => c.id === link.source);
-      if (!component) {
-        return;
-      }
-      this.setComponentAttribute(
-        component,
-        link.definition.attributeRef,
-        'Array',
-        link.target,
-      );
-    });
-
     const componentsMap = new Map();
     this.collectComponentsFromTree(componentsMap, componentsTree, defaultFileName);
 
     return this.generateFilesFromComponentsMap(componentsMap);
-  }
-
-  /**
-   * Set attribute value on component.
-   * @param {Component} component - Component to set attribute.
-   * @param {String} name - Name of attribute to set.
-   * @param {String} type - Type of attribute.
-   * @param {String} value - Value of attribute, only id of component is expected here.
-   */
-  setComponentAttribute(component, name, type, value) {
-    const attribute = component.attributes.find((a) => a.name === name);
-    const isArray = type === 'Array';
-
-    if (!attribute) {
-      component.attributes.push(new ComponentAttribute({
-        name,
-        value: isArray ? [value] : value,
-        type,
-      }));
-    } else if (isArray && !attribute.value.includes(value)) {
-      attribute.value.push(value);
-    } else if (!isArray) {
-      attribute.value = value;
-    }
-  }
-
-  /**
-   * Set container parent id on child attribute.
-   * @param {Component} parent - Parent component to get id.
-   * @param {Component} child - Child to set id attribute with parent id.
-   */
-  setContainerAttribute(parent, child) {
-    const definition = child.definition.definedAttributes
-      .find((def) => def.type === 'Reference' && def.containerRef === parent.definition.type);
-
-    this.setComponentAttribute(child, definition.name, 'String', parent.id);
   }
 
   /**
@@ -105,7 +56,7 @@ class TerraformRenderer extends DefaultRender {
       if (component.children.length === 0) {
         return;
       }
-      component.children.forEach((child) => this.setContainerAttribute(component, child));
+
       this.collectComponentsFromTree(files, component.children, component.path);
     });
   }

@@ -267,5 +267,29 @@ describe('Test TerraformRenderer', () => {
         ])).toEqual([input]);
       });
     });
+
+    describe('Fix related bugs', () => {
+      it('Should fix https://github.com/ditrit/terrator-plugin/issues/22', () => {
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: fs.readFileSync('tests/resources/tf/bug_22.tf', 'utf8'),
+        });
+
+        const definitions = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        ).getDefinitions();
+
+        const components = [
+          new Component({
+            path: 'new_file.tf',
+            id: 'object_64f4f095',
+            name: 'object_64f4f095',
+            definition: definitions.components.find((definition) => definition.blockType === 'provider'),
+          }),
+        ];
+        expect(new TerraformRender().render(components, [])).toEqual([input]);
+      });
+    });
   });
 });

@@ -269,10 +269,10 @@ describe('Test TerraformRenderer', () => {
     });
 
     describe('Fix related bugs', () => {
-      it('Should fix https://github.com/ditrit/terrator-plugin/issues/22', () => {
+      it('Should fix prodiver rendering, https://github.com/ditrit/terrator-plugin/issues/22', () => {
         const input = new FileInput({
           path: 'new_file.tf',
-          content: fs.readFileSync('tests/resources/tf/bug_22.tf', 'utf8'),
+          content: fs.readFileSync('tests/resources/tf/bug22_providerRendering.tf', 'utf8'),
         });
 
         const definitions = getTerraformMetadata(

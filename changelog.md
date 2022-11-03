@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fix provider rendering, [bug link](https://github.com/ditrit/terrator-plugin/issues/22).
+- Fix module rendering, [bug link](https://github.com/ditrit/terrator-plugin/issues/25).
 
 ## [0.1.3] - 2022/10/07
 

@@ -3,9 +3,9 @@ import {
   DefaultParser,
   ComponentLink,
 } from 'leto-modelizer-plugin-core';
-import TerraformListener from 'src/parser/TerraformListener';
-import Lexer from 'src/antlr/terraformLexer';
-import Parser from 'src/antlr/terraformParser';
+import TerraformListener from './TerraformListener';
+import Lexer from '../antlr/terraformLexer';
+import Parser from '../antlr/terraformParser';
 
 /**
  * Class to parse and retrieve components/links from Terraform files.

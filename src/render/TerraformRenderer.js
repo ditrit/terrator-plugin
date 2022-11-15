@@ -1,5 +1,5 @@
 import nunjucks from 'nunjucks';
-import template from 'src/render/TerraformTemplate';
+import template from './TerraformTemplate';
 import {
   DefaultRender,
   ComponentAttribute,

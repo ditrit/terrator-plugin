@@ -1,4 +1,4 @@
-import aws from 'src/assets/metadata/aws.json';
+import aws from './aws.json';
 
 export default {
   aws,

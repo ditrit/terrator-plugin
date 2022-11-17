@@ -206,8 +206,12 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
       this.currentComponent.attributes
         .push(this.currentField);
     }
-    this.currentField.definition = this.currentComponent.definition.definedAttributes
-      .find((definitionAttribute) => definitionAttribute.name === this.currentField.name) || null;
+
+    if (this.currentComponent.definition) {
+      this.currentField.definition = this.currentComponent.definition.definedAttributes
+        .find((definitionAttribute) => definitionAttribute.name === this.currentField.name)
+        || null;
+    }
     this.currentField = null;
   }
 

@@ -2,7 +2,6 @@ import Ajv from 'ajv';
 import {
   ComponentAttributeDefinition,
   DefaultMetadata,
-  ComponentLinkDefinition,
 } from 'leto-modelizer-plugin-core';
 import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
 import Schema from 'src/metadata/ValidationSchema';
@@ -12,8 +11,8 @@ import providers from 'src/assets/metadata';
  * Class to validate and retrieve components definitions from Terraform metadata.
  */
 class TerraformMetadata extends DefaultMetadata {
-  constructor() {
-    super();
+  constructor(pluginData) {
+    super(pluginData);
     this.providers = providers;
     this.ajv = new Ajv();
     this.schema = Schema;
@@ -45,66 +44,12 @@ class TerraformMetadata extends DefaultMetadata {
   }
 
   /**
-   * Get all definitions from metadata.
-   * @returns {{components: ComponentDefinition[], links: ComponentLinkDefinition[]}} Definitions.
+   * Parse all component/link definitions from metadata.
    */
-  getDefinitions() {
-    const components = this.getComponentDefinitions();
-    const links = this.getLinkDefinitions(components);
-
-    return {
-      components,
-      links,
+  parse() {
+    this.pluginData.definitions = {
+      components: this.getComponentDefinitions(),
     };
-  }
-
-  /**
-   * Set link definitions from components.
-   * @param {TerraformComponentDefinition[]} componentDefinitions - Component definitions to parse.
-   * @param {ComponentLinkDefinition[]} [linkDefinitions=[]] - Link definitions array to populate by
-   * this function.
-   * @returns {ComponentLinkDefinition[]} All link definitions.
-   */
-  getLinkDefinitions(componentDefinitions, linkDefinitions = []) {
-    componentDefinitions.forEach((componentDefinition) => {
-      componentDefinition.definedAttributes
-        .forEach((attribute) => this.setLinkDefinition(
-          linkDefinitions,
-          componentDefinition.type,
-          attribute,
-        ));
-    });
-    return linkDefinitions;
-  }
-
-  /**
-   * Set link definition from attribute in link definition array.
-   * @param {ComponentLinkDefinition[]} linkDefinitions - Link definition array.
-   * @param {String} componentType - Type of related component.
-   * @param {ComponentAttributeDefinition} definedAttribute - Attribute to parse.
-   */
-  setLinkDefinition(linkDefinitions, componentType, definedAttribute) {
-    if (definedAttribute.definedAttributes.length > 0) {
-      definedAttribute.definedAttributes
-        .forEach((attribute) => this.setLinkDefinition(linkDefinitions, componentType, attribute));
-    }
-
-    if (definedAttribute.type !== 'Link') {
-      return;
-    }
-
-    const linkDefinition = new ComponentLinkDefinition({ type: definedAttribute.linkType });
-    if (definedAttribute.linkType === 'Reverse') {
-      linkDefinition.sourceRef = definedAttribute.linkRef;
-      linkDefinition.targetRef = componentType;
-    } else {
-      linkDefinition.sourceRef = componentType;
-      linkDefinition.targetRef = definedAttribute.linkRef;
-    }
-
-    linkDefinition.attributeRef = definedAttribute.name;
-
-    linkDefinitions.push(linkDefinition);
   }
 
   /**

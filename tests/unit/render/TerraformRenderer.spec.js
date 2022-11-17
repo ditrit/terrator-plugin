@@ -1,12 +1,12 @@
 import TerraformRender from 'src/render/TerraformRenderer';
 import fs from 'fs';
-import TerraformMetadata from 'src/metadata/TerraformMetadata';
 import TerraformParser from 'src/parser/TerraformParser';
 import {
   Component,
   ComponentAttribute,
   ComponentAttributeDefinition,
-  ComponentLink, ComponentLinkDefinition, FileInput
+  DefaultData,
+  FileInput,
 } from 'leto-modelizer-plugin-core';
 import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
 import { getTerraformMetadata } from 'tests/resources/utils';
@@ -19,54 +19,57 @@ describe('Test TerraformRenderer', () => {
   describe('Test methods', () => {
     describe('Test method: render', () => {
       it('Should render container', () => {
-        const definitions = getTerraformMetadata(
+        const metadata = getTerraformMetadata(
           'aws',
           'tests/resources/metadata/container.json',
-        ).getDefinitions();
-        const parser = new TerraformParser(definitions);
+        );
+        metadata.parse();
+        const parser = new TerraformParser(metadata.pluginData);
         const input = new FileInput({
           path: './container.tf',
           content: fs.readFileSync('tests/resources/tf/container.tf', 'utf8'),
         });
-        const { components, links } = parser.parse([input]);
+        parser.parse([input]);
 
-        expect(new TerraformRender().render(components, links)).toEqual([input]);
+        expect(new TerraformRender(metadata.pluginData).render()).toEqual([input]);
       });
 
       it('Should render container', () => {
-        const definitions = getTerraformMetadata(
+        const metadata = getTerraformMetadata(
           'aws',
           'tests/resources/metadata/container.json',
-        ).getDefinitions();
-        const parser = new TerraformParser(definitions);
+        );
+        metadata.parse();
+        const parser = new TerraformParser(metadata.pluginData);
         const input = new FileInput({
           path: './container.tf',
           content: fs.readFileSync('tests/resources/tf/container.tf', 'utf8'),
         });
-        const { components, links } = parser.parse([input]);
+        parser.parse([input]);
 
-        expect(new TerraformRender().render(components, links)).toEqual([input]);
+        expect(new TerraformRender(metadata.pluginData).render()).toEqual([input]);
       });
 
       describe('Should render multiple files', () => {
-        const definitions = getTerraformMetadata(
+        const metadata = getTerraformMetadata(
           'aws',
           'tests/resources/tf/link.json',
-        ).getDefinitions();
-        const parser = new TerraformParser(definitions);
+        );
+        metadata.parse();
+        const parser = new TerraformParser(metadata.pluginData);
         const inputs = [
           new FileInput({
             path: './link_default_single.tf',
             content: fs.readFileSync('tests/resources/tf/link_default_single.tf', 'utf8'),
           }),
           new FileInput({
-            path: null,
+            path: './link_reverse_single.tf',
             content: fs.readFileSync('tests/resources/tf/link_reverse_single.tf', 'utf8'),
           }),
         ];
-        const { components, links } = parser.parse(inputs);
+        parser.parse(inputs);
 
-        expect(new TerraformRender().render(components, links, './link_reverse_single.tf')).toEqual([
+        expect(new TerraformRender(metadata.pluginData).render()).toEqual([
           new FileInput({
             path: './link_default_single.tf',
             content: fs.readFileSync('tests/resources/tf/link_default_single.tf', 'utf8'),
@@ -79,95 +82,98 @@ describe('Test TerraformRenderer', () => {
       });
 
       it('Should render container with empty attributes', () => {
-        const definitions = getTerraformMetadata(
+        const metadata = getTerraformMetadata(
           'aws',
           'tests/resources/metadata/container.json',
-        ).getDefinitions();
-        const parser = new TerraformParser(definitions);
+        );
+        metadata.parse();
+        const parser = new TerraformParser(metadata.pluginData);
         const input = new FileInput({
           path: './container.tf',
           content: fs.readFileSync('tests/resources/tf/container.tf', 'utf8'),
         });
-        const { components, links } = parser.parse([input]);
-        // keep only name attribute on the child.
-        components[0].children[0].attributes = [components[0].children[0].attributes[0]];
-
-        expect(new TerraformRender().render(components, links)).toEqual([input]);
+        parser.parse([input]);
+        expect(new TerraformRender(metadata.pluginData).render()).toEqual([input]);
       });
 
       it('Should render single default link', () => {
-        const definitions = getTerraformMetadata(
+        const metadata = getTerraformMetadata(
           'aws',
           'tests/resources/tf/link.json',
-        ).getDefinitions();
-        const parser = new TerraformParser(definitions);
+        );
+        metadata.parse();
+        const parser = new TerraformParser(metadata.pluginData);
         const input = new FileInput({
           path: './link_default_single.tf',
           content: fs.readFileSync('tests/resources/tf/link_default_single.tf', 'utf8'),
         });
-        const { components, links } = parser.parse([input]);
+        parser.parse([input]);
 
-        expect(new TerraformRender().render(components, links)).toEqual([input]);
+        expect(new TerraformRender(metadata.pluginData).render()).toEqual([input]);
       });
 
       it('Should render multiple default links', () => {
-        const definitions = getTerraformMetadata(
+        const metadata = getTerraformMetadata(
           'aws',
           'tests/resources/tf/link.json',
-        ).getDefinitions();
-        const parser = new TerraformParser(definitions);
+        );
+        metadata.parse();
+        const parser = new TerraformParser(metadata.pluginData);
         const input = new FileInput({
           path: './link_default_multiple.tf',
-          content: fs.readFileSync('tests/resources/tf/link_default_multiple.tf', 'utf8')
+          content: fs.readFileSync('tests/resources/tf/link_default_multiple.tf', 'utf8'),
         });
-        const { components, links } = parser.parse([input]);
+        parser.parse([input]);
 
-        expect(new TerraformRender().render(components, links)).toEqual([input]);
+        expect(new TerraformRender(metadata.pluginData).render()).toEqual([input]);
       });
 
       it('Should render single reverse link', () => {
-        const definitions = getTerraformMetadata(
+        const metadata = getTerraformMetadata(
           'aws',
           'tests/resources/tf/link.json',
-        ).getDefinitions();
-        const parser = new TerraformParser(definitions);
+        );
+        metadata.parse();
+        const parser = new TerraformParser(metadata.pluginData);
         const input = new FileInput({
           path: './link_reverse_single.tf',
           content: fs.readFileSync('tests/resources/tf/link_reverse_single.tf', 'utf8'),
         });
-        const { components, links } = parser.parse([input]);
+        parser.parse([input]);
 
-        expect(new TerraformRender().render(components, links)).toEqual([input]);
+        expect(new TerraformRender(metadata.pluginData).render()).toEqual([input]);
       });
 
       it('Should render multiple reverse links', () => {
-        const definitions = getTerraformMetadata(
+        const metadata = getTerraformMetadata(
           'aws',
           'tests/resources/tf/link.json',
-        ).getDefinitions();
-        const parser = new TerraformParser(definitions);
+        );
+        metadata.parse();
+        const parser = new TerraformParser(metadata.pluginData);
         const input = new FileInput({
           path: './link_reverse_multiple.tf',
           content: fs.readFileSync('tests/resources/tf/link_reverse_multiple.tf', 'utf8'),
         });
-        const { components, links } = parser.parse([input]);
+        parser.parse([input]);
 
-        expect(new TerraformRender().render(components, links)).toEqual([input]);
+        expect(new TerraformRender(metadata.pluginData).render()).toEqual([input]);
       });
 
       it('Should render app', () => {
-        const definitions = getTerraformMetadata(
+        const metadata = getTerraformMetadata(
           'aws',
           'src/assets/metadata/aws.json',
-        ).getDefinitions();
-        const parser = new TerraformParser(definitions);
+        );
+        metadata.parse();
+        const parser = new TerraformParser(metadata.pluginData);
         const input = new FileInput({
           path: './app.tf',
           content: fs.readFileSync('tests/resources/tf/app.tf', 'utf8'),
         });
-        const { components, links } = parser.parse([input]);
+        parser.parse([input]);
 
-        expect(new TerraformRender().render(components, links)).toEqual([input]);
+        expect(new TerraformRender(metadata.pluginData).render()).toEqual([input]);
       });
 
       it('Should render with new links', () => {
@@ -175,7 +181,9 @@ describe('Test TerraformRenderer', () => {
           path: './link_default_multiple.tf',
           content: fs.readFileSync('tests/resources/tf/link_default_multiple.tf', 'utf8'),
         });
-        expect(new TerraformRender().render([
+
+        const pluginData = new DefaultData();
+        pluginData.components = [
           new Component({
             name: 'parent_default_multiple_1',
             id: 'parent_default_multiple_1',
@@ -196,6 +204,10 @@ describe('Test TerraformRenderer', () => {
             attributes: [new ComponentAttribute({
               name: 'name',
               value: 'parent_default_multiple_1',
+              type: 'String',
+            }), new ComponentAttribute({
+              name: 'toChild',
+              value: ['child_default_multiple_1', 'child_default_multiple_2'],
               type: 'String',
             })],
           }),
@@ -233,38 +245,9 @@ describe('Test TerraformRenderer', () => {
               type: 'String',
             })],
           }),
-        ], [
-          new ComponentLink({
-            source: 'parent_default_multiple_1',
-            target: 'child_default_multiple_1',
-            definition: new ComponentLinkDefinition({
-              attributeRef: 'toChild',
-              sourceRef: 'parent',
-              targetRef: 'child',
-              type: 'Default',
-            }),
-          }),
-          new ComponentLink({
-            source: 'parent_default_multiple_1',
-            target: 'child_default_multiple_2',
-            definition: new ComponentLinkDefinition({
-              attributeRef: 'toChild',
-              sourceRef: 'parent',
-              targetRef: 'child',
-              type: 'Default',
-            }),
-          }),
-          new ComponentLink({
-            source: 'parent_default_multiple_2',
-            target: 'child_default_multiple_1',
-            definition: new ComponentLinkDefinition({
-              attributeRef: 'toChild',
-              sourceRef: 'parent',
-              targetRef: 'child',
-              type: 'Default',
-            }),
-          }),
-        ])).toEqual([input]);
+        ];
+
+        expect(new TerraformRender(pluginData).render()).toEqual([input]);
       });
     });
 
@@ -275,20 +258,22 @@ describe('Test TerraformRenderer', () => {
           content: fs.readFileSync('tests/resources/tf/bug22_providerRendering.tf', 'utf8'),
         });
 
-        const definitions = getTerraformMetadata(
+        const metadata = getTerraformMetadata(
           'aws',
           'src/assets/metadata/aws.json',
-        ).getDefinitions();
+        );
+        metadata.parse();
 
-        const components = [
+        metadata.pluginData.components = [
           new Component({
             path: 'new_file.tf',
             id: 'object_64f4f095',
             name: 'object_64f4f095',
-            definition: definitions.components.find((definition) => definition.blockType === 'provider'),
+            definition: metadata.pluginData.definitions.components
+              .find((definition) => definition.blockType === 'provider'),
           }),
         ];
-        expect(new TerraformRender().render(components, [])).toEqual([input]);
+        expect(new TerraformRender(metadata.pluginData).render()).toEqual([input]);
       });
 
       it('Should fix module rendering, https://github.com/ditrit/terrator-plugin/issues/25', () => {
@@ -297,22 +282,23 @@ describe('Test TerraformRenderer', () => {
           content: fs.readFileSync('tests/resources/tf/bug25_moduleRendering.tf', 'utf8'),
         });
 
-        const definitions = getTerraformMetadata(
+        const metadata = getTerraformMetadata(
           'aws',
           'src/assets/metadata/aws.json',
-        ).getDefinitions();
+        );
+        metadata.parse();
 
-        const components = [
+        metadata.pluginData.components = [
           new Component({
             path: 'new_file.tf',
             id: 'object_64f4f095',
             name: 'object_64f4f095',
-            definition: definitions.components
+            definition: metadata.pluginData.definitions.components
               .find(({ blockType, type }) => blockType === 'module' && type === 'server'),
           }),
         ];
 
-        expect(new TerraformRender().render(components, [])).toEqual([input]);
+        expect(new TerraformRender(metadata.pluginData).render()).toEqual([input]);
       });
     });
   });

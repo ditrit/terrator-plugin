@@ -1,7 +1,7 @@
 {
   "name": "aws",
   "model": "DefaultModel",
-  "icon": "aws",
+  "icon": "aws/aws",
   "attributes": [
     {
       "name": "region",
@@ -13,21 +13,21 @@
     {
       "type": "aws_ami",
       "model": "DefaultModel",
-      "icon": "Aws_EC2_AMI"
+      "icon": "aws/Aws_EC2_AMI"
     }
   ],
   "modules": [
     {
       "type": "server",
       "model": "DefaultModel",
-      "icon": "Aws_Servers"
+      "icon": "aws/Aws_Servers"
     }
   ],
   "resources": [
     {
       "type": "aws_security_group",
       "model": "DefaultModel",
-      "icon": "AwsSecurityGroup",
+      "icon": "aws/AwsSecurityGroup",
       "attributes": [
         {
           "name": "vpc_id",
@@ -40,7 +40,7 @@
     {
       "type": "aws_instance",
       "model": "DefaultModel",
-      "icon": "Aws_EC2-Instance",
+      "icon": "aws/Aws_EC2-Instance",
       "attributes": [
         {
           "name": "security_groups",
@@ -65,7 +65,7 @@
     {
       "type": "aws_volume_attachment",
       "model": "DefaultModel",
-      "icon": "Aws_Elastic-Block-Store_Volume",
+      "icon": "aws/Aws_Elastic-Block-Store_Volume",
       "attributes": [
         {
           "name": "device_name",
@@ -88,7 +88,7 @@
     {
       "type": "aws_ebs_volume",
       "model": "DefaultModel",
-      "icon": "Aws_Elastic-Block-Store_Volume",
+      "icon": "aws/Aws_Elastic-Block-Store_Volume",
       "attributes": [
         {
           "name": "availability_zone",
@@ -99,7 +99,7 @@
     {
       "type": "aws_elb",
       "model": "DefaultModel",
-      "icon": "Aws_Elastic-Load-Balancing_Network-Load-Balancer",
+      "icon": "aws/Aws_Elastic-Load-Balancing_Network-Load-Balancer",
       "attributes": [
         {
           "name": "listener",
@@ -151,13 +151,13 @@
     {
       "type": "aws_vpc",
       "model": "DefaultContainer",
-      "icon": "Aws_Virtual-Private-Cloud",
+      "icon": "aws/Aws_Virtual-Private-Cloud",
       "isContainer": true
     },
     {
       "type": "aws_internet_gateway",
       "model": "DefaultModel",
-      "icon": "Aws_VPC_Internet-Gateway",
+      "icon": "aws/Aws_VPC_Internet-Gateway",
       "attributes": [
         {
           "name": "vpc_id",
@@ -169,7 +169,7 @@
     {
       "type": "aws_route",
       "model": "DefaultModel",
-      "icon": "Aws_Route-53",
+      "icon": "aws/Aws_Route-53",
       "attributes": [
         {
           "name": "route_table_id",
@@ -188,7 +188,7 @@
     {
       "type": "aws_subnet",
       "model": "DefaultModel",
-      "icon": "AwsSubnet",
+      "icon": "aws/AwsSubnet",
       "attributes": [
         {
           "name": "vpc_id",
@@ -206,7 +206,7 @@
     {
       "type": "aws_db_subnet_group",
       "model": "DefaultContainer",
-      "icon": "AwsDbSubnetGroup",
+      "icon": "aws/AwsDbSubnetGroup",
       "isContainer": true,
       "attributes": [
         {
@@ -220,7 +220,7 @@
     {
       "type": "aws_route53_zone",
       "model": "DefaultContainer",
-      "icon": "Aws_Route-53-Hosted-Zone",
+      "icon": "aws/Aws_Route-53-Hosted-Zone",
       "isContainer": true,
       "attributes": [
         {
@@ -233,7 +233,7 @@
     {
       "type": "aws_route53_record",
       "model": "DefaultModel",
-      "icon": "Aws_Route-53_Route-Table",
+      "icon": "aws/Aws_Route-53_Route-Table",
       "attributes": [
         {
           "name": "zone_id",
@@ -252,7 +252,7 @@
     {
       "type": "aws_db_instance",
       "model": "DefaultModel",
-      "icon": "Aws_EC2_DB-Instance",
+      "icon": "aws/Aws_EC2_DB-Instance",
       "attributes": [
         {
           "name": "instance_class",
@@ -277,7 +277,7 @@
     {
       "type": "aws_key_pair",
       "model": "DefaultModel",
-      "icon": "Aws_Identity-Access-Management_Long-Term-Security-Credential"
+      "icon": "aws/Aws_Identity-Access-Management_Long-Term-Security-Credential"
     }
   ],
   "variables": [

@@ -1,5 +1,7 @@
-import aws from 'src/assets/metadata/aws.json';
+import sgcp from './sgcp.json';
+import aws from './aws.json';
 
 export default {
+  sgcp,
   aws,
 };

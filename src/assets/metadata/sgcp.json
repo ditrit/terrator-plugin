@@ -1,0 +1,602 @@
+{
+  "name": "cloudplatform",
+  "model": "DefaultModel",
+  "icon": "sgcp/cloudplatform",
+  "attributes": [
+    {
+      "name": "region",
+      "type": "String",
+      "required": true
+    },
+    {
+      "name": "default_tags",
+      "type": "Array",
+      "required": false
+    }
+  ],
+  "data": [
+    {
+      "type": "cloudplatform_compute_network",
+      "model": "DefaultModel",
+      "icon": "sgcp/cloudplatform_compute_network",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": false
+        }
+      ]
+    },
+    {
+      "type": "cloudplatform_compute_subnet",
+      "model": "DefaultModel",
+      "icon": "sgcp/cloudplatform_compute_subnet",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": false
+        },
+        {
+          "name": "network_name",
+          "type": "String",
+          "required": false
+        },
+        {
+          "name": "availability_zone",
+          "type": "String",
+          "required": false
+        }
+      ]
+    },
+    {
+      "type": "cloudplatform_dns_zone",
+      "model": "DefaultModel",
+      "icon": "sgcp/cloudplatform_dns_zone",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        }
+      ]
+    },
+    {
+      "type": "cloudplatform_osfactory_image_source",
+      "model": "DefaultModel",
+      "icon": "sgcp/cloudplatform_osfactory_image_source",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": false
+        },
+        {
+          "name": "latest",
+          "type": "Boolean",
+          "required": false
+        },
+        {
+          "name": "os_name",
+          "type": "String",
+          "required": false
+        },
+        {
+          "name": "os_distrib",
+          "type": "String",
+          "required": false
+        },
+        {
+          "name": "os_version",
+          "type": "String",
+          "required": false
+        }
+      ]
+    },
+    {
+      "type": "cloudplatform_slb_subnet",
+      "model": "DefaultModel",
+      "icon": "sgcp/cloudplatform_slb_subnet",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": false
+        },
+        {
+          "name": "network_name",
+          "type": "String",
+          "required": false
+        },
+        {
+          "name": "availability_zone",
+          "type": "String",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "modules": [],
+  "resources": [
+    {
+      "type": "cloudplatform_compute_instance",
+      "model": "DefaultModel",
+      "icon": "sgcp/cloudplatform_compute_instance",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "description",
+          "type": "String",
+          "required": false
+        },
+        {
+          "name": "tags",
+          "type": "Array",
+          "required": false
+        },
+        {
+          "name": "availability_zone",
+          "type": "String",
+          "required": false
+        },
+        {
+          "name": "flavor_name",
+          "type": "String",
+          "required": true,
+          "rules": { "values": ["XXLarge-mem32 12vCPU-32GB", "Medium-mem8 2vCPU-8GB",  "Micro 1vCPU-1GB", "Medium 2vCPU-4GB", "Medium-mem16 2vCPU-16GB", "XLarge-mem32 8vCPU-32GB", "XLarge-mem64 8vCPU-64GB", "Small-mem4 1vCPU-4GB", "Large-mem64 4vCPU-64GB", "XLarge-mem128 8vCPU-128GB", "Medium-mem2 2vCPU-2GB", "XXLarge 12vCPU-24GB", "XXLarge-mem48 12vCPU-48GB", "Large 4vCPU-8GB", "Small 1vCPU-2GB", "XXLarge-mem64 12vCPU-64GB",  "XXLarge-mem128 12vCPU-128GB", "XXLarge-mem16 12vCPU-16GB", "Large-mem32 4vCPU-32GB", "Large-mem128 4vCPU-128GB", "Medium-mem32 2vCPU-32GB", "XLarge 8vCPU-16GB", "Large-mem16 4vCPU-16GB", "XXLarge-mem96 12vCPU-96GB"] }
+        },
+        {
+          "name": "image_ref",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "cloudplatform_osfactory_image",
+          "required": true
+        },
+        {
+          "name": "port",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "cloudplatform_compute_port",
+          "required": true
+        },
+        {
+          "name": "key_name",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "cloudplatform_compute_keypair",
+          "required": false
+        }
+      ]
+    },
+    {
+      "type": "cloudplatform_compute_keypair",
+      "model": "DefaultModel",
+      "icon": "sgcp/cloudplatform_compute_keypair",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "public_key",
+          "type": "String",
+          "required": true
+        }
+      ]
+    },
+    {
+      "type": "cloudplatform_compute_port",
+      "model": "DefaultModel",
+      "icon": "sgcp/cloudplatform_compute_port",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "description",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "network",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "cloudplatform_compute_network",
+          "required": true
+        },
+        {
+          "name": "subnets",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "cloudplatform_compute_subnet",
+          "required": true
+        },
+        {
+          "name": "security_group_ids",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "cloudplatform_compute_security_group_v2",
+          "required": false
+        }
+      ]
+    },
+    {
+      "type": "cloudplatform_compute_security_group_v2",
+      "model": "DefaultContainer",
+      "icon": "sgcp/cloudplatform_compute_security_group_v2",
+      "isContainer": true,
+      "attributes": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "description",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "tags",
+          "type": "Array",
+          "required": false
+        },
+        {
+          "name": "ecosystem",
+          "type": "String",
+          "required": false,
+          "rules": { "values": ["ocs", "vcs"] }
+        }
+      ]
+    },
+    {
+      "type": "cloudplatform_compute_security_rule_v2",
+      "model": "DefaultModel",
+      "icon": "sgcp/cloudplatform_compute_security_rule_v2",
+      "attributes": [
+        {
+          "name": "security_group_id",
+          "type": "Reference",
+          "containerRef": "cloudplatform_compute_security_group_v2",
+          "required": true
+        },
+        {
+          "name": "description",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "direction",
+          "type": "String",
+          "required": true,
+          "rules": { "values": ["ingress", "egress"] }
+        },
+        {
+          "name": "remote_type",
+          "type": "String",
+          "required": true,
+          "rules": { "values": ["ipRange", "securityGroupId"] }
+        },
+        {
+          "name": "remote_value",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "protocol",
+          "type": "String",
+          "required": true,
+          "rules": { "values": ["tcp", "udp", "icmp"] }
+        },
+        {
+          "name": "port_range",
+          "type": "String",
+          "required": false
+        }
+      ]
+    },
+    {
+      "type": "cloudplatform_dns_alias",
+      "model": "DefaultModel",
+      "icon": "sgcp/cloudplatform_dns_alias",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "zone_id",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "cloudplatform_dns_zone",
+          "required": true
+        },
+        {
+          "name": "target",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "ttl",
+          "type": "Number",
+          "required": false,
+          "rules": { "min": 60 }
+        },
+        {
+          "name": "tags",
+          "type": "Array",
+          "required": false
+        }
+      ]
+    },
+    {
+      "type": "cloudplatform_osfactory_image",
+      "model": "DefaultModel",
+      "icon": "sgcp/cloudplatform_osfactory_image",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "image_size",
+          "type": "Number",
+          "required": true,
+          "rules": { "values": [8, 16, 32] }
+        },
+        {
+          "name": "source",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "cloudplatform_osfactory_image_source",
+          "required": true
+        },
+        {
+          "name": "derivation",
+          "type": "Object",
+          "required": false,
+          "attributes": [
+            {
+              "name": "type",
+              "type": "String",
+              "required": true,
+              "rules": { "values": ["ansible_role", "ansible_playbook", "puppet"] }
+            },
+            {
+              "name": "url",
+              "type": "String",
+              "required": true
+            },
+            {
+              "name": "revision",
+              "type": "String",
+              "required": false
+            },
+            {
+              "name": "properties",
+              "type": "Object",
+              "required": false,
+              "attributes": [
+                {
+                  "name": "playbook_file",
+                  "type": "String",
+                  "required": false
+                },
+                {
+                  "name": "parameters",
+                  "type": "Object",
+                  "required": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cloudplatform_slb_healthcheck_v1",
+      "model": "DefaultModel",
+      "icon": "sgcp/cloudplatform_slb_healthcheck_v1",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "loadbalancer_id",
+          "type": "Reference",
+          "containerRef": "cloudplatform_slb_load_balancer_v1",
+          "required": true
+        },
+        {
+          "name": "health_check_type",
+          "type": "String",
+          "required": true,
+          "rules": { "values": ["SLOW", "STANDARD", "AGGRESSIVE"] }
+        },
+        {
+          "name": "protocol",
+          "type": "String",
+          "required": true,
+          "rules": { "values": ["TCP", "HTTP", "HTTPS"] }
+        },
+        {
+          "name": "port",
+          "type": "Number",
+          "required": true,
+          "rules": { "min": 0, "max": 65535 }
+        }
+      ]
+    },
+    {
+      "type": "cloudplatform_slb_listener_v1",
+      "model": "DefaultModel",
+      "icon": "sgcp/cloudplatform_slb_listener_v1",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "tags",
+          "type": "Array",
+          "required": false
+        },
+        {
+          "name": "loadbalancer_id",
+          "type": "Reference",
+          "containerRef": "cloudplatform_slb_load_balancer_v1",
+          "required": true
+        },
+        {
+          "name": "vip_id",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "cloudplatform_slb_vip_v1",
+          "required": true
+        },
+        {
+          "name": "pool_id",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "cloudplatform_slb_pool_v1",
+          "required": true
+        },
+        {
+          "name": "protocol",
+          "type": "String",
+          "required": true,
+          "rules": { "values": ["TCP", "HTTP", "HTTPS"] }
+        },
+        {
+          "name": "port",
+          "type": "Number",
+          "required": true,
+          "rules": { "min": 0, "max": 65535 }
+        }
+      ]
+    },
+    {
+      "type": "cloudplatform_slb_load_balancer_v1",
+      "model": "DefaultContainer",
+      "icon": "sgcp/cloudplatform_slb_load_balancer_v1",
+      "isContainer": true,
+      "attributes": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "tags",
+          "type": "Array",
+          "required": false
+        },
+        {
+          "name": "availability_zone",
+          "type": "String",
+          "required": false
+        },
+        {
+          "name": "type",
+          "type": "String",
+          "required": true,
+          "rules": { "values": ["BASIC", "PREMIUM", "GOLD"] }
+        }
+      ]
+    },
+    {
+      "type": "cloudplatform_slb_pool_v1",
+      "model": "DefaultModel",
+      "icon": "sgcp/cloudplatform_slb_pool_v1",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "loadbalancer_id",
+          "type": "Reference",
+          "containerRef": "cloudplatform_slb_load_balancer_v1",
+          "required": true
+        },
+        {
+          "name": "pool_type",
+          "type": "String",
+          "required": false,
+          "rules": { "values": ["OCS", "VCS", "SGCLOUD"] }
+        },
+        {
+          "name": "real_server_ids",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "cloudplatform_compute_instance",
+          "required": true
+        },
+        {
+          "name": "port",
+          "type": "Number",
+          "required": true,
+          "rules": { "min": 0, "max": 65535 }
+        },
+        {
+          "name": "algorithm",
+          "type": "String",
+          "required": true,
+          "rules": { "values": ["ROUNDROBIN", "LEASTCONNECTION"] }
+        },
+        {
+          "name": "persistence",
+          "type": "String",
+          "required": true,
+          "rules": { "values": ["NONE", "SOURCEIP", "COOKIES"] }
+        },
+        {
+          "name": "healthcheck_id",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "cloudplatform_slb_healthcheck_v1",
+          "required": true
+        }
+      ]
+    },
+    {
+      "type": "cloudplatform_slb_vip_v1",
+      "model": "DefaultModel",
+      "icon": "sgcp/cloudplatform_slb_vip_v1",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "loadbalancer_id",
+          "type": "Reference",
+          "containerRef": "cloudplatform_slb_load_balancer_v1",
+          "required": true
+        },
+        {
+          "name": "subnet_id",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "cloudplatform_slb_subnet",
+          "required": true
+        }
+      ]
+    }
+  ],
+  "variables": []
+}

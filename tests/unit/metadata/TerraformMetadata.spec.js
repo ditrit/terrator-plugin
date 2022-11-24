@@ -1,6 +1,4 @@
-import TerraformMetadata from 'src/metadata/TerraformMetadata';
 import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
-import fs from 'fs';
 import {
   ComponentAttributeDefinition,
   ComponentLinkDefinition,
@@ -38,19 +36,19 @@ describe('Test TerraformMetadata', () => {
       });
     });
 
-    describe('Test method: getDefinitions', () => {
+    describe('Test method: parse', () => {
       const metadata = getTerraformMetadata('validMetadata', 'tests/resources/metadata/valid.json');
 
-      it('Should return components and links', () => {
-        const result = metadata.getDefinitions();
+      it('Should set component and link definitions', () => {
+        metadata.parse();
+        metadata.pluginData.initLinkDefinitions();
 
-        expect(result).not.toBeNull();
-        expect(result.links).not.toBeNull();
-        expect(result.links.length).toBeGreaterThanOrEqual(1);
-        expect(result.components).not.toBeNull();
-        expect(result.components.length).toBeGreaterThanOrEqual(1);
+        expect(metadata.pluginData.definitions.links).not.toBeNull();
+        expect(metadata.pluginData.definitions.links.length).toBeGreaterThanOrEqual(1);
+        expect(metadata.pluginData.definitions.components).not.toBeNull();
+        expect(metadata.pluginData.definitions.components.length).toBeGreaterThanOrEqual(1);
       });
-    })
+    });
 
     describe('Test method: getComponentDefinitions', () => {
       const metadata = getTerraformMetadata('validMetadata', 'tests/resources/metadata/valid.json');
@@ -136,7 +134,7 @@ describe('Test TerraformMetadata', () => {
       }, {
         type: 'type3',
         parentTypes: [],
-        }];
+      }];
       const output = [{
         type: 'type1',
         parentTypes: [
@@ -159,7 +157,7 @@ describe('Test TerraformMetadata', () => {
           'type2',
         ],
       }];
-  
+
       it('should make match input and output', () => {
         const metadata = getTerraformMetadata('validMetadata', 'tests/resources/metadata/valid.json');
         metadata.setChildrenTypes(input);
@@ -217,11 +215,12 @@ describe('Test TerraformMetadata', () => {
 
     it('Test example: link.json', () => {
       const metadata = getTerraformMetadata('container', 'tests/resources/metadata/link.json');
+      metadata.parse();
+      metadata.pluginData.initLinkDefinitions();
 
       expect(metadata.validate()).toBeTruthy();
 
-      const components = metadata.getComponentDefinitions();
-      expect(metadata.getLinkDefinitions(components)).toEqual([
+      expect(metadata.pluginData.definitions.links).toEqual([
         new ComponentLinkDefinition({
           attributeRef: 'vpc_id2',
           sourceRef: 'aws_internet_gateway',
@@ -236,8 +235,8 @@ describe('Test TerraformMetadata', () => {
         }),
         new ComponentLinkDefinition({
           attributeRef: 'vpc_id2',
-          sourceRef: 'aws_vpc',
-          targetRef: 'aws_internet_gateway',
+          sourceRef: 'aws_internet_gateway',
+          targetRef: 'aws_vpc',
           type: 'Reverse',
         }),
       ]);

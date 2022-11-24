@@ -1,7 +1,6 @@
 import antlr4 from 'antlr4';
 import {
   DefaultParser,
-  ComponentLink,
 } from 'leto-modelizer-plugin-core';
 import TerraformListener from 'src/parser/TerraformListener';
 import Lexer from 'src/antlr/terraformLexer';
@@ -23,10 +22,9 @@ class TerraformParser extends DefaultParser {
   /**
    * Convert the content of files into Components.
    * @param {FileInput[]} [inputs=[]] - Data you want to parse.
-   * @return {Object} - Object that contains all components, links and errors.
    */
   parse(inputs = []) {
-    const listener = new TerraformListener(this.definitions.components);
+    const listener = new TerraformListener(this.pluginData.definitions.components);
     inputs.forEach((input) => {
       listener.currentFile = input;
       const stream = new antlr4.InputStream(input.content);
@@ -42,11 +40,8 @@ class TerraformParser extends DefaultParser {
       return component;
     });
 
-    return {
-      components: this.getComponentTree(components),
-      links: this.getLinks(components),
-      errors: listener.errors,
-    };
+    this.pluginData.components = this.getComponentTree(components);
+    this.pluginData.parseErrors = listener.errors;
   }
 
   /**
@@ -79,7 +74,7 @@ class TerraformParser extends DefaultParser {
   getParents(components, child) {
     return components
       .filter((component) => {
-        if (!component.definition.isContainer) {
+        if (!component.definition || !component.definition.isContainer) {
           return false;
         }
 
@@ -102,41 +97,6 @@ class TerraformParser extends DefaultParser {
     }
     return component.definition.parentTypes.length > 0 && component.attributes
       .some((attribute) => attribute.definition && attribute.definition.type === 'Reference');
-  }
-
-  /**
-   * Get all links from components attributes.
-   * @param {Component[]} components - Component list to parse to retrieve links.
-   * @return {ComponentLink[]} Component link array.
-   */
-  getLinks(components) {
-    const links = [];
-    this.definitions.links.forEach((linkDefinition) => {
-      const sourceRef = (linkDefinition.type === 'Default') ? linkDefinition.sourceRef : linkDefinition.targetRef;
-
-      components
-        .filter((component) => component.definition && component.definition.type === sourceRef)
-        .forEach((component) => {
-          component.attributes
-            .filter((attribute) => attribute.name === linkDefinition.attributeRef)
-            .forEach((attribute) => {
-              if (attribute.type === 'Array') {
-                attribute.value.forEach((value) => links.push(new ComponentLink({
-                  source: component.id,
-                  target: value,
-                  definition: linkDefinition,
-                })));
-              } else {
-                links.push(new ComponentLink({
-                  source: component.id,
-                  target: attribute.value,
-                  definition: linkDefinition,
-                }));
-              }
-            });
-        });
-    });
-    return links;
   }
 }
 

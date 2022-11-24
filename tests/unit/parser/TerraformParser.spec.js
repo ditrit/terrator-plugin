@@ -1,6 +1,5 @@
 import fs from 'fs';
 import TerraformParser from 'src/parser/TerraformParser';
-import TerraformMetadata from 'src/metadata/TerraformMetadata';
 import {
   Component,
   ComponentAttribute,
@@ -43,7 +42,7 @@ describe('Test TerraformParser', () => {
               name: 'test',
               type: 'String',
             }),
-          })]
+          })],
         }))).toBeFalsy();
       });
 
@@ -58,9 +57,9 @@ describe('Test TerraformParser', () => {
             definition: new ComponentAttributeDefinition({
               name: 'parentId',
               type: 'Reference',
-              containerRef: 'parent1'
+              containerRef: 'parent1',
             }),
-          })]
+          })],
         }))).toBeTruthy();
       });
     });
@@ -117,17 +116,15 @@ describe('Test TerraformParser', () => {
     });
 
     describe('Test method: parse', () => {
-      describe('Test default parse', () => {
-        const definitions = getTerraformMetadata(
+      it('Test default parse', () => {
+        const { pluginData } = getTerraformMetadata(
           'aws',
           'tests/resources/metadata/container.json',
-        ).getDefinitions();
-        const parser = new TerraformParser(definitions);
-        expect(parser.parse()).toEqual({
-          components: [],
-          links: [],
-          errors: [],
-        });
+        );
+        const parser = new TerraformParser(pluginData);
+        parser.parse();
+        expect(parser.pluginData.components).toEqual([]);
+        expect(parser.pluginData.parseErrors).toEqual([]);
       });
 
       describe('Test parse: app.tf', () => {
@@ -135,15 +132,16 @@ describe('Test TerraformParser', () => {
           'aws',
           'src/assets/metadata/aws.json',
         );
-        const parser = new TerraformParser(metadata.getDefinitions());
+        metadata.parse();
+        const parser = new TerraformParser(metadata.pluginData);
 
         it('Should have all elements in tf', () => {
           const input = new FileInput({
             path: './app.tf',
             content: fs.readFileSync('tests/resources/tf/app.tf', 'utf8'),
           });
-          const { components } = parser.parse([input]);
-          expect(components).toEqual([
+          parser.parse([input]);
+          expect(parser.pluginData.components).toEqual([
             new Component({
               id: 'aws',
               name: 'aws',
@@ -300,41 +298,45 @@ describe('Test TerraformParser', () => {
       });
 
       describe('Test parse: container', () => {
-        const definitions = getTerraformMetadata(
+        const metadata = getTerraformMetadata(
           'aws',
           'tests/resources/metadata/container.json',
-        ).getDefinitions();
-        const parser = new TerraformParser(definitions);
+        );
+        metadata.parse();
+        const parser = new TerraformParser(metadata.pluginData);
 
         it('Should have valid tree', () => {
           const input = new FileInput({
             path: './container.tf',
             content: fs.readFileSync('tests/resources/tf/container.tf', 'utf8'),
           });
-          const { components } = parser.parse([input]);
+          parser.parse([input]);
 
-          expect(components.length).toEqual(1);
-          expect(components[0].id).toEqual('parent');
+          expect(parser.pluginData.components.length).toEqual(1);
+          expect(parser.pluginData.components[0].id).toEqual('parent');
 
-          expect(components[0].children.length).toEqual(1);
-          expect(components[0].children[0].id).toEqual('child');
+          expect(parser.pluginData.components[0].children.length).toEqual(1);
+          expect(parser.pluginData.components[0].children[0].id).toEqual('child');
         });
       });
 
       describe('Test parse: links', () => {
-        const definitions = getTerraformMetadata(
+        const metadata = getTerraformMetadata(
           'aws',
           'tests/resources/tf/link.json',
-        ).getDefinitions();
-        const parser = new TerraformParser(definitions);
+        );
+        metadata.parse();
+        metadata.pluginData.initLinkDefinitions();
+        const parser = new TerraformParser(metadata.pluginData);
 
         it('Should parse single default link', () => {
           const input = new FileInput({
             path: './link_default_single.tf',
             content: fs.readFileSync('tests/resources/tf/link_default_single.tf', 'utf8'),
           });
+          parser.parse([input]);
 
-          expect(parser.parse([input]).links)
+          expect(parser.pluginData.getLinks())
             .toEqual([new ComponentLink({
               source: 'parent_default_single_1',
               target: 'child_default_single_1',
@@ -352,7 +354,9 @@ describe('Test TerraformParser', () => {
             path: './link_default_multiple.tf',
             content: fs.readFileSync('tests/resources/tf/link_default_multiple.tf', 'utf8'),
           });
-          expect(parser.parse([input]).links)
+          parser.parse([input]);
+
+          expect(parser.pluginData.getLinks())
             .toEqual([
               new ComponentLink({
                 source: 'parent_default_multiple_1',
@@ -381,14 +385,16 @@ describe('Test TerraformParser', () => {
             path: './link_reverse_single.tf',
             content: fs.readFileSync('tests/resources/tf/link_reverse_single.tf', 'utf8'),
           });
-          expect(parser.parse([input]).links)
+          parser.parse([input]);
+
+          expect(parser.pluginData.getLinks())
             .toEqual([new ComponentLink({
               source: 'parent_reverse_single_1',
               target: 'child_reverse_single_1',
               definition: new ComponentLinkDefinition({
                 attributeRef: 'fromChild',
-                sourceRef: 'child',
-                targetRef: 'parent',
+                sourceRef: 'parent',
+                targetRef: 'child',
                 type: 'Reverse',
               }),
             })]);
@@ -399,15 +405,17 @@ describe('Test TerraformParser', () => {
             path: './link_reverse_multiple.tf',
             content: fs.readFileSync('tests/resources/tf/link_reverse_multiple.tf', 'utf8'),
           });
-          expect(parser.parse([input]).links)
+          parser.parse([input]);
+
+          expect(parser.pluginData.getLinks())
             .toEqual([
               new ComponentLink({
                 source: 'parent_reverse_multiple_1',
                 target: 'child_reverse_multiple_1',
                 definition: new ComponentLinkDefinition({
                   attributeRef: 'fromChild',
-                  sourceRef: 'child',
-                  targetRef: 'parent',
+                  sourceRef: 'parent',
+                  targetRef: 'child',
                   type: 'Reverse',
                 }),
               }),
@@ -416,8 +424,8 @@ describe('Test TerraformParser', () => {
                 target: 'child_reverse_multiple_2',
                 definition: new ComponentLinkDefinition({
                   attributeRef: 'fromChild',
-                  sourceRef: 'child',
-                  targetRef: 'parent',
+                  sourceRef: 'parent',
+                  targetRef: 'child',
                   type: 'Reverse',
                 }),
               })]);

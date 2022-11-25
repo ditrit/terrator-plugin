@@ -28,7 +28,7 @@ class TerraformRenderer extends DefaultRender {
    */
   render() {
     const componentsMap = new Map();
-    this.collectComponentsFromTree(componentsMap, this.pluginData.components, './new_file.tf');
+    this.collectComponentsFromTree(componentsMap, this.pluginData.components, 'new_file.tf');
 
     return this.generateFilesFromComponentsMap(componentsMap);
   }

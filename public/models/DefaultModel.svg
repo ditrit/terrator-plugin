@@ -12,10 +12,10 @@
           x="50" y="21"
           style="font-family:Calibri;font-size:16px;font-weight:600"
           fill="white"
-          xml:space="preserve">Component name</text>
+          xml:space="preserve">{{name}}</text>
     <text class="component-type"
           x="50" y="36"
           style="font-family:Calibri;font-size:12px;font-style:italic"
           fill="white"
-          xml:space="preserve">Component type</text>
+          xml:space="preserve">{{definition.type}}</text>
 </svg>

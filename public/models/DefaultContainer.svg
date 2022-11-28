@@ -18,10 +18,10 @@
               rx="4" ry="4"></rect>
         <text class="component-name"
               x="50" y="1.5em"
-              style="font-size: 14px; font-weight: 600">Component Name</text>
+              style="font-size: 14px; font-weight: 600">{{name}}</text>
         <text class="component-type"
               x="50" y="3em"
-              style="font-size: 12px; font-style: italic">component type</text>
+              style="font-size: 12px; font-style: italic">{{definition.type}}</text>
     </g>
     <svg class="component-icon" x="9" y="9" width="32" height="32"></svg>
 </svg>

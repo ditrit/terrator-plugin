@@ -154,14 +154,14 @@
           "type": "Link",
           "linkType": "Default",
           "linkRef": "osfactory_image",
-          "required": true
+          "required": false
         },
         {
           "name": "port",
           "type": "Link",
           "linkType": "Default",
           "linkRef": "compute_port",
-          "required": true
+          "required": false
         },
         {
           "name": "key_name",
@@ -209,14 +209,14 @@
           "type": "Link",
           "linkType": "Default",
           "linkRef": "compute_network",
-          "required": true
+          "required": false
         },
         {
           "name": "subnets",
           "type": "Link",
           "linkType": "Default",
           "linkRef": "compute_subnet",
-          "required": true
+          "required": false
         },
         {
           "name": "security_group_ids",
@@ -317,7 +317,7 @@
           "type": "Link",
           "linkType": "Default",
           "linkRef": "dns_zone",
-          "required": true
+          "required": false
         },
         {
           "name": "target",
@@ -358,7 +358,7 @@
           "type": "Link",
           "linkType": "Default",
           "linkRef": "osfactory_image_source",
-          "required": true
+          "required": false
         },
         {
           "name": "derivation",
@@ -464,14 +464,14 @@
           "type": "Link",
           "linkType": "Default",
           "linkRef": "slb_vip_v1",
-          "required": true
+          "required": false
         },
         {
           "name": "pool_id",
           "type": "Link",
           "linkType": "Default",
           "linkRef": "slb_pool_v1",
-          "required": true
+          "required": false
         },
         {
           "name": "protocol",
@@ -543,7 +543,7 @@
           "type": "Link",
           "linkType": "Default",
           "linkRef": "compute_instance",
-          "required": true
+          "required": false
         },
         {
           "name": "port",
@@ -568,7 +568,7 @@
           "type": "Link",
           "linkType": "Default",
           "linkRef": "slb_healthcheck_v1",
-          "required": true
+          "required": false
         }
       ]
     },
@@ -593,7 +593,7 @@
           "type": "Link",
           "linkType": "Default",
           "linkRef": "slb_subnet",
-          "required": true
+          "required": false
         }
       ]
     }

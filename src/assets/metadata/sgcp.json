@@ -6,7 +6,8 @@
     {
       "name": "region",
       "type": "String",
-      "required": true
+      "required": true,
+      "rules": { "values": ["eu-fr-paris", "eu-fr-north", "us-east-newyork", "hk-hongkong"] }
     },
     {
       "name": "default_tags",

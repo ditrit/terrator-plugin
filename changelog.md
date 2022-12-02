@@ -10,6 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Replace documentation generation library ESDoc by JSDoc
+- Update plugin-core to version 0.11.0
+
+### Removed
+
+- Children management in parser and render
 
 ## [0.1.7] - 2022/11/28
 

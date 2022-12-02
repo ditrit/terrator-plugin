@@ -135,10 +135,31 @@
           "rules": { "values": [8, 16, 32] }
         },
         {
-          "name": "source",
+          "name": "image_source",
           "type": "Link",
           "linkType": "Default",
           "linkRef": "osfactory_image_source",
+          "required": false
+        },
+        {
+          "name": "derivation_type",
+          "type": "String",
+          "required": true,
+          "rules": { "values": ["ansible_role", "ansible_playbook", "puppet"] }
+        },
+        {
+          "name": "derivation_url",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "derivation_revision",
+          "type": "String",
+          "required": false
+        },
+        {
+          "name": "derivation_playbook_file",
+          "type": "String",
           "required": false
         },
         {

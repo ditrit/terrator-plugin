@@ -622,6 +622,46 @@
           "rules": { "min": 0, "max": 65535 }
         }
       ]
+    },
+    {
+      "type": "trafficmanager_service",
+      "model": "DefaultModel",
+      "icon": "sgcp/trafficmanager_service",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "zone_name",
+          "type": "String",
+          "required": true,
+          "rules": { "values": ["gslb.cloud.socgen", "gslb.eu-fr-paris.cloud.socgen", "gslb.cloud.aws-socgen.com", "gslb.cloud.azure-socgen.com", "gslb-cce.trafficmanager.cloud.com"] }
+        },
+        {
+          "name": "description",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "tags",
+          "type": "Array",
+          "required": false
+        },
+        {
+          "name": "members",
+          "type": "Link",
+          "linkType": "Default",
+          "linkRef": "slb_load_balancer_v1",
+          "required": false
+        },
+        {
+          "name": "enabled",
+          "type": "Boolean",
+          "required": false
+        }
+      ]
     }
   ],
   "variables": []

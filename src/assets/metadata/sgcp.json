@@ -141,7 +141,7 @@
           "name": "image_source",
           "type": "Link",
           "linkType": "Default",
-          "linkRef": "osfactory_img_src",
+          "linkRef": "osfactory_image_src",
           "required": false
         },
         {

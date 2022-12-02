@@ -15,55 +15,6 @@ import { getTerraformMetadata } from 'tests/resources/utils';
 
 describe('Test TerraformParser', () => {
   describe('Test methods', () => {
-    describe('Test method: hasParent', () => {
-      const parser = new TerraformParser();
-
-      it('Should return false on no definition', () => {
-        expect(parser.hasParent(new Component())).toBeFalsy();
-      });
-
-      it('Should return false on no parent', () => {
-        expect(parser.hasParent(new Component({
-          definition: new ComponentDefinition({
-            parentTypes: [],
-          }),
-        }))).toBeFalsy();
-      });
-
-      it('Should return false on no attribute with reference of parent', () => {
-        expect(parser.hasParent(new Component({
-          definition: new ComponentDefinition({
-            parentTypes: ['parent1'],
-          }),
-          attributes: [new ComponentAttribute({
-            name: 'test',
-            value: 'test',
-            definition: new ComponentAttributeDefinition({
-              name: 'test',
-              type: 'String',
-            }),
-          })],
-        }))).toBeFalsy();
-      });
-
-      it('Should return true on attribute with reference of parent', () => {
-        expect(parser.hasParent(new Component({
-          definition: new ComponentDefinition({
-            parentTypes: ['parent1'],
-          }),
-          attributes: [new ComponentAttribute({
-            name: 'parentId',
-            value: 'parent1',
-            definition: new ComponentAttributeDefinition({
-              name: 'parentId',
-              type: 'Reference',
-              containerRef: 'parent1',
-            }),
-          })],
-        }))).toBeTruthy();
-      });
-    });
-
     describe('Test method: isParsable', () => {
       const parser = new TerraformParser();
 
@@ -77,41 +28,6 @@ describe('Test TerraformParser', () => {
         expect(parser.isParsable(new FileInformation({
           path: './file.txt',
         }))).toBeFalsy();
-      });
-    });
-    describe('Test method: getParents', () => {
-      const components = [
-        new Component({
-          id: 'parent1',
-          name: 'parent1',
-          definition: new ComponentDefinition({ isContainer: true, type: 'parent' }),
-        }),
-        new Component({
-          id: 'child1',
-          name: 'child1',
-          definition: new ComponentDefinition({
-            type: 'child',
-            parentTypes: ['parent'],
-          }),
-          attributes: [
-            new ComponentAttribute({
-              name: 'container',
-              type: 'String',
-              value: 'parent1',
-            }),
-          ],
-        }),
-      ];
-      components[1].attributes[0].definition = new ComponentAttributeDefinition({
-        name: 'container',
-        type: 'Reference',
-        containerRef: 'parent',
-      });
-
-      it('Should have one parent', () => {
-        const parent = new TerraformParser().getParents(components, components[1]);
-        expect(parent.length).toEqual(1);
-        expect(parent[0].id).toEqual('parent1');
       });
     });
 
@@ -312,11 +228,9 @@ describe('Test TerraformParser', () => {
           });
           parser.parse([input]);
 
-          expect(parser.pluginData.components.length).toEqual(1);
+          expect(parser.pluginData.components.length).toEqual(2);
           expect(parser.pluginData.components[0].id).toEqual('parent');
-
-          expect(parser.pluginData.components[0].children.length).toEqual(1);
-          expect(parser.pluginData.components[0].children[0].id).toEqual('child');
+          expect(parser.pluginData.components[1].id).toEqual('child');
         });
       });
 

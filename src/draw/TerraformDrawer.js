@@ -8,7 +8,7 @@ class TerraformDrawer extends DefaultDrawer {
     super(pluginData, resources, events, rootId, {
       ...options,
       minHeight: 80,
-      minWidth: 96,
+      minWidth: 110,
       margin: 5,
     });
   }

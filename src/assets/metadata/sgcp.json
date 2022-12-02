@@ -46,7 +46,8 @@
         {
           "name": "availability_zone",
           "type": "String",
-          "required": false
+          "required": false,
+          "rules": { "values": ["eu-fr-paris-1", "eu-fr-paris-2", "eu-fr-north-1", "us-east-newyork-1", "us-east-newyork-2", "hk-hongkong-1", "hk-hongkong-2"] }
         }
       ]
     },
@@ -80,7 +81,8 @@
         {
           "name": "availability_zone",
           "type": "String",
-          "required": false
+          "required": false,
+          "rules": { "values": ["eu-fr-paris-1", "eu-fr-paris-2", "eu-fr-north-1", "us-east-newyork-1", "us-east-newyork-2", "hk-hongkong-1", "hk-hongkong-2"] }
         }
       ]
     },
@@ -228,7 +230,8 @@
         {
           "name": "availability_zone",
           "type": "String",
-          "required": false
+          "required": false,
+          "rules": { "values": ["eu-fr-paris-1", "eu-fr-paris-2", "eu-fr-north-1", "us-east-newyork-1", "us-east-newyork-2", "hk-hongkong-1", "hk-hongkong-2"] }
         },
         {
           "name": "flavor_name",
@@ -443,7 +446,8 @@
         {
           "name": "availability_zone",
           "type": "String",
-          "required": false
+          "required": false,
+          "rules": { "values": ["eu-fr-paris-1", "eu-fr-paris-2", "eu-fr-north-1", "us-east-newyork-1", "us-east-newyork-2", "hk-hongkong-1", "hk-hongkong-2"] }
         },
         {
           "name": "type",

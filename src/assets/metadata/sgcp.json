@@ -662,6 +662,144 @@
           "required": false
         }
       ]
+    },
+    {
+      "type": "postgre_cluster",
+      "model": "DefaultContainer",
+      "icon": "sgcp/postgre_cluster",
+      "isContainer": true,
+      "attributes": [
+        {
+          "name": "alias",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "tags",
+          "type": "Array",
+          "required": false
+        },
+        {
+          "name": "storage",
+          "type": "Number",
+          "required": true,
+          "rules": { "values": [20, 60, 160, 300, 500, 750, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000] }
+        },
+        {
+          "name": "has_backup",
+          "type": "Boolean",
+          "required": true
+        },
+        {
+          "name": "has_monitoring",
+          "type": "Boolean",
+          "required": true
+        },
+        {
+          "name": "version",
+          "type": "Number",
+          "required": false,
+          "rules": { "values": [14, 12, 11, 10, 9.6, 9.5] }
+        },
+        {
+          "name": "type",
+          "type": "String",
+          "required": true,
+          "rules": { "values": ["Medium 2vCPU-4GB", "Large 4vCPU-8GB", "Large-mem32 4vCPU-32GB", "XLarge 8vCPU-16GB", "XLarge-mem32 8vCPU-32GB", "XLarge-mem64 8vCPU-64GB", "4XLarge 24vCPU-48GB", "4XLarge-mem96 24vCPU-96GB", "4XLarge-mem128 24vCPU-128GB", "4XLarge-mem192 24vCPU-192GB", "Micro 1vCPU-1GB"] }
+        },
+        {
+          "name": "availability_zone",
+          "type": "String",
+          "required": true,
+          "rules": { "values": ["eu-fr-paris-1", "eu-fr-paris-2", "eu-fr-north-1", "us-east-newyork-1", "us-east-newyork-2", "hk-hongkong-1", "hk-hongkong-2"] }
+        },
+        {
+          "name": "enviroment",
+          "type": "String",
+          "required": true,
+          "rules": { "values": ["dev", "hml", "prd"] }
+        },
+        {
+          "name": "network",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "virtual_machine_provider",
+          "type": "String",
+          "required": false,
+          "rules": { "values": ["OCS", "EDGE"] }
+        },
+        {
+          "name": "lc_collate",
+          "type": "String",
+          "required": false,
+          "rules": { "values": ["fr_FR.UTF-8", "en_US.UTF-8"] }
+        },
+        {
+          "name": "lc_ctype",
+          "type": "String",
+          "required": false,
+          "rules": { "values": ["fr_FR.UTF-8", "en_US.UTF-8"] }
+        },
+        {
+          "name": "volume_type",
+          "type": "String",
+          "required": true,
+          "rules": { "values": ["tiefighter", "xwing"] }
+        },
+        {
+          "name": "replication",
+          "type": "Object",
+          "required": false,
+          "attributes": [
+            {
+              "name": "availability_zone",
+              "type": "String",
+              "required": true,
+              "rules": { "values": ["eu-fr-paris-1", "eu-fr-paris-2", "eu-fr-north-1", "us-east-newyork-1", "us-east-newyork-2", "hk-hongkong-1", "hk-hongkong-2"] }
+            },
+            {
+              "name": "network",
+              "type": "String",
+              "required": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "postgre_database",
+      "model": "DefaultModel",
+      "icon": "sgcp/postgre_database",
+      "attributes": [
+        {
+          "name": "cluster_id",
+          "type": "Reference",
+          "containerRef": "postgre_cluster",
+          "required": true
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "username",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "password",
+          "type": "String",
+          "required": true
+        },
+        {
+          "name": "extensions",
+          "type": "Array",
+          "required": false
+        }
+      ]
     }
   ],
   "variables": []

@@ -87,7 +87,7 @@
       ]
     },
     {
-      "type": "osfactory_image_source",
+      "type": "osfactory_image_src",
       "model": "DefaultModel",
       "icon": "sgcp/osfactory_image_source",
       "attributes": [
@@ -141,7 +141,7 @@
           "name": "image_source",
           "type": "Link",
           "linkType": "Default",
-          "linkRef": "osfactory_image_source",
+          "linkRef": "osfactory_img_src",
           "required": false
         },
         {
@@ -312,13 +312,13 @@
           "name": "security_group_ids",
           "type": "Link",
           "linkType": "Default",
-          "linkRef": "compute_security_group_v2",
+          "linkRef": "security_group_v2",
           "required": false
         }
       ]
     },
     {
-      "type": "compute_security_group_v2",
+      "type": "security_group_v2",
       "model": "DefaultContainer",
       "icon": "sgcp/compute_security_group",
       "isContainer": true,
@@ -347,14 +347,14 @@
       ]
     },
     {
-      "type": "compute_security_rule_v2",
+      "type": "security_rule_v2",
       "model": "DefaultModel",
       "icon": "sgcp/compute_security_group_rule",
       "attributes": [
         {
           "name": "security_group_id",
           "type": "Reference",
-          "containerRef": "compute_security_group_v2",
+          "containerRef": "security_group_v2",
           "required": true
         },
         {
@@ -624,7 +624,7 @@
       ]
     },
     {
-      "type": "trafficmanager_service",
+      "type": "trafficmanager_svc",
       "model": "DefaultModel",
       "icon": "sgcp/trafficmanager_service",
       "attributes": [

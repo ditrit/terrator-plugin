@@ -17,7 +17,7 @@ describe('Test TerraformRenderer', () => {
   });
 
   describe('Test methods', () => {
-    describe('Test method: render', () => {
+    describe('Test method: renderFiles', () => {
       it('Should render container', () => {
         const metadata = getTerraformMetadata(
           'aws',
@@ -31,7 +31,7 @@ describe('Test TerraformRenderer', () => {
         });
         parser.parse([input]);
 
-        expect(new TerraformRender(metadata.pluginData).render()).toEqual([input]);
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
 
       it('Should render container', () => {
@@ -47,7 +47,7 @@ describe('Test TerraformRenderer', () => {
         });
         parser.parse([input]);
 
-        expect(new TerraformRender(metadata.pluginData).render()).toEqual([input]);
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
 
       describe('Should render multiple files', () => {
@@ -69,7 +69,7 @@ describe('Test TerraformRenderer', () => {
         ];
         parser.parse(inputs);
 
-        expect(new TerraformRender(metadata.pluginData).render()).toEqual([
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([
           new FileInput({
             path: './link_default_single.tf',
             content: fs.readFileSync('tests/resources/tf/link_default_single.tf', 'utf8'),
@@ -93,7 +93,7 @@ describe('Test TerraformRenderer', () => {
           content: fs.readFileSync('tests/resources/tf/container.tf', 'utf8'),
         });
         parser.parse([input]);
-        expect(new TerraformRender(metadata.pluginData).render()).toEqual([input]);
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
 
       it('Should render single default link', () => {
@@ -109,7 +109,7 @@ describe('Test TerraformRenderer', () => {
         });
         parser.parse([input]);
 
-        expect(new TerraformRender(metadata.pluginData).render()).toEqual([input]);
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
 
       it('Should render multiple default links', () => {
@@ -125,7 +125,7 @@ describe('Test TerraformRenderer', () => {
         });
         parser.parse([input]);
 
-        expect(new TerraformRender(metadata.pluginData).render()).toEqual([input]);
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
 
       it('Should render single reverse link', () => {
@@ -141,7 +141,7 @@ describe('Test TerraformRenderer', () => {
         });
         parser.parse([input]);
 
-        expect(new TerraformRender(metadata.pluginData).render()).toEqual([input]);
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
 
       it('Should render multiple reverse links', () => {
@@ -157,7 +157,7 @@ describe('Test TerraformRenderer', () => {
         });
         parser.parse([input]);
 
-        expect(new TerraformRender(metadata.pluginData).render()).toEqual([input]);
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
 
       it('Should render app', () => {
@@ -173,7 +173,7 @@ describe('Test TerraformRenderer', () => {
         });
         parser.parse([input]);
 
-        expect(new TerraformRender(metadata.pluginData).render()).toEqual([input]);
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
 
       it('Should render with new links', () => {
@@ -247,7 +247,7 @@ describe('Test TerraformRenderer', () => {
           }),
         ];
 
-        expect(new TerraformRender(pluginData).render()).toEqual([input]);
+        expect(new TerraformRender(pluginData).renderFiles()).toEqual([input]);
       });
     });
 
@@ -273,7 +273,7 @@ describe('Test TerraformRenderer', () => {
               .find((definition) => definition.blockType === 'provider'),
           }),
         ];
-        expect(new TerraformRender(metadata.pluginData).render()).toEqual([input]);
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
 
       it('Should fix module rendering, https://github.com/ditrit/terrator-plugin/issues/25', () => {
@@ -298,7 +298,7 @@ describe('Test TerraformRenderer', () => {
           }),
         ];
 
-        expect(new TerraformRender(metadata.pluginData).render()).toEqual([input]);
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
     });
   });

@@ -29,36 +29,21 @@ class TerraformRenderer extends DefaultRender {
    *
    * @returns {FileInput[]} Array of generated files from components and links.
    */
-  render() {
-    const componentsMap = new Map();
-    this.collectComponentsFromTree(componentsMap, this.pluginData.components, 'new_file.tf');
-
-    return this.generateFilesFromComponentsMap(componentsMap);
-  }
-
-  /**
-   * Transform tree of components into an array of components associated by file name in a map.
-   *
-   * @param {Map<string, Component[]>} files - Final map to populate.
-   * @param {Component[]} tree - Tree to get components.
-   * @param {string} defaultFileName - Default file name to set in case of empty path on component.
-   */
-  collectComponentsFromTree(files, tree, defaultFileName) {
-    tree.forEach((component) => {
-      this.initComponentPath(component, defaultFileName);
-
-      if (!files.has(component.path)) {
-        files.set(component.path, [component]);
-      } else {
-        files.get(component.path).push(component);
-      }
-
-      if (component.children.length === 0) {
-        return;
-      }
-
-      this.collectComponentsFromTree(files, component.children, component.path);
-    });
+  renderFiles() {
+    return this.generateFilesFromComponentsMap(
+      this.pluginData.components.reduce(
+        (map, component) => {
+          this.initComponentPath(component, 'new_file.tf');
+          if (!map.has(component.path)) {
+            map.set(component.path, [component]);
+          } else {
+            map.get(component.path).push(component);
+          }
+          return map;
+        },
+        new Map(),
+      ),
+    );
   }
 
   /**

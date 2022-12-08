@@ -1,9 +1,13 @@
 module.exports = {
   root: true,
 
+  plugins: [
+    'jsdoc',
+  ],
+
   parserOptions: {
     parser: '@babel/eslint-parser',
-    ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
+    ecmaVersion: 2022, // Allows for the parsing of modern ECMAScript features
     sourceType: 'module', // Allows for the use of imports
   },
 
@@ -16,6 +20,7 @@ module.exports = {
   // Rules order is important, please avoid shuffling them
   extends: [
     'airbnb-base',
+    'plugin:jsdoc/recommended',
   ],
 
   globals: {
@@ -24,7 +29,13 @@ module.exports = {
     chrome: 'readonly',
   },
 
-  ignorePatterns: ['dist/*', 'src/assets/index.js', 'src/antlr/**'],
+  ignorePatterns: [
+    'docs/*',
+    'dist/*',
+    'src/assets/index.js',
+    'src/antlr/*',
+  ],
+
   // add your custom rules here
   rules: {
     'linebreak-style': ['error', 'unix'],
@@ -49,6 +60,7 @@ module.exports = {
 
     // allow debugger during development only
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'jsdoc/no-undefined-types': 'off',
     'no-restricted-imports': ['error', {
       patterns: [{
         group: ['\\.\\./*', '\\./*'],

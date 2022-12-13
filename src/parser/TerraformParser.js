@@ -12,8 +12,9 @@ import Parser from 'src/antlr/terraformParser';
 class TerraformParser extends DefaultParser {
   /**
    * Indicate if this parser can parse this file.
+   *
    * @param {FileInformation} [fileInformation] - File information.
-   * @return {Boolean} - Boolean that indicates if this file can be parsed or not.
+   * @returns {boolean} Boolean that indicates if this file can be parsed or not.
    */
   isParsable(fileInformation) {
     return /^.*\.tf$/.test(fileInformation.path);
@@ -21,6 +22,7 @@ class TerraformParser extends DefaultParser {
 
   /**
    * Convert the content of files into Components.
+   *
    * @param {FileInput[]} [inputs=[]] - Data you want to parse.
    */
   parse(inputs = []) {
@@ -47,8 +49,9 @@ class TerraformParser extends DefaultParser {
   /**
    * Transforms components to components tree, where each child component are in the parent
    * component.
+   *
    * @param {Component[]} components - Horizontal component without any tree.
-   * @return {Component[]} Component tree.
+   * @returns {Component[]} Component tree.
    */
   getComponentTree(components) {
     const tree = [];
@@ -67,9 +70,10 @@ class TerraformParser extends DefaultParser {
 
   /**
    * Get all parents of a component.
+   *
    * @param {Component[]} components - Components list that contains all parents and children.
    * @param {Component} child - Child to get parent id from attributes.
-   * @return {Component[]} Parent list.
+   * @returns {Component[]} Parent list.
    */
   getParents(components, child) {
     return components
@@ -88,8 +92,9 @@ class TerraformParser extends DefaultParser {
 
   /**
    * Indicate if a component can have parent.
+   *
    * @param {Component} component - Component to check.
-   * @return {boolean} Return true if component can have parent otherwise false.
+   * @returns {boolean} Return true if component can have parent otherwise false.
    */
   hasParent(component) {
     if (!component.definition) {

@@ -2,13 +2,16 @@ import { ComponentDefinition } from 'leto-modelizer-plugin-core';
 
 /**
  * Specific Terraform component definition.
- * @extends {ComponentDefinition}
+ *
+ * @augments {ComponentDefinition}
  */
 class TerraformComponentDefinition extends ComponentDefinition {
   /**
    * Override ComponentDefinition constructor with blockType and provider properties.
-   * @param {String} [props.blockType] - Type of Terraform block.
-   * @param {String} [props.provider] - Related provider of terraform block.
+   *
+   * @param {object} props - Terraform block properties.
+   * @param {string} [props.blockType] - Type of Terraform block.
+   * @param {string} [props.provider] - Related provider of terraform block.
    * @see ComponentDefinition
    */
   constructor(props = {
@@ -18,12 +21,14 @@ class TerraformComponentDefinition extends ComponentDefinition {
     super(props);
     /**
      * Type of Terraform block.
-     * @type {String}
+     *
+     * @type {string}
      */
     this.blockType = props.blockType || null;
     /**
      * Related provider of the terraform block.
-     * @type {String}
+     *
+     * @type {string}
      */
     this.provider = props.provider || null;
   }

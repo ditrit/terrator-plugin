@@ -404,6 +404,29 @@ describe('Test TerraformParser', () => {
           }),
         ]);
       });
+
+      it('Should fix file content null, https://github.com/ditrit/terrator-plugin/issues/43', () => {
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+        metadata.parse();
+        metadata.pluginData.initLinkDefinitions();
+        const parser = new TerraformParser(metadata.pluginData);
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: null,
+        });
+
+        let exception = null;
+        try {
+          parser.parse([input]);
+        } catch (e) {
+          exception = e;
+        }
+
+        expect(exception).toBeNull();
+      });
     });
   });
 });

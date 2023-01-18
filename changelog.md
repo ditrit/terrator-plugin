@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Template of models (container and component)
 - Icons size to fit into the new models
+- Update all project dependencies
 
 ### Fixed
 

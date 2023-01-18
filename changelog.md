@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Template of models (container and component)
 - Icons size to fit into the new models
 
+### Fixed
+
+- Parsing error when having a component with object inside object, [bug link](https://github.com/ditrit/terrator-plugin/issues/41).
+
 ## [0.1.8] - 2023/01/16
 
 ### Changed

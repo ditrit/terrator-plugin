@@ -27,16 +27,18 @@ class TerraformParser extends DefaultParser {
    */
   parse(inputs = []) {
     const listener = new TerraformListener(this.pluginData.definitions.components);
-    inputs.forEach((input) => {
-      listener.currentFile = input;
-      const stream = new antlr4.InputStream(input.content);
-      const lexer = new Lexer(stream);
-      const tokens = new antlr4.CommonTokenStream(lexer);
-      const parser = new Parser(tokens);
-      parser.buildParseTrees = true;
-      const tree = parser.file();
-      antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
-    });
+    inputs
+      .filter(({ content }) => content !== null)
+      .forEach((input) => {
+        listener.currentFile = input;
+        const stream = new antlr4.InputStream(input.content);
+        const lexer = new Lexer(stream);
+        const tokens = new antlr4.CommonTokenStream(lexer);
+        const parser = new Parser(tokens);
+        parser.buildParseTrees = true;
+        const tree = parser.file();
+        antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
+      });
 
     this.pluginData.components = listener.components.map((component) => {
       component.id = component.name;

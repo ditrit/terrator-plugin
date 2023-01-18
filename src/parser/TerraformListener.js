@@ -19,6 +19,7 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
     this.currentField = null;
     this.currentComplexeField = null;
     this.currentFile = null;
+    this.fieldsTree = [];
   }
 
   addComponent() {
@@ -26,6 +27,7 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
     this.components.push(this.currentComponent);
     this.currentComponent = null;
     this.currentBlockType = null;
+    this.fieldsTree = [];
   }
 
   // Enter a parse tree produced by terraformParser#file.
@@ -216,16 +218,29 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   }
 
   // Enter a parse tree produced by terraformParser#complexField.
-  enterComplexField() {
-    this.currentComplexeField = new ComponentAttribute({ value: [], type: 'Object' });
+  enterComplexField(ctx) {
+    if (this.currentComplexeField !== null) {
+      this.fieldsTree.push(this.currentComplexeField);
+    }
+
+    this.currentComplexeField = new ComponentAttribute({
+      name: getText(ctx.IDENTIFIER()),
+      value: [],
+      type: 'Object',
+    });
   }
 
   // Exit a parse tree produced by terraformParser#complexField.
-  exitComplexField(ctx) {
-    this.currentComplexeField.name = getText(ctx.IDENTIFIER());
-    this.currentComponent.attributes
-      .push(this.currentComplexeField);
-    this.currentComplexeField = null;
+  exitComplexField() {
+    if (this.fieldsTree.length > 0) {
+      const field = this.fieldsTree.pop();
+
+      field.value.push(this.currentComplexeField);
+      this.currentComplexeField = field;
+    } else {
+      this.currentComponent.attributes.push(this.currentComplexeField);
+      this.currentComplexeField = null;
+    }
   }
 
   // Enter a parse tree produced by terraformParser#validation.

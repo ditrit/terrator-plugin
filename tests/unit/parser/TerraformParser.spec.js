@@ -4,7 +4,6 @@ import {
   Component,
   ComponentAttribute,
   ComponentAttributeDefinition,
-  ComponentDefinition,
   ComponentLink,
   ComponentLinkDefinition,
   FileInformation,
@@ -344,6 +343,66 @@ describe('Test TerraformParser', () => {
                 }),
               })]);
         });
+      });
+
+      it('Should parsing object inside object, https://github.com/ditrit/terrator-plugin/issues/41', () => {
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+        metadata.parse();
+        metadata.pluginData.initLinkDefinitions();
+        const parser = new TerraformParser(metadata.pluginData);
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: fs.readFileSync('tests/resources/tf/bug41_subObject.tf', 'utf8'),
+        });
+
+        parser.parse([input]);
+
+        expect(metadata.pluginData.components).toEqual([
+          new Component({
+            id: 'web',
+            name: 'web',
+            path: 'new_file.tf',
+            definition: metadata.pluginData.definitions.components.find(({ type }) => type === 'aws_ami'),
+            attributes: [
+              new ComponentAttribute({
+                name: 'filter',
+                type: 'Object',
+                value: [
+                  new ComponentAttribute({
+                    name: 'name',
+                    type: 'String',
+                    value: 'state',
+                  }),
+                  new ComponentAttribute({
+                    name: 'test',
+                    type: 'Object',
+                    value: [
+                      new ComponentAttribute({
+                        name: 'value',
+                        type: 'Number',
+                        value: 8,
+                      }),
+                      new ComponentAttribute({
+                        name: 'test2',
+                        type: 'Object',
+                        value: [
+                          new ComponentAttribute({
+                            name: 'value',
+                            type: 'Number',
+                            value: 9,
+                          }),
+                        ],
+                      }),
+                    ],
+                  }),
+                ],
+              }),
+            ],
+          }),
+        ]);
       });
     });
   });

@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Parsing error when having a component with object inside object, [bug link](https://github.com/ditrit/terrator-plugin/issues/41).
+- Fix parsing error when file content is null, [bug link](https://github.com/ditrit/terrator-plugin/issues/43).
 
 ## [0.1.8] - 2023/01/16
 

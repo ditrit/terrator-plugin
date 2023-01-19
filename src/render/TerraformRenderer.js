@@ -1,5 +1,5 @@
 import nunjucks from 'nunjucks';
-import template from 'src/render/TerraformTemplate';
+import templates from 'src/render/TerraformTemplate';
 import {
   DefaultRender,
   FileInput,
@@ -16,12 +16,20 @@ class TerraformRenderer extends DefaultRender {
    */
   constructor(pluginData) {
     super(pluginData);
-    this.template = template;
-    nunjucks.configure({
+
+    const Loader = nunjucks.Loader.extend({
+      getSource(name) {
+        return {
+          src: templates[name],
+        };
+      },
+    });
+    const env = new nunjucks.Environment(new Loader(), {
       autoescape: false,
       trimBlocks: true,
       lstripBlocks: true,
     });
+    this.template = nunjucks.compile(templates.root, env);
   }
 
   /**
@@ -69,7 +77,7 @@ class TerraformRenderer extends DefaultRender {
     map.forEach((components, path) => {
       files.push(new FileInput({
         path,
-        content: `${nunjucks.renderString(this.template, { components }).trim()}\n`,
+        content: `${this.template.render({ components }).trim()}\n`,
       }));
     });
     return files;

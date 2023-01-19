@@ -50,7 +50,7 @@ describe('Test TerraformRenderer', () => {
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
 
-      describe('Should render multiple files', () => {
+      it('Should render multiple files', () => {
         const metadata = getTerraformMetadata(
           'aws',
           'tests/resources/tf/link.json',
@@ -281,11 +281,11 @@ describe('Test TerraformRenderer', () => {
           path: 'new_file.tf',
           content: fs.readFileSync('tests/resources/tf/bug25_moduleRendering.tf', 'utf8'),
         });
-
         const metadata = getTerraformMetadata(
           'aws',
           'src/assets/metadata/aws.json',
         );
+
         metadata.parse();
 
         metadata.pluginData.components = [
@@ -297,6 +297,25 @@ describe('Test TerraformRenderer', () => {
               .find(({ blockType, type }) => blockType === 'module' && type === 'server'),
           }),
         ];
+
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
+      });
+
+      it('Should fix render of an object attribute, https://github.com/ditrit/terrator-plugin/issues/46', () => {
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: fs.readFileSync('tests/resources/tf/bug41_subObject.tf', 'utf8'),
+        });
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+
+        metadata.parse();
+
+        const parser = new TerraformParser(metadata.pluginData);
+
+        parser.parse([input]);
 
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });

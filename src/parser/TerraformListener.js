@@ -30,6 +30,10 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
     this.fieldsTree = [];
   }
 
+  getAttributeDefinition(object, name) {
+    return object.definition?.definedAttributes.find((def) => def.name === name) || null;
+  }
+
   // Enter a parse tree produced by terraformParser#file.
   enterFile() {
   }
@@ -209,24 +213,38 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
         .push(this.currentField);
     }
 
-    if (this.currentComponent.definition) {
-      this.currentField.definition = this.currentComponent.definition.definedAttributes
-        .find((definitionAttribute) => definitionAttribute.name === this.currentField.name)
-        || null;
+    if (this.currentComplexeField) {
+      this.currentField.definition = this.getAttributeDefinition(
+        this.currentComplexeField,
+        this.currentField.name,
+      );
+    } else {
+      this.currentField.definition = this.getAttributeDefinition(
+        this.currentComponent,
+        this.currentField.name,
+      );
     }
+
     this.currentField = null;
   }
 
   // Enter a parse tree produced by terraformParser#complexField.
   enterComplexField(ctx) {
+    const name = getText(ctx.IDENTIFIER());
+    let definition;
+
     if (this.currentComplexeField !== null) {
       this.fieldsTree.push(this.currentComplexeField);
+      definition = this.getAttributeDefinition(this.currentComplexeField, name);
+    } else {
+      definition = this.getAttributeDefinition(this.currentComponent, name);
     }
 
     this.currentComplexeField = new ComponentAttribute({
-      name: getText(ctx.IDENTIFIER()),
+      name,
       value: [],
       type: 'Object',
+      definition,
     });
   }
 

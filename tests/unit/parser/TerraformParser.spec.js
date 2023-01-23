@@ -427,6 +427,66 @@ describe('Test TerraformParser', () => {
 
         expect(exception).toBeNull();
       });
+
+      it('Should fix missing attribute definition for an object, https://github.com/ditrit/terrator-plugin/issues/48', () => {
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+        metadata.parse();
+        metadata.pluginData.initLinkDefinitions();
+        const parser = new TerraformParser(metadata.pluginData);
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: fs.readFileSync('tests/resources/tf/bug48_objectAttributeDefinition.tf', 'utf8'),
+        });
+
+        parser.parse([input]);
+
+        const awsElbDefinition = metadata.pluginData.definitions.components.find(({ type }) => type === 'aws_elb');
+        const listenerAttributeDefinition = awsElbDefinition.definedAttributes.find(({ name }) => name === 'listener');
+        const lbPortAttributeDefinition = listenerAttributeDefinition.definedAttributes.find(({ name }) => name === 'lb_port');
+
+        expect(metadata.pluginData.components).toEqual([
+          new Component({
+            id: 'aws_elb_620fea2f',
+            name: 'aws_elb_620fea2f',
+            path: 'new_file.tf',
+            definition: awsElbDefinition,
+            attributes: [
+              new ComponentAttribute({
+                name: 'listener',
+                type: 'Object',
+                definition: listenerAttributeDefinition,
+                value: [
+                  new ComponentAttribute({
+                    name: 'lb_port',
+                    type: 'Number',
+                    definition: lbPortAttributeDefinition,
+                    value: 404,
+                  }),
+                  new ComponentAttribute({
+                    name: 'value',
+                    type: 'String',
+                    value: 'test',
+                  }),
+                ],
+              }),
+              new ComponentAttribute({
+                name: 'test',
+                type: 'Object',
+                value: [
+                  new ComponentAttribute({
+                    name: 'value',
+                    type: 'Number',
+                    value: 1,
+                  }),
+                ],
+              }),
+            ],
+          }),
+        ]);
+      });
     });
   });
 });

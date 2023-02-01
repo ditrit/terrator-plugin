@@ -19,6 +19,7 @@ class TerraformPlugin extends DefaultPlugin {
     const pluginData = new DefaultData({
       name,
       version,
+      defaultFileName: 'new_file.tf',
     });
 
     super({

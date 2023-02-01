@@ -41,7 +41,6 @@ class TerraformRenderer extends DefaultRender {
     return this.generateFilesFromComponentsMap(
       this.pluginData.components.reduce(
         (map, component) => {
-          this.initComponentPath(component, 'new_file.tf');
           if (!map.has(component.path)) {
             map.set(component.path, [component]);
           } else {
@@ -52,18 +51,6 @@ class TerraformRenderer extends DefaultRender {
         new Map(),
       ),
     );
-  }
-
-  /**
-   * Initialize component path if empty.
-   *
-   * @param {Component} component - Component to init.
-   * @param {string} defaultFileName - Default file name to set if empty.
-   */
-  initComponentPath(component, defaultFileName) {
-    if (!component.path) {
-      component.path = defaultFileName;
-    }
   }
 
   /**

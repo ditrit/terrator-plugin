@@ -41,7 +41,7 @@ class TerraformParser extends DefaultParser {
       });
 
     this.pluginData.components = listener.components.map((component) => {
-      component.id = component.name;
+      component.id = this.pluginData.generateComponentId(component.definition);
       return component;
     });
     this.pluginData.parseErrors = listener.errors;

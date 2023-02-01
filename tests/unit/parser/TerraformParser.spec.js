@@ -58,7 +58,7 @@ describe('Test TerraformParser', () => {
           parser.parse([input]);
           expect(parser.pluginData.components).toEqual([
             new Component({
-              id: 'aws',
+              id: 'aws_1',
               name: 'aws',
               path: './app.tf',
               definition: new TerraformComponentDefinition({
@@ -98,7 +98,7 @@ describe('Test TerraformParser', () => {
             }),
             new Component({
               name: 'server',
-              id: 'server',
+              id: 'server_1',
               path: './app.tf',
               definition: new TerraformComponentDefinition({
                 blockType: 'module',
@@ -115,7 +115,7 @@ describe('Test TerraformParser', () => {
             }),
             new Component({
               name: 'web',
-              id: 'web',
+              id: 'aws_ami_1',
               path: './app.tf',
               definition: new TerraformComponentDefinition({
                 blockType: 'data',
@@ -150,7 +150,7 @@ describe('Test TerraformParser', () => {
             }),
             new Component({
               name: 'publicdns',
-              id: 'publicdns',
+              id: 'aws_route53_zone_1',
               path: './app.tf',
               definition: new TerraformComponentDefinition({
                 blockType: 'resource',
@@ -192,7 +192,7 @@ describe('Test TerraformParser', () => {
               ],
             }),
             new Component({
-              id: 'image_id',
+              id: 'image_id_1',
               name: 'image_id',
               path: './app.tf',
               definition: new TerraformComponentDefinition({
@@ -228,8 +228,8 @@ describe('Test TerraformParser', () => {
           parser.parse([input]);
 
           expect(parser.pluginData.components.length).toEqual(2);
-          expect(parser.pluginData.components[0].id).toEqual('parent');
-          expect(parser.pluginData.components[1].id).toEqual('child');
+          expect(parser.pluginData.components[0].id).toEqual('aws_vpc_1');
+          expect(parser.pluginData.components[1].id).toEqual('aws_internet_gateway_1');
         });
       });
 
@@ -251,7 +251,7 @@ describe('Test TerraformParser', () => {
 
           expect(parser.pluginData.getLinks())
             .toEqual([new ComponentLink({
-              source: 'parent_default_single_1',
+              source: 'parent_1',
               target: 'child_default_single_1',
               definition: new ComponentLinkDefinition({
                 attributeRef: 'toChild',
@@ -272,7 +272,7 @@ describe('Test TerraformParser', () => {
           expect(parser.pluginData.getLinks())
             .toEqual([
               new ComponentLink({
-                source: 'parent_default_multiple_1',
+                source: 'parent_2',
                 target: 'child_default_multiple_1',
                 definition: new ComponentLinkDefinition({
                   attributeRef: 'toChild',
@@ -282,7 +282,7 @@ describe('Test TerraformParser', () => {
                 }),
               }),
               new ComponentLink({
-                source: 'parent_default_multiple_1',
+                source: 'parent_2',
                 target: 'child_default_multiple_2',
                 definition: new ComponentLinkDefinition({
                   attributeRef: 'toChild',
@@ -302,7 +302,7 @@ describe('Test TerraformParser', () => {
 
           expect(parser.pluginData.getLinks())
             .toEqual([new ComponentLink({
-              source: 'parent_reverse_single_1',
+              source: 'parent_1',
               target: 'child_reverse_single_1',
               definition: new ComponentLinkDefinition({
                 attributeRef: 'fromChild',
@@ -323,7 +323,7 @@ describe('Test TerraformParser', () => {
           expect(parser.pluginData.getLinks())
             .toEqual([
               new ComponentLink({
-                source: 'parent_reverse_multiple_1',
+                source: 'parent_2',
                 target: 'child_reverse_multiple_1',
                 definition: new ComponentLinkDefinition({
                   attributeRef: 'fromChild',
@@ -333,7 +333,7 @@ describe('Test TerraformParser', () => {
                 }),
               }),
               new ComponentLink({
-                source: 'parent_reverse_multiple_1',
+                source: 'parent_2',
                 target: 'child_reverse_multiple_2',
                 definition: new ComponentLinkDefinition({
                   attributeRef: 'fromChild',
@@ -362,7 +362,7 @@ describe('Test TerraformParser', () => {
 
         expect(metadata.pluginData.components).toEqual([
           new Component({
-            id: 'web',
+            id: 'aws_ami_1',
             name: 'web',
             path: 'new_file.tf',
             definition: metadata.pluginData.definitions.components.find(({ type }) => type === 'aws_ami'),
@@ -449,7 +449,7 @@ describe('Test TerraformParser', () => {
 
         expect(metadata.pluginData.components).toEqual([
           new Component({
-            id: 'aws_elb_620fea2f',
+            id: 'aws_elb_1',
             name: 'aws_elb_620fea2f',
             path: 'new_file.tf',
             definition: awsElbDefinition,

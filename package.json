@@ -32,7 +32,7 @@
   "homepage": "https://github.com/ditrit/terrator-plugin#readme",
   "dependencies": {
     "antlr4": "^4.11.0",
-    "leto-modelizer-plugin-core": "github:ditrit/leto-modelizer-plugin-core#0.11.0",
+    "leto-modelizer-plugin-core": "github:ditrit/leto-modelizer-plugin-core#0.12.0",
     "nunjucks": "^3.2.3"
   },
   "devDependencies": {

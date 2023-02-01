@@ -106,6 +106,9 @@ class TerraformMetadata extends DefaultMetadata {
       model: provider.model,
       definedAttributes: provider.attributes.map(this.getAttributeDefinition),
       isContainer: provider.isContainer,
+      displayName: provider.displayName,
+      description: provider.description,
+      url: provider.url,
     });
 
     definition.parentTypes = this.getParentTypes(definition);
@@ -131,6 +134,9 @@ class TerraformMetadata extends DefaultMetadata {
       icon: block.icon,
       isContainer: block.isContainer || false,
       definedAttributes: attributes.map(this.getAttributeDefinition),
+      displayName: block.displayName,
+      description: block.description,
+      url: block.url,
     });
 
     definition.parentTypes = this.getParentTypes(definition);

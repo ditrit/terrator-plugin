@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
-## [Unreleased]
+## [0.1.10] 2023/02/02
 
 ### Changed
 
@@ -100,6 +100,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add renderer for terraform files
 - Import metadata instead of passing it through constructor in TerraformMetadata
 
+[0.1.10]: https://github.com/ditrit/terrator-plugin/blob/0.1.10/changelog.md
 [0.1.9]: https://github.com/ditrit/terrator-plugin/blob/0.1.9/changelog.md
 [0.1.8]: https://github.com/ditrit/terrator-plugin/blob/0.1.8/changelog.md
 [0.1.7]: https://github.com/ditrit/terrator-plugin/blob/0.1.7/changelog.md

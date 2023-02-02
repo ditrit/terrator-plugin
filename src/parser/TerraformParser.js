@@ -26,6 +26,7 @@ class TerraformParser extends DefaultParser {
    * @param {FileInput[]} [inputs=[]] - Data you want to parse.
    */
   parse(inputs = []) {
+    this.pluginData.components = [];
     const listener = new TerraformListener(this.pluginData.definitions.components);
     inputs
       .filter(({ content }) => content !== null)

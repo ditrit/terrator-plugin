@@ -72,6 +72,7 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
 
   // Exit a parse tree produced by terraformParser#moduleDirective.
   exitModuleDirective() {
+    this.currentComponent.id = null;
     this.addComponent();
   }
 
@@ -100,6 +101,7 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
 
   // Exit a parse tree produced by terraformParser#providerDirective.
   exitProviderDirective() {
+    this.currentComponent.id = null;
     this.addComponent();
   }
 
@@ -150,7 +152,7 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
 
   // Exit a parse tree produced by terraformParser#name.
   exitName(ctx) {
-    this.currentComponent.name = getText(ctx);
+    this.currentComponent.id = getText(ctx);
   }
 
   // Enter a parse tree produced by terraformParser#resourceType.

@@ -40,9 +40,11 @@ class TerraformParser extends DefaultParser {
         antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
       });
 
-    this.pluginData.components = listener.components.map((component) => {
-      component.id = this.pluginData.generateComponentId(component.definition);
-      return component;
+    listener.components.forEach((component) => {
+      if (component.id === null) {
+        component.id = this.pluginData.generateComponentId(component.definition);
+      }
+      this.pluginData.components.push(component);
     });
     this.pluginData.parseErrors = listener.errors;
   }

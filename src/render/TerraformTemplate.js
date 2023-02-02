@@ -1,5 +1,5 @@
 const root = `{% for _block in components %}
-{{ _block.definition.blockType }} {% if ['resource','data'].includes(_block.definition.blockType) %}"{{ _block.definition.type }}" {% endif %}{% if ['provider', 'module'].includes(_block.definition.blockType) %}"{{ _block.definition.type }}"{% else %}"{{ _block.name }}"{% endif %} {
+{{ _block.definition.blockType }} {% if ['resource','data'].includes(_block.definition.blockType) %}"{{ _block.definition.type }}" {% endif %}{% if ['provider', 'module'].includes(_block.definition.blockType) %}"{{ _block.definition.type }}"{% else %}"{{ _block.id }}"{% endif %} {
 {% for attribute in _block.attributes %}{% set level = 1 %}
 {% include "attribute" ignore missing %}
 {% endfor %}

@@ -58,8 +58,8 @@ describe('Test TerraformParser', () => {
           parser.parse([input]);
           expect(parser.pluginData.components).toEqual([
             new Component({
-              id: 'aws',
-              name: 'aws',
+              id: 'aws_1',
+              name: null,
               path: './app.tf',
               definition: new TerraformComponentDefinition({
                 type: 'aws',
@@ -67,10 +67,16 @@ describe('Test TerraformParser', () => {
                 blockType: 'provider',
                 icon: 'aws',
                 model: 'DefaultModel',
+                displayName: 'AWS provider',
+                description: 'Amazon Web Services (AWS) provider',
+                url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs',
                 definedAttributes: [new ComponentAttributeDefinition({
                   name: 'region',
                   type: 'String',
                   required: true,
+                  displayName: 'Region',
+                  description: 'AWS service endpoints',
+                  url: 'https://docs.aws.amazon.com/general/latest/gr/rande.html',
                 })],
               }),
               attributes: [
@@ -92,13 +98,16 @@ describe('Test TerraformParser', () => {
                     name: 'region',
                     type: 'String',
                     required: true,
+                    displayName: 'Region',
+                    description: 'AWS service endpoints',
+                    url: 'https://docs.aws.amazon.com/general/latest/gr/rande.html',
                   }),
                 }),
               ],
             }),
             new Component({
-              name: 'server',
-              id: 'server',
+              name: null,
+              id: 'server_1',
               path: './app.tf',
               definition: new TerraformComponentDefinition({
                 blockType: 'module',
@@ -114,7 +123,7 @@ describe('Test TerraformParser', () => {
               })],
             }),
             new Component({
-              name: 'web',
+              name: null,
               id: 'web',
               path: './app.tf',
               definition: new TerraformComponentDefinition({
@@ -149,7 +158,7 @@ describe('Test TerraformParser', () => {
               ],
             }),
             new Component({
-              name: 'publicdns',
+              name: null,
               id: 'publicdns',
               path: './app.tf',
               definition: new TerraformComponentDefinition({
@@ -193,7 +202,7 @@ describe('Test TerraformParser', () => {
             }),
             new Component({
               id: 'image_id',
-              name: 'image_id',
+              name: null,
               path: './app.tf',
               definition: new TerraformComponentDefinition({
                 blockType: 'variable',
@@ -363,7 +372,7 @@ describe('Test TerraformParser', () => {
         expect(metadata.pluginData.components).toEqual([
           new Component({
             id: 'web',
-            name: 'web',
+            name: null,
             path: 'new_file.tf',
             definition: metadata.pluginData.definitions.components.find(({ type }) => type === 'aws_ami'),
             attributes: [
@@ -450,7 +459,7 @@ describe('Test TerraformParser', () => {
         expect(metadata.pluginData.components).toEqual([
           new Component({
             id: 'aws_elb_620fea2f',
-            name: 'aws_elb_620fea2f',
+            name: null,
             path: 'new_file.tf',
             definition: awsElbDefinition,
             attributes: [

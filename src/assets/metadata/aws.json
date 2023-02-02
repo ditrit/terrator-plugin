@@ -2,11 +2,17 @@
   "name": "aws",
   "model": "DefaultModel",
   "icon": "aws",
+  "displayName": "AWS provider",
+  "description": "Amazon Web Services (AWS) provider",
+  "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs",
   "attributes": [
     {
       "name": "region",
       "type": "String",
-      "required": true
+      "required": true,
+      "displayName": "Region",
+      "description": "AWS service endpoints",
+      "url": "https://docs.aws.amazon.com/general/latest/gr/rande.html"
     }
   ],
   "data": [

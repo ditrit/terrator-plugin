@@ -26,6 +26,7 @@ class TerraformParser extends DefaultParser {
    * @param {FileInput[]} [inputs=[]] - Data you want to parse.
    */
   parse(inputs = []) {
+    this.pluginData.components = [];
     const listener = new TerraformListener(this.pluginData.definitions.components);
     inputs
       .filter(({ content }) => content !== null)
@@ -40,9 +41,11 @@ class TerraformParser extends DefaultParser {
         antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
       });
 
-    this.pluginData.components = listener.components.map((component) => {
-      component.id = component.name;
-      return component;
+    listener.components.forEach((component) => {
+      if (component.id === null) {
+        component.id = this.pluginData.generateComponentId(component.definition);
+      }
+      this.pluginData.components.push(component);
     });
     this.pluginData.parseErrors = listener.errors;
   }

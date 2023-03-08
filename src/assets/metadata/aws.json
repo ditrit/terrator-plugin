@@ -1,311 +1,3784 @@
 {
   "name": "aws",
-  "model": "DefaultModel",
-  "icon": "aws",
   "displayName": "AWS provider",
-  "description": "Amazon Web Services (AWS) provider",
+  "description": "Use the Amazon Web Services (AWS) provider to interact with the many resources supported by AWS.",
+  "icon": "aws",
+  "model": "DefaultModel",
   "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs",
   "attributes": [
     {
       "name": "region",
-      "type": "String",
-      "required": true,
       "displayName": "Region",
       "description": "AWS service endpoints",
+      "required": true,
+      "type": "String",
       "url": "https://docs.aws.amazon.com/general/latest/gr/rande.html"
+    },
+    {
+      "name": "skip_region_validation",
+      "displayName": "Skip region validation",
+      "description": "Define if region validation should be skipped or not.",
+      "type": "Boolean",
+      "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#skip_region_validation"
+    },
+    {
+      "name": "access_key",
+      "displayName": "Access key",
+      "description": "The ID of the access key to allow Terraform requests to authenticate with.",
+      "type": "String",
+      "url": "https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html"
+    },
+    {
+      "name": "secret_key",
+      "displayName": "Secret key",
+      "description": "The secret key to allow Terraform requests to authenticate with.",
+      "type": "String",
+      "url": "https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html"
+    },
+    {
+      "name": "token",
+      "displayName": "Token",
+      "description": "Used to validate session temporary credentials.",
+      "type": "String",
+      "url": "https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html"
+    },
+    {
+      "name": "allowed_account_ids",
+      "displayName": "Allowed Account IDs",
+      "description": "List of allowed AWS account IDs to prevent you from mistakenly<br>using an incorrect one (and potentially end up destroying a live environment).",
+      "type": "Array",
+      "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#allowed_account_ids"
+    },
+    {
+      "name": "forbidden_account_ids",
+      "displayName": "Forbidden Account IDs",
+      "description": "List of forbidden AWS account IDs to prevent you from mistakenly<br>using an incorrect one (and potentially end up destroying a live environment).",
+      "type": "Array",
+      "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#forbidden_account_ids"
+    },
+    {
+      "name": "skip_requesting_account_id",
+      "displayName": "Skip requesting account ID",
+      "description": "Whether to skip requesting the account ID or not.",
+      "type": "Boolean",
+      "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#skip_requesting_account_id"
+    },
+    {
+      "name": "custom_ca_bundle",
+      "displayName": "Custom Certificate Authority (CA) bundle",
+      "description": "File containing custom root and intermediate certificates.",
+      "type": "String",
+      "url": "https://docs.aws.amazon.com/privateca/latest/userguide/PcaWelcome.html"
+    },
+    {
+      "name": "insecure",
+      "displayName": "Insecure",
+      "description": "Whether to explicitly allow the provider to perform \"insecure\" SSL requests or not.",
+      "type": "Boolean",
+      "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html"
+    },
+    {
+      "name": "ec2_metadata_service_endpoint",
+      "displayName": "EC2 metadata service (IMDS) endpoint",
+      "description": "Address of the EC2 metadata service (IMDS) endpoint to use.",
+      "type": "String",
+      "url": "https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environments-cfg-ec2-imds.html"
+    },
+    {
+      "name": "ec2_metadata_service_endpoint_mode",
+      "displayName": "EC2 metadata service (IMDS) endpoint mode",
+      "description": "Communication mode to use with the metadata service.",
+      "type": "String",
+      "url": "https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environments-cfg-ec2-imds.html",
+      "rules": {
+        "values": [
+          "IPv4",
+          "IPv6"
+        ]
+      }
+    },
+    {
+      "name": "http_proxy",
+      "displayName": "HTTP proxy",
+      "description": "Address of an HTTP proxy to use when accessing the AWS API.",
+      "type": "String",
+      "url": "https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-http.html",
+      "rules": {
+        "regex": "[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)"
+      }
+    },
+    {
+      "name": "max_retries",
+      "displayName": "Max retries",
+      "description": "Maximum number of times an API call is retried when AWS throttles requests or on transient failures.",
+      "type": "Number",
+      "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#max_retries"
+    },
+    {
+      "name": "profile",
+      "displayName": "Profile",
+      "description": "AWS profile name as set in the shared configuration and credentials files.",
+      "type": "String",
+      "url": "https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html"
+    },
+    {
+      "name": "shared_config_files",
+      "displayName": "Shared config files",
+      "description": "List of paths to AWS shared config files.",
+      "type": "String",
+      "url": "https://docs.aws.amazon.com/sdkref/latest/guide/file-format.html"
+    },
+    {
+      "name": "shared_credentials_files",
+      "displayName": "Shared credentials files",
+      "description": "List of paths to the shared credentials files.",
+      "type": "String",
+      "url": "https://docs.aws.amazon.com/sdkref/latest/guide/file-format.html"
+    },
+    {
+      "name": "skip_credentials_validation",
+      "displayName": "Skip credentials validation",
+      "description": "Whether to skip credentials validation via the STS API or not.",
+      "type": "Boolean",
+      "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html"
+    },
+    {
+      "name": "sts_region",
+      "displayName": "Security Token Servic (STS) region",
+      "description": "AWS region for Security Token Service (STS)",
+      "type": "String",
+      "url": "https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html"
+    },
+    {
+      "name": "s3_use_path_style",
+      "displayName": "Use path-style for S3",
+      "description": "Whether to enable the request to use path-style addressing or not<br>i.e., https://s3.amazonaws.com/BUCKET/KEY.",
+      "type": "Boolean",
+      "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html"
+    },
+    {
+      "name": "skip_metadata_api_check",
+      "displayName": "Skip metadata API check",
+      "description": "Whether to skip the AWS Metadata API check or not.",
+      "type": "Boolean",
+      "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#skip_metadata_api_check"
+    },
+    {
+      "name": "use_dualstack_endpoint",
+      "displayName": "Use dual-stack endpoint",
+      "description": "Force the provider to resolve endpoints with DualStack capability.",
+      "type": "Boolean",
+      "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/dual-stack-endpoints.html"
+    },
+    {
+      "name": "use_fips_endpoint",
+      "displayName": "Use FIPS endpoint",
+      "description": "Force the provider to resolve endpoints with FIPS capability.",
+      "type": "Boolean",
+      "url": "https://aws.amazon.com/compliance/fips/"
+    },
+    {
+      "name": "assume_role",
+      "displayName": "Assume role",
+      "description": "Set of temporary security credentials that you can use to access AWS resources.",
+      "type": "Object",
+      "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#assume_role",
+      "attributes": [
+        {
+          "name":"duration",
+          "displayName": "Duration",
+          "description": "Duration of the assume role session.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#duration"
+        },
+        {
+          "name":"external_id",
+          "displayName": "External ID",
+          "description": "External identifier to use when assuming the role.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#external_id"
+        },
+        {
+          "name":"policy",
+          "displayName": "Policy",
+          "description": "IAM Policy JSON describing further restricting permissions for the IAM Role being assumed.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#policy"
+        },
+        {
+          "name":"policy_arns",
+          "displayName": "Policy ARNs",
+          "description": "Set of Amazon Resource Names (ARNs) of IAM Policies describing further restricting permissions for the IAM Role being assumed.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#policy_arns"
+        },
+        {
+          "name":"role_arn",
+          "displayName": "Role ARN",
+          "description": "ARN of the IAM Role to assume. Can also be set with the AWS_ROLE_ARN environment variable.",
+          "required": true,
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#role_arn"
+        },
+        {
+          "name":"session_name",
+          "displayName": "Session name",
+          "description": "Session name to use when assuming the role. Can also be set with the AWS_ROLE_SESSION_NAME environment variable.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#session_name"
+        },
+        {
+          "name":"source_identity",
+          "displayName": "Source identity",
+          "description": "Source identity specified by the principal assuming the role.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#source_identity"
+        },
+        {
+          "name":"tags",
+          "displayName": "Tags",
+          "description": "Map of assume role session tags.",
+          "type": "Array",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#tags"
+        },
+        {
+          "name":"transitive_tag_keys",
+          "displayName": "Transitive tag keys",
+          "description": "Set of assume role session tag keys to pass to any subsequent sessions.",
+          "type": "Array",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#transitive_tag_keys"
+        }
+      ]
+    },
+    {
+      "name": "assume_role_with_web_identity",
+      "displayName": "Assume role with web identity",
+      "description": "Configuration block for assuming an IAM role using a web identity.",
+      "type": "Object",
+      "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#assume_role_with_web_identity",
+      "attributes": [
+        {
+          "name":"duration",
+          "displayName": "Duration",
+          "description": "Duration of the assume role session.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#duration"
+        },
+        {
+          "name":"policy",
+          "displayName": "Policy",
+          "description": "IAM Policy JSON describing further restricting permissions for the IAM Role being assumed.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#policy"
+        },
+        {
+          "name":"policy_arns",
+          "displayName": "Policy ARNs",
+          "description": "Set of Amazon Resource Names (ARNs) of IAM Policies describing further restricting permissions for the IAM Role being assumed.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#policy_arns"
+        },
+        {
+          "name":"role_arn",
+          "displayName": "Role ARN",
+          "description": "ARN of the IAM Role to assume. Can also be set with the AWS_ROLE_ARN environment variable.",
+          "required": true,
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#role_arn"
+        },
+        {
+          "name":"session_name",
+          "displayName": "Session name",
+          "description": "Session name to use when assuming the role. Can also be set with the AWS_ROLE_SESSION_NAME environment variable.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#session_name"
+        },
+        {
+          "name":"web_identity_token",
+          "displayName": "Web identity token",
+          "description": "Value of a web identity token from an OpenID Connect (OIDC) or OAuth provider. One of web_identity_token or web_identity_token_file is required.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#web_identity_token"
+        },
+        {
+          "name":"web_identity_token_file",
+          "displayName": "Web identity token file",
+          "description": "File containing a web identity token from an OpenID Connect (OIDC) or OAuth provider. One of web_identity_token_file or web_identity_token is required. Can also be set with the AWS_WEB_IDENTITY_TOKEN_FILE environment variable.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#web_identity_token_file"
+        }
+      ]
+    },
+    {
+      "name": "default_tags",
+      "displayName": "Default tags",
+      "description": "You can assign metadata to your AWS resources in the form of tags.<br>Each tag is a label consisting of a user-defined key and value.<br>Tags can help you manage, identify, organize, search for, and filter resources.",
+      "type": "Object",
+      "url": "https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html",
+      "attributes": [
+        {
+          "name": "tags",
+          "displayName": "Tags",
+          "description": "Key-value map of tags to apply to all resources.",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#tags"
+        }
+      ]
+    },
+    {
+      "name": "ignore_tags",
+      "displayName": "Ignore tags",
+      "description": "Configuration block with resource tag settings to ignore across all resources handled by this provider<br>(except any individual service tag resources such as aws_ec2_tag)<br>for situations where external systems are managing certain resource tags.",
+      "type": "Object",
+      "url": "https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html",
+      "attributes": [
+        {
+          "name": "keys",
+          "displayName": "Keys",
+          "description": "List of exact resource tag keys to ignore across all resources handled by this provider.",
+          "type": "Array",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#keys"
+        },
+        {
+          "name": "key_prefixes",
+          "displayName": "Key prefixes",
+          "description": "List of resource tag key prefixes to ignore across all resources handled by this provider.",
+          "type": "Array",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs#key_prefixes"
+        }
+      ]
+    },
+    {
+      "name": "endpoints",
+      "displayName": "Endpoints",
+      "description": "Configure the Terraform AWS Provider to use customized endpoints.",
+      "type": "Object",
+      "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/custom-service-endpoints"
     }
   ],
   "data": [
     {
       "type": "aws_ami",
+      "displayName": "Amazon Machine Image (AMI)",
+      "description": "An Amazon Machine Image (AMI) is a supported and maintained image provided by AWS<br>that provides the information required to launch an instance.",
+      "icon": "Aws_EC2_AMI",
       "model": "DefaultModel",
-      "icon": "Aws_EC2_AMI"
+      "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html",
+      "attributes": [
+        {
+          "name": "owners",
+          "displayName": "Owners",
+          "description": "List of AMI owners to limit search.",
+          "type": "Array",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html"
+        },
+        {
+          "name": "most_recent",
+          "displayName": "Most recent",
+          "description": "If more than one result is returned, use the most recent AMI.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami#most_recent"
+        },
+        {
+          "name": "executable_users",
+          "displayName": "Executable users",
+          "description": "Limit search to users with explicit launch permission on the image.",
+          "type": "Array",
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html"
+        },
+        {
+          "name": "include_deprecated",
+          "displayName": "Include deprecated",
+          "description": "If true, all deprecated AMIs are included in the response.",
+          "type": "Boolean",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-deprecate.html"
+        },
+        {
+          "name": "name_regex",
+          "displayName": "Name regex",
+          "description": "Regex string to apply to the AMI list returned by AWS.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami#name_regex"
+        }
+      ]
+    },
+    {
+      "type": "aws_rds_engine_version",
+      "displayName": "Relational Database Service engine version",
+      "description": "Information about a Relational Database Service engine version.<br><br>Amazon Relational Database Service (Amazon RDS) is a web service<br>that makes it easier to set up, operate, and scale a relational database in the AWS Cloud.",
+      "icon": "Aws_RDS",
+      "model": "DefaultModel",
+      "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html",
+      "attributes": [
+        {
+          "name": "engine",
+          "displayName": "Engine",
+          "description": "A DB engine is the specific relational database software that runs on your DB instance.",
+          "required": true,
+          "type": "String",
+          "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html#Welcome.Concepts.DBInstance.engine",
+          "rules": {
+            "values": [
+              "aurora",
+              "aurora-mysql",
+              "aurora-postgresql",
+              "docdb",
+              "mariadb",
+              "mysql",
+              "neptune",
+              "oracle-ee",
+              "oracle-se",
+              "oracle-se1",
+              "oracle-se2",
+              "postgres",
+              "sqlserver-ee",
+              "sqlserver-ex",
+              "sqlserver-se",
+              "sqlserver-web"
+            ]
+          }
+        },
+        {
+          "name": "default_only",
+          "displayName": "Default only",
+          "description": "When set to true, the default version for the specified engine or combination of engine and major version will be returned.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/rds_engine_version#default_only"
+        },
+        {
+          "name": "version",
+          "displayName": "Version",
+          "description": "Version of the DB engine.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/rds_engine_version#version"
+        },
+        {
+          "name": "preferred_versions",
+          "displayName": "Preferred versions",
+          "description": "Ordered list of preferred engine versions.",
+          "type": "Array",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/rds_engine_version#preferred_versions"
+        },
+        {
+          "name": "include_all",
+          "displayName": "Include all",
+          "description": "When set to true, the specified version or member of prefered versions will be returned even if it is deprecated.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/rds_engine_version#include_all"
+        },
+        {
+          "name": "parameter_group_family",
+          "displayName": "Parameter group family",
+          "description": "Name of a specific DB parameter group family.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/rds_engine_version#parameter_group_family"
+        }
+      ]
+    },
+    {
+      "type": "aws_availability_zones",
+      "displayName": "Availability Zones",
+      "description": "The Availability Zones data source allows access to the list of AWS Availability Zones<br>which can be accessed by an AWS account within the region configured in the provider.<br><br>This is different from the Availability Zone (singular).",
+      "icon": "Aws_Local-Zones",
+      "model": "DefaultModel",
+      "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+      "attributes": [
+        {
+          "name": "all_availability_zones",
+          "displayName": "All Availability Zones",
+          "description": "Set to true to include all Availability Zones and Local Zones regardless of your opt in status.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones#all_availability_zones"
+        },
+        {
+          "name": "exclude_names",
+          "displayName": "Exclude names",
+          "description": "List of Availability Zone names to exclude.",
+          "type": "Array",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones#exclude_names"
+        },
+        {
+          "name": "exclude_zone_ids",
+          "displayName": "Exclude zone IDs",
+          "description": "List of Availability Zone IDs to exclude.",
+          "type": "Array",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones#exclude_zone_ids"
+        },
+        {
+          "name": "state",
+          "displayName": "State",
+          "description": "Allows to filter list of Availability Zones based on their current state.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones#state",
+          "rules": {
+            "values": [
+              "available",
+              "impaired",
+              "information",
+              "unavailable"
+            ]
+          }
+        }
+      ]
     }
   ],
   "modules": [
     {
       "type": "server",
-      "model": "DefaultModel",
-      "icon": "Aws_Servers"
+      "displayName": "Server",
+      "icon": "Aws_Servers",
+      "model": "DefaultModel"
     }
   ],
   "resources": [
     {
       "type": "aws_security_group",
-      "model": "DefaultModel",
+      "displayName": "Security group",
+      "description": "A security group controls the traffic that is allowed to reach and leave the resources that it is associated with.",
       "icon": "AwsSecurityGroup",
+      "model": "DefaultModel",
+      "url": "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html",
       "attributes": [
         {
+          "name": "description",
+          "displayName": "Description",
+          "description": "Description of the security group.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#description"
+        },
+        {
+          "name": "name",
+          "displayName": "Name",
+          "description": "Name of the security group.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#name"
+        },
+        {
+          "name": "name_prefix",
+          "displayName": "Name prefix",
+          "description": "Creates a unique name beginning with the specified prefix.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#name_prefix"
+        },
+        {
+          "name": "revoke_rules_on_delete",
+          "displayName": "Revoke rules on delete",
+          "description": "Instruct Terraform to revoke all of the Security Groups attached ingress and egress rules before deleting the rule itself.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#revoke_rules_on_delete"
+        },
+        {
           "name": "vpc_id",
-          "type": "Link",
-          "linkType": "Default",
+          "displayName": "VPC ID",
+          "description": "The ID of the VPC for which to create the security group.",
+          "containerRef": "aws_vpc",
+          "linkAttribute": "id",
           "linkRef": "aws_vpc",
-          "linkAttribute": "id"
+          "linkType": "Default",
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#vpc_id"
+        },
+        {
+          "name": "egress",
+          "displayName": "Egress",
+          "description": "Configuration block for egress rules",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#egress",
+          "attributes": [
+            {
+              "name": "from_port",
+              "displayName": "From port",
+              "description": "Start port (or ICMP type number if protocol is icmp).",
+              "required": true,
+              "type": "Number",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#from_port"
+            },
+            {
+              "name": "to_port",
+              "displayName": "To port",
+              "description": "End port (or ICMP code if protocol is icmp).",
+              "required": true,
+              "type": "Number",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#to_port"
+            },
+            {
+              "name": "protocol",
+              "displayName": "Protocol",
+              "description": "The protocol. If not icmp, tcp, udp, or all use the -1 protocol number.",
+              "required": true,
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#protocol"
+            },
+            {
+              "name": "cidr_blocks",
+              "displayName": "CIDR blocks",
+              "description": "List of CIDR blocks.",
+              "type": "Array",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#cidr_blocks"
+            },
+            {
+              "name": "ipv6_cidr_blocks",
+              "displayName": "IPv6 CIDR blocks",
+              "description": "List of IPv6 CIDR blocks.",
+              "type": "Array",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#ipv6_cidr_blocks"
+            }
+          ]
+        },
+        {
+          "name": "ingress",
+          "displayName": "Ingress",
+          "description": "Configuration block for Ingress rules",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#ingress",
+          "attributes": [
+            {
+              "name": "from_port",
+              "displayName": "From port",
+              "description": "Start port (or ICMP type number if protocol is icmp).",
+              "required": true,
+              "type": "Number",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#from_port"
+            },
+            {
+              "name": "to_port",
+              "displayName": "To port",
+              "description": "End port (or ICMP code if protocol is icmp).",
+              "required": true,
+              "type": "Number",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#to_port"
+            },
+            {
+              "name": "protocol",
+              "displayName": "Protocol",
+              "description": "The protocol. If not icmp, tcp, udp, or all use the -1 protocol number.",
+              "required": true,
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#protocol"
+            },
+            {
+              "name": "cidr_blocks",
+              "displayName": "CIDR blocks",
+              "description": "List of CIDR blocks.",
+              "type": "Array",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#cidr_blocks"
+            },
+            {
+              "name": "ipv6_cidr_blocks",
+              "displayName": "IPv6 CIDR blocks",
+              "description": "List of IPv6 CIDR blocks.",
+              "type": "Array",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#ipv6_cidr_blocks"
+            }
+          ]
+        },
+        {
+          "name": "tags",
+          "displayName": "Tags",
+          "description": "A map of tags to assign to the resource.",
+          "type": "Object",
+          "url": "https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html"
         }
       ]
     },
     {
       "type": "aws_instance",
-      "model": "DefaultModel",
+      "displayName": "EC2 Instance",
+      "description": "Provides an EC2 instance resource.",
       "icon": "Aws_EC2-Instance",
+      "model": "DefaultModel",
+      "url": "https://docs.aws.amazon.com/ec2/index.html",
       "attributes": [
         {
           "name": "security_groups",
-          "type": "Link",
-          "linkType": "Reverse",
+          "displayName": "Security groups",
+          "description": "List of security group names to associate with.",
+          "linkAttribute": "name",
           "linkRef": "aws_security_group",
-          "linkAttribute": "name"
+          "linkType": "Reverse",
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#security_groups"
         },
         {
           "name": "vpc_security_group_ids",
-          "type": "Link",
-          "linkType": "Reverse",
+          "displayName": "VPC security group IDs",
+          "description": "List of security group IDs to associate with.",
+          "linkAttribute": "id",
           "linkRef": "aws_security_group",
-          "linkAttribute": "id"
+          "linkType": "Reverse",
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#vpc_security_group_ids"
         },
         {
           "name": "subnet_id",
-          "type": "Link",
-          "linkType": "Default",
+          "displayName": "Subnet ID",
+          "description": "The VPC Subnet ID to launch in.",
+          "linkAttribute": "id",
           "linkRef": "aws_subnet",
-          "linkAttribute": "id"
+          "linkType": "Default",
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#subnet_id"
         }
       ]
     },
     {
       "type": "aws_volume_attachment",
-      "model": "DefaultModel",
+      "displayName": "AWS volume attachment",
+      "description": "Attach an EBS volume to one or more instances",
       "icon": "Aws_Elastic-Block-Store_Volume",
+      "model": "DefaultModel",
+      "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html",
       "attributes": [
         {
           "name": "device_name",
-          "type": "String"
+          "displayName": "Device name",
+          "description": "The device name to expose to the instance (for example, /dev/sdh or xvdh).",
+          "required": true,
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/volume_attachment#device_name"
         },
         {
           "name": "volume_id",
-          "type": "Link",
-          "linkType": "Default",
+          "displayName": "Volume ID",
+          "description": "The ID of the Volume to attach to.",
+          "linkAttribute": "id",
           "linkRef": "aws_ebs_volume",
-          "linkAttribute": "id"
+          "linkType": "Default",
+          "required": true,
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/volume_attachment#volume_id"
         },
         {
           "name": "instance_id",
-          "type": "Link",
-          "linkType": "Default",
+          "displayName": "Instance ID",
+          "description": "The ID of the Instance to attach to.",
+          "linkAttribute": "id",
           "linkRef": "aws_instance",
-          "linkAttribute": "id"
+          "linkType": "Default",
+          "required": true,
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/volume_attachment#instance_id"
         }
       ]
     },
     {
       "type": "aws_ebs_volume",
-      "model": "DefaultModel",
+      "displayName": "EBS Volume",
+      "description": "A durable, block-level storage device that you can attach to your instances.",
       "icon": "Aws_Elastic-Block-Store_Volume",
+      "model": "DefaultModel",
+      "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes.html",
       "attributes": [
         {
           "name": "availability_zone",
-          "type": "String"
+          "displayName": "Availability zone",
+          "description": "The Availability Zone where the EBS volume will exist.",
+          "required": true,
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ebs_volume#availability_zone"
         }
       ]
     },
     {
       "type": "aws_elb",
-      "model": "DefaultModel",
+      "displayName": "AWS ELB",
+      "description": "Automatically distributes incoming application traffic across multiple targets and virtual appliances in one or more Availability Zones.",
       "icon": "Aws_Elastic-Load-Balancing_Network-Load-Balancer",
+      "model": "DefaultModel",
+      "url": "https://aws.amazon.com/elasticloadbalancing/",
       "attributes": [
         {
           "name": "listener",
-          "type": "Object",
+          "displayName": "Listener",
+          "description": "A list of listener blocks. Each listener block supports fields documented below.",
           "required": true,
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elb#listener",
           "attributes": [
             {
               "name": "instance_port",
+              "displayName": "Instance port",
+              "description": "The port on the instance to route to.",
+              "required": true,
               "type": "String",
-              "required": true
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elb#instance_port"
             },
             {
               "name": "lb_port",
+              "displayName": "LB port",
+              "description": "The port to listen on for the load balancer.",
+              "required": true,
               "type": "Number",
-              "required": true
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elb#lb_port"
             },
             {
               "name": "lb_protocol",
+              "displayName": "LB protocol",
+              "description": "The protocol to listen on. Valid values are HTTP, HTTPS, TCP, or SSL.",
+              "required": true,
               "type": "String",
-              "required": true
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elb#lb_protocol"
             },
             {
               "name": "instance_protocol",
+              "displayName": "Instance protocol",
+              "description": "The protocol to use to the instance. Valid values are HTTP, HTTPS, TCP, or SSL.",
+              "required": true,
               "type": "String",
-              "required": true
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elb#instance_protocol"
             }
           ]
         },
         {
           "name": "subnets",
-          "type": "Link",
-          "linkType": "Default",
+          "displayName": "Subnets",
+          "description": "A list of subnet IDs to attach to the ELB.",
+          "linkAttribute": "id",
           "linkRef": "aws_subnet",
-          "linkAttribute": "id"
+          "linkType": "Default",
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elb#subnets"
         },
         {
           "name": "security_groups",
-          "type": "Link",
-          "linkType": "Default",
+          "displayName": "Security groups",
+          "description": "A list of security group IDs to assign to the ELB.",
+          "linkAttribute": "id",
           "linkRef": "aws_security_group",
-          "linkAttribute": "id"
+          "linkType": "Default",
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elb#security_groups"
         },
         {
           "name": "instances",
-          "type": "Link",
-          "linkType": "Default",
+          "displayName": "Instances",
+          "description": "A list of instance ids to place in the ELB pool.",
+          "linkAttribute": "id",
           "linkRef": "aws_instance",
-          "linkAttribute": "id"
+          "linkType": "Default",
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elb#instances"
         }
       ]
     },
     {
       "type": "aws_vpc",
-      "model": "DefaultContainer",
+      "displayName": "Virtual Private Cloud (VPC)",
+      "description": "Amazon Virtual Private Cloud (Amazon VPC) enables you to launch AWS resources into a virtual network that you've defined.",
       "icon": "Aws_Virtual-Private-Cloud",
-      "isContainer": true
+      "isContainer": true,
+      "model": "DefaultContainer",
+      "url": "https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html",
+      "attributes": [
+        {
+          "name": "cidr_block",
+          "displayName": "CIDR block",
+          "description": "IPv4 CIDR block of the desired VPC.",
+          "type": "String",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/configure-your-vpc.html",
+          "rules": {
+            "regex": "^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$"
+          }
+        },
+        {
+          "name": "ipv4_ipam_pool_id",
+          "displayName": "IPv4 IPAM pool ID",
+          "description": "ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR.",
+          "type": "String",
+          "url": "https://docs.aws.amazon.com/vpc/latest/ipam/what-it-is-ipam.html"
+        },
+        {
+          "name": "ipv4_netmask_length",
+          "displayName": "IPv4 netmask length",
+          "description": "Netmask length of the IPv4 CIDR you want to allocate to this VPC.",
+          "type": "Number",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/configure-your-vpc.html",
+          "rules": {
+            "max": 32,
+            "min": 1
+          }
+        },
+        {
+          "name": "ipv6_cidr_block",
+          "displayName": "IPv6 CIDR block",
+          "description": "IPv6 CIDR block to request from an IPAM Pool.",
+          "type": "String",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/configure-your-vpc.html",
+          "rules": {
+            "regex": "[a-fA-F0-9]{4}(:[a-fA-F0-9]{4}){7}"
+          }
+        },
+        {
+          "name": "ipv6_ipam_pool_id",
+          "displayName": "IPv6 IPAM pool ID",
+          "description": "IPAM Pool ID for a IPv6 pool",
+          "type": "String",
+          "url": "https://docs.aws.amazon.com/vpc/latest/ipam/what-it-is-ipam.html"
+        },
+        {
+          "name": "ipv6_netmask_length",
+          "displayName": "IPv6 netmask length",
+          "description": "Netmask length to request from IPAM Pool.",
+          "type": "Number",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/configure-your-vpc.html",
+          "rules": {
+            "values": [
+              56
+            ]
+          }
+        },
+        {
+          "name": "ipv6_cidr_block_network_border_group",
+          "displayName": "IPv6 CIDR block network border group",
+          "description": "Restrict advertisement of public addresses to specific Network Border Groups such as LocalZones.",
+          "type": "String",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/Extend_VPCs.html"
+        },
+        {
+          "name": "instance_tenancy",
+          "displayName": "Instance tenancy",
+          "description": "Allowed tenancy of instances launched into the selected VPC.",
+          "type": "String",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html",
+          "rules": {
+            "values": [
+              "default",
+              "dedicated"
+            ]
+          }
+        },
+        {
+          "name": "enable_dns_support",
+          "displayName": "Enable DNS support",
+          "description": "Enable DNS support in the VPC.",
+          "type": "Boolean",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html"
+        },
+        {
+          "name": "enable_dns_hostnames",
+          "displayName": "Enable DNS hostnames",
+          "description": "Enable DNS hostnames in the VPC.",
+          "type": "Boolean",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html"
+        },
+        {
+          "name": "enable_classiclink",
+          "displayName": "Enable ClassicLink",
+          "description": "Enable ClassicLink for the VPC, allowing you to link EC2-Classic instances to the VPC.",
+          "type": "Boolean",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html"
+        },
+        {
+          "name": "enable_classiclink_dns_support",
+          "displayName": "Enable ClassicLink DNS support",
+          "description": "Enable ClassicLink DNS Support for the VPC.<br>If set to true, DNS hostnames that are addressed between linked EC2-Classic instances and instances in the VPC will resolve to private IP addresses.",
+          "type": "Boolean",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html"
+        },
+        {
+          "name": "assign_generated_ipv6_cidr_block",
+          "displayName": "Assign generated IPv6 CIDR block",
+          "description": "Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC.",
+          "type": "Boolean",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/configure-your-vpc.html"
+        },
+        {
+          "name": "enable_network_address_usage_metrics",
+          "displayName": "Enable network address usage metrics",
+          "description": "Enable network address usage metrics for the VPC.",
+          "type": "Boolean",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/network-address-usage.html"
+        },
+        {
+          "name": "tags",
+          "displayName": "Tags",
+          "description": "A map of tags to assign to the resource.",
+          "type": "Object",
+          "url": "https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html"
+        }
+      ]
     },
     {
       "type": "aws_internet_gateway",
-      "model": "DefaultModel",
+      "displayName": "Internet gateway",
+      "description": "An internet gateway is a horizontally scaled, redundant, and highly available VPC component<br>that allows communication between your VPC and the internet.",
       "icon": "Aws_VPC_Internet-Gateway",
+      "model": "DefaultModel",
+      "url": "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html",
       "attributes": [
         {
           "name": "vpc_id",
+          "displayName": "VPC ID",
+          "description": "The VPC ID to create the gateway in.",
+          "containerRef": "aws_vpc",
           "type": "Reference",
-          "containerRef": "aws_vpc"
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html"
+        },
+        {
+          "name": "tags",
+          "displayName": "Tags",
+          "description": "A map of tags to assign to the resource.",
+          "type": "Object",
+          "url": "https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html"
         }
       ]
     },
     {
       "type": "aws_route",
-      "model": "DefaultModel",
+      "displayName": "AWS route",
+      "description": "Contains a set of rules, called routes, that determine where network traffic from your subnet or gateway is directed.",
       "icon": "Aws_Route-53",
+      "model": "DefaultModel",
+      "url": "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html",
       "attributes": [
         {
           "name": "route_table_id",
-          "type": "Reference",
+          "displayName": "Route table ID",
+          "description": "The ID of the routing table.",
+          "containerRef": "aws_route",
           "required": true,
-          "containerRef": "aws_route"
+          "type": "Reference",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route#route_table_id"
         },
         {
           "name": "gateway_id",
-          "type": "Link",
-          "linkType": "Default",
+          "displayName": "Gateway ID",
+          "description": "Identifier of a VPC internet gateway or a virtual private gateway.",
+          "linkAttribute": "id",
           "linkRef": "aws_internet_gateway",
-          "linkAttribute": "id"
+          "linkType": "Default",
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route#gateway_id"
         }
       ]
     },
     {
       "type": "aws_subnet",
+      "displayName": "Subnet",
+      "description": "A subnet is a range of IP addresses in your VPC. You can launch AWS resources into your subnets.",
+      "icon": "Aws_Mesh",
       "model": "DefaultModel",
-      "icon": "AwsSubnet",
+      "url": "https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html",
       "attributes": [
         {
           "name": "vpc_id",
-          "type": "Reference",
+          "displayName": "VPC ID",
+          "description": "The VPC ID to create the subnet in.",
           "containerRef": "aws_vpc",
-          "linkAttribute": "id"
+          "linkAttribute": "id",
+          "required": true,
+          "type": "Reference",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet#vpc_id"
         },
         {
           "name": "gateway_id",
           "type": "Link",
-          "linkType": "Default",
+          "linkAttribute": "id",
           "linkRef": "aws_internet_gateway",
-          "linkAttribute": "id"
+          "linkType": "Default"
+        },
+        {
+          "name": "availability_zone",
+          "displayName": "Availability zone",
+          "description": "The Availability Zone for the subnet.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet#availability_zone"
+        },
+        {
+          "name": "availability_zone_id",
+          "displayName": "Availability zone ID",
+          "description": "The ID of the Availability Zone for the subnet.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet#availability_zone_id"
+        },
+        {
+          "name": "cidr_block",
+          "displayName": "CIDR block",
+          "description": "IPv4 CIDR block for the subnet",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet#cidr_block",
+          "rules": {
+            "regex": "^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$"
+          }
+        },
+        {
+          "name": "customer_owned_ipv4_pool",
+          "displayName": "Customer owned IPv4 pool",
+          "description": "The ID of an address pool that you own.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet#customer_owned_ipv4_pool"
+        },
+        {
+          "name": "map_customer_owned_ip_on_launch",
+          "displayName": "Map customer owned IP on launch",
+          "description": "Specify true to indicate that network interfaces created in the subnet should be assigned a customer owned IP address.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet#map_customer_owned_ip_on_launch"
+        },
+        {
+          "name": "map_customer_ip_on_launch",
+          "displayName": "Map customer IP on launch",
+          "description": "Specify true to indicate that instances launched into the subnet should be assigned a public IP address.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet#map_public_ip_on_launch"
+        },
+        {
+          "name": "enable_dns64",
+          "displayName": "Enable DNS64",
+          "description": "Whether DNS queries made to the Amazon-provided DNS Resolver<br>in this subnet should return synthetic IPv6 addresses for IPv4-only destinations.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet#enable_dns64"
+        },
+        {
+          "name": "assign_ipv6_address_on_creation",
+          "displayName": "Assign IPv6 address on creation",
+          "description": "Specify true to indicate that network interfaces created in the specified subnet should be assigned an IPv6 address.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet#assign_ipv6_address_on_creation"
+        },
+        {
+          "name": "ipv6_cidr_block",
+          "displayName": "IPv6 CIDR block",
+          "description": "The IPv6 network range for the subnet, in CIDR notation",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet#ipv6_cidr_block",
+          "rules": {
+            "regex": "[a-fA-F0-9]{4}(:[a-fA-F0-9]{4}){7}"
+          }
+        },
+        {
+          "name": "ipv6_native",
+          "displayName": "IPv6 native",
+          "description": "Whether to create an IPv6-only subnet.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet#ipv6_native"
+        },
+        {
+          "name": "enable_resource_name_dns_a_record_on_launch",
+          "displayName": "Enable ressource name DNS A record on launch",
+          "description": "Whether to respond to DNS queries for instance hostnames with DNS A records.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet#enable_resource_name_dns_a_record_on_launch"
+        },
+        {
+          "name": "enable_resource_name_dns_aaaa_record_on_launch",
+          "displayName": "Enable ressource name DNS AAAA record on launch",
+          "description": "Whether to respond to DNS queries for instance hostnames with DNS AAAA records.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet#enable_resource_name_dns_aaaa_record_on_launch"
+        },
+        {
+          "name": "private_dns_hostname_type_on_launch",
+          "displayName": "Private DNS hostname type on launch",
+          "description": "The type of hostnames to assign to instances in the subnet at launch.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet#private_dns_hostname_type_on_launch"
+        },
+        {
+          "name": "outpost_arn",
+          "displayName": "Outpost Amazon Resource Name (ARN)",
+          "description": "Amazon Resource Name (ARN) of the Outpost",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet#outpost_arn"
+        },
+        {
+          "name": "tags",
+          "displayName": "Tags",
+          "description": "A map of tags to assign to the resource.",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet#tags"
         }
       ]
     },
     {
       "type": "aws_db_subnet_group",
-      "model": "DefaultContainer",
+      "displayName": "AWS DB subnet group",
+      "description": "A collection of subnets that you create in a VPC and that you then designate for your DB instances.",
       "icon": "AwsDbSubnetGroup",
-      "isContainer": true,
+      "model": "DefaultModel",
+      "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Subnets",
       "attributes": [
         {
           "name": "subnet_ids",
-          "type": "Reference",
+          "displayName": "Subnet IDs",
+          "description": "A list of VPC subnet IDs.",
+          "linkRef": "aws_subnet",
+          "linkType": "Default",
           "required": true,
-          "containerRef": "aws_subnet"
+          "type": "Link",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html"
         }
       ]
     },
     {
       "type": "aws_route53_zone",
-      "model": "DefaultContainer",
+      "displayName": "AWS route 53 zone",
+      "description": "A collection of records",
       "icon": "Aws_Route-53-Hosted-Zone",
       "isContainer": true,
+      "model": "DefaultContainer",
+      "url": "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html",
       "attributes": [
         {
           "name": "name",
+          "displayName": "Name",
+          "description": "This is the name of the hosted zone.",
+          "required": true,
           "type": "String",
-          "required": true
+          "containerRef": "aws_route53_zone",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_zone#name"
+        },
+        {
+          "name": "records",
+          "displayName": "Records",
+          "type": "Link",
+          "linkAttribute": "name",
+          "linkRef": "aws_route53_record",
+          "linkType": "Default"
         }
       ]
     },
     {
       "type": "aws_route53_record",
-      "model": "DefaultModel",
+      "displayName": "AWS route 53 record",
+      "description": "Create records to tell the DNS how to route traffic for that domain.",
       "icon": "Aws_Route-53_Route-Table",
+      "model": "DefaultModel",
+      "url": "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/rrsets-working-with.html",
       "attributes": [
         {
           "name": "zone_id",
-          "type": "Reference",
+          "displayName": "Zone ID",
+          "description": "The ID of the hosted zone to contain this record.",
+          "containerRef": "aws_route53_zone",
           "required": true,
-          "containerRef": "aws_route53_zone"
+          "type": "Reference",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record#zone_id"
         },
         {
           "name": "records",
-          "type": "Link",
-          "linkType": "Default",
+          "displayName": "Records",
+          "description": "A string list of records.",
           "linkRef": "aws_route53_record",
-          "linkAttribute": "name"
+          "linkType": "Default",
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record#records"
         }
       ]
     },
     {
       "type": "aws_db_instance",
-      "model": "DefaultModel",
+      "displayName": "AWS DB instance",
+      "description": "An isolated database environment.",
       "icon": "Aws_EC2_DB-Instance",
+      "model": "DefaultModel",
+      "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.html",
       "attributes": [
         {
-          "name": "instance_class",
-          "type": "String",
-          "required": true
+          "name": "allocated_storage",
+          "displayName": "Allocated storage",
+          "description": "The allocated storage in gigabytes.",
+          "required": true,
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#allocated_storage"
         },
         {
-          "name": "db_subnet_group_name",
-          "type": "Link",
+          "name": "db_name",
+          "displayName": "Database name",
+          "description": "The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#db_name"
+        },
+        {
+          "name": "engine",
+          "displayName": "Database engine",
+          "description": "The database engine to use.",
+          "linkRef": "aws_rds_engine_version",
           "linkType": "Default",
-          "linkRef": "aws_db_subnet_group",
-          "linkAttribute": "name"
+          "required": true,
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#engine"
         },
         {
           "name": "vpc_security_group_ids",
-          "type": "Link",
-          "required": true,
-          "linkType": "Default",
+          "displayName": "VPC security groups",
+          "description": "A list of VPC security groups to associate.",
           "linkRef": "aws_security_group",
-          "linkAttribute": "id"
+          "linkType": "Default",
+          "required": true,
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#vpc_security_group_ids"
+        },
+        {
+          "name": "instance_class",
+          "displayName": "Instance class",
+          "description": "The instance type of the Relational Database Service instance.",
+          "required": true,
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#instance_class"
+        },
+        {
+          "name": "db_subnet_group_name",
+          "displayName": "Subnet group name",
+          "description": "Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group.",
+          "linkAttribute": "name",
+          "linkRef": "aws_db_subnet_group",
+          "linkType": "Default",
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#db_subnet_group_name"
+        },
+        {
+          "name": "username",
+          "displayName": "Username",
+          "description": "Username for the master DB user.",
+          "required": true,
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#username"
+        },
+        {
+          "name": "password",
+          "displayName": "Password",
+          "description": "Password for the master DB user.",
+          "required": true,
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#password"
+        },
+        {
+          "name": "skip_final_snapshot",
+          "displayName": "Skip final snapshot",
+          "description": "Determines whether a final DB snapshot is created before the DB instance is deleted.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#skip_final_snapshot"
+        },
+        {
+          "name": "publicly_accessible",
+          "displayName": "Publicly accessible",
+          "description": "Controls if instance is publicly accessible.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#publicly_accessible"
+        },
+        {
+          "name": "allow_major_version_upgrade",
+          "displayName": "Allow major version upgrade",
+          "description": "Indicates that major version upgrades are allowed.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#allow_major_version_upgrade"
+        },
+        {
+          "name": "apply_immediately",
+          "displayName": "Apply immediately",
+          "description": "Specifies whether any database modifications are applied immediately, or during the next maintenance window.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#apply_immediately"
+        },
+        {
+          "name": "auto_minor_version_upgrade",
+          "displayName": "Auto minor version upgrade",
+          "description": "Indicates that minor engine upgrades will be applied automatically to the DB instance during the maintenance window.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#auto_minor_version_upgrade"
+        },
+        {
+          "name": "availability_zone",
+          "displayName": "Availability zone",
+          "description": "The Availability Zone for the Relational Database Service instance.",
+          "linkAttribute": "id",
+          "linkRef": "aws_availability_zones",
+          "linkType": "Default",
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#availability_zone"
+        },
+        {
+          "name": "backup_retention_period",
+          "displayName": "Backup retention period",
+          "description": "The days to retain backups for.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#backup_retention_period",
+          "rules": {
+            "max": "35",
+            "min": "0"
+          }
+        },
+        {
+          "name": "backup_window",
+          "displayName": "Backup window",
+          "description": "The daily time range (in UTC) during which automated backups are created if they are enabled.<br/>Must not overlap with maintenance_window.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#backup_window"
+        },
+        {
+          "name": "character_set_name",
+          "displayName": "Character set name",
+          "description": "Specifies the character set to associate with the DB instance.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#character_set_name"
+        },
+        {
+          "name": "copy_tags_to_snapshot",
+          "displayName": "Copy tags to snapshot",
+          "description": "Whether to copy all Instance tags to snapshots, or not.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#copy_tags_to_snapshot"
+        },
+        {
+          "name": "delete_automated_snapshots",
+          "displayName": "Delete automated snapshots",
+          "description": "Whether to remove automated backups when the DB instance is deleted.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#delete_automated_snapshots"
+        },
+        {
+          "name": "deletion_protection",
+          "displayName": "Deletion protection",
+          "description": "If 'Deletion protection' is set to true, the DB instance cannot be deleted. Otherwise, it can.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#deletion_protection"
+        },
+        {
+          "name": "final_snapshot_identifier",
+          "displayName": "Final snapshot identifier",
+          "description": "The name of the final DB snapshot when this DB instance is deleted.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#final_snapshot_identifier"
+        },
+        {
+          "name": "iam_database_authentication_enabled",
+          "displayName": "IAM database authentication enabled",
+          "description": "Specifies whether mappings of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#iam_database_authentication_enabled"
+        },
+        {
+          "name": "identifier",
+          "displayName": "Identifier",
+          "description": "The name of the Relational Database Service instance.<br>Conflicts with identifier_prefix.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#identifier"
+        },
+        {
+          "name": "identifier_prefix",
+          "displayName": "Identifier prefix",
+          "description": "Creates a unique identifier beginning with the specified prefix.<br>Conflicts with identifier.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#identifier_prefix"
+        },
+        {
+          "name": "iops",
+          "displayName": "IOPS",
+          "description": "The amount of provisioned IOPS.<br>Can only be set when storage_type is io1 or p3.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#iops"
+        },
+        {
+          "name": "maintenance_window",
+          "displayName": "Maintenance window",
+          "description": "The window to perform maintenance in.<br>Format: ddd:hh24:mi-ddd:hh24:mi.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#maintenance_window"
+        },
+        {
+          "name": "max_allocated_storage",
+          "displayName": "Max allocated storage",
+          "description": "The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#max_allocated_storage"
+        },
+        {
+          "name": "monitoring_interval",
+          "displayName": "Monitoring interval",
+          "description": "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance.",
+          "type": "Array",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#monitoring_interval",
+          "rules": {
+            "values": [
+              "0",
+              "1",
+              "5",
+              "10",
+              "15",
+              "30",
+              "60"
+            ]
+          }
+        },
+        {
+          "name": "multi_az",
+          "displayName": "Multi AZ",
+          "description": "Specifies if the Relational Database Service instance is on multiple Availability Zones.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#multi_az"
+        },
+        {
+          "name": "network_type",
+          "displayName": "Network type",
+          "description": "The type of network connection to use for connecting to an Amazon Relational Database Service instance.",
+          "type": "Array",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#network_type",
+          "rules": {
+            "values": [
+              "IPV4",
+              "DUAL"
+            ]
+          }
+        },
+        {
+          "name": "option_group_name",
+          "displayName": "Option group name",
+          "description": "The name of the option group to associate.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#option_group_name"
+        },
+        {
+          "name": "parameter_group_name",
+          "displayName": "Parameter group name",
+          "description": "The name of the DB parameter group to associate.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#parameter_group_name"
+        },
+        {
+          "name": "performance_insights_enabled",
+          "displayName": "Performance insights enabled",
+          "description": "Specifies whether Performance Insights are enabled.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#performance_insights_enabled"
+        },
+        {
+          "name": "performance_insights_retention_period",
+          "displayName": "Performance insights retention period",
+          "description": "The amount of time in days to retain Performance Insights data.<br>Must be a multiple of 31.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#performance_insights_retention_period"
+        },
+        {
+          "name": "port",
+          "displayName": "Port",
+          "description": "The port on which the DB accepts connections.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#port",
+          "rules": {
+            "max": "65535",
+            "min": "1"
+          }
+        },
+        {
+          "name": "replica_mode",
+          "displayName": "Replica mode",
+          "description": "Specifies whether the replica is in either mounted or open-read-only mode.<br>This attribute is only supported by Oracle instances.",
+          "type": "Array",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#replica_mode",
+          "rules": {
+            "values": [
+              "mounted",
+              "open-read-only"
+            ]
+          }
+        },
+        {
+          "name": "restore_to_point_in_time",
+          "displayName": "Restore to point in time",
+          "description": "Restore from a point in time.<br>Must be specified if restore is set to true.",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#restore_to_point_in_time",
+          "attributes": [
+            {
+              "name": "restore_time",
+              "displayName": "Restore time",
+              "description": "The date and time to restore from.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#restore_time"
+            },
+            {
+              "name": "source_db_instance_identifier",
+              "displayName": "Source DB instance identifier",
+              "description": "The identifier of the source DB instance from which to restore.",
+              "linkRef": "aws_db_instance",
+              "linkType": "Default",
+              "type": "Link",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#source_db_instance_identifier"
+            },
+            {
+              "name": "use_latest_restorable_time",
+              "displayName": "Use latest restorable time",
+              "description": "Specifies whether to restore the DB instance to the latest restorable backup time.",
+              "type": "Boolean",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#use_latest_restorable_time"
+            },
+            {
+              "name": "source_db_instance_automated_backups_arn",
+              "displayName": "Source DB instance automated backups ARN",
+              "description": "The ARN of the automated backup from which to restore.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#source_db_instance_automated_backups_arn"
+            },
+            {
+              "name": "source_dbi_resource_id",
+              "displayName": "Source DBI resource ID",
+              "description": "The resource ID of the source DB instance from which to restore.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#source_dbi_resource_id"
+            }
+          ]
+        },
+        {
+          "name": "s3_import",
+          "displayName": "S3 import",
+          "description": "Import from an S3 bucket.<br>Must be specified if import is set to true.",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#s3_import",
+          "attributes": [
+            {
+              "name": "bucket_name",
+              "displayName": "Bucket name",
+              "description": "The name of the S3 bucket where the backup is stored.",
+              "linkRef": "aws_s3_bucket",
+              "linkType": "Default",
+              "required": true,
+              "type": "Link",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#bucket_name"
+            },
+            {
+              "name": "bucket_prefix",
+              "displayName": "Bucket prefix",
+              "description": "The path to the backup.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#bucket_prefix"
+            },
+            {
+              "name": "ingestion_role",
+              "displayName": "Ingestion role",
+              "description": "Role applied to load the data.",
+              "required": true,
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#ingestion_role"
+            },
+            {
+              "name": "source_engine",
+              "displayName": "Source engine",
+              "description": "Source engine for the backup.",
+              "required": true,
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#source_engine"
+            },
+            {
+              "name": "source_engine_version",
+              "displayName": "Source engine version",
+              "description": "Version of the source engine used for the backup.",
+              "linkRef": "aws_rds_engine_version",
+              "linkType": "Default",
+              "required": true,
+              "type": "Link",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#source_engine_version"
+            }
+          ]
+        },
+        {
+          "name": "storage_encrypted",
+          "displayName": "Storage encrypted",
+          "description": "Specifies whether the DB instance is encrypted.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#storage_encrypted"
+        },
+        {
+          "name": "storage_type",
+          "displayName": "Storage type",
+          "description": "The type of storage for the DB.",
+          "type": "Array",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#storage_type",
+          "rules": {
+            "values": [
+              "standard",
+              "gp2",
+              "gp3",
+              "io1"
+            ]
+          }
+        },
+        {
+          "name": "storage_throughput",
+          "displayName": "Storage throughput",
+          "description": "The storage throughput value for the DB instance.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#storage_throughput"
+        },
+        {
+          "name": "timezone",
+          "displayName": "Timezone",
+          "description": "The timezone of the DB instance.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#timezone"
+        },
+        {
+          "name": "customer_owned_ip_enabled",
+          "displayName": "Customer owned IP enabled",
+          "description": "Specifies whether the DB instance is a customer-owned IP address (CoIP) enabled.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#customer_owned_ip_enabled"
+        },
+        {
+          "name": "tags",
+          "displayName": "Tags",
+          "description": "A mapping of tags to assign to the DB instance.",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#tags"
         }
       ]
     },
     {
       "type": "aws_key_pair",
+      "displayName": "AWS key pair",
+      "description": "A set of security credentials to prove your identity when connecting to an Amazon EC2 instance.",
+      "icon": "Aws_Identity-Access-Management_Long-Term-Security-Credential",
       "model": "DefaultModel",
-      "icon": "Aws_Identity-Access-Management_Long-Term-Security-Credential"
+      "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html",
+      "attributes": [
+        {
+          "name": "key_name",
+          "displayName": "Key name",
+          "description": "The name for the key pair.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair#key_name"
+        },
+        {
+          "name": "public_key",
+          "displayName": "Public key",
+          "description": "The public key material.",
+          "required": true,
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair#public_key"
+        },
+        {
+          "name": "key_name_prefix",
+          "displayName": "Key name prefix",
+          "description": "Creates a unique name beginning with the specified prefix.<br>Conflicts with key_name.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair#key_name_prefix"
+        },
+        {
+          "name": "tags",
+          "displayName": "Tags",
+          "description": "A mapping of tags to assign to the resource.",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair#tags"
+        }
+      ]
+    },
+    {
+      "type": "aws_route_table",
+      "displayName": "Route table",
+      "description": "A route table contains a set of rules, called routes, that determine where network traffic from your subnet or gateway is directed.",
+      "icon": "Aws_Route-53_Route-Table",
+      "model": "DefaultModel",
+      "url": "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html",
+      "attributes": [
+        {
+          "name": "vpc_id",
+          "displayName": "VPC ID",
+          "description": "The ID of the VPC for which to create the route table.",
+          "containerRef": "aws_vpc",
+          "required": true,
+          "type": "Reference",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html"
+        },
+        {
+          "name": "propagating_vgws",
+          "displayName": "Propagating Virtual GateWays (VGWS)",
+          "description": "List of virtual gateways for propagation",
+          "type": "Array",
+          "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/virtualgateways.html"
+        },
+        {
+          "name": "tags",
+          "displayName": "Tags",
+          "description": "A map of tags to assign to the resource.",
+          "type": "Object",
+          "url": "https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html"
+        }
+      ]
+    },
+    {
+      "type": "aws_route_table_association",
+      "displayName": "Route table association",
+      "description": "Association between a route table and a subnet, internet gateway, or virtual private gateway.",
+      "icon": "Aws_Connector",
+      "model": "DefaultModel",
+      "url": "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html",
+      "attributes": [
+        {
+          "name": "vpc_id",
+          "displayName": "VPC ID",
+          "description": "The ID of the VPC for which to create the route table association.",
+          "containerRef": "aws_vpc",
+          "type": "Reference",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html"
+        },
+        {
+          "name": "route_table_id",
+          "displayName": "Route table ID",
+          "description": "The ID of the route table to associate the subnet with.",
+          "linkRef": "aws_route_table",
+          "linkType": "Reverse",
+          "required": true,
+          "type": "Link",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html"
+        },
+        {
+          "name": "gateway_id",
+          "displayName": "Gateway ID",
+          "description": "The ID of the gateway to associate the route table with. Conflicts with subnet_id.",
+          "linkRef": "aws_internet_gateway",
+          "linkType": "Default",
+          "type": "Link",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html"
+        },
+        {
+          "name": "subnet_id",
+          "displayName": "Subnet ID",
+          "description": "The ID of the subnet to associate the route table with. Conflicts with gateway_id.",
+          "linkRef": "aws_subnet",
+          "linkType": "Default",
+          "type": "Link",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html"
+        }
+      ]
+    },
+    {
+      "type": "aws_s3_bucket",
+      "displayName": "S3 bucket",
+      "description": "Amazon Simple Storage Service (Amazon S3) is an object storage service.",
+      "icon": "Aws_Storage-Service_Bucket",
+      "model": "DefaultModel",
+      "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html",
+      "attributes": [
+        {
+          "name": "bucket",
+          "displayName": "Bucket name",
+          "description": "The name of the bucket.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#bucket",
+          "rules": {
+            "max": 63,
+            "min": 1
+          }
+        },
+        {
+          "name": "bucket_prefix",
+          "displayName": "Bucket prefix",
+          "description": "Creates a unique bucket name beginning with the specified prefix.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#bucket_prefix",
+          "rules": {
+            "max": 63,
+            "min": 1
+          }
+        },
+        {
+          "name": "force_destroy",
+          "displayName": "Force destroy",
+          "description": "Indicates if all objects (including any locked objects) should be deleted from the bucket<br>when the bucket is destroyed so that the bucket can be destroyed without error.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#force_destroy"
+        },
+        {
+          "name": "object_lock_enabled",
+          "displayName": "Object lock enabled",
+          "description": "Indicates whether this bucket has an Object Lock configuration enabled.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#object_lock_enabled"
+        },
+        {
+          "name": "tags",
+          "displayName": "Tags",
+          "description": "A map of tags to assign to the resource.",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#tags"
+        }
+      ]
+    },
+    {
+      "type": "aws_s3_bucket_acl",
+      "displayName": "S3 bucket Access Control List (ACL)",
+      "description": "Amazon S3 access control lists (ACLs) enable you to manage access to buckets and objects.",
+      "icon": "Aws_Storage-Service_Bucket-ACL",
+      "model": "DefaultModel",
+      "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/acls.html",
+      "attributes": [
+        {
+          "name": "bucket",
+          "displayName": "Bucket",
+          "description": "The name of the bucket to put the ACL in.",
+          "linkRef": "aws_s3_bucket",
+          "linkType": "Default",
+          "required": true,
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl#bucket"
+        },
+        {
+          "name": "acl",
+          "displayName": "ACL",
+          "description": "ACL to apply to the bucket<br>Conflicts with access_control_policy",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl#acl"
+        },
+        {
+          "name": "expected_bucket_owner",
+          "displayName": "Bucket owner",
+          "description": "Account ID of the expected bucket owner",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl#expected_bucket_owner"
+        }
+      ]
+    },
+    {
+      "type": "aws_lb",
+      "displayName": "Application Load Balancer (LB)",
+      "description": "A load balancer serves as the single point of contact for clients. The load balancer distributes incoming application traffic across multiple targets, in multiple Availability Zones.",
+      "icon": "Aws_Application-Load-Balancer",
+      "model": "DefaultModel",
+      "url": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html",
+      "attributes": [
+        {
+          "name": "vpc_id",
+          "displayName": "VPC ID",
+          "description": "The ID of the VPC to create the ALB in.",
+          "containerRef": "aws_vpc",
+          "type": "Reference",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#vpc_id"
+        },
+        {
+          "name": "name",
+          "displayName": "Name",
+          "description": "The name of the LB. This name must be unique within your AWS account.<br>If not specified, Terraform will autogenerate a name beginning with tf-lb.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#name",
+          "rules": {
+            "regex": "^([a-zA-Z0-9]+-)*[a-zA-Z0-9]+$"
+          }
+        },
+        {
+          "name": "internal",
+          "displayName": "Internal LB",
+          "description": "If true, the LB will be internal.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#internal"
+        },
+        {
+          "name": "load_balancer_type",
+          "displayName": "Load balancer type",
+          "description": "The type of load balancer to create.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#load_balancer_type",
+          "rules": {
+            "values": [
+              "application",
+              "gateway",
+              "network"
+            ]
+          }
+        },
+        {
+          "name": "access_logs",
+          "displayName": "Access logs",
+          "description": "An Access Logs block.",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb",
+          "attributes": [
+            {
+              "name": "bucket",
+              "displayName": "Bucket",
+              "description": "The S3 bucket name to store the logs in.",
+              "linkRef": "aws_s3_bucket",
+              "linkType": "Default",
+              "type": "Link",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#bucket"
+            },
+            {
+              "name": "enabled",
+              "displayName": "Enabled",
+              "description": "Boolean to enable / disable access_logs. Defaults to false, even when bucket is specified.",
+              "type": "Boolean",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#enabled"
+            },
+            {
+              "name": "prefix",
+              "displayName": "Prefix",
+              "description": "The S3 bucket prefix. Logs are stored in the root if not configured.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#prefix"
+            }
+          ]
+        },
+        {
+          "name": "customer_owned_ipv4_pool",
+          "displayName": "Customer owned ivp4 pool",
+          "description": "The ID of the customer owned ipv4 pool to use for this load balancer.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#customer_owned_ipv4_pool"
+        },
+        {
+          "name": "desync_mitigation_mode",
+          "displayName": "Customer owned ivp4 pool",
+          "description": "Determines how the load balancer handles requests that might pose a security risk to an application due to HTTP desync.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#desync_mitigation_mode",
+          "rules": {
+            "values": [
+              "defensive",
+              "monitor",
+              "strictest"
+            ]
+          }
+        },
+        {
+          "name": "drop_invalid_header_fields",
+          "displayName": "Drop invalid header fields",
+          "description": "Indicates whether HTTP headers with header fields that are not valid are removed by the load balancer (true) or routed to targets (false).<br>The default is false. Elastic Load Balancing requires that message header names contain only alphanumeric characters and hyphens. Only valid for Load Balancers of type.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#drop_invalid_header_fields"
+        },
+        {
+          "name": "enable_cross_zone_load_balancing",
+          "displayName": "Enable cross zone load balancing",
+          "description": "If true, cross-zone load balancing of the load balancer will be enabled. For network and gateway type load balancers, this feature is disabled by default (false).<br>For application load balancer this feature is always enabled (true) and cannot be disabled. Defaults to false.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#enable_cross_zone_load_balancing"
+        },
+        {
+          "name": "enable_deletion_protection",
+          "displayName": "Enable deletion protection",
+          "description": "If true, deletion of the load balancer will be disabled via the AWS API. This will prevent Terraform from deleting the load balancer. Defaults to false.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#enable_deletion_protection"
+        },
+        {
+          "name": "enable_http2",
+          "displayName": "Enable http2",
+          "description": "Indicates whether HTTP/2 is enabled in application load balancers. Defaults to true.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#enable_http2"
+        },
+        {
+          "name": "enable_waf_fail_open",
+          "displayName": "Enable WAF fail open",
+          "description": "Indicates whether to allow a WAF-enabled load balancer to route requests to targets<br>if it is unable to forward the request to AWS WAF. Defaults to false.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#enable_waf_fail_open"
+        },
+        {
+          "name": "idle_timeout",
+          "displayName": "Idle timeout",
+          "description": "The time in seconds that the connection is allowed to be idle.<br>Only valid for Load Balancers of type application. Default: 60.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#idle_timeout"
+        },
+        {
+          "name": "ip_address_type",
+          "displayName": "IP address type",
+          "description": "The type of IP addresses used by the subnets for your load balancer.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#ip_address_type",
+          "rules": {
+            "values": [
+              "ipv4",
+              "dualstack"
+            ]
+          }
+        },
+        {
+          "name": "security_groups",
+          "displayName": "Security groups",
+          "description": "A list of security group IDs to assign to the LB. Only valid for Load Balancers of type application.",
+          "linkRef": "aws_security_group",
+          "linkType": "Default",
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#security_groups"
+        },
+        {
+          "name": "preserve_host_header",
+          "displayName": "Preserve host header",
+          "description": "Indicates whether the Application Load Balancer should preserve the Host header in the HTTP request <br>and send it to the target without any change. Defaults to false.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#preserve_host_header"
+        },
+        {
+          "name": "subnet_mapping",
+          "displayName": "Subnet mapping",
+          "description": "A subnet mapping block.",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#subnet_mapping",
+          "attributes": [
+            {
+              "name": "subnet_id",
+              "displayName": "Subnet ID",
+              "description": "ID of the subnet of which to attach to the load balancer. You can specify only one subnet per Availability Zone.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#subnet_id"
+            },
+            {
+              "name": "allocation_id",
+              "displayName": "Allocation ID",
+              "description": "The allocation ID of the Elastic IP address for an internet-facing load balancer.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#allocation_id"
+            },
+            {
+              "name": "ipv6_address",
+              "displayName": "IPv6 address",
+              "description": "The IPv6 address. You associate IPv6 CIDR blocks with your VPC and choose the subnets <br>where you launch both internet-facing and internal Application Load Balancers or Network Load Balancers.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#ipv6_address"
+            },
+            {
+              "name": "private_ipv4_address",
+              "displayName": "Private IPv4 address",
+              "description": "The private IPv4 address for an internal load balancer.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#private_ipv4_address"
+            }
+          ]
+        },
+        {
+          "name": "subnets",
+          "displayName": "Subnets",
+          "description": "A list of subnet IDs to attach to the LB. Subnets cannot be updated for Load Balancers of type network.<br>Changing this value for load balancers of type network will force a recreation of the resource.",
+          "linkRef": "aws_subnet",
+          "linkType": "Default",
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#subnets"
+        },
+        {
+          "name": "name_prefix",
+          "displayName": "Name prefix",
+          "description": "Creates a unique name beginning with the specified prefix. Conflicts with name.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#name_prefix"
+        },
+        {
+          "name": "tags",
+          "displayName": "Tags",
+          "description": "A map of tags to assign to the resource. If configured with a provider default_tags configuration block present,<br>tags with matching keys will overwrite those defined at the provider-level.",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#tags"
+        }
+      ]
+    },
+    {
+      "type": "aws_lb_target_group",
+      "displayName": "Load balancer target group",
+      "description": "Target groups route requests to one or more registered targets, using the protocol and port number that you specify.<br>You can register a target with multiple target groups",
+      "icon": "Aws_Application-Load-Balancer-Target-Group",
+      "model": "DefaultModel",
+      "url": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html",
+      "attributes": [
+        {
+          "name": "connection_termination",
+          "displayName": "Connection termination",
+          "description": "Whether to terminate connections at the end of the deregistration timeout on Network Load Balancers.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#connection_termination"
+        },
+        {
+          "name": "deregistration_delay",
+          "displayName": "Deregistration delay",
+          "description": "Amount time for Elastic Load Balancing to wait before changing the state of a deregistering target from draining to unused.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#deregistration_delay"
+        },
+        {
+          "name": "lambda_multi_value_headers_enabled",
+          "displayName": "Lambda multi value headers enabled",
+          "description": "Whether the request and response headers exchanged between the load balancer and the Lambda function include arrays of values or strings.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#lambda_multi_value_headers_enabled"
+        },
+        {
+          "name": "load_balancing_algorithm_type",
+          "displayName": "Load balancing algorithm type",
+          "description": "Determines how the load balancer selects targets when routing requests.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#load_balancing_algorithm_type",
+          "rules": {
+            "values": [
+              "round_robin",
+              "least_outstanding_requests"
+            ]
+          }
+        },
+        {
+          "name": "name",
+          "displayName": "Name",
+          "description": "Name of the target group. If omitted, Terraform will assign a random, unique name.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#name"
+        },
+        {
+          "name": "name_prefix",
+          "displayName": "Name prefix",
+          "description": "Creates a unique name beginning with the specified prefix.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#name_prefix"
+        },
+        {
+          "name": "port",
+          "displayName": "Port",
+          "description": "Port on which targets receive traffic, unless overridden when registering a specific target.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#port"
+        },
+        {
+          "name": "preserve_client_ip",
+          "displayName": "Preserve client IP",
+          "description": "Whether client IP preservation is enabled.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#preserve_client_ip"
+        },
+        {
+          "name": "protocol",
+          "displayName": "Protocol",
+          "description": "Protocol to use for routing traffic to the targets.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#protocol",
+          "rules": {
+            "values": [
+              "GENEVE",
+              "HTTP",
+              "HTTPS",
+              "TCP",
+              "TCP_UDP",
+              "TLS",
+              "UDP"
+            ]
+          }
+        },
+        {
+          "name": "protocol_version",
+          "displayName": "Protocol version",
+          "description": "Only applicable when protocol is HTTP or HTTPS. The protocol version.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#protocol_version"
+        },
+        {
+          "name": "proxy_protocol_v2",
+          "displayName": "Proxy protocol v2",
+          "description": "Whether to enable support for proxy protocol v2 on Network Load Balancers.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#proxy_protocol_v2"
+        },
+        {
+          "name": "slow_start",
+          "displayName": "Slow start",
+          "description": "Amount time for targets to warm up before the load balancer sends them a full share of requests.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#slow_start"
+        },
+        {
+          "name": "target_type",
+          "displayName": "Target type",
+          "description": "Type of target that you must specify when registering targets with this target group. The default is \"instance\".",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#target_type"
+        },
+        {
+          "name": "ip_address_type",
+          "displayName": "IP address type",
+          "description": "The type of IP addresses used by the target group, only supported when target type is set to ip.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#ip_address_type",
+          "rules": {
+            "values": [
+              "ipv4",
+              "ipv6"
+            ]
+          }
+        },
+        {
+          "name": "vpc_id",
+          "displayName": "VPC ID",
+          "description": "Identifier of the VPC in which to create the target group.",
+          "linkRef": "aws_vpc",
+          "linkType": "Default",
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#vpc_id"
+        },
+        {
+          "name": "health_check",
+          "displayName": "Health check",
+          "description": "Health Check configuration block.",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#health_check",
+          "attributes": [
+            {
+              "name": "enabled",
+              "displayName": "Enabled",
+              "description": "Whether health checks are enabled.",
+              "type": "Boolean",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#enabled"
+            },
+            {
+              "name": "healthy_threshold",
+              "displayName": "Healthy threshold",
+              "description": "Number of consecutive health check successes required before considering a target healthy.",
+              "type": "Number",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#healthy_threshold"
+            },
+            {
+              "name": "interval",
+              "displayName": "Interval",
+              "description": "Approximate amount of time, in seconds, between health checks of an individual target.",
+              "type": "Number",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#interval"
+            },
+            {
+              "name": "matcher",
+              "displayName": "Matcher",
+              "description": "Response codes to use when checking for a healthy responses from a target.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#matcher"
+            },
+            {
+              "name": "path",
+              "displayName": "Path",
+              "description": "Destination for the health check request.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#path"
+            },
+            {
+              "name": "port",
+              "displayName": "Port",
+              "description": "The port the load balancer uses when performing health checks on targets.",
+              "type": "Number",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#port"
+            },
+            {
+              "name": "protocol",
+              "displayName": "Protocol",
+              "description": "The port the load balancer uses when performing health checks on targets.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#protocol",
+              "rules": {
+                "values": [
+                  "TCP",
+                  "HTTP",
+                  "HTTPS"
+                ]
+              }
+            },
+            {
+              "name": "timeout",
+              "displayName": "Timeout",
+              "description": "Amount of time, in seconds, during which no response from a target means a failed health check.",
+              "type": "Number",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#timeout"
+            },
+            {
+              "name": "unhealthy_threshold",
+              "displayName": "Unhealthy threshold",
+              "description": "Number of consecutive health check failures required before considering a target unhealthy.",
+              "type": "Number",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#unhealthy_threshold"
+            }
+          ]
+        },
+        {
+          "name": "stickiness",
+          "displayName": "Stickiness",
+          "description": "Stickiness configuration block.",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#stickiness",
+          "attributes": [
+            {
+              "name": "cookie_duration",
+              "displayName": "Cookie duration",
+              "description": "The time period, in seconds, during which requests from a client should be routed to the same target.",
+              "type": "Number",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#cookie_duration"
+            },
+            {
+              "name": "cookie_name",
+              "displayName": "Cookie name",
+              "description": "Name of the application based cookie.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#cookie_name"
+            },
+            {
+              "name": "enabled",
+              "displayName": "Enable stickiness",
+              "description": "Boolean to enable/disable stickiness.",
+              "type": "Boolean",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#enabled"
+            },
+            {
+              "name": "type",
+              "displayName": "Type",
+              "description": "The type of sticky sessions.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#type",
+              "rules": {
+                "values": [
+                  "lb_cookie",
+                  "app_cookie",
+                  "source_ip",
+                  "source_ip_dest_ip",
+                  "source_ip_dest_ip_proto"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "tags",
+          "displayName": "Tags",
+          "description": "A map of tags to assign to the resource.",
+          "type": "Object",
+          "url": "https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html"
+        },
+        {
+          "name": "target_failover",
+          "displayName": "Target failover",
+          "description": "Target failover block.",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#target_failover",
+          "attributes": [
+            {
+              "name": "on_deregistration",
+              "displayName": "On deregistration",
+              "description": "Indicates how the Gateway Load Balancer (GWLB) handles existing flows when a target is deregistered.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#on_deregistration",
+              "rules": {
+                "values": [
+                  "rebalance",
+                  "no_rebalance"
+                ]
+              }
+            },
+            {
+              "name": "on_unhealthy",
+              "displayName": "On unhealthy",
+              "description": "Indicates how the Gateway Load Balancer (GWLB) handles existing flows when a target is unhealthy.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#on_unhealthy",
+              "rules": {
+                "values": [
+                  "rebalance",
+                  "no_rebalance"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "aws_launch_configuration",
+      "displayName": "Launch configuration",
+      "description": "A launch configuration is an instance configuration template that an Auto Scaling group uses to launch EC2 instances.<br>When you create a launch configuration, you specify information for the instances.",
+      "icon": "Aws_Launch-Configuration",
+      "model": "DefaultModel",
+      "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-configurations.html",
+      "attributes": [
+        {
+          "name": "image_id",
+          "displayName": "Image ID",
+          "description": "The EC2 image ID to launch.",
+          "linkRef": "aws_ami",
+          "linkType": "Default",
+          "required": true,
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#image_id"
+        },
+        {
+          "name": "instance_type",
+          "displayName": "Instance type",
+          "description": "The size of instance to launch.",
+          "required": true,
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#instance_type"
+        },
+        {
+          "name": "iam_instance_profile",
+          "displayName": "IAM instance profile",
+          "description": "The name attribute of the IAM instance profile to associate with launched instances.",
+          "type": "String",
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html"
+        },
+        {
+          "name": "associate_public_ip_address",
+          "displayName": "Associate public IP address",
+          "description": "Associate a public ip address with an instance in a VPC.",
+          "type": "Boolean",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html"
+        },
+        {
+          "name": "enable_monitoring",
+          "displayName": "Enable monitoring",
+          "description": "Enables/disables detailed monitoring.",
+          "type": "Boolean",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring_ec2.html"
+        },
+        {
+          "name": "key_name",
+          "displayName": "Key name",
+          "description": "The key name that should be used for the instance.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#key_name"
+        },
+        {
+          "name": "name",
+          "displayName": "Name",
+          "description": "The name of the launch configuration.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#name"
+        },
+        {
+          "name": "name_prefix",
+          "displayName": "Name prefix",
+          "description": "Creates a unique name beginning with the specified prefix.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#name_prefix"
+        },
+        {
+          "name": "security_groups",
+          "displayName": "Security groups",
+          "description": "A list of associated security group IDS.",
+          "linkRef": "aws_security_group",
+          "linkType": "Default",
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#security_groups"
+        },
+        {
+          "name": "placement_tenancy",
+          "displayName": "Placement tenancy",
+          "description": "The tenancy of the instance.",
+          "type": "String",
+          "url": "https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateLaunchConfiguration.html",
+          "rules": {
+            "values": [
+              "enabled",
+              "disabled"
+            ]
+          }
+        },
+        {
+          "name": "spot_price",
+          "displayName": "Spot price",
+          "description": "The maximum price to use for reserving spot instances.",
+          "type": "Number",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html"
+        },
+        {
+          "name": "user_data",
+          "displayName": "User data",
+          "description": "The user data to provide when launching the instance.<br>If you need to pass gzip-compressed data via this argument, use \"user_data_base64\" instead.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#user_data"
+        },
+        {
+          "name": "user_data_base64",
+          "displayName": "User data base64",
+          "description": "Can be used instead of \"user_data\" to pass base64-encoded binary data directly,<br>whenever the value is not a valid UTF-8 string.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#user_data_base64"
+        },
+        {
+          "name": "vpc_classic_link_id",
+          "displayName": "VPC ClassicLink ID",
+          "description": "The ID of a ClassicLink-enabled VPC.",
+          "linkRef": "aws_vpc",
+          "linkType": "Default",
+          "type": "Link",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html"
+        },
+        {
+          "name": "vpc_classic_link_security_groups",
+          "displayName": "VPC ClassicLink security groups",
+          "description": "The IDs of one or more security groups for the specified ClassicLink-enabled VPC.",
+          "linkRef": "aws_security_group",
+          "linkType": "Default",
+          "type": "Link",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html"
+        },
+        {
+          "name": "ebs_optimized",
+          "displayName": "EBS optimized",
+          "description": "If true, the launched EC2 instance will be EBS-optimized.",
+          "type": "Boolean",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html"
+        },
+        {
+          "name": "ebs_block_device",
+          "displayName": "EBS block device",
+          "description": "Additional EBS block devices to attach to the instance.",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#ebs_block_device",
+          "attributes": [
+            {
+              "name": "device_name",
+              "displayName": "Device name",
+              "description": "The name of the device to mount.",
+              "required": true,
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#device_name"
+            },
+            {
+              "name": "snapshot_id",
+              "displayName": "Snapshot ID",
+              "description": "The Snapshot ID to mount.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#snapshot_id"
+            },
+            {
+              "name": "volume_size",
+              "displayName": "Volume size",
+              "description": "The size of the volume in gigabytes.",
+              "type": "Number",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#volume_size"
+            },
+            {
+              "name": "volume_type",
+              "displayName": "Volume type",
+              "description": "The type of volume.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration#volume_type",
+              "rules": {
+                "values": [
+                  "standard",
+                  "gp2",
+                  "gp3",
+                  "st1",
+                  "sc1",
+                  "io1"
+                ]
+              }
+            },
+            {
+              "name": "iops",
+              "displayName": "IOPS",
+              "description": "The amount of provisioned Input/output Operations Per Second (IOPS). This must be set with a volume_type of \"io1\".",
+              "type": "Number",
+              "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-io-characteristics.html"
+            },
+            {
+              "name": "throughput",
+              "displayName": "Throughput",
+              "description": "The throughput (MiBps) to provision for a gp3 volume.",
+              "type": "Number",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#throughput"
+            },
+            {
+              "name": "delete_on_termination",
+              "displayName": "Delete on termination",
+              "description": "Whether the volume should be destroyed on instance termination.",
+              "type": "Boolean",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#delete_on_termination"
+            },
+            {
+              "name": "encrypted",
+              "displayName": "Encrypted",
+              "description": "Whether the volume should be encrypted or not.",
+              "type": "Boolean",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#encrypted"
+            },
+            {
+              "name": "no_device",
+              "displayName": "No device",
+              "description": "Whether the device in the block device mapping of the AMI is suppressed.",
+              "type": "Boolean",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#no_device"
+            }
+          ]
+        },
+        {
+          "name": "ephemeral_block_device",
+          "displayName": "Ephemeral block device",
+          "description": "Customize Ephemeral (also known as \"Instance Store\") volumes on the instance.",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#ephemeral_block_device",
+          "attributes": [
+            {
+              "name": "device_name",
+              "displayName": "Device name",
+              "description": "The name of the block device to mount on the instance.",
+              "required": "true",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#ephemeral_block_device"
+            },
+            {
+              "name": "no_device",
+              "displayName": "No device",
+              "description": "Whether the device in the block device mapping of the AMI is suppressed.",
+              "type": "Boolean",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#ephemeral_block_device"
+            },
+            {
+              "name": "virtual_name",
+              "displayName": "Virtual name",
+              "description": "The Instance Store Device Name.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#virtual_name"
+            }
+          ]
+        },
+        {
+          "name": "metadata_options",
+          "displayName": "Metadata options",
+          "description": "The metadata options for the instance.",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration#metadata_options",
+          "attributes": [
+            {
+              "name": "http_endpoint",
+              "displayName": "HTTP endpoint",
+              "description": "The state of the metadata service: enabled, disabled.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration#http_endpoint",
+              "rules": {
+                "values": [
+                  "enabled",
+                  "disabled"
+                ]
+              }
+            },
+            {
+              "name": "http_tokens",
+              "displayName": "HTTP tokens",
+              "description": "Whether the HTTP tokens are required.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration#http_tokens",
+              "rules": {
+                "values": [
+                  "optional",
+                  "required"
+                ]
+              }
+            },
+            {
+              "name": "http_put_response_hop_limit",
+              "displayName": "HTTP PUT response hop limit",
+              "description": "The desired HTTP PUT response hop limit for instance metadata requests.",
+              "type": "Number",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration#http_put_response_hop_limit"
+            }
+          ]
+        },
+        {
+          "name": "root_block_device",
+          "displayName": "Root block device",
+          "description": "Customize details about the root block device of the instance.",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#root_block_device",
+          "attributes": [
+            {
+              "description": "Whether the volume should be destroyed on instance termination.",
+              "displayName": "Delete on termination",
+              "name": "delete_on_termination",
+              "type": "Boolean",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#root_block_device"
+            },
+            {
+              "description": "Whether the volume should be encrypted or not. Defaults to false.",
+              "displayName": "Encrypted",
+              "name": "encrypted",
+              "type": "Boolean",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#root_block_device"
+            },
+            {
+              "description": "The amount of provisioned IOPS.",
+              "displayName": "IOPS",
+              "name": "iops",
+              "type": "Number",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#root_block_device"
+            },
+            {
+              "description": "The throughput (MiBps) to provision for a gp3 volume.",
+              "displayName": "Throughput",
+              "name": "throughput",
+              "type": "Number",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#root_block_device"
+            },
+            {
+              "description": "The size of the volume in gigabytes.",
+              "displayName": "Volume",
+              "name": "volume_size",
+              "type": "Number",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#root_block_device"
+            },
+            {
+              "displayName": "Volume type",
+              "name": "volume_type",
+              "rules": {
+                "values": [
+                  "standard",
+                  "gp2",
+                  "gp3",
+                  "st1",
+                  "sc1",
+                  "io1"
+                ]
+              },
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#root_block_device"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "aws_autoscaling_policy",
+      "displayName": "Autoscaling policy",
+      "description": "Provides an Auto Scaling policy resource.",
+      "icon": "Aws_Auto-Scaling",
+      "model": "DefaultModel",
+      "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html",
+      "attributes": [
+        {
+          "name": "name",
+          "displayName": "Name",
+          "description": "Name of the policy.",
+          "required": true,
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_policy#name"
+        },
+        {
+          "name": "autoscaling_group_name",
+          "displayName": "Autoscaling group name",
+          "description": "Name of the autoscaling group.",
+          "linkRef": "aws_autoscaling_group",
+          "linkType": "Default",
+          "required": true,
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_policy#autoscaling_group_name"
+        },
+        {
+          "name": "adjustment_type",
+          "displayName": "Adjustment type",
+          "description": "Whether the adjustment is an absolute number or a percentage of the current capacity.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_policy#adjustment_type",
+          "rules": {
+            "values": [
+              "ChangeInCapacity",
+              "ExactCapacity",
+              "PercentChangeInCapacity"
+            ]
+          }
+        },
+        {
+          "name": "policy_type",
+          "displayName": "Policy type",
+          "description": "Policy type",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_policy#policy_type",
+          "rules": {
+            "values": [
+              "SimpleScaling",
+              "StepScaling",
+              "TargetTrackingScaling",
+              "PredictiveScaling"
+            ]
+          }
+        },
+        {
+          "name": "cooldown",
+          "displayName": "Cooldown",
+          "description": "Amount of time, in seconds, after a scaling activity completes and before the next scaling activity can start.<br>Only available for SimpleScaling policies.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_policy#cooldown"
+        },
+        {
+          "name": "scaling_adjustment",
+          "displayName": "Scaling adjustment",
+          "description": "Number of instances by which to scale.<br>Only available for SimpleScaling policies.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_policy#scaling_adjustment"
+        },
+        {
+          "name": "estimated_instance_warmup",
+          "displayName": "Estimated instance warmup",
+          "description": "Estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_policy#estimated_instance_warmup"
+        },
+        {
+          "name": "enabled",
+          "displayName": "Enabled",
+          "description": "Whether the policy should be enabled.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_policy#enabled"
+        },
+        {
+          "name": "min_adjustment_magnitude",
+          "displayName": "Min adjustment magnitude",
+          "description": "Minimum value to scale by when adjustment_type is set to PercentChangeInCapacity.<br>Only valid when policy_type is SimpleScaling or StepScalling.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_policy#min_adjustment_magnitude"
+        },
+        {
+          "name": "metric_aggregation_type",
+          "displayName": "Metric aggregation type",
+          "description": "The aggregation type for the CloudWatch metrics.<br>Only valid when policy_type is StepScaling.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_policy#metric_aggregation_type",
+          "rules": {
+            "values": [
+              "Average",
+              "Minimum",
+              "Maximum"
+            ]
+          }
+        },
+        {
+          "name": "step_adjustment",
+          "displayName": "Step adjustment",
+          "description": "A list of step adjustments.<br>Only valid when policy_type is StepScaling.",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_policy#step_adjustment",
+          "attributes": [
+            {
+              "name": "metric_interval_lower_bound",
+              "displayName": "Metric interval lower bound",
+              "description": "The lower bound for the difference between the alarm threshold and the CloudWatch metric.",
+              "type": "Number",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_policy#metric_interval_lower_bound"
+            },
+            {
+              "name": "metric_interval_upper_bound",
+              "displayName": "Metric interval upper bound",
+              "description": "The upper bound for the difference between the alarm threshold and the CloudWatch metric.",
+              "type": "Number",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_policy#metric_interval_upper_bound"
+            },
+            {
+              "name": "scaling_adjustment",
+              "displayName": "Scaling adjustment",
+              "description": "The number of members by which to scale.",
+              "type": "Number",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_policy#scaling_adjustment"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "aws_cloudwatch_metric_alarm",
+      "displayName": "Cloudwatch metric alarm",
+      "description": "Watches a single metric over a specified time period, and performs one or more specified actions, based on the value of the metric relative to a threshold over time.",
+      "icon": "Amazon-CloudWatch_Alarm",
+      "model": "DefaultModel",
+      "url": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#CloudWatchAlarms",
+      "attributes": [
+        {
+          "name": "alarm_name",
+          "displayName": "Alarm name",
+          "description": "The descriptive name for the alarm. This name must be unique within the user's AWS account",
+          "required": true,
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#alarm_name"
+        },
+        {
+          "name": "comparison_operator",
+          "displayName": "Comparison operator",
+          "description": "The arithmetic operation to use when comparing the specified Statistic and Threshold.",
+          "required": true,
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#comparison_operator",
+          "rules": {
+            "values": [
+              "GreaterThanOrEqualToThreshold",
+              "GreaterThanThreshold",
+              "LessThanThreshold",
+              "LessThanOrEqualToThreshold",
+              "LessThanLowerOrGreaterThanUpperThreshold",
+              "LessThanLowerThreshold",
+              "GreaterThanUpperThreshold"
+            ]
+          }
+        },
+        {
+          "name": "evaluation_periods",
+          "displayName": "Evaluation periods",
+          "description": "The number of periods over which data is compared to the specified threshold.",
+          "required": true,
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#evaluation_periods"
+        },
+        {
+          "name": "metric_name",
+          "displayName": "Metric name",
+          "description": "The name for the alarm's associated metric.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#metric_name"
+        },
+        {
+          "name": "namespace",
+          "displayName": "Namespace",
+          "description": "The namespace for the alarm's associated metric.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#namespace"
+        },
+        {
+          "name": "period",
+          "displayName": "Period",
+          "description": "The period in seconds over which the specified statistic is applied.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#period"
+        },
+        {
+          "name": "statistic",
+          "displayName": "Statistic",
+          "description": "The statistic to apply to the alarm's associated metric.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#statistic",
+          "rules": {
+            "values": [
+              "SampleCount",
+              "Average",
+              "Sum",
+              "Minimum",
+              "Maximum"
+            ]
+          }
+        },
+        {
+          "name": "threshold",
+          "displayName": "Threshold",
+          "description": "The value against which the specified statistic is compared.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#threshold"
+        },
+        {
+          "name": "dimensions",
+          "displayName": "Dimensions",
+          "description": "The dimensions for the alarm's associated metric.",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#dimensions",
+          "attributes": [
+            {
+              "name": "AutoScalingGroupName",
+              "displayName": "Auto Scaling group name",
+              "description": "Amazon EC2 Auto Scaling",
+              "linkRef": "aws_autoscaling_group",
+              "linkType": "Default",
+              "type": "Link",
+              "url": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html"
+            }
+          ]
+        },
+        {
+          "name": "actions_enabled",
+          "displayName": "Actions enabled",
+          "description": "Indicates whether or not actions should be executed during any changes to the alarm's state.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#actions_enabled"
+        },
+        {
+          "name": "alarm_description",
+          "displayName": "Alarm description",
+          "description": "The description for the alarm.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#alarm_description"
+        },
+        {
+          "name": "datapoints_to_alarm",
+          "displayName": "Datapoints to alarm",
+          "description": "The number of datapoints that must be breaching to trigger the alarm.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#datapoints_to_alarm"
+        },
+        {
+          "name": "alarm_actions",
+          "displayName": "Alarm actions",
+          "description": "The list of actions to execute when this alarm transitions into an ALARM state from any other state.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#alarm_actions",
+          "rules": {
+            "max": 5,
+            "min": 1
+          }
+        },
+        {
+          "name": "insufficient_data_actions",
+          "displayName": "Insufficient data actions",
+          "description": "The list of actions to execute when this alarm transitions into an INSUFFICIENT_DATA state from any other state.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#insufficient_data_actions",
+          "rules": {
+            "max": 5,
+            "min": 1
+          }
+        },
+        {
+          "name": "ok_actions",
+          "displayName": "OK actions",
+          "description": "The list of actions to execute when this alarm transitions into an OK state from any other state.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#ok_actions",
+          "rules": {
+            "max": 5,
+            "min": 1
+          }
+        },
+        {
+          "name": "unit",
+          "displayName": "Unit",
+          "description": "The unit for the alarm's associated metric.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#unit",
+          "rules": {
+            "values": [
+              "Seconds",
+              "Microseconds",
+              "Milliseconds",
+              "Bytes",
+              "Kilobytes",
+              "Megabytes",
+              "Gigabytes",
+              "Terabytes",
+              "Bits",
+              "Kilobits",
+              "Megabits",
+              "Gigabits",
+              "Terabits",
+              "Percent",
+              "Count",
+              "Bytes/Second",
+              "Kilobytes/Second",
+              "Megabytes/Second",
+              "Gigabytes/Second",
+              "Terabytes/Second",
+              "Bits/Second",
+              "Kilobits/Second",
+              "Megabits/Second",
+              "Gigabits/Second",
+              "Terabits/Second",
+              "Count/Second",
+              "None"
+            ]
+          }
+        },
+        {
+          "name": "extended_statistic",
+          "displayName": "Extended statistic",
+          "description": "The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#extended_statistic"
+        },
+        {
+          "name": "treat_missing_data",
+          "displayName": "Treat missing data",
+          "description": "Sets how this alarm is to handle missing data points.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#treat_missing_data",
+          "rules": {
+            "values": [
+              "breaching",
+              "notBreaching",
+              "ignore",
+              "missing"
+            ]
+          }
+        },
+        {
+          "name": "evaluate_low_sample_count_percentiles",
+          "displayName": "Evaluate low sample count percentiles",
+          "description": "Used only for alarms based on percentiles.<br>If ignore, the alarm state does not change during periods with too few data points to be statistically significant.<br>If evaluate or omit, the alarm is always evaluated and possibly changes state no matter how many data points are available.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#evaluate_low_sample_count_percentiles",
+          "rules": {
+            "values": [
+              "evaluate",
+              "ignore"
+            ]
+          }
+        },
+        {
+          "name": "metric_query",
+          "displayName": "Metric query",
+          "description": "Enable to create an alarm based on a metric math expression.",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#metric_query",
+          "attributes": [
+            {
+              "name": "id",
+              "displayName": "ID",
+              "description": "A short name used to tie this object to the results in the response.",
+              "required": true,
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#id"
+            },
+            {
+              "name": "account_id",
+              "displayName": "Account ID",
+              "description": "The account ID to use when searching for the metric.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#account_id"
+            },
+            {
+              "name": "expression",
+              "displayName": "Expression",
+              "description": "The math expression to be performed on the returned data, if this object is performing a math expression.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#expression"
+            },
+            {
+              "name": "label",
+              "displayName": "Label",
+              "description": "A human-readable label for this metric or expression.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#label"
+            },
+            {
+              "name": "return_data",
+              "displayName": "Return data",
+              "description": "Specify exactly one metric_query to be true to use that metric_query result as the alarm.",
+              "type": "Boolean",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm#return_data"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "aws_efs_file_system",
+      "displayName": "EFS File System",
+      "description": "Provides an Elastic File System (EFS) File System resource.",
+      "icon": "Amazon-EFS",
+      "model": "DefaultModel",
+      "url": "https://aws.amazon.com/efs/?nc1=h_ls",
+      "attributes": [
+        {
+          "name": "arn",
+          "displayName": "ARN",
+          "description": "Amazon Resource Name (ARN) of the file system.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_file_system#arn"
+        },
+        {
+          "name": "availability_zone_name",
+          "displayName": "Availability zone name",
+          "description": "The AWS Availability Zone in which to create the file system.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_file_system#availability_zone_name"
+        },
+        {
+          "name": "availability_zone_id",
+          "displayName": "Availability zone ID",
+          "description": "The identifier of the Availability Zone in which the file system's One Zone storage classes exist.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_file_system#availability_zone_id"
+        },
+        {
+          "name": "creation_token",
+          "displayName": "Creation token",
+          "description": "A unique name used as reference when creating the Elastic File System to ensure idempotent file system creation.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_file_system#creation_token",
+          "rules": {
+            "max": "64",
+            "min": "1"
+          }
+        },
+        {
+          "name": "encrypted",
+          "displayName": "Encrypted",
+          "description": "If true, the disk will be encrypted.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_file_system#encrypted"
+        },
+        {
+          "name": "kms_key_id",
+          "displayName": "Encrypted",
+          "description": "Amazon Resource Name (ARN) for the Key Management Service (KMS) encryption key.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_file_system#kms_key_id"
+        },
+        {
+          "name": "lifecycle_policy",
+          "displayName": "Lifecycle policy",
+          "description": "A file system lifecycle policy",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_file_system#lifecycle_policy",
+          "attributes": [
+            {
+              "name": "transition_to_ia",
+              "displayName": "Transition to IA",
+              "description": "Indicates how long it takes to transition files to the IA storage class.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_file_system#transition_to_ia",
+              "rules": {
+                "values": [
+                  "AFTER_1_DAY",
+                  "AFTER_7_DAYS",
+                  "AFTER_14_DAYS",
+                  "AFTER_30_DAYS",
+                  "AFTER_60_DAYS",
+                  "AFTER_90_DAYS"
+                ]
+              }
+            },
+            {
+              "name": "transition_to_primary_storage_class",
+              "displayName": "Transition to primary storage class",
+              "description": "Describes the policy used to transition a file from infrequent access storage to primary storage.",
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_file_system#transition_to_primary_storage_class",
+              "rules": {
+                "values": [
+                  "AFTER_1_ACCESS"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "performance_mode",
+          "displayName": "Performance mode",
+          "description": "The file system performance mode.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_file_system#performance_mode",
+          "rules": {
+            "values": [
+              "generalPurpose",
+              "maxIO"
+            ]
+          }
+        },
+        {
+          "name": "provisioned_throughput_in_mibps",
+          "displayName": "Provisioned throughput in Mibps",
+          "description": "The throughput, measured in MiB/s, that you want to provision for the file system.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_file_system#provisioned_throughput_in_mibps"
+        },
+        {
+          "name": "throughput_mode",
+          "displayName": "Throughput mode",
+          "description": "Throughput mode for the file system.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_file_system#throughput_mode",
+          "rules": {
+            "values": [
+              "bursting",
+              "provisioned",
+              "elastic"
+            ]
+          }
+        },
+        {
+          "name": "size_in_bytes",
+          "displayName": "Size in bytes",
+          "description": "Current byte count used by the file system.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/efs_file_system#size_in_bytes"
+        },
+        {
+          "name": "tags",
+          "displayName": "Tags",
+          "description": "A mapping of tags to assign to the file system.",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_file_system#tags"
+        }
+      ]
+    },
+    {
+      "type": "aws_lb_listener",
+      "displayName": "Load Balancer Listener",
+      "description": "Provides a Load Balancer Listener resource.",
+      "icon": "Aws_Elastic-Load-Balancing_Network-Load-Balancer",
+      "model": "DefaultModel",
+      "url": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html",
+      "attributes": [
+        {
+          "name": "load_balancer_arn",
+          "displayName": "Load balancer ARN",
+          "description": "ARN of the load balancer.",
+          "linkRef": "aws_lb",
+          "linkType": "Default",
+          "required": true,
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener#load_balancer_arn"
+        },
+        {
+          "name": "default_action",
+          "displayName": "Default action",
+          "description": "Configuration block for the default action.",
+          "required": true,
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener#default_action",
+          "attributes": [
+            {
+              "name": "type",
+              "displayName": "Type",
+              "description": "Type of routing action.",
+              "required": true,
+              "type": "String",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener#type",
+              "rules": {
+                "values": [
+                  "forward",
+                  "authenticate-oidc",
+                  "authenticate-cognito",
+                  "redirect",
+                  "fixed-response"
+                ]
+              }
+            },
+            {
+              "name": "target_group_arn",
+              "displayName": "Target group ARN",
+              "description": "ARN of the target group to which to route traffic.",
+              "linkRef": "aws_lb_target_group",
+              "linkType": "Default",
+              "type": "Link",
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener#target_group_arn"
+            }
+          ]
+        },
+        {
+          "name": "certificate_arn",
+          "displayName": "Cerificate ARN",
+          "description": "ARN of the default SSL server certificate.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener#certificate_arn"
+        },
+        {
+          "name": "port",
+          "displayName": "Port",
+          "description": "Port on which the load balancer is listening.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener#port",
+          "rules": {
+            "max": 65535,
+            "min": 1
+          }
+        },
+        {
+          "name": "protocol",
+          "displayName": "Protocol",
+          "description": "Protocol for connections from clients to the load balancer.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener#protocol",
+          "rules": {
+            "values": [
+              "HTTP",
+              "HTTPS",
+              "TCP",
+              "TLS",
+              "UDP",
+              "TCP_UDP"
+            ]
+          }
+        },
+        {
+          "name": "alpn_policy",
+          "displayName": "ALPN policy",
+          "description": "Name of the Application-Layer Protocol Negotiation (ALPN) policy.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener#alpn_policy",
+          "rules": {
+            "values": [
+              "HTTP1Only",
+              "HTTP2Only",
+              "HTTP2Optional",
+              "HTTP2Preferred",
+              "None"
+            ]
+          }
+        },
+        {
+          "name": "ssl_policy",
+          "displayName": "SSL policy",
+          "description": "Name of the SSL Policy for the listener.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener#ssl_policy"
+        },
+        {
+          "name": "tags",
+          "displayName": "Tags",
+          "description": "A mapping of tags to assign to the resource.",
+          "type": "Object",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener#tags"
+        }
+      ]
+    },
+    {
+      "type": "aws_efs_mount_target",
+      "displayName": "EFS Mount Target",
+      "description": "Provide an Elastic File System (EFS) mount target.",
+      "icon": "Amazon-EFS",
+      "model": "DefaultModel",
+      "url": "https://docs.aws.amazon.com/efs/latest/ug/accessing-fs.html",
+      "attributes": [
+        {
+          "name": "file_system_id",
+          "displayName": "File system ID",
+          "description": "The ID of the file system for which the mount target is intended.",
+          "linkRef": "aws_efs_file_system",
+          "linkType": "Default",
+          "required": true,
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_mount_target#file_system_id"
+        },
+        {
+          "name": "subnet_id",
+          "displayName": "Subnet ID",
+          "description": "The ID of the subnet to add the mount target in.",
+          "linkRef": "aws_subnet",
+          "linkType": "Default",
+          "required": true,
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_mount_target#subnet_id"
+        },
+        {
+          "name": "ip_address",
+          "displayName": "IP address",
+          "description": "The address (within the address range of the specified subnet) at which the file system may be mounted via the mount target.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_mount_target#ip_address"
+        },
+        {
+          "name": "security_groups",
+          "displayName": "Security groups",
+          "description": "A list of up to 5 VPC security group IDs (that must be for the same VPC as subnet specified) in effect for the mount target.",
+          "linkRef": "aws_security_group",
+          "linkType": "Default",
+          "type": "Link",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_mount_target#security_groups"
+        }
+      ]
+    },
+    {
+      "type": "random_string",
+      "displayName": "Random String",
+      "description": "Generates a random permutation of alphanumeric characters and optionally special characters.",
+      "icon": "variable",
+      "model": "DefaultModel",
+      "url": "https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string",
+      "attributes": [
+        {
+          "name": "length",
+          "displayName": "Length",
+          "description": "The length of the string desired.",
+          "required": true,
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string#length",
+          "rules": {
+            "min": 1
+          }
+        },
+        {
+          "name": "special",
+          "displayName": "Special",
+          "description": "Include special characters in the result.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string#special"
+        },
+        {
+          "name": "min_special",
+          "displayName": "Min special",
+          "description": "Minimum number of special characters to include in the result.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string#min_special"
+        },
+        {
+          "name": "lower",
+          "displayName": "Lower",
+          "description": "Include lowercase alphabet characters in the result.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string#lower"
+        },
+        {
+          "name": "min_lower",
+          "displayName": "Min lower",
+          "description": "Minimum number of lowercase characters to include in the result.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string#min_lower"
+        },
+        {
+          "name": "upper",
+          "displayName": "Upper",
+          "description": "Include uppercase alphabet characters in the result.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string#upper"
+        },
+        {
+          "name": "min_upper",
+          "displayName": "Min upper",
+          "description": "Minimum number of uppercase characters to include in the result.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string#min_upper"
+        },
+        {
+          "name": "numeric",
+          "displayName": "Numeric",
+          "description": "Include numeric characters in the result.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string#numeric"
+        },
+        {
+          "name": "min_numeric",
+          "displayName": "Min numeric",
+          "description": "Minimum number of numeric characters to include in the result.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password#min_numeric"
+        },
+        {
+          "name": "override_special",
+          "displayName": "Override special",
+          "description": "Supply your own list of special characters to use for string generation.",
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "type": "random_password",
+      "displayName": "Random Password",
+      "description": "Identical to random_string with the exception that the result is treated as sensitive and, thus, not displayed in console output.",
+      "icon": "variable",
+      "model": "DefaultModel",
+      "url": "https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password",
+      "attributes": [
+        {
+          "name": "length",
+          "displayName": "Length",
+          "description": "The length of the string desired.",
+          "required": true,
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password#length",
+          "rules": {
+            "min": 1
+          }
+        },
+        {
+          "name": "special",
+          "displayName": "Special",
+          "description": "Include special characters in the result.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password#special"
+        },
+        {
+          "name": "min_special",
+          "displayName": "Min special",
+          "description": "Minimum number of special characters to include in the result.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string#min_special"
+        },
+        {
+          "name": "lower",
+          "displayName": "Lower",
+          "description": "Include lowercase alphabet characters in the result.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password#lower"
+        },
+        {
+          "name": "min_lower",
+          "displayName": "Min lower",
+          "description": "Minimum number of lowercase characters to include in the result.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string#min_lower"
+        },
+        {
+          "name": "upper",
+          "displayName": "Upper",
+          "description": "Include uppercase alphabet characters in the result.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password#upper"
+        },
+        {
+          "name": "min_upper",
+          "displayName": "Min upper",
+          "description": "Minimum number of uppercase characters to include in the result.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string#min_upper"
+        },
+        {
+          "name": "numeric",
+          "displayName": "Numeric",
+          "description": "Include numeric characters in the result.",
+          "type": "Boolean",
+          "url": "https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password#numeric"
+        },
+        {
+          "name": "min_numeric",
+          "displayName": "Min numeric",
+          "description": "Minimum number of numeric characters to include in the result.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password#min_numeric"
+        },
+        {
+          "name": "override_special",
+          "displayName": "Override special",
+          "description": "Supply your own list of special characters to use for string generation.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password#override_special"
+        }
+      ]
+    },
+    {
+      "type": "aws_autoscaling_group",
+      "displayName": "Auto Scaling Group",
+      "description": "Provides an Auto Scaling Group resource.",
+      "icon": "Aws_Auto-Scaling",
+      "model": "DefaultModel",
+      "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html",
+      "attributes": [
+        {
+          "name": "name",
+          "displayName": "Name",
+          "description": "Name of the Auto Scaling Group.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_group#name"
+        },
+        {
+          "name": "min_size",
+          "displayName": "Min Size",
+          "description": "Minimum size of the Auto Scaling Group.",
+          "required": true,
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_group#min_size"
+        },
+        {
+          "name": "max_size",
+          "displayName": "Max Size",
+          "description": "Maximum size of the Auto Scaling Group.",
+          "required": true,
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_group#max_size"
+        },
+        {
+          "name": "deired_capacity",
+          "displayName": "Desired Capacity",
+          "description": "Number of Amazon EC2 instances that should be running in the group.",
+          "type": "Number",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_group#desired_capacity"
+        },
+        {
+          "name": "health_check_type",
+          "displayName": "Health Check Type",
+          "description": "Controls how health checking is done.",
+          "type": "String",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_group#health_check_type",
+          "rules": {
+            "values": [
+              "EC2",
+              "ELB"
+            ]
+          }
+        },
+        {
+          "name": "target_group_arns",
+          "displayName": "Target Group ARNs",
+          "description": "Set of aws_alb_target_group ARNs, for use with Application or Network Load Balancing.",
+          "type": "Array",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_group#target_group_arns"
+        }
+      ]
     }
   ],
   "variables": [
     {
       "type": "image_id",
-      "model": "DefaultModel",
-      "icon": "variable"
+      "icon": "variable",
+      "model": "DefaultModel"
     }
   ]
 }

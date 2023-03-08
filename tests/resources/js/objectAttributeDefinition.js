@@ -28,8 +28,8 @@ export default [
           new TerraformComponentAttribute({
             name: 'lb_port',
             type: 'Number',
-            definition: lbPortAttributeDefinition,
             value: 404,
+            definition: lbPortAttributeDefinition,
           }),
           new TerraformComponentAttribute({
             name: 'value',

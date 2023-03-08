@@ -10,34 +10,41 @@ const metadata = getTerraformMetadata(
 metadata.parse();
 
 const awsDefinition = metadata.pluginData.definitions.components.find(({ type }) => type === 'aws');
-const regionDefinition = awsDefinition.definedAttributes.find(({ name }) => name === 'region');
+const regionAttributeDefinition = awsDefinition.definedAttributes.find(({ name }) => name === 'region');
+const accessKeyAttributeDefinition = awsDefinition.definedAttributes.find(({ name }) => name === 'access_key');
+const secretKeyAttributeDefinition = awsDefinition.definedAttributes.find(({ name }) => name === 'secret_key');
 const serverDefinition = metadata.pluginData.definitions.components.find(({ type }) => type === 'server');
+const sourceAttributeDefinition = awsDefinition.definedAttributes.find(({ name }) => name === 'source');
 const awsAmiDefinition = metadata.pluginData.definitions.components.find(({ type }) => type === 'aws_ami');
+const filterAttributeDefinition = awsAmiDefinition.definedAttributes.find(({ name }) => name === 'filter');
+const mostRecentAttributeDefinition = awsAmiDefinition.definedAttributes.find(({ name }) => name === 'most_recent');
 const awsRoute53ZoneDefinition = metadata.pluginData.definitions.components.find(({ type }) => type === 'aws_route53_zone');
-const nameDefinition = awsRoute53ZoneDefinition.definedAttributes.find(({ name }) => name === 'name');
+const nameAttributeDefinition = awsRoute53ZoneDefinition.definedAttributes.find(({ name }) => name === 'name');
 
 export const appComponents = [
   new Component({
+    definition: awsDefinition,
     id: 'aws_1',
     name: null,
     path: './app.tf',
-    definition: awsDefinition,
     attributes: [
       new TerraformComponentAttribute({
         name: 'access_key',
         type: 'String',
         value: 'ABCD1234J54PXLDF4IC4WMVA',
+        definition: accessKeyAttributeDefinition,
       }),
       new TerraformComponentAttribute({
         name: 'secret_key',
         type: 'String',
         value: '28prpojfngldfgPcgiv79Q/J+8o7ksdfsTjmmE2QQBRa',
+        definition: secretKeyAttributeDefinition,
       }),
       new TerraformComponentAttribute({
         name: 'region',
         type: 'String',
         value: 'eu-west-3',
-        definition: regionDefinition,
+        definition: regionAttributeDefinition,
       }),
     ],
   }),
@@ -50,6 +57,7 @@ export const appComponents = [
       name: 'source',
       type: 'String',
       value: '../modules/server',
+      definition: sourceAttributeDefinition,
     })],
   }),
   new Component({
@@ -62,6 +70,7 @@ export const appComponents = [
         name: 'filter',
         type: 'Object',
         isDynamic: true,
+        definition: filterAttributeDefinition,
         value: [
           new TerraformComponentAttribute({
             name: 'name',
@@ -79,6 +88,7 @@ export const appComponents = [
         name: 'most_recent',
         value: true,
         type: 'Boolean',
+        definition: mostRecentAttributeDefinition,
       }),
     ],
   }),
@@ -92,7 +102,7 @@ export const appComponents = [
         name: 'name',
         value: 'aws.domaine.fr',
         type: 'String',
-        definition: nameDefinition,
+        definition: nameAttributeDefinition,
       }),
       new TerraformComponentAttribute({
         name: 'image_id',

@@ -8,7 +8,7 @@ const root = `{% for _block in components %}
 {% endfor %}`;
 
 const attribute = `{% if attribute.type == 'Object' %}
-{{ attribute.name | indent(level * 4, true) }} {
+{{ attribute.name | indent(level * 4, true) }} {% if not attribute.isDynamic %}= {% endif %}{
 {% set level = level+1 %}{% for attr in attribute.value %}{% set attribute = attr %}
 {% include "attribute" ignore missing %}
 {% set attribute = attr %}

@@ -2,7 +2,6 @@ import fs from 'fs';
 import TerraformParser from 'src/parser/TerraformParser';
 import {
   Component,
-  ComponentAttribute,
   ComponentAttributeDefinition,
   ComponentLink,
   ComponentLinkDefinition,
@@ -11,6 +10,7 @@ import {
 } from 'leto-modelizer-plugin-core';
 import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
 import { getTerraformMetadata } from 'tests/resources/utils';
+import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
 
 describe('Test TerraformParser', () => {
   describe('Test methods', () => {
@@ -80,17 +80,17 @@ describe('Test TerraformParser', () => {
                 })],
               }),
               attributes: [
-                new ComponentAttribute({
+                new TerraformComponentAttribute({
                   name: 'access_key',
                   type: 'String',
                   value: 'ABCD1234J54PXLDF4IC4WMVA',
                 }),
-                new ComponentAttribute({
+                new TerraformComponentAttribute({
                   name: 'secret_key',
                   type: 'String',
                   value: '28prpojfngldfgPcgiv79Q/J+8o7ksdfsTjmmE2QQBRa',
                 }),
-                new ComponentAttribute({
+                new TerraformComponentAttribute({
                   name: 'region',
                   type: 'String',
                   value: 'eu-west-3',
@@ -116,7 +116,7 @@ describe('Test TerraformParser', () => {
                 type: 'server',
                 model: 'DefaultModel',
               }),
-              attributes: [new ComponentAttribute({
+              attributes: [new TerraformComponentAttribute({
                 name: 'source',
                 type: 'String',
                 value: '../modules/server',
@@ -134,23 +134,24 @@ describe('Test TerraformParser', () => {
                 model: 'DefaultModel',
               }),
               attributes: [
-                new ComponentAttribute({
+                new TerraformComponentAttribute({
                   name: 'filter',
                   type: 'Object',
+                  isDynamic: true,
                   value: [
-                    new ComponentAttribute({
+                    new TerraformComponentAttribute({
                       name: 'name',
                       type: 'String',
                       value: 'state',
                     }),
-                    new ComponentAttribute({
+                    new TerraformComponentAttribute({
                       name: 'values',
                       type: 'Array',
                       value: ['available'],
                     }),
                   ],
                 }),
-                new ComponentAttribute({
+                new TerraformComponentAttribute({
                   name: 'most_recent',
                   value: true,
                   type: 'Boolean',
@@ -176,7 +177,7 @@ describe('Test TerraformParser', () => {
                 })],
               }),
               attributes: [
-                new ComponentAttribute({
+                new TerraformComponentAttribute({
                   name: 'name',
                   value: 'aws.domaine.fr',
                   type: 'String',
@@ -186,13 +187,13 @@ describe('Test TerraformParser', () => {
                     required: true,
                   }),
                 }),
-                new ComponentAttribute({
+                new TerraformComponentAttribute({
                   name: 'image_id',
                   value: null,
                   type: 'String',
                   definition: null,
                 }),
-                new ComponentAttribute({
+                new TerraformComponentAttribute({
                   name: 'position',
                   value: 1,
                   type: 'Number',
@@ -211,7 +212,7 @@ describe('Test TerraformParser', () => {
                 icon: 'variable',
                 model: 'DefaultModel',
               }),
-              attributes: [new ComponentAttribute({
+              attributes: [new TerraformComponentAttribute({
                 name: 'type',
                 type: 'String',
                 value: 'string',
@@ -376,29 +377,32 @@ describe('Test TerraformParser', () => {
             path: 'new_file.tf',
             definition: metadata.pluginData.definitions.components.find(({ type }) => type === 'aws_ami'),
             attributes: [
-              new ComponentAttribute({
+              new TerraformComponentAttribute({
                 name: 'filter',
                 type: 'Object',
+                isDynamic: true,
                 value: [
-                  new ComponentAttribute({
+                  new TerraformComponentAttribute({
                     name: 'name',
                     type: 'String',
                     value: 'state',
                   }),
-                  new ComponentAttribute({
+                  new TerraformComponentAttribute({
                     name: 'test',
                     type: 'Object',
+                    isDynamic: true,
                     value: [
-                      new ComponentAttribute({
+                      new TerraformComponentAttribute({
                         name: 'value',
                         type: 'Number',
                         value: 8,
                       }),
-                      new ComponentAttribute({
+                      new TerraformComponentAttribute({
                         name: 'test2',
                         type: 'Object',
+                        isDynamic: true,
                         value: [
-                          new ComponentAttribute({
+                          new TerraformComponentAttribute({
                             name: 'value',
                             type: 'Number',
                             value: 9,
@@ -463,29 +467,31 @@ describe('Test TerraformParser', () => {
             path: 'new_file.tf',
             definition: awsElbDefinition,
             attributes: [
-              new ComponentAttribute({
+              new TerraformComponentAttribute({
                 name: 'listener',
                 type: 'Object',
                 definition: listenerAttributeDefinition,
+                isDynamic: true,
                 value: [
-                  new ComponentAttribute({
+                  new TerraformComponentAttribute({
                     name: 'lb_port',
                     type: 'Number',
                     definition: lbPortAttributeDefinition,
                     value: 404,
                   }),
-                  new ComponentAttribute({
+                  new TerraformComponentAttribute({
                     name: 'value',
                     type: 'String',
                     value: 'test',
                   }),
                 ],
               }),
-              new ComponentAttribute({
+              new TerraformComponentAttribute({
                 name: 'test',
                 type: 'Object',
+                isDynamic: true,
                 value: [
-                  new ComponentAttribute({
+                  new TerraformComponentAttribute({
                     name: 'value',
                     type: 'Number',
                     value: 1,
@@ -496,6 +502,285 @@ describe('Test TerraformParser', () => {
           }),
         ]);
       });
+
+      it('Should parse the tag attribute as a key/value list', () => {
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+        metadata.parse();
+        metadata.pluginData.initLinkDefinitions();
+        const parser = new TerraformParser(metadata.pluginData);
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: fs.readFileSync('tests/resources/tf/complex_field.tf', 'utf8'),
+        });
+
+        parser.parse([input]);
+
+        const awsSecGroupDefinition = metadata.pluginData.definitions.components.find(({ type }) => type === 'aws_security_group');
+
+        const tagsAttributeDefinition = awsSecGroupDefinition.definedAttributes.find(({ name }) => name === 'tags');
+
+        const egressAttributeDefinition = awsSecGroupDefinition.definedAttributes.find(({ name }) => name === 'egress');
+        
+        expect(metadata.pluginData.components).toEqual([
+          new Component({
+            id: 'test_secgroup',
+            name: null,
+            path: 'new_file.tf',
+            definition: awsSecGroupDefinition,
+            attributes: [
+              new TerraformComponentAttribute({
+                name: 'egress',
+                type: 'Object',
+                definition: egressAttributeDefinition,
+                isDynamic: true,
+                value: [
+                  new TerraformComponentAttribute({
+                    name: 'from_port',
+                    type: 'Number',
+                    value: 0,
+                  }),
+                  new TerraformComponentAttribute({
+                    name: 'to_port',
+                    type: 'Number',
+                    value: 0,
+                  })
+                ]
+              }),
+              new TerraformComponentAttribute({
+                name: 'tags',
+                type: 'Object',
+                definition: tagsAttributeDefinition,
+                value: [
+                  new TerraformComponentAttribute({
+                    name: 'Environment',
+                    type: 'String',
+                    value: 'Test',
+                  }),
+                  new TerraformComponentAttribute({
+                    name: 'Name',
+                    type: 'String',
+                    value: 'test Secgroup',
+                  }),
+                ],
+              }),
+            ],
+          }),
+        ]);
+      });
+    });
+
+    it('Should parse an empty resource', () => {
+      const metadata = getTerraformMetadata(
+        'aws',
+        'src/assets/metadata/aws.json',
+      );
+      metadata.parse();
+      metadata.pluginData.initLinkDefinitions();
+      const parser = new TerraformParser(metadata.pluginData);
+      const input = new FileInput({
+        path: 'new_file.tf',
+        content: fs.readFileSync('tests/resources/tf/empty_resource.tf', 'utf8'),
+      });
+
+      parser.parse([input]);
+
+      const instanceDefinition = metadata.pluginData.definitions.components.find(({ type }) => type === 'aws_instance');
+        
+      expect(metadata.pluginData.components).toEqual([
+        new Component({
+          id: 'instance',
+          name: null,
+          path: 'new_file.tf',
+          definition: instanceDefinition
+        }),
+      ]);
+    });
+    it('Should parse a resource containing attributes and blocks', () => {
+      const metadata = getTerraformMetadata(
+        'aws',
+        'src/assets/metadata/aws.json',
+      );
+      metadata.parse();
+      metadata.pluginData.initLinkDefinitions();
+      const parser = new TerraformParser(metadata.pluginData);
+      const input = new FileInput({
+        path: 'new_file.tf',
+        content: fs.readFileSync('tests/resources/tf/attributes_and_blocks.tf', 'utf8'),
+      });
+
+      parser.parse([input]);
+
+      const awsSecGroupDefinition = metadata.pluginData.definitions.components.find(({ type }) => type === 'aws_security_group');
+      const nameAttributeDefinition = awsSecGroupDefinition.definedAttributes.find(({ name }) => name === 'name');
+      const descriptionAttributeDefinition = awsSecGroupDefinition.definedAttributes.find(({ name }) => name === 'description');
+      const egressAttributeDefinition = awsSecGroupDefinition.definedAttributes.find(({ name }) => name === 'egress');
+      const tagsAttributeDefinition = awsSecGroupDefinition.definedAttributes.find(({ name }) => name === 'tags');
+
+      expect(metadata.pluginData.components).toEqual([
+        new Component({
+          id: 'allow_all',
+          name: null,
+          path: 'new_file.tf',
+          definition: awsSecGroupDefinition,
+          attributes: [
+            new TerraformComponentAttribute({
+              name: 'name',
+              type: 'String',
+              definition: nameAttributeDefinition,
+              value: 'allow_all',
+            }),
+            new TerraformComponentAttribute({
+              name: 'description',
+              type: 'String',
+              definition: descriptionAttributeDefinition,
+              value: 'Allow all inbound traffic',
+            }),
+            new TerraformComponentAttribute({
+              name: 'ingress',
+              type: 'Object',
+              isDynamic: true,
+              value: [
+                new TerraformComponentAttribute({
+                  name: 'from_port',
+                  type: 'Number',
+                  value: 0,
+                }),
+                new TerraformComponentAttribute({
+                  name: 'to_port',
+                  type: 'Number',
+                  value: 0,
+                }),
+                new TerraformComponentAttribute({
+                  name: 'protocol',
+                  type: 'String',
+                  value: '-1',
+                }),
+              ]
+            }),
+            new TerraformComponentAttribute({
+              name: 'egress',
+              type: 'Object',
+              definition: egressAttributeDefinition,
+              isDynamic: true,
+              value: [
+                new TerraformComponentAttribute({
+                  name: 'from_port',
+                  type: 'Number',
+                  value: 0,
+                }),
+                new TerraformComponentAttribute({
+                  name: 'to_port',
+                  type: 'Number',
+                  value: 0,
+                }),
+                new TerraformComponentAttribute({
+                  name: 'protocol',
+                  type: 'String',
+                  value: '-1',
+                }),
+              ]
+            }),
+            new TerraformComponentAttribute({
+              name: 'tags',
+              type: 'Object',
+              definition: tagsAttributeDefinition,
+              isDynamic: false,
+              value: [
+                new TerraformComponentAttribute({
+                  name: 'Terraform',
+                  type: 'Boolean',
+                  value: true,
+                }),
+              ],
+            }),
+          ]
+        }),
+      ]);
+    });
+
+    it('Should parse a resource with 2 blocks with the same name but different types', () => {
+      const metadata = getTerraformMetadata(
+        'aws',
+        'src/assets/metadata/aws.json',
+      );
+      metadata.parse();
+      metadata.pluginData.initLinkDefinitions();
+      const parser = new TerraformParser(metadata.pluginData);
+      const input = new FileInput({
+        path: 'new_file.tf',
+        content: fs.readFileSync('tests/resources/tf/double_tags.tf', 'utf8'),
+      });
+
+      const instanceDefinition = metadata.pluginData.definitions.components.find(({ type }) => type === 'aws_instance')
+
+      parser.parse([input]);
+      expect(parser.pluginData.components).toEqual([
+        new Component({
+          id: 'test',
+          name: null,
+          path: 'new_file.tf',
+          definition: instanceDefinition,
+          attributes: [
+            new TerraformComponentAttribute({
+              name: 'tags',
+              type: 'Object',
+              isDynamic: true,
+              value: [
+                new TerraformComponentAttribute({
+                  name: 'name',
+                  type: 'String',
+                  value: 'test',
+                }),
+                new TerraformComponentAttribute({
+                  name: 'value',
+                  type: 'Number',
+                  value: 50,
+                }),
+              ]
+            }),
+            new TerraformComponentAttribute({
+              name: 'tags',
+              type: 'Object',
+              isDynamic: false,
+              value: [
+                new TerraformComponentAttribute({
+                  name: 'name',
+                  type: 'String',
+                  value: 'test2',
+                }),
+                new TerraformComponentAttribute({
+                  name: 'value',
+                  type: 'Number',
+                  value: 60,
+                }),
+              ]
+            }),
+          ]
+        }),
+      ]);
+    });
+
+    it('Should throw an error when parsing a resource with an invalid body syntax', () => {
+      const metadata = getTerraformMetadata(
+        'aws',
+        'src/assets/metadata/aws.json',
+      );
+      metadata.parse();
+      metadata.pluginData.initLinkDefinitions();
+      const parser = new TerraformParser(metadata.pluginData);
+      const input = new FileInput({
+        path: 'new_file.tf',
+        content: fs.readFileSync('tests/resources/tf/wrong_body.tf', 'utf8'),
+      });
+
+      // Expect the parser to log an error to the console
+      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+      parser.parse([input]);
+      expect(spy).toHaveBeenCalled();
+      
     });
   });
 });

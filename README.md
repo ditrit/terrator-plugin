@@ -10,6 +10,22 @@ npm run build
 
 ## Development
 
+### Generate the parser
+
+We use antlr4 to generate the Terraform parser. Follow [these steps](https://github.com/antlr/antlr4/blob/master/doc/getting-started.md#unix) from the official antlr4 repository to install it.
+
+Make sure your `CLASSPATH` environment variable is set, and use the `ANTLR4_PATH` environment variable to specify your antlr4 executable directory. For example, on Linux:
+
+```
+export ANTLR4_PATH="/usr/local/lib/antlr-4.11.0-complete.jar"
+```
+
+You can then run:
+
+```
+npm run parser:generate
+```
+
 ### How to release
 
 We use [Semantic Versioning](https://semver.org/spec/v2.0.0.html) as guideline for the version management.

@@ -1,261 +1,163 @@
-// Generated from .\terraformParser.g4 by ANTLR 4.9.3
+// Generated from java-escape by ANTLR 4.11.0-SNAPSHOT
 // jshint ignore: start
 import antlr4 from 'antlr4';
-import TerraformListener from '../parser/TerraformListener.js';
+import TerraformListener from 'src/parser/TerraformListener.js';
+const serializedATN = [4,1,40,302,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
+4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,
+2,13,7,13,2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,
+20,7,20,2,21,7,21,2,22,7,22,1,0,1,0,1,0,1,0,1,0,1,0,1,0,4,0,54,8,0,11,0,
+12,0,55,1,0,1,0,1,1,1,1,1,1,1,1,1,1,5,1,65,8,1,10,1,12,1,68,9,1,1,1,1,1,
+1,2,1,2,1,2,1,2,1,2,4,2,77,8,2,11,2,12,2,78,1,2,1,2,1,3,1,3,1,3,1,3,1,4,
+1,4,1,4,1,4,5,4,91,8,4,10,4,12,4,94,9,4,1,4,1,4,1,5,1,5,1,5,5,5,101,8,5,
+10,5,12,5,104,9,5,1,5,1,5,1,6,1,6,1,6,1,6,1,6,5,6,113,8,6,10,6,12,6,116,
+9,6,1,6,1,6,1,7,1,7,1,7,1,7,5,7,124,8,7,10,7,12,7,127,9,7,1,7,1,7,1,8,1,
+8,1,8,1,8,4,8,135,8,8,11,8,12,8,136,1,8,1,8,1,9,1,9,1,10,1,10,1,11,1,11,
+1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,
+11,3,11,162,8,11,1,12,1,12,1,12,4,12,167,8,12,11,12,12,12,168,1,13,1,13,
+1,13,1,13,1,14,1,14,1,14,1,14,5,14,179,8,14,10,14,12,14,182,9,14,1,14,1,
+14,1,15,1,15,1,15,5,15,189,8,15,10,15,12,15,192,9,15,1,15,1,15,1,16,1,16,
+1,16,1,16,4,16,200,8,16,11,16,12,16,201,1,16,1,16,1,16,1,16,1,16,1,17,1,
+17,1,17,1,17,1,17,3,17,214,8,17,1,18,1,18,1,18,1,18,1,18,1,18,3,18,222,8,
+18,1,19,1,19,1,19,1,19,1,19,5,19,229,8,19,10,19,12,19,232,9,19,1,19,3,19,
+235,8,19,1,19,1,19,1,20,1,20,1,20,4,20,242,8,20,11,20,12,20,243,1,20,1,20,
+1,20,1,20,4,20,250,8,20,11,20,12,20,251,4,20,254,8,20,11,20,12,20,255,1,
+20,1,20,1,20,1,20,1,20,1,20,3,20,264,8,20,1,20,1,20,1,20,1,20,1,20,1,20,
+1,20,1,20,1,20,1,20,1,20,5,20,277,8,20,10,20,12,20,280,9,20,1,21,1,21,1,
+21,1,21,1,21,1,21,5,21,288,8,21,10,21,12,21,291,9,21,1,21,3,21,294,8,21,
+1,21,1,21,3,21,298,8,21,1,22,1,22,1,22,0,1,40,23,0,2,4,6,8,10,12,14,16,18,
+20,22,24,26,28,30,32,34,36,38,40,42,44,0,3,2,0,3,3,28,28,2,0,23,23,28,28,
+2,0,24,24,30,30,329,0,53,1,0,0,0,2,59,1,0,0,0,4,71,1,0,0,0,6,82,1,0,0,0,
+8,86,1,0,0,0,10,97,1,0,0,0,12,107,1,0,0,0,14,119,1,0,0,0,16,130,1,0,0,0,
+18,140,1,0,0,0,20,142,1,0,0,0,22,161,1,0,0,0,24,166,1,0,0,0,26,170,1,0,0,
+0,28,174,1,0,0,0,30,185,1,0,0,0,32,195,1,0,0,0,34,213,1,0,0,0,36,221,1,0,
+0,0,38,223,1,0,0,0,40,263,1,0,0,0,42,297,1,0,0,0,44,299,1,0,0,0,46,54,3,
+8,4,0,47,54,3,10,5,0,48,54,3,12,6,0,49,54,3,14,7,0,50,54,3,16,8,0,51,54,
+3,4,2,0,52,54,3,2,1,0,53,46,1,0,0,0,53,47,1,0,0,0,53,48,1,0,0,0,53,49,1,
+0,0,0,53,50,1,0,0,0,53,51,1,0,0,0,53,52,1,0,0,0,54,55,1,0,0,0,55,53,1,0,
+0,0,55,56,1,0,0,0,56,57,1,0,0,0,57,58,5,0,0,1,58,1,1,0,0,0,59,60,5,2,0,0,
+60,61,3,20,10,0,61,62,3,18,9,0,62,66,5,14,0,0,63,65,3,24,12,0,64,63,1,0,
+0,0,65,68,1,0,0,0,66,64,1,0,0,0,66,67,1,0,0,0,67,69,1,0,0,0,68,66,1,0,0,
+0,69,70,5,15,0,0,70,3,1,0,0,0,71,72,5,1,0,0,72,73,3,18,9,0,73,76,5,14,0,
+0,74,77,3,6,3,0,75,77,3,24,12,0,76,74,1,0,0,0,76,75,1,0,0,0,77,78,1,0,0,
+0,78,76,1,0,0,0,78,79,1,0,0,0,79,80,1,0,0,0,80,81,5,15,0,0,81,5,1,0,0,0,
+82,83,5,3,0,0,83,84,5,16,0,0,84,85,5,29,0,0,85,7,1,0,0,0,86,87,5,4,0,0,87,
+88,3,18,9,0,88,92,5,14,0,0,89,91,3,24,12,0,90,89,1,0,0,0,91,94,1,0,0,0,92,
+90,1,0,0,0,92,93,1,0,0,0,93,95,1,0,0,0,94,92,1,0,0,0,95,96,5,15,0,0,96,9,
+1,0,0,0,97,98,5,5,0,0,98,102,5,14,0,0,99,101,3,24,12,0,100,99,1,0,0,0,101,
+104,1,0,0,0,102,100,1,0,0,0,102,103,1,0,0,0,103,105,1,0,0,0,104,102,1,0,
+0,0,105,106,5,15,0,0,106,11,1,0,0,0,107,108,5,6,0,0,108,109,3,20,10,0,109,
+110,3,18,9,0,110,114,5,14,0,0,111,113,3,24,12,0,112,111,1,0,0,0,113,116,
+1,0,0,0,114,112,1,0,0,0,114,115,1,0,0,0,115,117,1,0,0,0,116,114,1,0,0,0,
+117,118,5,15,0,0,118,13,1,0,0,0,119,120,5,7,0,0,120,121,3,18,9,0,121,125,
+5,14,0,0,122,124,3,24,12,0,123,122,1,0,0,0,124,127,1,0,0,0,125,123,1,0,0,
+0,125,126,1,0,0,0,126,128,1,0,0,0,127,125,1,0,0,0,128,129,5,15,0,0,129,15,
+1,0,0,0,130,131,5,8,0,0,131,132,3,18,9,0,132,134,5,14,0,0,133,135,3,24,12,
+0,134,133,1,0,0,0,135,136,1,0,0,0,136,134,1,0,0,0,136,137,1,0,0,0,137,138,
+1,0,0,0,138,139,5,15,0,0,139,17,1,0,0,0,140,141,5,29,0,0,141,19,1,0,0,0,
+142,143,5,29,0,0,143,21,1,0,0,0,144,162,5,27,0,0,145,162,5,9,0,0,146,147,
+5,9,0,0,147,148,5,17,0,0,148,149,3,22,11,0,149,150,5,18,0,0,150,162,1,0,
+0,0,151,152,5,10,0,0,152,153,5,17,0,0,153,154,3,22,11,0,154,155,5,18,0,0,
+155,162,1,0,0,0,156,157,5,11,0,0,157,158,5,17,0,0,158,159,3,24,12,0,159,
+160,5,18,0,0,160,162,1,0,0,0,161,144,1,0,0,0,161,145,1,0,0,0,161,146,1,0,
+0,0,161,151,1,0,0,0,161,156,1,0,0,0,162,23,1,0,0,0,163,167,3,28,14,0,164,
+167,3,30,15,0,165,167,3,26,13,0,166,163,1,0,0,0,166,164,1,0,0,0,166,165,
+1,0,0,0,167,168,1,0,0,0,168,166,1,0,0,0,168,169,1,0,0,0,169,25,1,0,0,0,170,
+171,7,0,0,0,171,172,5,16,0,0,172,173,3,36,18,0,173,27,1,0,0,0,174,175,5,
+28,0,0,175,176,5,16,0,0,176,180,5,14,0,0,177,179,3,24,12,0,178,177,1,0,0,
+0,179,182,1,0,0,0,180,178,1,0,0,0,180,181,1,0,0,0,181,183,1,0,0,0,182,180,
+1,0,0,0,183,184,5,15,0,0,184,29,1,0,0,0,185,186,5,28,0,0,186,190,5,14,0,
+0,187,189,3,24,12,0,188,187,1,0,0,0,189,192,1,0,0,0,190,188,1,0,0,0,190,
+191,1,0,0,0,191,193,1,0,0,0,192,190,1,0,0,0,193,194,5,15,0,0,194,31,1,0,
+0,0,195,196,5,14,0,0,196,197,5,12,0,0,197,199,5,16,0,0,198,200,3,34,17,0,
+199,198,1,0,0,0,200,201,1,0,0,0,201,199,1,0,0,0,201,202,1,0,0,0,202,203,
+1,0,0,0,203,204,5,13,0,0,204,205,5,16,0,0,205,206,5,29,0,0,206,207,5,15,
+0,0,207,33,1,0,0,0,208,214,5,29,0,0,209,214,5,30,0,0,210,214,5,26,0,0,211,
+214,5,25,0,0,212,214,3,38,19,0,213,208,1,0,0,0,213,209,1,0,0,0,213,210,1,
+0,0,0,213,211,1,0,0,0,213,212,1,0,0,0,214,35,1,0,0,0,215,222,5,30,0,0,216,
+222,5,26,0,0,217,222,3,42,21,0,218,222,3,40,20,0,219,222,5,29,0,0,220,222,
+3,22,11,0,221,215,1,0,0,0,221,216,1,0,0,0,221,217,1,0,0,0,221,218,1,0,0,
+0,221,219,1,0,0,0,221,220,1,0,0,0,222,37,1,0,0,0,223,224,5,28,0,0,224,225,
+5,17,0,0,225,230,3,36,18,0,226,227,5,21,0,0,227,229,3,36,18,0,228,226,1,
+0,0,0,229,232,1,0,0,0,230,228,1,0,0,0,230,231,1,0,0,0,231,234,1,0,0,0,232,
+230,1,0,0,0,233,235,5,21,0,0,234,233,1,0,0,0,234,235,1,0,0,0,235,236,1,0,
+0,0,236,237,5,18,0,0,237,39,1,0,0,0,238,239,6,20,-1,0,239,264,5,28,0,0,240,
+242,7,1,0,0,241,240,1,0,0,0,242,243,1,0,0,0,243,241,1,0,0,0,243,244,1,0,
+0,0,244,264,1,0,0,0,245,253,5,35,0,0,246,254,5,36,0,0,247,254,5,39,0,0,248,
+250,5,37,0,0,249,248,1,0,0,0,250,251,1,0,0,0,251,249,1,0,0,0,251,252,1,0,
+0,0,252,254,1,0,0,0,253,246,1,0,0,0,253,247,1,0,0,0,253,249,1,0,0,0,254,
+255,1,0,0,0,255,253,1,0,0,0,255,256,1,0,0,0,256,257,1,0,0,0,257,264,5,40,
+0,0,258,259,5,29,0,0,259,260,3,40,20,0,260,261,5,29,0,0,261,264,1,0,0,0,
+262,264,3,38,19,0,263,238,1,0,0,0,263,241,1,0,0,0,263,245,1,0,0,0,263,258,
+1,0,0,0,263,262,1,0,0,0,264,278,1,0,0,0,265,266,10,6,0,0,266,267,5,22,0,
+0,267,277,3,40,20,7,268,269,10,5,0,0,269,270,5,19,0,0,270,271,3,44,22,0,
+271,272,5,20,0,0,272,277,1,0,0,0,273,274,10,4,0,0,274,275,5,22,0,0,275,277,
+3,44,22,0,276,265,1,0,0,0,276,268,1,0,0,0,276,273,1,0,0,0,277,280,1,0,0,
+0,278,276,1,0,0,0,278,279,1,0,0,0,279,41,1,0,0,0,280,278,1,0,0,0,281,282,
+5,19,0,0,282,298,5,20,0,0,283,284,5,19,0,0,284,289,3,36,18,0,285,286,5,21,
+0,0,286,288,3,36,18,0,287,285,1,0,0,0,288,291,1,0,0,0,289,287,1,0,0,0,289,
+290,1,0,0,0,290,293,1,0,0,0,291,289,1,0,0,0,292,294,5,21,0,0,293,292,1,0,
+0,0,293,294,1,0,0,0,294,295,1,0,0,0,295,296,5,20,0,0,296,298,1,0,0,0,297,
+281,1,0,0,0,297,283,1,0,0,0,298,43,1,0,0,0,299,300,7,2,0,0,300,45,1,0,0,
+0,30,53,55,66,76,78,92,102,114,125,136,161,166,168,180,190,201,213,221,230,
+234,243,251,253,255,263,276,278,289,293,297];
 
-const serializedATN = ['\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786',
-  '\u5964\u0003*\u0120\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004',
-  '\t\u0004\u0004\u0005\t\u0005\u0004\u0006\t\u0006\u0004\u0007\t\u0007',
-  '\u0004\b\t\b\u0004\t\t\t\u0004\n\t\n\u0004\u000b\t\u000b\u0004\f\t\f',
-  '\u0004\r\t\r\u0004\u000e\t\u000e\u0004\u000f\t\u000f\u0004\u0010\t\u0010',
-  '\u0004\u0011\t\u0011\u0004\u0012\t\u0012\u0004\u0013\t\u0013\u0004\u0014',
-  '\t\u0014\u0004\u0015\t\u0015\u0004\u0016\t\u0016\u0004\u0017\t\u0017',
-  '\u0004\u0018\t\u0018\u0003\u0002\u0006\u00022\n\u0002\r\u0002\u000e',
-  '\u00023\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003',
-  '\u0003\u0003\u0003\u0003\u0005\u0003=\n\u0003\u0003\u0004\u0003\u0004',
-  '\u0003\u0004\u0003\u0004\u0003\u0004\u0006\u0004D\n\u0004\r\u0004\u000e',
-  '\u0004E\u0003\u0004\u0003\u0004\u0003\u0005\u0003\u0005\u0003\u0005',
-  '\u0003\u0005\u0003\u0005\u0006\u0005O\n\u0005\r\u0005\u000e\u0005P\u0003',
-  '\u0005\u0003\u0005\u0003\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0003',
-  '\u0007\u0003\u0007\u0003\u0007\u0003\u0007\u0003\u0007\u0003\u0007\u0003',
-  '\b\u0003\b\u0003\b\u0006\bb\n\b\r\b\u000e\bc\u0003\b\u0003\b\u0003\t',
-  '\u0003\t\u0003\t\u0003\t\u0003\t\u0003\t\u0003\t\u0003\n\u0003\n\u0003',
-  '\n\u0003\n\u0006\ns\n\n\r\n\u000e\nt\u0003\n\u0003\n\u0003\u000b\u0003',
-  '\u000b\u0003\u000b\u0003\u000b\u0006\u000b}\n\u000b\r\u000b\u000e\u000b',
-  '~\u0003\u000b\u0003\u000b\u0003\f\u0003\f\u0003\r\u0003\r\u0003\u000e',
-  '\u0003\u000e\u0003\u000e\u0003\u000e\u0003\u000e\u0003\u000e\u0003\u000e',
-  '\u0003\u000e\u0003\u000e\u0003\u000e\u0003\u000e\u0003\u000e\u0003\u000e',
-  '\u0003\u000e\u0003\u000e\u0003\u000e\u0003\u000e\u0005\u000e\u0098\n',
-  '\u000e\u0003\u000f\u0003\u000f\u0006\u000f\u009c\n\u000f\r\u000f\u000e',
-  '\u000f\u009d\u0003\u0010\u0003\u0010\u0003\u0010\u0003\u0010\u0003\u0011',
-  '\u0003\u0011\u0003\u0011\u0003\u0011\u0003\u0011\u0003\u0011\u0003\u0011',
-  '\u0003\u0011\u0003\u0011\u0003\u0011\u0003\u0011\u0006\u0011\u00af\n',
-  '\u0011\r\u0011\u000e\u0011\u00b0\u0003\u0011\u0005\u0011\u00b4\n\u0011',
-  '\u0003\u0012\u0003\u0012\u0003\u0012\u0003\u0012\u0006\u0012\u00ba\n',
-  '\u0012\r\u0012\u000e\u0012\u00bb\u0003\u0012\u0003\u0012\u0003\u0012',
-  '\u0003\u0012\u0003\u0012\u0003\u0013\u0003\u0013\u0003\u0013\u0003\u0013',
-  '\u0003\u0013\u0005\u0013\u00c8\n\u0013\u0003\u0014\u0003\u0014\u0003',
-  '\u0014\u0003\u0014\u0003\u0014\u0003\u0014\u0005\u0014\u00d0\n\u0014',
-  '\u0003\u0015\u0003\u0015\u0003\u0015\u0003\u0015\u0003\u0015\u0007\u0015',
-  '\u00d7\n\u0015\f\u0015\u000e\u0015\u00da\u000b\u0015\u0003\u0015\u0005',
-  '\u0015\u00dd\n\u0015\u0003\u0015\u0003\u0015\u0003\u0016\u0003\u0016',
-  '\u0003\u0016\u0006\u0016\u00e4\n\u0016\r\u0016\u000e\u0016\u00e5\u0003',
-  '\u0016\u0003\u0016\u0003\u0016\u0003\u0016\u0006\u0016\u00ec\n\u0016',
-  '\r\u0016\u000e\u0016\u00ed\u0006\u0016\u00f0\n\u0016\r\u0016\u000e\u0016',
-  '\u00f1\u0003\u0016\u0003\u0016\u0003\u0016\u0003\u0016\u0003\u0016\u0003',
-  '\u0016\u0005\u0016\u00fa\n\u0016\u0003\u0016\u0003\u0016\u0003\u0016',
-  '\u0003\u0016\u0003\u0016\u0003\u0016\u0003\u0016\u0003\u0016\u0003\u0016',
-  '\u0003\u0016\u0003\u0016\u0007\u0016\u0107\n\u0016\f\u0016\u000e\u0016',
-  '\u010a\u000b\u0016\u0003\u0017\u0003\u0017\u0003\u0017\u0003\u0017\u0003',
-  '\u0017\u0003\u0017\u0007\u0017\u0112\n\u0017\f\u0017\u000e\u0017\u0115',
-  '\u000b\u0017\u0003\u0017\u0005\u0017\u0118\n\u0017\u0003\u0017\u0003',
-  '\u0017\u0005\u0017\u011c\n\u0017\u0003\u0018\u0003\u0018\u0003\u0018',
-  '\u0002\u0003*\u0019\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014',
-  '\u0016\u0018\u001a\u001c\u001e "$&(*,.\u0002\u0005\u0004\u0002\u0005',
-  '\u0005\u001e\u001e\u0004\u0002\u0019\u0019\u001e\u001e\u0004\u0002\u001a',
-  '\u001a  \u0002\u0138\u00021\u0003\u0002\u0002\u0002\u0004<\u0003\u0002',
-  '\u0002\u0002\u0006>\u0003\u0002\u0002\u0002\bI\u0003\u0002\u0002\u0002',
-  '\nT\u0003\u0002\u0002\u0002\fX\u0003\u0002\u0002\u0002\u000e^\u0003',
-  '\u0002\u0002\u0002\u0010g\u0003\u0002\u0002\u0002\u0012n\u0003\u0002',
-  '\u0002\u0002\u0014x\u0003\u0002\u0002\u0002\u0016\u0082\u0003\u0002',
-  '\u0002\u0002\u0018\u0084\u0003\u0002\u0002\u0002\u001a\u0097\u0003\u0002',
-  '\u0002\u0002\u001c\u009b\u0003\u0002\u0002\u0002\u001e\u009f\u0003\u0002',
-  '\u0002\u0002 \u00b3\u0003\u0002\u0002\u0002"\u00b5\u0003\u0002\u0002',
-  '\u0002$\u00c7\u0003\u0002\u0002\u0002&\u00cf\u0003\u0002\u0002\u0002',
-  '(\u00d1\u0003\u0002\u0002\u0002*\u00f9\u0003\u0002\u0002\u0002,\u011b',
-  '\u0003\u0002\u0002\u0002.\u011d\u0003\u0002\u0002\u000202\u0005\u0004',
-  '\u0003\u000210\u0003\u0002\u0002\u000223\u0003\u0002\u0002\u000231\u0003',
-  '\u0002\u0002\u000234\u0003\u0002\u0002\u00024\u0003\u0003\u0002\u0002',
-  '\u00025=\u0005\f\u0007\u00026=\u0005\u000e\b\u00027=\u0005\u0010\t\u0002',
-  '8=\u0005\u0012\n\u00029=\u0005\u0014\u000b\u0002:=\u0005\b\u0005\u0002',
-  ';=\u0005\u0006\u0004\u0002<5\u0003\u0002\u0002\u0002<6\u0003\u0002\u0002',
-  '\u0002<7\u0003\u0002\u0002\u0002<8\u0003\u0002\u0002\u0002<9\u0003\u0002',
-  '\u0002\u0002<:\u0003\u0002\u0002\u0002<;\u0003\u0002\u0002\u0002=\u0005',
-  '\u0003\u0002\u0002\u0002>?\u0007\u0004\u0002\u0002?@\u0005\u0018\r\u0002',
-  '@A\u0005\u0016\f\u0002AC\u0007\u0010\u0002\u0002BD\u0005\u001c\u000f',
-  '\u0002CB\u0003\u0002\u0002\u0002DE\u0003\u0002\u0002\u0002EC\u0003\u0002',
-  '\u0002\u0002EF\u0003\u0002\u0002\u0002FG\u0003\u0002\u0002\u0002GH\u0007',
-  '\u0011\u0002\u0002H\u0007\u0003\u0002\u0002\u0002IJ\u0007\u0003\u0002',
-  '\u0002JK\u0005\u0016\f\u0002KN\u0007\u0010\u0002\u0002LO\u0005\n\u0006',
-  '\u0002MO\u0005\u001c\u000f\u0002NL\u0003\u0002\u0002\u0002NM\u0003\u0002',
-  '\u0002\u0002OP\u0003\u0002\u0002\u0002PN\u0003\u0002\u0002\u0002PQ\u0003',
-  '\u0002\u0002\u0002QR\u0003\u0002\u0002\u0002RS\u0007\u0011\u0002\u0002',
-  'S\t\u0003\u0002\u0002\u0002TU\u0007\u0005\u0002\u0002UV\u0007\u0012',
-  '\u0002\u0002VW\u0007\u001f\u0002\u0002W\u000b\u0003\u0002\u0002\u0002',
-  'XY\u0007\u0006\u0002\u0002YZ\u0005\u0016\f\u0002Z[\u0007\u0010\u0002',
-  '\u0002[\\\u0005\u001c\u000f\u0002\\]\u0007\u0011\u0002\u0002]\r\u0003',
-  '\u0002\u0002\u0002^_\u0007\u0007\u0002\u0002_a\u0007\u0010\u0002\u0002',
-  '`b\u0005\u001c\u000f\u0002a`\u0003\u0002\u0002\u0002bc\u0003\u0002\u0002',
-  '\u0002ca\u0003\u0002\u0002\u0002cd\u0003\u0002\u0002\u0002de\u0003\u0002',
-  '\u0002\u0002ef\u0007\u0011\u0002\u0002f\u000f\u0003\u0002\u0002\u0002',
-  'gh\u0007\b\u0002\u0002hi\u0005\u0018\r\u0002ij\u0005\u0016\f\u0002j',
-  'k\u0007\u0010\u0002\u0002kl\u0005\u001c\u000f\u0002lm\u0007\u0011\u0002',
-  '\u0002m\u0011\u0003\u0002\u0002\u0002no\u0007\t\u0002\u0002op\u0005',
-  '\u0016\f\u0002pr\u0007\u0010\u0002\u0002qs\u0005\u001c\u000f\u0002r',
-  'q\u0003\u0002\u0002\u0002st\u0003\u0002\u0002\u0002tr\u0003\u0002\u0002',
-  '\u0002tu\u0003\u0002\u0002\u0002uv\u0003\u0002\u0002\u0002vw\u0007\u0011',
-  '\u0002\u0002w\u0013\u0003\u0002\u0002\u0002xy\u0007\n\u0002\u0002yz',
-  '\u0005\u0016\f\u0002z|\u0007\u0010\u0002\u0002{}\u0005\u001c\u000f\u0002',
-  '|{\u0003\u0002\u0002\u0002}~\u0003\u0002\u0002\u0002~|\u0003\u0002\u0002',
-  '\u0002~\u007f\u0003\u0002\u0002\u0002\u007f\u0080\u0003\u0002\u0002',
-  '\u0002\u0080\u0081\u0007\u0011\u0002\u0002\u0081\u0015\u0003\u0002\u0002',
-  '\u0002\u0082\u0083\u0007\u001f\u0002\u0002\u0083\u0017\u0003\u0002\u0002',
-  '\u0002\u0084\u0085\u0007\u001f\u0002\u0002\u0085\u0019\u0003\u0002\u0002',
-  '\u0002\u0086\u0098\u0007\u001d\u0002\u0002\u0087\u0098\u0007\u000b\u0002',
-  '\u0002\u0088\u0089\u0007\u000b\u0002\u0002\u0089\u008a\u0007\u0013\u0002',
-  '\u0002\u008a\u008b\u0005\u001a\u000e\u0002\u008b\u008c\u0007\u0014\u0002',
-  '\u0002\u008c\u0098\u0003\u0002\u0002\u0002\u008d\u008e\u0007\f\u0002',
-  '\u0002\u008e\u008f\u0007\u0013\u0002\u0002\u008f\u0090\u0005\u001a\u000e',
-  '\u0002\u0090\u0091\u0007\u0014\u0002\u0002\u0091\u0098\u0003\u0002\u0002',
-  '\u0002\u0092\u0093\u0007\r\u0002\u0002\u0093\u0094\u0007\u0013\u0002',
-  '\u0002\u0094\u0095\u0005\u001c\u000f\u0002\u0095\u0096\u0007\u0014\u0002',
-  '\u0002\u0096\u0098\u0003\u0002\u0002\u0002\u0097\u0086\u0003\u0002\u0002',
-  '\u0002\u0097\u0087\u0003\u0002\u0002\u0002\u0097\u0088\u0003\u0002\u0002',
-  '\u0002\u0097\u008d\u0003\u0002\u0002\u0002\u0097\u0092\u0003\u0002\u0002',
-  '\u0002\u0098\u001b\u0003\u0002\u0002\u0002\u0099\u009c\u0005 \u0011',
-  '\u0002\u009a\u009c\u0005\u001e\u0010\u0002\u009b\u0099\u0003\u0002\u0002',
-  '\u0002\u009b\u009a\u0003\u0002\u0002\u0002\u009c\u009d\u0003\u0002\u0002',
-  '\u0002\u009d\u009b\u0003\u0002\u0002\u0002\u009d\u009e\u0003\u0002\u0002',
-  '\u0002\u009e\u001d\u0003\u0002\u0002\u0002\u009f\u00a0\t\u0002\u0002',
-  '\u0002\u00a0\u00a1\u0007\u0012\u0002\u0002\u00a1\u00a2\u0005&\u0014',
-  '\u0002\u00a2\u001f\u0003\u0002\u0002\u0002\u00a3\u00a4\u0007\u001e\u0002',
-  '\u0002\u00a4\u00a5\u0007\u0010\u0002\u0002\u00a5\u00a6\u0005\u001c\u000f',
-  '\u0002\u00a6\u00a7\u0007\u0011\u0002\u0002\u00a7\u00b4\u0003\u0002\u0002',
-  '\u0002\u00a8\u00a9\u0007\u001e\u0002\u0002\u00a9\u00aa\u0007\u0012\u0002',
-  '\u0002\u00aa\u00ae\u0007\u0010\u0002\u0002\u00ab\u00ac\u0007\u001f\u0002',
-  '\u0002\u00ac\u00ad\u0007\u0012\u0002\u0002\u00ad\u00af\u0007\u001f\u0002',
-  '\u0002\u00ae\u00ab\u0003\u0002\u0002\u0002\u00af\u00b0\u0003\u0002\u0002',
-  '\u0002\u00b0\u00ae\u0003\u0002\u0002\u0002\u00b0\u00b1\u0003\u0002\u0002',
-  '\u0002\u00b1\u00b2\u0003\u0002\u0002\u0002\u00b2\u00b4\u0007\u0011\u0002',
-  '\u0002\u00b3\u00a3\u0003\u0002\u0002\u0002\u00b3\u00a8\u0003\u0002\u0002',
-  '\u0002\u00b4!\u0003\u0002\u0002\u0002\u00b5\u00b6\u0007\u0010\u0002',
-  '\u0002\u00b6\u00b7\u0007\u000e\u0002\u0002\u00b7\u00b9\u0007\u0012\u0002',
-  '\u0002\u00b8\u00ba\u0005$\u0013\u0002\u00b9\u00b8\u0003\u0002\u0002',
-  '\u0002\u00ba\u00bb\u0003\u0002\u0002\u0002\u00bb\u00b9\u0003\u0002\u0002',
-  '\u0002\u00bb\u00bc\u0003\u0002\u0002\u0002\u00bc\u00bd\u0003\u0002\u0002',
-  '\u0002\u00bd\u00be\u0007\u000f\u0002\u0002\u00be\u00bf\u0007\u0012\u0002',
-  '\u0002\u00bf\u00c0\u0007\u001f\u0002\u0002\u00c0\u00c1\u0007\u0011\u0002',
-  '\u0002\u00c1#\u0003\u0002\u0002\u0002\u00c2\u00c8\u0007\u001f\u0002',
-  '\u0002\u00c3\u00c8\u0007 \u0002\u0002\u00c4\u00c8\u0007\u001c\u0002',
-  '\u0002\u00c5\u00c8\u0007\u001b\u0002\u0002\u00c6\u00c8\u0005(\u0015',
-  '\u0002\u00c7\u00c2\u0003\u0002\u0002\u0002\u00c7\u00c3\u0003\u0002\u0002',
-  '\u0002\u00c7\u00c4\u0003\u0002\u0002\u0002\u00c7\u00c5\u0003\u0002\u0002',
-  '\u0002\u00c7\u00c6\u0003\u0002\u0002\u0002\u00c8%\u0003\u0002\u0002',
-  '\u0002\u00c9\u00d0\u0007 \u0002\u0002\u00ca\u00d0\u0007\u001c\u0002',
-  '\u0002\u00cb\u00d0\u0005,\u0017\u0002\u00cc\u00d0\u0005*\u0016\u0002',
-  '\u00cd\u00d0\u0007\u001f\u0002\u0002\u00ce\u00d0\u0005\u001a\u000e\u0002',
-  '\u00cf\u00c9\u0003\u0002\u0002\u0002\u00cf\u00ca\u0003\u0002\u0002\u0002',
-  '\u00cf\u00cb\u0003\u0002\u0002\u0002\u00cf\u00cc\u0003\u0002\u0002\u0002',
-  '\u00cf\u00cd\u0003\u0002\u0002\u0002\u00cf\u00ce\u0003\u0002\u0002\u0002',
-  "\u00d0\'\u0003\u0002\u0002\u0002\u00d1\u00d2\u0007\u001e\u0002\u0002",
-  '\u00d2\u00d3\u0007\u0013\u0002\u0002\u00d3\u00d8\u0005&\u0014\u0002',
-  '\u00d4\u00d5\u0007\u0017\u0002\u0002\u00d5\u00d7\u0005&\u0014\u0002',
-  '\u00d6\u00d4\u0003\u0002\u0002\u0002\u00d7\u00da\u0003\u0002\u0002\u0002',
-  '\u00d8\u00d6\u0003\u0002\u0002\u0002\u00d8\u00d9\u0003\u0002\u0002\u0002',
-  '\u00d9\u00dc\u0003\u0002\u0002\u0002\u00da\u00d8\u0003\u0002\u0002\u0002',
-  '\u00db\u00dd\u0007\u0017\u0002\u0002\u00dc\u00db\u0003\u0002\u0002\u0002',
-  '\u00dc\u00dd\u0003\u0002\u0002\u0002\u00dd\u00de\u0003\u0002\u0002\u0002',
-  '\u00de\u00df\u0007\u0014\u0002\u0002\u00df)\u0003\u0002\u0002\u0002',
-  '\u00e0\u00e1\b\u0016\u0001\u0002\u00e1\u00fa\u0007\u001e\u0002\u0002',
-  '\u00e2\u00e4\t\u0003\u0002\u0002\u00e3\u00e2\u0003\u0002\u0002\u0002',
-  '\u00e4\u00e5\u0003\u0002\u0002\u0002\u00e5\u00e3\u0003\u0002\u0002\u0002',
-  '\u00e5\u00e6\u0003\u0002\u0002\u0002\u00e6\u00fa\u0003\u0002\u0002\u0002',
-  '\u00e7\u00ef\u0007%\u0002\u0002\u00e8\u00f0\u0007&\u0002\u0002\u00e9',
-  "\u00f0\u0007)\u0002\u0002\u00ea\u00ec\u0007\'\u0002\u0002\u00eb\u00ea",
-  '\u0003\u0002\u0002\u0002\u00ec\u00ed\u0003\u0002\u0002\u0002\u00ed\u00eb',
-  '\u0003\u0002\u0002\u0002\u00ed\u00ee\u0003\u0002\u0002\u0002\u00ee\u00f0',
-  '\u0003\u0002\u0002\u0002\u00ef\u00e8\u0003\u0002\u0002\u0002\u00ef\u00e9',
-  '\u0003\u0002\u0002\u0002\u00ef\u00eb\u0003\u0002\u0002\u0002\u00f0\u00f1',
-  '\u0003\u0002\u0002\u0002\u00f1\u00ef\u0003\u0002\u0002\u0002\u00f1\u00f2',
-  '\u0003\u0002\u0002\u0002\u00f2\u00f3\u0003\u0002\u0002\u0002\u00f3\u00fa',
-  '\u0007*\u0002\u0002\u00f4\u00f5\u0007\u001f\u0002\u0002\u00f5\u00f6',
-  '\u0005*\u0016\u0002\u00f6\u00f7\u0007\u001f\u0002\u0002\u00f7\u00fa',
-  '\u0003\u0002\u0002\u0002\u00f8\u00fa\u0005(\u0015\u0002\u00f9\u00e0',
-  '\u0003\u0002\u0002\u0002\u00f9\u00e3\u0003\u0002\u0002\u0002\u00f9\u00e7',
-  '\u0003\u0002\u0002\u0002\u00f9\u00f4\u0003\u0002\u0002\u0002\u00f9\u00f8',
-  '\u0003\u0002\u0002\u0002\u00fa\u0108\u0003\u0002\u0002\u0002\u00fb\u00fc',
-  '\f\b\u0002\u0002\u00fc\u00fd\u0007\u0018\u0002\u0002\u00fd\u0107\u0005',
-  '*\u0016\t\u00fe\u00ff\f\u0007\u0002\u0002\u00ff\u0100\u0007\u0015\u0002',
-  '\u0002\u0100\u0101\u0005.\u0018\u0002\u0101\u0102\u0007\u0016\u0002',
-  '\u0002\u0102\u0107\u0003\u0002\u0002\u0002\u0103\u0104\f\u0006\u0002',
-  '\u0002\u0104\u0105\u0007\u0018\u0002\u0002\u0105\u0107\u0005.\u0018',
-  '\u0002\u0106\u00fb\u0003\u0002\u0002\u0002\u0106\u00fe\u0003\u0002\u0002',
-  '\u0002\u0106\u0103\u0003\u0002\u0002\u0002\u0107\u010a\u0003\u0002\u0002',
-  '\u0002\u0108\u0106\u0003\u0002\u0002\u0002\u0108\u0109\u0003\u0002\u0002',
-  '\u0002\u0109+\u0003\u0002\u0002\u0002\u010a\u0108\u0003\u0002\u0002',
-  '\u0002\u010b\u010c\u0007\u0015\u0002\u0002\u010c\u011c\u0007\u0016\u0002',
-  '\u0002\u010d\u010e\u0007\u0015\u0002\u0002\u010e\u0113\u0005&\u0014',
-  '\u0002\u010f\u0110\u0007\u0017\u0002\u0002\u0110\u0112\u0005&\u0014',
-  '\u0002\u0111\u010f\u0003\u0002\u0002\u0002\u0112\u0115\u0003\u0002\u0002',
-  '\u0002\u0113\u0111\u0003\u0002\u0002\u0002\u0113\u0114\u0003\u0002\u0002',
-  '\u0002\u0114\u0117\u0003\u0002\u0002\u0002\u0115\u0113\u0003\u0002\u0002',
-  '\u0002\u0116\u0118\u0007\u0017\u0002\u0002\u0117\u0116\u0003\u0002\u0002',
-  '\u0002\u0117\u0118\u0003\u0002\u0002\u0002\u0118\u0119\u0003\u0002\u0002',
-  '\u0002\u0119\u011a\u0007\u0016\u0002\u0002\u011a\u011c\u0003\u0002\u0002',
-  '\u0002\u011b\u010b\u0003\u0002\u0002\u0002\u011b\u010d\u0003\u0002\u0002',
-  '\u0002\u011c-\u0003\u0002\u0002\u0002\u011d\u011e\t\u0004\u0002\u0002',
-  '\u011e/\u0003\u0002\u0002\u0002\u001e3<ENPct~\u0097\u009b\u009d\u00b0',
-  '\u00b3\u00bb\u00c7\u00cf\u00d8\u00dc\u00e5\u00ed\u00ef\u00f1\u00f9\u0106',
-  '\u0108\u0113\u0117\u011b'].join('');
 
 const atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
 
-const decisionsToDFA = atn.decisionToState.map((ds, index) => new antlr4.dfa.DFA(ds, index));
+const decisionsToDFA = atn.decisionToState.map( (ds, index) => new antlr4.dfa.DFA(ds, index) );
 
 const sharedContextCache = new antlr4.PredictionContextCache();
 
 export default class terraformParser extends antlr4.Parser {
-  static grammarFileName = 'terraformParser.g4';
 
-  static literalNames = [null, "'module'", "'data'", "'source'", "'provider'",
-    "'terraform'", "'resource'", "'variable'", "'output'",
-    "'list'", "'map'", "'object'", "'condition'",
-    "'error_message'", "'{'", "'}'", "'='", "'('",
-    "')'", "'['", "']'", "','", "'.'", "'-'", "'*'",
-    null, null, null, null, null, null, null, null,
-    null, null, "'<<EOF'", null, null, null, null,
-    "'EOF'"];
+    static grammarFileName = "java-escape";
+    static literalNames = [ null, "'module'", "'data'", "'source'", "'provider'", 
+                            "'terraform'", "'resource'", "'variable'", "'output'", 
+                            "'list'", "'map'", "'object'", "'condition'", 
+                            "'error_message'", "'{'", "'}'", "'='", "'('", 
+                            "')'", "'['", "']'", "','", "'.'", "'-'", "'*'", 
+                            null, null, null, null, null, null, null, null, 
+                            null, null, "'<<EOF'", null, null, null, null, 
+                            "'EOF'" ];
+    static symbolicNames = [ null, "MODULE", "DATA", "SOURCE", "PROVIDER", 
+                             "TERRAFORM", "RESOURCE", "VARIABLE", "OUTPUT", 
+                             "LIST", "MAP", "OBJECT", "CONDITION", "ERROR", 
+                             "AO", "AF", "EQUAL", "PO", "PF", "CO", "CF", 
+                             "VIRG", "POINT", "TIRET", "MULT", "BOOLEANOP", 
+                             "BOOLEAN", "TYPE", "IDENTIFIER", "STRING", 
+                             "NUMBER", "COMMENT", "LINE_COMMENT", "HAS_COMMENT", 
+                             "WS", "OPEN", "IDENTIFIERS", "WSS", "NUMBERS", 
+                             "AUTRE", "CLOSE" ];
+    static ruleNames = [ "file", "dataDirective", "moduleDirective", "moduleSource", 
+                         "providerDirective", "terraformDirective", "resourceDirective", 
+                         "variableDirective", "outputDirective", "name", 
+                         "providerType", "type", "object", "field", "attributeBlock", 
+                         "dynamicBlock", "validation", "condition", "expression", 
+                         "functionCall", "complexExpression", "array", "index" ];
 
-  static symbolicNames = [null, 'MODULE', 'DATA', 'SOURCE', 'PROVIDER',
-    'TERRAFORM', 'RESOURCE', 'VARIABLE', 'OUTPUT',
-    'LIST', 'MAP', 'OBJECT', 'CONDITION', 'ERROR',
-    'AO', 'AF', 'EQUAL', 'PO', 'PF', 'CO', 'CF',
-    'VIRG', 'POINT', 'TIRET', 'MULT', 'BOOLEANOP',
-    'BOOLEAN', 'TYPE', 'IDENTIFIER', 'STRING',
-    'NUMBER', 'COMMENT', 'LINE_COMMENT', 'HAS_COMMENT',
-    'WS', 'OPEN', 'IDENTIFIERS', 'WSS', 'NUMBERS',
-    'AUTRE', 'CLOSE'];
+    constructor(input) {
+        super(input);
+        this._interp = new antlr4.atn.ParserATNSimulator(this, atn, decisionsToDFA, sharedContextCache);
+        this.ruleNames = terraformParser.ruleNames;
+        this.literalNames = terraformParser.literalNames;
+        this.symbolicNames = terraformParser.symbolicNames;
+    }
 
-  static ruleNames = ['file', 'directive', 'dataDirective', 'moduleDirective',
-    'moduleSource', 'providerDirective', 'terraformDirective',
-    'resourceDirective', 'variableDirective', 'outputDirective',
-    'name', 'providerType', 'type', 'object', 'field',
-    'complexField', 'validation', 'condition', 'expression',
-    'functionCall', 'complexExpression', 'array', 'index'];
+    get atn() {
+        return atn;
+    }
 
-  constructor(input) {
-    super(input);
-    this._interp = new antlr4.atn.ParserATNSimulator(this, atn, decisionsToDFA, sharedContextCache);
-    this.ruleNames = terraformParser.ruleNames;
-    this.literalNames = terraformParser.literalNames;
-    this.symbolicNames = terraformParser.symbolicNames;
-  }
-
-  get atn() {
-    return atn;
-  }
-
-  sempred(localctx, ruleIndex, predIndex) {
-    	switch (ruleIndex) {
+    sempred(localctx, ruleIndex, predIndex) {
+    	switch(ruleIndex) {
     	case 20:
     	    		return this.complexExpression_sempred(localctx, predIndex);
-      default:
-        throw `No predicate with index:${ruleIndex}`;
+        default:
+            throw "No predicate with index:" + ruleIndex;
+       }
     }
-  }
 
-  complexExpression_sempred(localctx, predIndex) {
-    	switch (predIndex) {
+    complexExpression_sempred(localctx, predIndex) {
+    	switch(predIndex) {
     		case 0:
     			return this.precpred(this._ctx, 6);
     		case 1:
@@ -263,87 +165,65 @@ export default class terraformParser extends antlr4.Parser {
     		case 2:
     			return this.precpred(this._ctx, 4);
     		default:
-    			throw `No predicate with index:${predIndex}`;
+    			throw "No predicate with index:" + predIndex;
     	}
-  }
+    };
 
-  file() {
-	    const localctx = new FileContext(this, this._ctx, this.state);
+
+
+
+	file() {
+	    let localctx = new FileContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 0, terraformParser.RULE_file);
-	    let _la = 0; // Token type
+	    var _la = 0; // Token type
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 47;
+	        this.state = 53; 
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        do {
-	            this.state = 46;
-	            this.directive();
-	            this.state = 49;
-	            this._errHandler.sync(this);
-	            _la = this._input.LA(1);
-	        } while ((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << terraformParser.MODULE) | (1 << terraformParser.DATA) | (1 << terraformParser.PROVIDER) | (1 << terraformParser.TERRAFORM) | (1 << terraformParser.RESOURCE) | (1 << terraformParser.VARIABLE) | (1 << terraformParser.OUTPUT))) !== 0));
-	    } catch (re) {
-	    	if (re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-  }
-
-  directive() {
-	    const localctx = new DirectiveContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 2, terraformParser.RULE_directive);
-	    try {
-	        this.state = 58;
-	        this._errHandler.sync(this);
-	        switch (this._input.LA(1)) {
-	        case terraformParser.PROVIDER:
-	            this.enterOuterAlt(localctx, 1);
-	            this.state = 51;
-	            this.providerDirective();
-	            break;
-	        case terraformParser.TERRAFORM:
-	            this.enterOuterAlt(localctx, 2);
-	            this.state = 52;
-	            this.terraformDirective();
-	            break;
-	        case terraformParser.RESOURCE:
-	            this.enterOuterAlt(localctx, 3);
 	            this.state = 53;
-	            this.resourceDirective();
-	            break;
-	        case terraformParser.VARIABLE:
-	            this.enterOuterAlt(localctx, 4);
-	            this.state = 54;
-	            this.variableDirective();
-	            break;
-	        case terraformParser.OUTPUT:
-	            this.enterOuterAlt(localctx, 5);
-	            this.state = 55;
-	            this.outputDirective();
-	            break;
-	        case terraformParser.MODULE:
-	            this.enterOuterAlt(localctx, 6);
-	            this.state = 56;
-	            this.moduleDirective();
-	            break;
-	        case terraformParser.DATA:
-	            this.enterOuterAlt(localctx, 7);
-	            this.state = 57;
-	            this.dataDirective();
-	            break;
-	        default:
-	            throw new antlr4.error.NoViableAltException(this);
-	        }
+	            this._errHandler.sync(this);
+	            switch(this._input.LA(1)) {
+	            case 4:
+	                this.state = 46;
+	                this.providerDirective();
+	                break;
+	            case 5:
+	                this.state = 47;
+	                this.terraformDirective();
+	                break;
+	            case 6:
+	                this.state = 48;
+	                this.resourceDirective();
+	                break;
+	            case 7:
+	                this.state = 49;
+	                this.variableDirective();
+	                break;
+	            case 8:
+	                this.state = 50;
+	                this.outputDirective();
+	                break;
+	            case 1:
+	                this.state = 51;
+	                this.moduleDirective();
+	                break;
+	            case 2:
+	                this.state = 52;
+	                this.dataDirective();
+	                break;
+	            default:
+	                throw new antlr4.error.NoViableAltException(this);
+	            }
+	            this.state = 55; 
+	            this._errHandler.sync(this);
+	            _la = this._input.LA(1);
+	        } while((((_la) & ~0x1f) == 0 && ((1 << _la) & 502) !== 0));
+	        this.state = 57;
+	        this.match(terraformParser.EOF);
 	    } catch (re) {
-	    	if (re instanceof antlr4.error.RecognitionException) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
 		        this._errHandler.reportError(this, re);
 		        this._errHandler.recover(this, re);
@@ -354,36 +234,38 @@ export default class terraformParser extends antlr4.Parser {
 	        this.exitRule();
 	    }
 	    return localctx;
-  }
+	}
 
-  dataDirective() {
-	    const localctx = new DataDirectiveContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 4, terraformParser.RULE_dataDirective);
-	    let _la = 0; // Token type
+
+
+	dataDirective() {
+	    let localctx = new DataDirectiveContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 2, terraformParser.RULE_dataDirective);
+	    var _la = 0; // Token type
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 60;
+	        this.state = 59;
 	        this.match(terraformParser.DATA);
-	        this.state = 61;
+	        this.state = 60;
 	        this.providerType();
-	        this.state = 62;
+	        this.state = 61;
 	        this.name();
-	        this.state = 63;
+	        this.state = 62;
 	        this.match(terraformParser.AO);
-	        this.state = 65;
+	        this.state = 66;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        do {
-	            this.state = 64;
+	        while(_la===3 || _la===28) {
+	            this.state = 63;
 	            this.object();
-	            this.state = 67;
+	            this.state = 68;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	        } while (_la === terraformParser.SOURCE || _la === terraformParser.IDENTIFIER);
+	        }
 	        this.state = 69;
 	        this.match(terraformParser.AF);
 	    } catch (re) {
-	    	if (re instanceof antlr4.error.RecognitionException) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
 		        this._errHandler.reportError(this, re);
 		        this._errHandler.recover(this, re);
@@ -394,12 +276,14 @@ export default class terraformParser extends antlr4.Parser {
 	        this.exitRule();
 	    }
 	    return localctx;
-  }
+	}
 
-  moduleDirective() {
-	    const localctx = new ModuleDirectiveContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 6, terraformParser.RULE_moduleDirective);
-	    let _la = 0; // Token type
+
+
+	moduleDirective() {
+	    let localctx = new ModuleDirectiveContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 4, terraformParser.RULE_moduleDirective);
+	    var _la = 0; // Token type
 	    try {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 71;
@@ -408,14 +292,14 @@ export default class terraformParser extends antlr4.Parser {
 	        this.name();
 	        this.state = 73;
 	        this.match(terraformParser.AO);
-	        this.state = 76;
+	        this.state = 76; 
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        do {
 	            this.state = 76;
 	            this._errHandler.sync(this);
-	            const la_ = this._interp.adaptivePredict(this._input, 3, this._ctx);
-	            switch (la_) {
+	            var la_ = this._interp.adaptivePredict(this._input,3,this._ctx);
+	            switch(la_) {
 	            case 1:
 	                this.state = 74;
 	                this.moduleSource();
@@ -425,15 +309,16 @@ export default class terraformParser extends antlr4.Parser {
 	                this.state = 75;
 	                this.object();
 	                break;
+
 	            }
-	            this.state = 78;
+	            this.state = 78; 
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	        } while (_la === terraformParser.SOURCE || _la === terraformParser.IDENTIFIER);
+	        } while(_la===3 || _la===28);
 	        this.state = 80;
 	        this.match(terraformParser.AF);
 	    } catch (re) {
-	    	if (re instanceof antlr4.error.RecognitionException) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
 		        this._errHandler.reportError(this, re);
 		        this._errHandler.recover(this, re);
@@ -444,11 +329,13 @@ export default class terraformParser extends antlr4.Parser {
 	        this.exitRule();
 	    }
 	    return localctx;
-  }
+	}
 
-  moduleSource() {
-	    const localctx = new ModuleSourceContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 8, terraformParser.RULE_moduleSource);
+
+
+	moduleSource() {
+	    let localctx = new ModuleSourceContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 6, terraformParser.RULE_moduleSource);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 82;
@@ -458,7 +345,7 @@ export default class terraformParser extends antlr4.Parser {
 	        this.state = 84;
 	        this.match(terraformParser.STRING);
 	    } catch (re) {
-	    	if (re instanceof antlr4.error.RecognitionException) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
 		        this._errHandler.reportError(this, re);
 		        this._errHandler.recover(this, re);
@@ -469,11 +356,14 @@ export default class terraformParser extends antlr4.Parser {
 	        this.exitRule();
 	    }
 	    return localctx;
-  }
+	}
 
-  providerDirective() {
-	    const localctx = new ProviderDirectiveContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 10, terraformParser.RULE_providerDirective);
+
+
+	providerDirective() {
+	    let localctx = new ProviderDirectiveContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 8, terraformParser.RULE_providerDirective);
+	    var _la = 0; // Token type
 	    try {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 86;
@@ -482,48 +372,20 @@ export default class terraformParser extends antlr4.Parser {
 	        this.name();
 	        this.state = 88;
 	        this.match(terraformParser.AO);
-	        this.state = 89;
-	        this.object();
-	        this.state = 90;
-	        this.match(terraformParser.AF);
-	    } catch (re) {
-	    	if (re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-  }
-
-  terraformDirective() {
-	    const localctx = new TerraformDirectiveContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 12, terraformParser.RULE_terraformDirective);
-	    let _la = 0; // Token type
-	    try {
-	        this.enterOuterAlt(localctx, 1);
 	        this.state = 92;
-	        this.match(terraformParser.TERRAFORM);
-	        this.state = 93;
-	        this.match(terraformParser.AO);
-	        this.state = 95;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        do {
-	            this.state = 94;
+	        while(_la===3 || _la===28) {
+	            this.state = 89;
 	            this.object();
-	            this.state = 97;
+	            this.state = 94;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	        } while (_la === terraformParser.SOURCE || _la === terraformParser.IDENTIFIER);
-	        this.state = 99;
+	        }
+	        this.state = 95;
 	        this.match(terraformParser.AF);
 	    } catch (re) {
-	    	if (re instanceof antlr4.error.RecognitionException) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
 		        this._errHandler.reportError(this, re);
 		        this._errHandler.recover(this, re);
@@ -534,27 +396,34 @@ export default class terraformParser extends antlr4.Parser {
 	        this.exitRule();
 	    }
 	    return localctx;
-  }
+	}
 
-  resourceDirective() {
-	    const localctx = new ResourceDirectiveContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 14, terraformParser.RULE_resourceDirective);
+
+
+	terraformDirective() {
+	    let localctx = new TerraformDirectiveContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 10, terraformParser.RULE_terraformDirective);
+	    var _la = 0; // Token type
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 101;
-	        this.match(terraformParser.RESOURCE);
-	        this.state = 102;
-	        this.providerType();
-	        this.state = 103;
-	        this.name();
-	        this.state = 104;
+	        this.state = 97;
+	        this.match(terraformParser.TERRAFORM);
+	        this.state = 98;
 	        this.match(terraformParser.AO);
+	        this.state = 102;
+	        this._errHandler.sync(this);
+	        _la = this._input.LA(1);
+	        while(_la===3 || _la===28) {
+	            this.state = 99;
+	            this.object();
+	            this.state = 104;
+	            this._errHandler.sync(this);
+	            _la = this._input.LA(1);
+	        }
 	        this.state = 105;
-	        this.object();
-	        this.state = 106;
 	        this.match(terraformParser.AF);
 	    } catch (re) {
-	    	if (re instanceof antlr4.error.RecognitionException) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
 		        this._errHandler.reportError(this, re);
 		        this._errHandler.recover(this, re);
@@ -565,34 +434,38 @@ export default class terraformParser extends antlr4.Parser {
 	        this.exitRule();
 	    }
 	    return localctx;
-  }
+	}
 
-  variableDirective() {
-	    const localctx = new VariableDirectiveContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 16, terraformParser.RULE_variableDirective);
-	    let _la = 0; // Token type
+
+
+	resourceDirective() {
+	    let localctx = new ResourceDirectiveContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 12, terraformParser.RULE_resourceDirective);
+	    var _la = 0; // Token type
 	    try {
 	        this.enterOuterAlt(localctx, 1);
+	        this.state = 107;
+	        this.match(terraformParser.RESOURCE);
 	        this.state = 108;
-	        this.match(terraformParser.VARIABLE);
+	        this.providerType();
 	        this.state = 109;
 	        this.name();
 	        this.state = 110;
 	        this.match(terraformParser.AO);
-	        this.state = 112;
+	        this.state = 114;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        do {
+	        while(_la===3 || _la===28) {
 	            this.state = 111;
 	            this.object();
-	            this.state = 114;
+	            this.state = 116;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	        } while (_la === terraformParser.SOURCE || _la === terraformParser.IDENTIFIER);
-	        this.state = 116;
+	        }
+	        this.state = 117;
 	        this.match(terraformParser.AF);
 	    } catch (re) {
-	    	if (re instanceof antlr4.error.RecognitionException) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
 		        this._errHandler.reportError(this, re);
 		        this._errHandler.recover(this, re);
@@ -603,34 +476,36 @@ export default class terraformParser extends antlr4.Parser {
 	        this.exitRule();
 	    }
 	    return localctx;
-  }
+	}
 
-  outputDirective() {
-	    const localctx = new OutputDirectiveContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 18, terraformParser.RULE_outputDirective);
-	    let _la = 0; // Token type
+
+
+	variableDirective() {
+	    let localctx = new VariableDirectiveContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 14, terraformParser.RULE_variableDirective);
+	    var _la = 0; // Token type
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 118;
-	        this.match(terraformParser.OUTPUT);
 	        this.state = 119;
-	        this.name();
+	        this.match(terraformParser.VARIABLE);
 	        this.state = 120;
+	        this.name();
+	        this.state = 121;
 	        this.match(terraformParser.AO);
-	        this.state = 122;
+	        this.state = 125;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        do {
-	            this.state = 121;
+	        while(_la===3 || _la===28) {
+	            this.state = 122;
 	            this.object();
-	            this.state = 124;
+	            this.state = 127;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	        } while (_la === terraformParser.SOURCE || _la === terraformParser.IDENTIFIER);
-	        this.state = 126;
+	        }
+	        this.state = 128;
 	        this.match(terraformParser.AF);
 	    } catch (re) {
-	    	if (re instanceof antlr4.error.RecognitionException) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
 		        this._errHandler.reportError(this, re);
 		        this._errHandler.recover(this, re);
@@ -641,38 +516,36 @@ export default class terraformParser extends antlr4.Parser {
 	        this.exitRule();
 	    }
 	    return localctx;
-  }
+	}
 
-  name() {
-	    const localctx = new NameContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 20, terraformParser.RULE_name);
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 128;
-	        this.match(terraformParser.STRING);
-	    } catch (re) {
-	    	if (re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-  }
 
-  providerType() {
-	    const localctx = new ProviderTypeContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 22, terraformParser.RULE_providerType);
+
+	outputDirective() {
+	    let localctx = new OutputDirectiveContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 16, terraformParser.RULE_outputDirective);
+	    var _la = 0; // Token type
 	    try {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 130;
-	        this.match(terraformParser.STRING);
+	        this.match(terraformParser.OUTPUT);
+	        this.state = 131;
+	        this.name();
+	        this.state = 132;
+	        this.match(terraformParser.AO);
+	        this.state = 134; 
+	        this._errHandler.sync(this);
+	        _la = this._input.LA(1);
+	        do {
+	            this.state = 133;
+	            this.object();
+	            this.state = 136; 
+	            this._errHandler.sync(this);
+	            _la = this._input.LA(1);
+	        } while(_la===3 || _la===28);
+	        this.state = 138;
+	        this.match(terraformParser.AF);
 	    } catch (re) {
-	    	if (re instanceof antlr4.error.RecognitionException) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
 		        this._errHandler.reportError(this, re);
 		        this._errHandler.recover(this, re);
@@ -683,66 +556,115 @@ export default class terraformParser extends antlr4.Parser {
 	        this.exitRule();
 	    }
 	    return localctx;
-  }
+	}
 
-  type() {
-	    const localctx = new TypeContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 24, terraformParser.RULE_type);
+
+
+	name() {
+	    let localctx = new NameContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 18, terraformParser.RULE_name);
 	    try {
-	        this.state = 149;
+	        this.enterOuterAlt(localctx, 1);
+	        this.state = 140;
+	        this.match(terraformParser.STRING);
+	    } catch (re) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
+		        localctx.exception = re;
+		        this._errHandler.reportError(this, re);
+		        this._errHandler.recover(this, re);
+		    } else {
+		    	throw re;
+		    }
+	    } finally {
+	        this.exitRule();
+	    }
+	    return localctx;
+	}
+
+
+
+	providerType() {
+	    let localctx = new ProviderTypeContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 20, terraformParser.RULE_providerType);
+	    try {
+	        this.enterOuterAlt(localctx, 1);
+	        this.state = 142;
+	        this.match(terraformParser.STRING);
+	    } catch (re) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
+		        localctx.exception = re;
+		        this._errHandler.reportError(this, re);
+		        this._errHandler.recover(this, re);
+		    } else {
+		    	throw re;
+		    }
+	    } finally {
+	        this.exitRule();
+	    }
+	    return localctx;
+	}
+
+
+
+	type() {
+	    let localctx = new TypeContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 22, terraformParser.RULE_type);
+	    try {
+	        this.state = 161;
 	        this._errHandler.sync(this);
-	        const la_ = this._interp.adaptivePredict(this._input, 8, this._ctx);
-	        switch (la_) {
+	        var la_ = this._interp.adaptivePredict(this._input,10,this._ctx);
+	        switch(la_) {
 	        case 1:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 132;
+	            this.state = 144;
 	            this.match(terraformParser.TYPE);
 	            break;
 
 	        case 2:
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 133;
+	            this.state = 145;
 	            this.match(terraformParser.LIST);
 	            break;
 
 	        case 3:
 	            this.enterOuterAlt(localctx, 3);
-	            this.state = 134;
+	            this.state = 146;
 	            this.match(terraformParser.LIST);
-	            this.state = 135;
+	            this.state = 147;
 	            this.match(terraformParser.PO);
-	            this.state = 136;
+	            this.state = 148;
 	            this.type();
-	            this.state = 137;
+	            this.state = 149;
 	            this.match(terraformParser.PF);
 	            break;
 
 	        case 4:
 	            this.enterOuterAlt(localctx, 4);
-	            this.state = 139;
+	            this.state = 151;
 	            this.match(terraformParser.MAP);
-	            this.state = 140;
+	            this.state = 152;
 	            this.match(terraformParser.PO);
-	            this.state = 141;
+	            this.state = 153;
 	            this.type();
-	            this.state = 142;
+	            this.state = 154;
 	            this.match(terraformParser.PF);
 	            break;
 
 	        case 5:
 	            this.enterOuterAlt(localctx, 5);
-	            this.state = 144;
+	            this.state = 156;
 	            this.match(terraformParser.OBJECT);
-	            this.state = 145;
+	            this.state = 157;
 	            this.match(terraformParser.PO);
-	            this.state = 146;
+	            this.state = 158;
 	            this.object();
-	            this.state = 147;
+	            this.state = 159;
 	            this.match(terraformParser.PF);
 	            break;
+
 	        }
 	    } catch (re) {
-	    	if (re instanceof antlr4.error.RecognitionException) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
 		        this._errHandler.reportError(this, re);
 		        this._errHandler.recover(this, re);
@@ -753,43 +675,51 @@ export default class terraformParser extends antlr4.Parser {
 	        this.exitRule();
 	    }
 	    return localctx;
-  }
+	}
 
-  object() {
-	    const localctx = new ObjectContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 26, terraformParser.RULE_object);
+
+
+	object() {
+	    let localctx = new ObjectContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 24, terraformParser.RULE_object);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 153;
+	        this.state = 166; 
 	        this._errHandler.sync(this);
-	        let _alt = 1;
+	        var _alt = 1;
 	        do {
 	        	switch (_alt) {
 	        	case 1:
-	        		this.state = 153;
+	        		this.state = 166;
 	        		this._errHandler.sync(this);
-	        		var la_ = this._interp.adaptivePredict(this._input, 9, this._ctx);
-	        		switch (la_) {
+	        		var la_ = this._interp.adaptivePredict(this._input,11,this._ctx);
+	        		switch(la_) {
 	        		case 1:
-	        		    this.state = 151;
-	        		    this.complexField();
+	        		    this.state = 163;
+	        		    this.attributeBlock();
 	        		    break;
 
 	        		case 2:
-	        		    this.state = 152;
+	        		    this.state = 164;
+	        		    this.dynamicBlock();
+	        		    break;
+
+	        		case 3:
+	        		    this.state = 165;
 	        		    this.field();
 	        		    break;
+
 	        		}
 	        		break;
 	        	default:
 	        		throw new antlr4.error.NoViableAltException(this);
 	        	}
-	        	this.state = 155;
+	        	this.state = 168; 
 	        	this._errHandler.sync(this);
-	        	_alt = this._interp.adaptivePredict(this._input, 10, this._ctx);
-	        } while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER);
+	        	_alt = this._interp.adaptivePredict(this._input,12, this._ctx);
+	        } while ( _alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER );
 	    } catch (re) {
-	    	if (re instanceof antlr4.error.RecognitionException) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
 		        this._errHandler.reportError(this, re);
 		        this._errHandler.recover(this, re);
@@ -800,28 +730,31 @@ export default class terraformParser extends antlr4.Parser {
 	        this.exitRule();
 	    }
 	    return localctx;
-  }
+	}
 
-  field() {
-	    const localctx = new FieldContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 28, terraformParser.RULE_field);
-	    let _la = 0; // Token type
+
+
+	field() {
+	    let localctx = new FieldContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 26, terraformParser.RULE_field);
+	    var _la = 0; // Token type
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 157;
+	        this.state = 170;
 	        _la = this._input.LA(1);
-	        if (!(_la === terraformParser.SOURCE || _la === terraformParser.IDENTIFIER)) {
+	        if(!(_la===3 || _la===28)) {
 	        this._errHandler.recoverInline(this);
-	        } else {
+	        }
+	        else {
 	        	this._errHandler.reportMatch(this);
 	            this.consume();
 	        }
-	        this.state = 158;
+	        this.state = 171;
 	        this.match(terraformParser.EQUAL);
-	        this.state = 159;
+	        this.state = 172;
 	        this.expression();
 	    } catch (re) {
-	    	if (re instanceof antlr4.error.RecognitionException) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
 		        this._errHandler.reportError(this, re);
 		        this._errHandler.recover(this, re);
@@ -832,101 +765,120 @@ export default class terraformParser extends antlr4.Parser {
 	        this.exitRule();
 	    }
 	    return localctx;
-  }
+	}
 
-  complexField() {
-	    const localctx = new ComplexFieldContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 30, terraformParser.RULE_complexField);
-	    let _la = 0; // Token type
-	    try {
-	        this.state = 177;
-	        this._errHandler.sync(this);
-	        const la_ = this._interp.adaptivePredict(this._input, 12, this._ctx);
-	        switch (la_) {
-	        case 1:
-	            this.enterOuterAlt(localctx, 1);
-	            this.state = 161;
-	            this.match(terraformParser.IDENTIFIER);
-	            this.state = 162;
-	            this.match(terraformParser.AO);
-	            this.state = 163;
-	            this.object();
-	            this.state = 164;
-	            this.match(terraformParser.AF);
-	            break;
 
-	        case 2:
-	            this.enterOuterAlt(localctx, 2);
-	            this.state = 166;
-	            this.match(terraformParser.IDENTIFIER);
-	            this.state = 167;
-	            this.match(terraformParser.EQUAL);
-	            this.state = 168;
-	            this.match(terraformParser.AO);
-	            this.state = 172;
-	            this._errHandler.sync(this);
-	            _la = this._input.LA(1);
-	            do {
-	                this.state = 169;
-	                this.match(terraformParser.STRING);
-	                this.state = 170;
-	                this.match(terraformParser.EQUAL);
-	                this.state = 171;
-	                this.match(terraformParser.STRING);
-	                this.state = 174;
-	                this._errHandler.sync(this);
-	                _la = this._input.LA(1);
-	            } while (_la === terraformParser.STRING);
-	            this.state = 176;
-	            this.match(terraformParser.AF);
-	            break;
-	        }
-	    } catch (re) {
-	    	if (re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-  }
 
-  validation() {
-	    const localctx = new ValidationContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 32, terraformParser.RULE_validation);
-	    let _la = 0; // Token type
+	attributeBlock() {
+	    let localctx = new AttributeBlockContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 28, terraformParser.RULE_attributeBlock);
+	    var _la = 0; // Token type
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 179;
+	        this.state = 174;
+	        this.match(terraformParser.IDENTIFIER);
+	        this.state = 175;
+	        this.match(terraformParser.EQUAL);
+	        this.state = 176;
 	        this.match(terraformParser.AO);
 	        this.state = 180;
-	        this.match(terraformParser.CONDITION);
-	        this.state = 181;
-	        this.match(terraformParser.EQUAL);
+	        this._errHandler.sync(this);
+	        _la = this._input.LA(1);
+	        while(_la===3 || _la===28) {
+	            this.state = 177;
+	            this.object();
+	            this.state = 182;
+	            this._errHandler.sync(this);
+	            _la = this._input.LA(1);
+	        }
 	        this.state = 183;
+	        this.match(terraformParser.AF);
+	    } catch (re) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
+		        localctx.exception = re;
+		        this._errHandler.reportError(this, re);
+		        this._errHandler.recover(this, re);
+		    } else {
+		    	throw re;
+		    }
+	    } finally {
+	        this.exitRule();
+	    }
+	    return localctx;
+	}
+
+
+
+	dynamicBlock() {
+	    let localctx = new DynamicBlockContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 30, terraformParser.RULE_dynamicBlock);
+	    var _la = 0; // Token type
+	    try {
+	        this.enterOuterAlt(localctx, 1);
+	        this.state = 185;
+	        this.match(terraformParser.IDENTIFIER);
+	        this.state = 186;
+	        this.match(terraformParser.AO);
+	        this.state = 190;
+	        this._errHandler.sync(this);
+	        _la = this._input.LA(1);
+	        while(_la===3 || _la===28) {
+	            this.state = 187;
+	            this.object();
+	            this.state = 192;
+	            this._errHandler.sync(this);
+	            _la = this._input.LA(1);
+	        }
+	        this.state = 193;
+	        this.match(terraformParser.AF);
+	    } catch (re) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
+		        localctx.exception = re;
+		        this._errHandler.reportError(this, re);
+		        this._errHandler.recover(this, re);
+		    } else {
+		    	throw re;
+		    }
+	    } finally {
+	        this.exitRule();
+	    }
+	    return localctx;
+	}
+
+
+
+	validation() {
+	    let localctx = new ValidationContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 32, terraformParser.RULE_validation);
+	    var _la = 0; // Token type
+	    try {
+	        this.enterOuterAlt(localctx, 1);
+	        this.state = 195;
+	        this.match(terraformParser.AO);
+	        this.state = 196;
+	        this.match(terraformParser.CONDITION);
+	        this.state = 197;
+	        this.match(terraformParser.EQUAL);
+	        this.state = 199; 
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        do {
-	            this.state = 182;
+	            this.state = 198;
 	            this.condition();
-	            this.state = 185;
+	            this.state = 201; 
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	        } while ((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << terraformParser.BOOLEANOP) | (1 << terraformParser.BOOLEAN) | (1 << terraformParser.IDENTIFIER) | (1 << terraformParser.STRING) | (1 << terraformParser.NUMBER))) !== 0));
-	        this.state = 187;
+	        } while((((_la) & ~0x1f) == 0 && ((1 << _la) & 1979711488) !== 0));
+	        this.state = 203;
 	        this.match(terraformParser.ERROR);
-	        this.state = 188;
+	        this.state = 204;
 	        this.match(terraformParser.EQUAL);
-	        this.state = 189;
+	        this.state = 205;
 	        this.match(terraformParser.STRING);
-	        this.state = 190;
+	        this.state = 206;
 	        this.match(terraformParser.AF);
 	    } catch (re) {
-	    	if (re instanceof antlr4.error.RecognitionException) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
 		        this._errHandler.reportError(this, re);
 		        this._errHandler.recover(this, re);
@@ -937,45 +889,47 @@ export default class terraformParser extends antlr4.Parser {
 	        this.exitRule();
 	    }
 	    return localctx;
-  }
+	}
 
-  condition() {
-	    const localctx = new ConditionContext(this, this._ctx, this.state);
+
+
+	condition() {
+	    let localctx = new ConditionContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 34, terraformParser.RULE_condition);
 	    try {
-	        this.state = 197;
+	        this.state = 213;
 	        this._errHandler.sync(this);
-	        switch (this._input.LA(1)) {
-	        case terraformParser.STRING:
+	        switch(this._input.LA(1)) {
+	        case 29:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 192;
+	            this.state = 208;
 	            this.match(terraformParser.STRING);
 	            break;
-	        case terraformParser.NUMBER:
+	        case 30:
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 193;
+	            this.state = 209;
 	            this.match(terraformParser.NUMBER);
 	            break;
-	        case terraformParser.BOOLEAN:
+	        case 26:
 	            this.enterOuterAlt(localctx, 3);
-	            this.state = 194;
+	            this.state = 210;
 	            this.match(terraformParser.BOOLEAN);
 	            break;
-	        case terraformParser.BOOLEANOP:
+	        case 25:
 	            this.enterOuterAlt(localctx, 4);
-	            this.state = 195;
+	            this.state = 211;
 	            this.match(terraformParser.BOOLEANOP);
 	            break;
-	        case terraformParser.IDENTIFIER:
+	        case 28:
 	            this.enterOuterAlt(localctx, 5);
-	            this.state = 196;
+	            this.state = 212;
 	            this.functionCall();
 	            break;
 	        default:
 	            throw new antlr4.error.NoViableAltException(this);
 	        }
 	    } catch (re) {
-	    	if (re instanceof antlr4.error.RecognitionException) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
 		        this._errHandler.reportError(this, re);
 		        this._errHandler.recover(this, re);
@@ -986,54 +940,57 @@ export default class terraformParser extends antlr4.Parser {
 	        this.exitRule();
 	    }
 	    return localctx;
-  }
+	}
 
-  expression() {
-	    const localctx = new ExpressionContext(this, this._ctx, this.state);
+
+
+	expression() {
+	    let localctx = new ExpressionContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 36, terraformParser.RULE_expression);
 	    try {
-	        this.state = 205;
+	        this.state = 221;
 	        this._errHandler.sync(this);
-	        const la_ = this._interp.adaptivePredict(this._input, 15, this._ctx);
-	        switch (la_) {
+	        var la_ = this._interp.adaptivePredict(this._input,17,this._ctx);
+	        switch(la_) {
 	        case 1:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 199;
+	            this.state = 215;
 	            this.match(terraformParser.NUMBER);
 	            break;
 
 	        case 2:
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 200;
+	            this.state = 216;
 	            this.match(terraformParser.BOOLEAN);
 	            break;
 
 	        case 3:
 	            this.enterOuterAlt(localctx, 3);
-	            this.state = 201;
+	            this.state = 217;
 	            this.array();
 	            break;
 
 	        case 4:
 	            this.enterOuterAlt(localctx, 4);
-	            this.state = 202;
+	            this.state = 218;
 	            this.complexExpression(0);
 	            break;
 
 	        case 5:
 	            this.enterOuterAlt(localctx, 5);
-	            this.state = 203;
+	            this.state = 219;
 	            this.match(terraformParser.STRING);
 	            break;
 
 	        case 6:
 	            this.enterOuterAlt(localctx, 6);
-	            this.state = 204;
+	            this.state = 220;
 	            this.type();
 	            break;
+
 	        }
 	    } catch (re) {
-	    	if (re instanceof antlr4.error.RecognitionException) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
 		        this._errHandler.reportError(this, re);
 		        this._errHandler.recover(this, re);
@@ -1044,47 +1001,49 @@ export default class terraformParser extends antlr4.Parser {
 	        this.exitRule();
 	    }
 	    return localctx;
-  }
+	}
 
-  functionCall() {
-	    const localctx = new FunctionCallContext(this, this._ctx, this.state);
+
+
+	functionCall() {
+	    let localctx = new FunctionCallContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 38, terraformParser.RULE_functionCall);
-	    let _la = 0; // Token type
+	    var _la = 0; // Token type
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 207;
+	        this.state = 223;
 	        this.match(terraformParser.IDENTIFIER);
-	        this.state = 208;
+	        this.state = 224;
 	        this.match(terraformParser.PO);
-	        this.state = 209;
+	        this.state = 225;
 	        this.expression();
-	        this.state = 214;
+	        this.state = 230;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input, 16, this._ctx);
-	        while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-	            if (_alt === 1) {
-	                this.state = 210;
+	        var _alt = this._interp.adaptivePredict(this._input,18,this._ctx)
+	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+	            if(_alt===1) {
+	                this.state = 226;
 	                this.match(terraformParser.VIRG);
-	                this.state = 211;
-	                this.expression();
+	                this.state = 227;
+	                this.expression(); 
 	            }
-	            this.state = 216;
+	            this.state = 232;
 	            this._errHandler.sync(this);
-	            _alt = this._interp.adaptivePredict(this._input, 16, this._ctx);
+	            _alt = this._interp.adaptivePredict(this._input,18,this._ctx);
 	        }
 
-	        this.state = 218;
+	        this.state = 234;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if (_la === terraformParser.VIRG) {
-	            this.state = 217;
+	        if(_la===21) {
+	            this.state = 233;
 	            this.match(terraformParser.VIRG);
 	        }
 
-	        this.state = 220;
+	        this.state = 236;
 	        this.match(terraformParser.PF);
 	    } catch (re) {
-	    	if (re instanceof antlr4.error.RecognitionException) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
 		        this._errHandler.reportError(this, re);
 		        this._errHandler.recover(this, re);
@@ -1095,42 +1054,44 @@ export default class terraformParser extends antlr4.Parser {
 	        this.exitRule();
 	    }
 	    return localctx;
-  }
+	}
 
-  complexExpression(_p) {
-    if (_p === undefined) {
+
+	complexExpression(_p) {
+		if(_p===undefined) {
 		    _p = 0;
-    }
+		}
 	    const _parentctx = this._ctx;
 	    const _parentState = this.state;
 	    let localctx = new ComplexExpressionContext(this, this._ctx, _parentState);
 	    let _prevctx = localctx;
 	    const _startState = 40;
 	    this.enterRecursionRule(localctx, 40, terraformParser.RULE_complexExpression, _p);
-	    let _la = 0; // Token type
+	    var _la = 0; // Token type
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 247;
+	        this.state = 263;
 	        this._errHandler.sync(this);
-	        var la_ = this._interp.adaptivePredict(this._input, 22, this._ctx);
-	        switch (la_) {
+	        var la_ = this._interp.adaptivePredict(this._input,24,this._ctx);
+	        switch(la_) {
 	        case 1:
-	            this.state = 223;
+	            this.state = 239;
 	            this.match(terraformParser.IDENTIFIER);
 	            break;
 
 	        case 2:
-	            this.state = 225;
+	            this.state = 241; 
 	            this._errHandler.sync(this);
 	            var _alt = 1;
 	            do {
 	            	switch (_alt) {
 	            	case 1:
-	            		this.state = 224;
+	            		this.state = 240;
 	            		_la = this._input.LA(1);
-	            		if (!(_la === terraformParser.TIRET || _la === terraformParser.IDENTIFIER)) {
+	            		if(!(_la===23 || _la===28)) {
 	            		this._errHandler.recoverInline(this);
-	            		} else {
+	            		}
+	            		else {
 	            			this._errHandler.reportMatch(this);
 	            		    this.consume();
 	            		}
@@ -1138,135 +1099,138 @@ export default class terraformParser extends antlr4.Parser {
 	            	default:
 	            		throw new antlr4.error.NoViableAltException(this);
 	            	}
-	            	this.state = 227;
+	            	this.state = 243; 
 	            	this._errHandler.sync(this);
-	            	_alt = this._interp.adaptivePredict(this._input, 18, this._ctx);
-	            } while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER);
+	            	_alt = this._interp.adaptivePredict(this._input,20, this._ctx);
+	            } while ( _alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER );
 	            break;
 
 	        case 3:
-	            this.state = 229;
+	            this.state = 245;
 	            this.match(terraformParser.OPEN);
-	            this.state = 237;
+	            this.state = 253; 
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	            do {
-	                this.state = 237;
+	                this.state = 253;
 	                this._errHandler.sync(this);
-	                switch (this._input.LA(1)) {
-	                case terraformParser.IDENTIFIERS:
-	                    this.state = 230;
+	                switch(this._input.LA(1)) {
+	                case 36:
+	                    this.state = 246;
 	                    this.match(terraformParser.IDENTIFIERS);
 	                    break;
-	                case terraformParser.AUTRE:
-	                    this.state = 231;
+	                case 39:
+	                    this.state = 247;
 	                    this.match(terraformParser.AUTRE);
 	                    break;
-	                case terraformParser.WSS:
-	                    this.state = 233;
+	                case 37:
+	                    this.state = 249; 
 	                    this._errHandler.sync(this);
 	                    var _alt = 1;
 	                    do {
 	                    	switch (_alt) {
 	                    	case 1:
-	                    		this.state = 232;
+	                    		this.state = 248;
 	                    		this.match(terraformParser.WSS);
 	                    		break;
 	                    	default:
 	                    		throw new antlr4.error.NoViableAltException(this);
 	                    	}
-	                    	this.state = 235;
+	                    	this.state = 251; 
 	                    	this._errHandler.sync(this);
-	                    	_alt = this._interp.adaptivePredict(this._input, 19, this._ctx);
-	                    } while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER);
+	                    	_alt = this._interp.adaptivePredict(this._input,21, this._ctx);
+	                    } while ( _alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER );
 	                    break;
 	                default:
 	                    throw new antlr4.error.NoViableAltException(this);
 	                }
-	                this.state = 239;
+	                this.state = 255; 
 	                this._errHandler.sync(this);
 	                _la = this._input.LA(1);
-	            } while (((((_la - 36)) & ~0x1f) == 0 && ((1 << (_la - 36)) & ((1 << (terraformParser.IDENTIFIERS - 36)) | (1 << (terraformParser.WSS - 36)) | (1 << (terraformParser.AUTRE - 36)))) !== 0));
-	            this.state = 241;
+	            } while(((((_la - 36)) & ~0x1f) == 0 && ((1 << (_la - 36)) & 11) !== 0));
+	            this.state = 257;
 	            this.match(terraformParser.CLOSE);
 	            break;
 
 	        case 4:
-	            this.state = 242;
+	            this.state = 258;
 	            this.match(terraformParser.STRING);
-	            this.state = 243;
+	            this.state = 259;
 	            this.complexExpression(0);
-	            this.state = 244;
+	            this.state = 260;
 	            this.match(terraformParser.STRING);
 	            break;
 
 	        case 5:
-	            this.state = 246;
+	            this.state = 262;
 	            this.functionCall();
 	            break;
+
 	        }
 	        this._ctx.stop = this._input.LT(-1);
-	        this.state = 262;
+	        this.state = 278;
 	        this._errHandler.sync(this);
-	        var _alt = this._interp.adaptivePredict(this._input, 24, this._ctx);
-	        while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-	            if (_alt === 1) {
-	                if (this._parseListeners !== null) {
+	        var _alt = this._interp.adaptivePredict(this._input,26,this._ctx)
+	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+	            if(_alt===1) {
+	                if(this._parseListeners!==null) {
 	                    this.triggerExitRuleEvent();
 	                }
 	                _prevctx = localctx;
-	                this.state = 260;
+	                this.state = 276;
 	                this._errHandler.sync(this);
-	                var la_ = this._interp.adaptivePredict(this._input, 23, this._ctx);
-	                switch (la_) {
+	                var la_ = this._interp.adaptivePredict(this._input,25,this._ctx);
+	                switch(la_) {
 	                case 1:
 	                    localctx = new ComplexExpressionContext(this, _parentctx, _parentState);
 	                    this.pushNewRecursionContext(localctx, _startState, terraformParser.RULE_complexExpression);
-	                    this.state = 249;
-	                    if (!(this.precpred(this._ctx, 6))) {
-	                        throw new antlr4.error.FailedPredicateException(this, 'this.precpred(this._ctx, 6)');
+	                    this.state = 265;
+	                    if (!( this.precpred(this._ctx, 6))) {
+	                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 6)");
 	                    }
-	                    this.state = 250;
+	                    this.state = 266;
 	                    this.match(terraformParser.POINT);
-	                    this.state = 251;
+	                    this.state = 267;
 	                    this.complexExpression(7);
 	                    break;
 
 	                case 2:
 	                    localctx = new ComplexExpressionContext(this, _parentctx, _parentState);
 	                    this.pushNewRecursionContext(localctx, _startState, terraformParser.RULE_complexExpression);
-	                    this.state = 252;
-	                    if (!(this.precpred(this._ctx, 5))) {
-	                        throw new antlr4.error.FailedPredicateException(this, 'this.precpred(this._ctx, 5)');
+	                    this.state = 268;
+	                    if (!( this.precpred(this._ctx, 5))) {
+	                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 5)");
 	                    }
-	                    this.state = 253;
+	                    this.state = 269;
 	                    this.match(terraformParser.CO);
-	                    this.state = 254;
+	                    this.state = 270;
 	                    this.index();
-	                    this.state = 255;
+	                    this.state = 271;
 	                    this.match(terraformParser.CF);
 	                    break;
 
 	                case 3:
 	                    localctx = new ComplexExpressionContext(this, _parentctx, _parentState);
 	                    this.pushNewRecursionContext(localctx, _startState, terraformParser.RULE_complexExpression);
-	                    this.state = 257;
-	                    if (!(this.precpred(this._ctx, 4))) {
-	                        throw new antlr4.error.FailedPredicateException(this, 'this.precpred(this._ctx, 4)');
+	                    this.state = 273;
+	                    if (!( this.precpred(this._ctx, 4))) {
+	                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 4)");
 	                    }
-	                    this.state = 258;
+	                    this.state = 274;
 	                    this.match(terraformParser.POINT);
-	                    this.state = 259;
+	                    this.state = 275;
 	                    this.index();
 	                    break;
-	                }
+
+	                } 
 	            }
-	            this.state = 264;
+	            this.state = 280;
 	            this._errHandler.sync(this);
-	            _alt = this._interp.adaptivePredict(this._input, 24, this._ctx);
+	            _alt = this._interp.adaptivePredict(this._input,26,this._ctx);
 	        }
-	    } catch (error) {
-	        if (error instanceof antlr4.error.RecognitionException) {
+
+	    } catch( error) {
+	        if(error instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = error;
 		        this._errHandler.reportError(this, error);
 		        this._errHandler.recover(this, error);
@@ -1274,63 +1238,66 @@ export default class terraformParser extends antlr4.Parser {
 		    	throw error;
 		    }
 	    } finally {
-	        this.unrollRecursionContexts(_parentctx);
+	        this.unrollRecursionContexts(_parentctx)
 	    }
 	    return localctx;
-  }
+	}
 
-  array() {
-	    const localctx = new ArrayContext(this, this._ctx, this.state);
+
+
+	array() {
+	    let localctx = new ArrayContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 42, terraformParser.RULE_array);
-	    let _la = 0; // Token type
+	    var _la = 0; // Token type
 	    try {
-	        this.state = 281;
+	        this.state = 297;
 	        this._errHandler.sync(this);
-	        const la_ = this._interp.adaptivePredict(this._input, 27, this._ctx);
-	        switch (la_) {
+	        var la_ = this._interp.adaptivePredict(this._input,29,this._ctx);
+	        switch(la_) {
 	        case 1:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 265;
+	            this.state = 281;
 	            this.match(terraformParser.CO);
-	            this.state = 266;
+	            this.state = 282;
 	            this.match(terraformParser.CF);
 	            break;
 
 	        case 2:
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 267;
+	            this.state = 283;
 	            this.match(terraformParser.CO);
-	            this.state = 268;
+	            this.state = 284;
 	            this.expression();
-	            this.state = 273;
+	            this.state = 289;
 	            this._errHandler.sync(this);
-	            var _alt = this._interp.adaptivePredict(this._input, 25, this._ctx);
-	            while (_alt != 2 && _alt != antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-	                if (_alt === 1) {
-	                    this.state = 269;
+	            var _alt = this._interp.adaptivePredict(this._input,27,this._ctx)
+	            while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+	                if(_alt===1) {
+	                    this.state = 285;
 	                    this.match(terraformParser.VIRG);
-	                    this.state = 270;
-	                    this.expression();
+	                    this.state = 286;
+	                    this.expression(); 
 	                }
-	                this.state = 275;
+	                this.state = 291;
 	                this._errHandler.sync(this);
-	                _alt = this._interp.adaptivePredict(this._input, 25, this._ctx);
+	                _alt = this._interp.adaptivePredict(this._input,27,this._ctx);
 	            }
 
-	            this.state = 277;
+	            this.state = 293;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	            if (_la === terraformParser.VIRG) {
-	                this.state = 276;
+	            if(_la===21) {
+	                this.state = 292;
 	                this.match(terraformParser.VIRG);
 	            }
 
-	            this.state = 279;
+	            this.state = 295;
 	            this.match(terraformParser.CF);
 	            break;
+
 	        }
 	    } catch (re) {
-	    	if (re instanceof antlr4.error.RecognitionException) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
 		        this._errHandler.reportError(this, re);
 		        this._errHandler.recover(this, re);
@@ -1341,24 +1308,27 @@ export default class terraformParser extends antlr4.Parser {
 	        this.exitRule();
 	    }
 	    return localctx;
-  }
+	}
 
-  index() {
-	    const localctx = new IndexContext(this, this._ctx, this.state);
+
+
+	index() {
+	    let localctx = new IndexContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 44, terraformParser.RULE_index);
-	    let _la = 0; // Token type
+	    var _la = 0; // Token type
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 283;
+	        this.state = 299;
 	        _la = this._input.LA(1);
-	        if (!(_la === terraformParser.MULT || _la === terraformParser.NUMBER)) {
+	        if(!(_la===24 || _la===30)) {
 	        this._errHandler.recoverInline(this);
-	        } else {
+	        }
+	        else {
 	        	this._errHandler.reportMatch(this);
 	            this.consume();
 	        }
 	    } catch (re) {
-	    	if (re instanceof antlr4.error.RecognitionException) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
 		        this._errHandler.reportError(this, re);
 		        this._errHandler.recover(this, re);
@@ -1369,7 +1339,9 @@ export default class terraformParser extends antlr4.Parser {
 	        this.exitRule();
 	    }
 	    return localctx;
-  }
+	}
+
+
 }
 
 terraformParser.EOF = antlr4.Token.EOF;
@@ -1415,21 +1387,21 @@ terraformParser.AUTRE = 39;
 terraformParser.CLOSE = 40;
 
 terraformParser.RULE_file = 0;
-terraformParser.RULE_directive = 1;
-terraformParser.RULE_dataDirective = 2;
-terraformParser.RULE_moduleDirective = 3;
-terraformParser.RULE_moduleSource = 4;
-terraformParser.RULE_providerDirective = 5;
-terraformParser.RULE_terraformDirective = 6;
-terraformParser.RULE_resourceDirective = 7;
-terraformParser.RULE_variableDirective = 8;
-terraformParser.RULE_outputDirective = 9;
-terraformParser.RULE_name = 10;
-terraformParser.RULE_providerType = 11;
-terraformParser.RULE_type = 12;
-terraformParser.RULE_object = 13;
-terraformParser.RULE_field = 14;
-terraformParser.RULE_complexField = 15;
+terraformParser.RULE_dataDirective = 1;
+terraformParser.RULE_moduleDirective = 2;
+terraformParser.RULE_moduleSource = 3;
+terraformParser.RULE_providerDirective = 4;
+terraformParser.RULE_terraformDirective = 5;
+terraformParser.RULE_resourceDirective = 6;
+terraformParser.RULE_variableDirective = 7;
+terraformParser.RULE_outputDirective = 8;
+terraformParser.RULE_name = 9;
+terraformParser.RULE_providerType = 10;
+terraformParser.RULE_type = 11;
+terraformParser.RULE_object = 12;
+terraformParser.RULE_field = 13;
+terraformParser.RULE_attributeBlock = 14;
+terraformParser.RULE_dynamicBlock = 15;
 terraformParser.RULE_validation = 16;
 terraformParser.RULE_condition = 17;
 terraformParser.RULE_expression = 18;
@@ -1439,1219 +1411,1447 @@ terraformParser.RULE_array = 21;
 terraformParser.RULE_index = 22;
 
 class FileContext extends antlr4.ParserRuleContext {
-  constructor(parser, parent, invokingState) {
-    if (parent === undefined) {
-      parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-      invokingState = -1;
-    }
-    super(parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = terraformParser.RULE_file;
-  }
 
-  directive = function (i) {
-	    if (i === undefined) {
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = terraformParser.RULE_file;
+    }
+
+	EOF() {
+	    return this.getToken(terraformParser.EOF, 0);
+	};
+
+	providerDirective = function(i) {
+	    if(i===undefined) {
 	        i = null;
 	    }
-	    if (i === null) {
-	        return this.getTypedRuleContexts(DirectiveContext);
+	    if(i===null) {
+	        return this.getTypedRuleContexts(ProviderDirectiveContext);
+	    } else {
+	        return this.getTypedRuleContext(ProviderDirectiveContext,i);
 	    }
-	        return this.getTypedRuleContext(DirectiveContext, i);
-  };
+	};
 
-  enterRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	terraformDirective = function(i) {
+	    if(i===undefined) {
+	        i = null;
+	    }
+	    if(i===null) {
+	        return this.getTypedRuleContexts(TerraformDirectiveContext);
+	    } else {
+	        return this.getTypedRuleContext(TerraformDirectiveContext,i);
+	    }
+	};
+
+	resourceDirective = function(i) {
+	    if(i===undefined) {
+	        i = null;
+	    }
+	    if(i===null) {
+	        return this.getTypedRuleContexts(ResourceDirectiveContext);
+	    } else {
+	        return this.getTypedRuleContext(ResourceDirectiveContext,i);
+	    }
+	};
+
+	variableDirective = function(i) {
+	    if(i===undefined) {
+	        i = null;
+	    }
+	    if(i===null) {
+	        return this.getTypedRuleContexts(VariableDirectiveContext);
+	    } else {
+	        return this.getTypedRuleContext(VariableDirectiveContext,i);
+	    }
+	};
+
+	outputDirective = function(i) {
+	    if(i===undefined) {
+	        i = null;
+	    }
+	    if(i===null) {
+	        return this.getTypedRuleContexts(OutputDirectiveContext);
+	    } else {
+	        return this.getTypedRuleContext(OutputDirectiveContext,i);
+	    }
+	};
+
+	moduleDirective = function(i) {
+	    if(i===undefined) {
+	        i = null;
+	    }
+	    if(i===null) {
+	        return this.getTypedRuleContexts(ModuleDirectiveContext);
+	    } else {
+	        return this.getTypedRuleContext(ModuleDirectiveContext,i);
+	    }
+	};
+
+	dataDirective = function(i) {
+	    if(i===undefined) {
+	        i = null;
+	    }
+	    if(i===null) {
+	        return this.getTypedRuleContexts(DataDirectiveContext);
+	    } else {
+	        return this.getTypedRuleContext(DataDirectiveContext,i);
+	    }
+	};
+
+	enterRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.enterFile(this);
-    }
-  }
+		}
+	}
 
-  exitRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	exitRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.exitFile(this);
-    }
-  }
+		}
+	}
+
+
 }
 
-class DirectiveContext extends antlr4.ParserRuleContext {
-  constructor(parser, parent, invokingState) {
-    if (parent === undefined) {
-      parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-      invokingState = -1;
-    }
-    super(parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = terraformParser.RULE_directive;
-  }
 
-  providerDirective() {
-	    return this.getTypedRuleContext(ProviderDirectiveContext, 0);
-  }
-
-  terraformDirective() {
-	    return this.getTypedRuleContext(TerraformDirectiveContext, 0);
-  }
-
-  resourceDirective() {
-	    return this.getTypedRuleContext(ResourceDirectiveContext, 0);
-  }
-
-  variableDirective() {
-	    return this.getTypedRuleContext(VariableDirectiveContext, 0);
-  }
-
-  outputDirective() {
-	    return this.getTypedRuleContext(OutputDirectiveContext, 0);
-  }
-
-  moduleDirective() {
-	    return this.getTypedRuleContext(ModuleDirectiveContext, 0);
-  }
-
-  dataDirective() {
-	    return this.getTypedRuleContext(DataDirectiveContext, 0);
-  }
-
-  enterRule(listener) {
-	    if (listener instanceof TerraformListener) {
-	        listener.enterDirective(this);
-    }
-  }
-
-  exitRule(listener) {
-	    if (listener instanceof TerraformListener) {
-	        listener.exitDirective(this);
-    }
-  }
-}
 
 class DataDirectiveContext extends antlr4.ParserRuleContext {
-  constructor(parser, parent, invokingState) {
-    if (parent === undefined) {
-      parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-      invokingState = -1;
-    }
-    super(parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = terraformParser.RULE_dataDirective;
-  }
 
-  DATA() {
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = terraformParser.RULE_dataDirective;
+    }
+
+	DATA() {
 	    return this.getToken(terraformParser.DATA, 0);
-  }
+	};
 
-  providerType() {
-	    return this.getTypedRuleContext(ProviderTypeContext, 0);
-  }
+	providerType() {
+	    return this.getTypedRuleContext(ProviderTypeContext,0);
+	};
 
-  name() {
-	    return this.getTypedRuleContext(NameContext, 0);
-  }
+	name() {
+	    return this.getTypedRuleContext(NameContext,0);
+	};
 
-  AO() {
+	AO() {
 	    return this.getToken(terraformParser.AO, 0);
-  }
+	};
 
-  AF() {
+	AF() {
 	    return this.getToken(terraformParser.AF, 0);
-  }
+	};
 
-  object = function (i) {
-	    if (i === undefined) {
+	object = function(i) {
+	    if(i===undefined) {
 	        i = null;
 	    }
-	    if (i === null) {
+	    if(i===null) {
 	        return this.getTypedRuleContexts(ObjectContext);
+	    } else {
+	        return this.getTypedRuleContext(ObjectContext,i);
 	    }
-	        return this.getTypedRuleContext(ObjectContext, i);
-  };
+	};
 
-  enterRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	enterRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.enterDataDirective(this);
-    }
-  }
+		}
+	}
 
-  exitRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	exitRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.exitDataDirective(this);
-    }
-  }
+		}
+	}
+
+
 }
+
+
 
 class ModuleDirectiveContext extends antlr4.ParserRuleContext {
-  constructor(parser, parent, invokingState) {
-    if (parent === undefined) {
-      parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-      invokingState = -1;
-    }
-    super(parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = terraformParser.RULE_moduleDirective;
-  }
 
-  MODULE() {
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = terraformParser.RULE_moduleDirective;
+    }
+
+	MODULE() {
 	    return this.getToken(terraformParser.MODULE, 0);
-  }
+	};
 
-  name() {
-	    return this.getTypedRuleContext(NameContext, 0);
-  }
+	name() {
+	    return this.getTypedRuleContext(NameContext,0);
+	};
 
-  AO() {
+	AO() {
 	    return this.getToken(terraformParser.AO, 0);
-  }
+	};
 
-  AF() {
+	AF() {
 	    return this.getToken(terraformParser.AF, 0);
-  }
+	};
 
-  moduleSource = function (i) {
-	    if (i === undefined) {
+	moduleSource = function(i) {
+	    if(i===undefined) {
 	        i = null;
 	    }
-	    if (i === null) {
+	    if(i===null) {
 	        return this.getTypedRuleContexts(ModuleSourceContext);
+	    } else {
+	        return this.getTypedRuleContext(ModuleSourceContext,i);
 	    }
-	        return this.getTypedRuleContext(ModuleSourceContext, i);
-  };
+	};
 
-  object = function (i) {
-	    if (i === undefined) {
+	object = function(i) {
+	    if(i===undefined) {
 	        i = null;
 	    }
-	    if (i === null) {
+	    if(i===null) {
 	        return this.getTypedRuleContexts(ObjectContext);
+	    } else {
+	        return this.getTypedRuleContext(ObjectContext,i);
 	    }
-	        return this.getTypedRuleContext(ObjectContext, i);
-  };
+	};
 
-  enterRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	enterRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.enterModuleDirective(this);
-    }
-  }
+		}
+	}
 
-  exitRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	exitRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.exitModuleDirective(this);
-    }
-  }
+		}
+	}
+
+
 }
+
+
 
 class ModuleSourceContext extends antlr4.ParserRuleContext {
-  constructor(parser, parent, invokingState) {
-    if (parent === undefined) {
-      parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-      invokingState = -1;
-    }
-    super(parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = terraformParser.RULE_moduleSource;
-  }
 
-  SOURCE() {
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = terraformParser.RULE_moduleSource;
+    }
+
+	SOURCE() {
 	    return this.getToken(terraformParser.SOURCE, 0);
-  }
+	};
 
-  EQUAL() {
+	EQUAL() {
 	    return this.getToken(terraformParser.EQUAL, 0);
-  }
+	};
 
-  STRING() {
+	STRING() {
 	    return this.getToken(terraformParser.STRING, 0);
-  }
+	};
 
-  enterRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	enterRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.enterModuleSource(this);
-    }
-  }
+		}
+	}
 
-  exitRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	exitRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.exitModuleSource(this);
-    }
-  }
+		}
+	}
+
+
 }
+
+
 
 class ProviderDirectiveContext extends antlr4.ParserRuleContext {
-  constructor(parser, parent, invokingState) {
-    if (parent === undefined) {
-      parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-      invokingState = -1;
-    }
-    super(parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = terraformParser.RULE_providerDirective;
-  }
 
-  PROVIDER() {
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = terraformParser.RULE_providerDirective;
+    }
+
+	PROVIDER() {
 	    return this.getToken(terraformParser.PROVIDER, 0);
-  }
+	};
 
-  name() {
-	    return this.getTypedRuleContext(NameContext, 0);
-  }
+	name() {
+	    return this.getTypedRuleContext(NameContext,0);
+	};
 
-  AO() {
+	AO() {
 	    return this.getToken(terraformParser.AO, 0);
-  }
+	};
 
-  object() {
-	    return this.getTypedRuleContext(ObjectContext, 0);
-  }
-
-  AF() {
+	AF() {
 	    return this.getToken(terraformParser.AF, 0);
-  }
+	};
 
-  enterRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	object = function(i) {
+	    if(i===undefined) {
+	        i = null;
+	    }
+	    if(i===null) {
+	        return this.getTypedRuleContexts(ObjectContext);
+	    } else {
+	        return this.getTypedRuleContext(ObjectContext,i);
+	    }
+	};
+
+	enterRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.enterProviderDirective(this);
-    }
-  }
+		}
+	}
 
-  exitRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	exitRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.exitProviderDirective(this);
-    }
-  }
+		}
+	}
+
+
 }
+
+
 
 class TerraformDirectiveContext extends antlr4.ParserRuleContext {
-  constructor(parser, parent, invokingState) {
-    if (parent === undefined) {
-      parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-      invokingState = -1;
-    }
-    super(parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = terraformParser.RULE_terraformDirective;
-  }
 
-  TERRAFORM() {
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = terraformParser.RULE_terraformDirective;
+    }
+
+	TERRAFORM() {
 	    return this.getToken(terraformParser.TERRAFORM, 0);
-  }
+	};
 
-  AO() {
+	AO() {
 	    return this.getToken(terraformParser.AO, 0);
-  }
+	};
 
-  AF() {
+	AF() {
 	    return this.getToken(terraformParser.AF, 0);
-  }
+	};
 
-  object = function (i) {
-	    if (i === undefined) {
+	object = function(i) {
+	    if(i===undefined) {
 	        i = null;
 	    }
-	    if (i === null) {
+	    if(i===null) {
 	        return this.getTypedRuleContexts(ObjectContext);
+	    } else {
+	        return this.getTypedRuleContext(ObjectContext,i);
 	    }
-	        return this.getTypedRuleContext(ObjectContext, i);
-  };
+	};
 
-  enterRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	enterRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.enterTerraformDirective(this);
-    }
-  }
+		}
+	}
 
-  exitRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	exitRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.exitTerraformDirective(this);
-    }
-  }
+		}
+	}
+
+
 }
+
+
 
 class ResourceDirectiveContext extends antlr4.ParserRuleContext {
-  constructor(parser, parent, invokingState) {
-    if (parent === undefined) {
-      parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-      invokingState = -1;
-    }
-    super(parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = terraformParser.RULE_resourceDirective;
-  }
 
-  RESOURCE() {
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = terraformParser.RULE_resourceDirective;
+    }
+
+	RESOURCE() {
 	    return this.getToken(terraformParser.RESOURCE, 0);
-  }
+	};
 
-  providerType() {
-	    return this.getTypedRuleContext(ProviderTypeContext, 0);
-  }
+	providerType() {
+	    return this.getTypedRuleContext(ProviderTypeContext,0);
+	};
 
-  name() {
-	    return this.getTypedRuleContext(NameContext, 0);
-  }
+	name() {
+	    return this.getTypedRuleContext(NameContext,0);
+	};
 
-  AO() {
+	AO() {
 	    return this.getToken(terraformParser.AO, 0);
-  }
+	};
 
-  object() {
-	    return this.getTypedRuleContext(ObjectContext, 0);
-  }
-
-  AF() {
+	AF() {
 	    return this.getToken(terraformParser.AF, 0);
-  }
+	};
 
-  enterRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	object = function(i) {
+	    if(i===undefined) {
+	        i = null;
+	    }
+	    if(i===null) {
+	        return this.getTypedRuleContexts(ObjectContext);
+	    } else {
+	        return this.getTypedRuleContext(ObjectContext,i);
+	    }
+	};
+
+	enterRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.enterResourceDirective(this);
-    }
-  }
+		}
+	}
 
-  exitRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	exitRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.exitResourceDirective(this);
-    }
-  }
+		}
+	}
+
+
 }
+
+
 
 class VariableDirectiveContext extends antlr4.ParserRuleContext {
-  constructor(parser, parent, invokingState) {
-    if (parent === undefined) {
-      parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-      invokingState = -1;
-    }
-    super(parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = terraformParser.RULE_variableDirective;
-  }
 
-  VARIABLE() {
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = terraformParser.RULE_variableDirective;
+    }
+
+	VARIABLE() {
 	    return this.getToken(terraformParser.VARIABLE, 0);
-  }
+	};
 
-  name() {
-	    return this.getTypedRuleContext(NameContext, 0);
-  }
+	name() {
+	    return this.getTypedRuleContext(NameContext,0);
+	};
 
-  AO() {
+	AO() {
 	    return this.getToken(terraformParser.AO, 0);
-  }
+	};
 
-  AF() {
+	AF() {
 	    return this.getToken(terraformParser.AF, 0);
-  }
+	};
 
-  object = function (i) {
-	    if (i === undefined) {
+	object = function(i) {
+	    if(i===undefined) {
 	        i = null;
 	    }
-	    if (i === null) {
+	    if(i===null) {
 	        return this.getTypedRuleContexts(ObjectContext);
+	    } else {
+	        return this.getTypedRuleContext(ObjectContext,i);
 	    }
-	        return this.getTypedRuleContext(ObjectContext, i);
-  };
+	};
 
-  enterRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	enterRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.enterVariableDirective(this);
-    }
-  }
+		}
+	}
 
-  exitRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	exitRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.exitVariableDirective(this);
-    }
-  }
+		}
+	}
+
+
 }
+
+
 
 class OutputDirectiveContext extends antlr4.ParserRuleContext {
-  constructor(parser, parent, invokingState) {
-    if (parent === undefined) {
-      parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-      invokingState = -1;
-    }
-    super(parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = terraformParser.RULE_outputDirective;
-  }
 
-  OUTPUT() {
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = terraformParser.RULE_outputDirective;
+    }
+
+	OUTPUT() {
 	    return this.getToken(terraformParser.OUTPUT, 0);
-  }
+	};
 
-  name() {
-	    return this.getTypedRuleContext(NameContext, 0);
-  }
+	name() {
+	    return this.getTypedRuleContext(NameContext,0);
+	};
 
-  AO() {
+	AO() {
 	    return this.getToken(terraformParser.AO, 0);
-  }
+	};
 
-  AF() {
+	AF() {
 	    return this.getToken(terraformParser.AF, 0);
-  }
+	};
 
-  object = function (i) {
-	    if (i === undefined) {
+	object = function(i) {
+	    if(i===undefined) {
 	        i = null;
 	    }
-	    if (i === null) {
+	    if(i===null) {
 	        return this.getTypedRuleContexts(ObjectContext);
+	    } else {
+	        return this.getTypedRuleContext(ObjectContext,i);
 	    }
-	        return this.getTypedRuleContext(ObjectContext, i);
-  };
+	};
 
-  enterRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	enterRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.enterOutputDirective(this);
-    }
-  }
+		}
+	}
 
-  exitRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	exitRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.exitOutputDirective(this);
-    }
-  }
+		}
+	}
+
+
 }
+
+
 
 class NameContext extends antlr4.ParserRuleContext {
-  constructor(parser, parent, invokingState) {
-    if (parent === undefined) {
-      parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-      invokingState = -1;
-    }
-    super(parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = terraformParser.RULE_name;
-  }
 
-  STRING() {
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = terraformParser.RULE_name;
+    }
+
+	STRING() {
 	    return this.getToken(terraformParser.STRING, 0);
-  }
+	};
 
-  enterRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	enterRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.enterName(this);
-    }
-  }
+		}
+	}
 
-  exitRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	exitRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.exitName(this);
-    }
-  }
+		}
+	}
+
+
 }
+
+
 
 class ProviderTypeContext extends antlr4.ParserRuleContext {
-  constructor(parser, parent, invokingState) {
-    if (parent === undefined) {
-      parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-      invokingState = -1;
-    }
-    super(parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = terraformParser.RULE_providerType;
-  }
 
-  STRING() {
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = terraformParser.RULE_providerType;
+    }
+
+	STRING() {
 	    return this.getToken(terraformParser.STRING, 0);
-  }
+	};
 
-  enterRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	enterRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.enterProviderType(this);
-    }
-  }
+		}
+	}
 
-  exitRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	exitRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.exitProviderType(this);
-    }
-  }
+		}
+	}
+
+
 }
+
+
 
 class TypeContext extends antlr4.ParserRuleContext {
-  constructor(parser, parent, invokingState) {
-    if (parent === undefined) {
-      parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-      invokingState = -1;
-    }
-    super(parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = terraformParser.RULE_type;
-  }
 
-  TYPE() {
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = terraformParser.RULE_type;
+    }
+
+	TYPE() {
 	    return this.getToken(terraformParser.TYPE, 0);
-  }
+	};
 
-  LIST() {
+	LIST() {
 	    return this.getToken(terraformParser.LIST, 0);
-  }
+	};
 
-  PO() {
+	PO() {
 	    return this.getToken(terraformParser.PO, 0);
-  }
+	};
 
-  type() {
-	    return this.getTypedRuleContext(TypeContext, 0);
-  }
+	type() {
+	    return this.getTypedRuleContext(TypeContext,0);
+	};
 
-  PF() {
+	PF() {
 	    return this.getToken(terraformParser.PF, 0);
-  }
+	};
 
-  MAP() {
+	MAP() {
 	    return this.getToken(terraformParser.MAP, 0);
-  }
+	};
 
-  OBJECT() {
+	OBJECT() {
 	    return this.getToken(terraformParser.OBJECT, 0);
-  }
+	};
 
-  object() {
-	    return this.getTypedRuleContext(ObjectContext, 0);
-  }
+	object() {
+	    return this.getTypedRuleContext(ObjectContext,0);
+	};
 
-  enterRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	enterRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.enterType(this);
-    }
-  }
+		}
+	}
 
-  exitRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	exitRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.exitType(this);
-    }
-  }
+		}
+	}
+
+
 }
+
+
 
 class ObjectContext extends antlr4.ParserRuleContext {
-  constructor(parser, parent, invokingState) {
-    if (parent === undefined) {
-      parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-      invokingState = -1;
-    }
-    super(parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = terraformParser.RULE_object;
-  }
 
-  complexField = function (i) {
-	    if (i === undefined) {
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = terraformParser.RULE_object;
+    }
+
+	attributeBlock = function(i) {
+	    if(i===undefined) {
 	        i = null;
 	    }
-	    if (i === null) {
-	        return this.getTypedRuleContexts(ComplexFieldContext);
+	    if(i===null) {
+	        return this.getTypedRuleContexts(AttributeBlockContext);
+	    } else {
+	        return this.getTypedRuleContext(AttributeBlockContext,i);
 	    }
-	        return this.getTypedRuleContext(ComplexFieldContext, i);
-  };
+	};
 
-  field = function (i) {
-	    if (i === undefined) {
+	dynamicBlock = function(i) {
+	    if(i===undefined) {
 	        i = null;
 	    }
-	    if (i === null) {
+	    if(i===null) {
+	        return this.getTypedRuleContexts(DynamicBlockContext);
+	    } else {
+	        return this.getTypedRuleContext(DynamicBlockContext,i);
+	    }
+	};
+
+	field = function(i) {
+	    if(i===undefined) {
+	        i = null;
+	    }
+	    if(i===null) {
 	        return this.getTypedRuleContexts(FieldContext);
+	    } else {
+	        return this.getTypedRuleContext(FieldContext,i);
 	    }
-	        return this.getTypedRuleContext(FieldContext, i);
-  };
+	};
 
-  enterRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	enterRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.enterObject(this);
-    }
-  }
+		}
+	}
 
-  exitRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	exitRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.exitObject(this);
-    }
-  }
+		}
+	}
+
+
 }
+
+
 
 class FieldContext extends antlr4.ParserRuleContext {
-  constructor(parser, parent, invokingState) {
-    if (parent === undefined) {
-      parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-      invokingState = -1;
-    }
-    super(parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = terraformParser.RULE_field;
-  }
 
-  EQUAL() {
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = terraformParser.RULE_field;
+    }
+
+	EQUAL() {
 	    return this.getToken(terraformParser.EQUAL, 0);
-  }
+	};
 
-  expression() {
-	    return this.getTypedRuleContext(ExpressionContext, 0);
-  }
+	expression() {
+	    return this.getTypedRuleContext(ExpressionContext,0);
+	};
 
-  IDENTIFIER() {
+	IDENTIFIER() {
 	    return this.getToken(terraformParser.IDENTIFIER, 0);
-  }
+	};
 
-  SOURCE() {
+	SOURCE() {
 	    return this.getToken(terraformParser.SOURCE, 0);
-  }
+	};
 
-  enterRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	enterRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.enterField(this);
-    }
-  }
+		}
+	}
 
-  exitRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	exitRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.exitField(this);
-    }
-  }
+		}
+	}
+
+
 }
 
-class ComplexFieldContext extends antlr4.ParserRuleContext {
-  constructor(parser, parent, invokingState) {
-    if (parent === undefined) {
-      parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-      invokingState = -1;
-    }
-    super(parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = terraformParser.RULE_complexField;
-  }
 
-  IDENTIFIER() {
+
+class AttributeBlockContext extends antlr4.ParserRuleContext {
+
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = terraformParser.RULE_attributeBlock;
+    }
+
+	IDENTIFIER() {
 	    return this.getToken(terraformParser.IDENTIFIER, 0);
-  }
+	};
 
-  AO() {
+	EQUAL() {
+	    return this.getToken(terraformParser.EQUAL, 0);
+	};
+
+	AO() {
 	    return this.getToken(terraformParser.AO, 0);
-  }
+	};
 
-  object() {
-	    return this.getTypedRuleContext(ObjectContext, 0);
-  }
-
-  AF() {
+	AF() {
 	    return this.getToken(terraformParser.AF, 0);
-  }
+	};
 
-  EQUAL = function (i) {
-    if (i === undefined) {
-      i = null;
-    }
-	    if (i === null) {
-	        return this.getTokens(terraformParser.EQUAL);
+	object = function(i) {
+	    if(i===undefined) {
+	        i = null;
 	    }
-	        return this.getToken(terraformParser.EQUAL, i);
-  };
-
-  STRING = function (i) {
-    if (i === undefined) {
-      i = null;
-    }
-	    if (i === null) {
-	        return this.getTokens(terraformParser.STRING);
+	    if(i===null) {
+	        return this.getTypedRuleContexts(ObjectContext);
+	    } else {
+	        return this.getTypedRuleContext(ObjectContext,i);
 	    }
-	        return this.getToken(terraformParser.STRING, i);
-  };
+	};
 
-  enterRule(listener) {
-	    if (listener instanceof TerraformListener) {
-	        listener.enterComplexField(this);
-    }
-  }
+	enterRule(listener) {
+	    if(listener instanceof TerraformListener ) {
+	        listener.enterAttributeBlock(this);
+		}
+	}
 
-  exitRule(listener) {
-	    if (listener instanceof TerraformListener) {
-	        listener.exitComplexField(this);
-    }
-  }
+	exitRule(listener) {
+	    if(listener instanceof TerraformListener ) {
+	        listener.exitAttributeBlock(this);
+		}
+	}
+
+
 }
+
+
+
+class DynamicBlockContext extends antlr4.ParserRuleContext {
+
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = terraformParser.RULE_dynamicBlock;
+    }
+
+	IDENTIFIER() {
+	    return this.getToken(terraformParser.IDENTIFIER, 0);
+	};
+
+	AO() {
+	    return this.getToken(terraformParser.AO, 0);
+	};
+
+	AF() {
+	    return this.getToken(terraformParser.AF, 0);
+	};
+
+	object = function(i) {
+	    if(i===undefined) {
+	        i = null;
+	    }
+	    if(i===null) {
+	        return this.getTypedRuleContexts(ObjectContext);
+	    } else {
+	        return this.getTypedRuleContext(ObjectContext,i);
+	    }
+	};
+
+	enterRule(listener) {
+	    if(listener instanceof TerraformListener ) {
+	        listener.enterDynamicBlock(this);
+		}
+	}
+
+	exitRule(listener) {
+	    if(listener instanceof TerraformListener ) {
+	        listener.exitDynamicBlock(this);
+		}
+	}
+
+
+}
+
+
 
 class ValidationContext extends antlr4.ParserRuleContext {
-  constructor(parser, parent, invokingState) {
-    if (parent === undefined) {
-      parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-      invokingState = -1;
-    }
-    super(parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = terraformParser.RULE_validation;
-  }
 
-  AO() {
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = terraformParser.RULE_validation;
+    }
+
+	AO() {
 	    return this.getToken(terraformParser.AO, 0);
-  }
+	};
 
-  CONDITION() {
+	CONDITION() {
 	    return this.getToken(terraformParser.CONDITION, 0);
-  }
+	};
 
-  EQUAL = function (i) {
-    if (i === undefined) {
-      i = null;
-    }
-	    if (i === null) {
+	EQUAL = function(i) {
+		if(i===undefined) {
+			i = null;
+		}
+	    if(i===null) {
 	        return this.getTokens(terraformParser.EQUAL);
-	    }
+	    } else {
 	        return this.getToken(terraformParser.EQUAL, i);
-  };
+	    }
+	};
 
-  ERROR() {
+
+	ERROR() {
 	    return this.getToken(terraformParser.ERROR, 0);
-  }
+	};
 
-  STRING() {
+	STRING() {
 	    return this.getToken(terraformParser.STRING, 0);
-  }
+	};
 
-  AF() {
+	AF() {
 	    return this.getToken(terraformParser.AF, 0);
-  }
+	};
 
-  condition = function (i) {
-	    if (i === undefined) {
+	condition = function(i) {
+	    if(i===undefined) {
 	        i = null;
 	    }
-	    if (i === null) {
+	    if(i===null) {
 	        return this.getTypedRuleContexts(ConditionContext);
+	    } else {
+	        return this.getTypedRuleContext(ConditionContext,i);
 	    }
-	        return this.getTypedRuleContext(ConditionContext, i);
-  };
+	};
 
-  enterRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	enterRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.enterValidation(this);
-    }
-  }
+		}
+	}
 
-  exitRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	exitRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.exitValidation(this);
-    }
-  }
+		}
+	}
+
+
 }
+
+
 
 class ConditionContext extends antlr4.ParserRuleContext {
-  constructor(parser, parent, invokingState) {
-    if (parent === undefined) {
-      parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-      invokingState = -1;
-    }
-    super(parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = terraformParser.RULE_condition;
-  }
 
-  STRING() {
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = terraformParser.RULE_condition;
+    }
+
+	STRING() {
 	    return this.getToken(terraformParser.STRING, 0);
-  }
+	};
 
-  NUMBER() {
+	NUMBER() {
 	    return this.getToken(terraformParser.NUMBER, 0);
-  }
+	};
 
-  BOOLEAN() {
+	BOOLEAN() {
 	    return this.getToken(terraformParser.BOOLEAN, 0);
-  }
+	};
 
-  BOOLEANOP() {
+	BOOLEANOP() {
 	    return this.getToken(terraformParser.BOOLEANOP, 0);
-  }
+	};
 
-  functionCall() {
-	    return this.getTypedRuleContext(FunctionCallContext, 0);
-  }
+	functionCall() {
+	    return this.getTypedRuleContext(FunctionCallContext,0);
+	};
 
-  enterRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	enterRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.enterCondition(this);
-    }
-  }
+		}
+	}
 
-  exitRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	exitRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.exitCondition(this);
-    }
-  }
+		}
+	}
+
+
 }
+
+
 
 class ExpressionContext extends antlr4.ParserRuleContext {
-  constructor(parser, parent, invokingState) {
-    if (parent === undefined) {
-      parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-      invokingState = -1;
-    }
-    super(parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = terraformParser.RULE_expression;
-  }
 
-  NUMBER() {
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = terraformParser.RULE_expression;
+    }
+
+	NUMBER() {
 	    return this.getToken(terraformParser.NUMBER, 0);
-  }
+	};
 
-  BOOLEAN() {
+	BOOLEAN() {
 	    return this.getToken(terraformParser.BOOLEAN, 0);
-  }
+	};
 
-  array() {
-	    return this.getTypedRuleContext(ArrayContext, 0);
-  }
+	array() {
+	    return this.getTypedRuleContext(ArrayContext,0);
+	};
 
-  complexExpression() {
-	    return this.getTypedRuleContext(ComplexExpressionContext, 0);
-  }
+	complexExpression() {
+	    return this.getTypedRuleContext(ComplexExpressionContext,0);
+	};
 
-  STRING() {
+	STRING() {
 	    return this.getToken(terraformParser.STRING, 0);
-  }
+	};
 
-  type() {
-	    return this.getTypedRuleContext(TypeContext, 0);
-  }
+	type() {
+	    return this.getTypedRuleContext(TypeContext,0);
+	};
 
-  enterRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	enterRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.enterExpression(this);
-    }
-  }
+		}
+	}
 
-  exitRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	exitRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.exitExpression(this);
-    }
-  }
+		}
+	}
+
+
 }
+
+
 
 class FunctionCallContext extends antlr4.ParserRuleContext {
-  constructor(parser, parent, invokingState) {
-    if (parent === undefined) {
-      parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-      invokingState = -1;
-    }
-    super(parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = terraformParser.RULE_functionCall;
-  }
 
-  IDENTIFIER() {
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = terraformParser.RULE_functionCall;
+    }
+
+	IDENTIFIER() {
 	    return this.getToken(terraformParser.IDENTIFIER, 0);
-  }
+	};
 
-  PO() {
+	PO() {
 	    return this.getToken(terraformParser.PO, 0);
-  }
+	};
 
-  expression = function (i) {
-	    if (i === undefined) {
+	expression = function(i) {
+	    if(i===undefined) {
 	        i = null;
 	    }
-	    if (i === null) {
+	    if(i===null) {
 	        return this.getTypedRuleContexts(ExpressionContext);
+	    } else {
+	        return this.getTypedRuleContext(ExpressionContext,i);
 	    }
-	        return this.getTypedRuleContext(ExpressionContext, i);
-  };
+	};
 
-  PF() {
+	PF() {
 	    return this.getToken(terraformParser.PF, 0);
-  }
+	};
 
-  VIRG = function (i) {
-    if (i === undefined) {
-      i = null;
-    }
-	    if (i === null) {
+	VIRG = function(i) {
+		if(i===undefined) {
+			i = null;
+		}
+	    if(i===null) {
 	        return this.getTokens(terraformParser.VIRG);
-	    }
+	    } else {
 	        return this.getToken(terraformParser.VIRG, i);
-  };
+	    }
+	};
 
-  enterRule(listener) {
-	    if (listener instanceof TerraformListener) {
+
+	enterRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.enterFunctionCall(this);
-    }
-  }
+		}
+	}
 
-  exitRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	exitRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.exitFunctionCall(this);
-    }
-  }
+		}
+	}
+
+
 }
+
+
 
 class ComplexExpressionContext extends antlr4.ParserRuleContext {
-  constructor(parser, parent, invokingState) {
-    if (parent === undefined) {
-      parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-      invokingState = -1;
-    }
-    super(parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = terraformParser.RULE_complexExpression;
-  }
 
-  IDENTIFIER = function (i) {
-    if (i === undefined) {
-      i = null;
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = terraformParser.RULE_complexExpression;
     }
-	    if (i === null) {
+
+	IDENTIFIER = function(i) {
+		if(i===undefined) {
+			i = null;
+		}
+	    if(i===null) {
 	        return this.getTokens(terraformParser.IDENTIFIER);
-	    }
+	    } else {
 	        return this.getToken(terraformParser.IDENTIFIER, i);
-  };
+	    }
+	};
 
-  TIRET = function (i) {
-    if (i === undefined) {
-      i = null;
-    }
-	    if (i === null) {
+
+	TIRET = function(i) {
+		if(i===undefined) {
+			i = null;
+		}
+	    if(i===null) {
 	        return this.getTokens(terraformParser.TIRET);
-	    }
+	    } else {
 	        return this.getToken(terraformParser.TIRET, i);
-  };
+	    }
+	};
 
-  OPEN() {
+
+	OPEN() {
 	    return this.getToken(terraformParser.OPEN, 0);
-  }
+	};
 
-  CLOSE() {
+	CLOSE() {
 	    return this.getToken(terraformParser.CLOSE, 0);
-  }
+	};
 
-  IDENTIFIERS = function (i) {
-    if (i === undefined) {
-      i = null;
-    }
-	    if (i === null) {
+	IDENTIFIERS = function(i) {
+		if(i===undefined) {
+			i = null;
+		}
+	    if(i===null) {
 	        return this.getTokens(terraformParser.IDENTIFIERS);
-	    }
+	    } else {
 	        return this.getToken(terraformParser.IDENTIFIERS, i);
-  };
+	    }
+	};
 
-  AUTRE = function (i) {
-    if (i === undefined) {
-      i = null;
-    }
-	    if (i === null) {
+
+	AUTRE = function(i) {
+		if(i===undefined) {
+			i = null;
+		}
+	    if(i===null) {
 	        return this.getTokens(terraformParser.AUTRE);
-	    }
+	    } else {
 	        return this.getToken(terraformParser.AUTRE, i);
-  };
+	    }
+	};
 
-  WSS = function (i) {
-    if (i === undefined) {
-      i = null;
-    }
-	    if (i === null) {
+
+	WSS = function(i) {
+		if(i===undefined) {
+			i = null;
+		}
+	    if(i===null) {
 	        return this.getTokens(terraformParser.WSS);
-	    }
+	    } else {
 	        return this.getToken(terraformParser.WSS, i);
-  };
-
-  STRING = function (i) {
-    if (i === undefined) {
-      i = null;
-    }
-	    if (i === null) {
-	        return this.getTokens(terraformParser.STRING);
 	    }
-	        return this.getToken(terraformParser.STRING, i);
-  };
+	};
 
-  complexExpression = function (i) {
-	    if (i === undefined) {
+
+	STRING = function(i) {
+		if(i===undefined) {
+			i = null;
+		}
+	    if(i===null) {
+	        return this.getTokens(terraformParser.STRING);
+	    } else {
+	        return this.getToken(terraformParser.STRING, i);
+	    }
+	};
+
+
+	complexExpression = function(i) {
+	    if(i===undefined) {
 	        i = null;
 	    }
-	    if (i === null) {
+	    if(i===null) {
 	        return this.getTypedRuleContexts(ComplexExpressionContext);
+	    } else {
+	        return this.getTypedRuleContext(ComplexExpressionContext,i);
 	    }
-	        return this.getTypedRuleContext(ComplexExpressionContext, i);
-  };
+	};
 
-  functionCall() {
-	    return this.getTypedRuleContext(FunctionCallContext, 0);
-  }
+	functionCall() {
+	    return this.getTypedRuleContext(FunctionCallContext,0);
+	};
 
-  POINT() {
+	POINT() {
 	    return this.getToken(terraformParser.POINT, 0);
-  }
+	};
 
-  CO() {
+	CO() {
 	    return this.getToken(terraformParser.CO, 0);
-  }
+	};
 
-  index() {
-	    return this.getTypedRuleContext(IndexContext, 0);
-  }
+	index() {
+	    return this.getTypedRuleContext(IndexContext,0);
+	};
 
-  CF() {
+	CF() {
 	    return this.getToken(terraformParser.CF, 0);
-  }
+	};
 
-  enterRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	enterRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.enterComplexExpression(this);
-    }
-  }
+		}
+	}
 
-  exitRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	exitRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.exitComplexExpression(this);
-    }
-  }
+		}
+	}
+
+
 }
+
+
 
 class ArrayContext extends antlr4.ParserRuleContext {
-  constructor(parser, parent, invokingState) {
-    if (parent === undefined) {
-      parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-      invokingState = -1;
-    }
-    super(parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = terraformParser.RULE_array;
-  }
 
-  CO() {
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = terraformParser.RULE_array;
+    }
+
+	CO() {
 	    return this.getToken(terraformParser.CO, 0);
-  }
+	};
 
-  CF() {
+	CF() {
 	    return this.getToken(terraformParser.CF, 0);
-  }
+	};
 
-  expression = function (i) {
-	    if (i === undefined) {
+	expression = function(i) {
+	    if(i===undefined) {
 	        i = null;
 	    }
-	    if (i === null) {
+	    if(i===null) {
 	        return this.getTypedRuleContexts(ExpressionContext);
+	    } else {
+	        return this.getTypedRuleContext(ExpressionContext,i);
 	    }
-	        return this.getTypedRuleContext(ExpressionContext, i);
-  };
+	};
 
-  VIRG = function (i) {
-    if (i === undefined) {
-      i = null;
-    }
-	    if (i === null) {
+	VIRG = function(i) {
+		if(i===undefined) {
+			i = null;
+		}
+	    if(i===null) {
 	        return this.getTokens(terraformParser.VIRG);
-	    }
+	    } else {
 	        return this.getToken(terraformParser.VIRG, i);
-  };
+	    }
+	};
 
-  enterRule(listener) {
-	    if (listener instanceof TerraformListener) {
+
+	enterRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.enterArray(this);
-    }
-  }
+		}
+	}
 
-  exitRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	exitRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.exitArray(this);
-    }
-  }
+		}
+	}
+
+
 }
+
+
 
 class IndexContext extends antlr4.ParserRuleContext {
-  constructor(parser, parent, invokingState) {
-    if (parent === undefined) {
-      parent = null;
-    }
-    if (invokingState === undefined || invokingState === null) {
-      invokingState = -1;
-    }
-    super(parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = terraformParser.RULE_index;
-  }
 
-  NUMBER() {
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = terraformParser.RULE_index;
+    }
+
+	NUMBER() {
 	    return this.getToken(terraformParser.NUMBER, 0);
-  }
+	};
 
-  MULT() {
+	MULT() {
 	    return this.getToken(terraformParser.MULT, 0);
-  }
+	};
 
-  enterRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	enterRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.enterIndex(this);
-    }
-  }
+		}
+	}
 
-  exitRule(listener) {
-	    if (listener instanceof TerraformListener) {
+	exitRule(listener) {
+	    if(listener instanceof TerraformListener ) {
 	        listener.exitIndex(this);
-    }
-  }
+		}
+	}
+
+
 }
 
-terraformParser.FileContext = FileContext;
-terraformParser.DirectiveContext = DirectiveContext;
-terraformParser.DataDirectiveContext = DataDirectiveContext;
-terraformParser.ModuleDirectiveContext = ModuleDirectiveContext;
-terraformParser.ModuleSourceContext = ModuleSourceContext;
-terraformParser.ProviderDirectiveContext = ProviderDirectiveContext;
-terraformParser.TerraformDirectiveContext = TerraformDirectiveContext;
-terraformParser.ResourceDirectiveContext = ResourceDirectiveContext;
-terraformParser.VariableDirectiveContext = VariableDirectiveContext;
-terraformParser.OutputDirectiveContext = OutputDirectiveContext;
-terraformParser.NameContext = NameContext;
-terraformParser.ProviderTypeContext = ProviderTypeContext;
-terraformParser.TypeContext = TypeContext;
-terraformParser.ObjectContext = ObjectContext;
-terraformParser.FieldContext = FieldContext;
-terraformParser.ComplexFieldContext = ComplexFieldContext;
-terraformParser.ValidationContext = ValidationContext;
-terraformParser.ConditionContext = ConditionContext;
-terraformParser.ExpressionContext = ExpressionContext;
-terraformParser.FunctionCallContext = FunctionCallContext;
-terraformParser.ComplexExpressionContext = ComplexExpressionContext;
-terraformParser.ArrayContext = ArrayContext;
-terraformParser.IndexContext = IndexContext;
+
+
+
+terraformParser.FileContext = FileContext; 
+terraformParser.DataDirectiveContext = DataDirectiveContext; 
+terraformParser.ModuleDirectiveContext = ModuleDirectiveContext; 
+terraformParser.ModuleSourceContext = ModuleSourceContext; 
+terraformParser.ProviderDirectiveContext = ProviderDirectiveContext; 
+terraformParser.TerraformDirectiveContext = TerraformDirectiveContext; 
+terraformParser.ResourceDirectiveContext = ResourceDirectiveContext; 
+terraformParser.VariableDirectiveContext = VariableDirectiveContext; 
+terraformParser.OutputDirectiveContext = OutputDirectiveContext; 
+terraformParser.NameContext = NameContext; 
+terraformParser.ProviderTypeContext = ProviderTypeContext; 
+terraformParser.TypeContext = TypeContext; 
+terraformParser.ObjectContext = ObjectContext; 
+terraformParser.FieldContext = FieldContext; 
+terraformParser.AttributeBlockContext = AttributeBlockContext; 
+terraformParser.DynamicBlockContext = DynamicBlockContext; 
+terraformParser.ValidationContext = ValidationContext; 
+terraformParser.ConditionContext = ConditionContext; 
+terraformParser.ExpressionContext = ExpressionContext; 
+terraformParser.FunctionCallContext = FunctionCallContext; 
+terraformParser.ComplexExpressionContext = ComplexExpressionContext; 
+terraformParser.ArrayContext = ArrayContext; 
+terraformParser.IndexContext = IndexContext; 

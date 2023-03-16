@@ -11,6 +11,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Update plugin-core to version 0.14.0
 
+### Added
+
+- Differentiate between attribute blocks and dynamic blocks
+- Script to generate the parser from the grammar using npm cli
+
+### Fixed
+
+- Parsing error when a component had an empty body
+
 ## [0.1.12] - 2023/02/09
 
 ### Changed
@@ -118,6 +127,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add renderer for terraform files
 - Import metadata instead of passing it through constructor in TerraformMetadata
 
+[0.1.13]: https://github.com/ditrit/terrator-plugin/blob/0.1.12/changelog.md
 [0.1.12]: https://github.com/ditrit/terrator-plugin/blob/0.1.12/changelog.md
 [0.1.11]: https://github.com/ditrit/terrator-plugin/blob/0.1.11/changelog.md
 [0.1.10]: https://github.com/ditrit/terrator-plugin/blob/0.1.10/changelog.md

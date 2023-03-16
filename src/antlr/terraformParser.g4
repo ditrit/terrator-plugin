@@ -17,35 +17,35 @@ directive
   ;
 
 dataDirective
-  : 'data' providerType name '{' (object)+ '}'
+  : DATA providerType name AO (object)+ AF
   ;
 
 moduleDirective
-  : 'module' name '{' (moduleSource|object)+ '}'
+  : MODULE name AO (moduleSource|object)+ AF
   ;
 
 moduleSource
-  : 'source' '=' STRING
+  : SOURCE EQUAL STRING
   ;
 
 providerDirective
-  : 'provider' name '{' object '}'
+  : PROVIDER name AO object AF
   ;
 
 terraformDirective
-  : 'terraform' '{' (object)+ '}'
+  : TERRAFORM AO (object)+ AF
   ;
 
 resourceDirective
-  : 'resource' providerType name '{' object '}'
+  : RESOURCE providerType name AO object AF
   ;
 
 variableDirective
-  : 'variable' name '{' (object)+ '}'
+  : VARIABLE name AO (object)+ AF
   ;
 
 outputDirective
-  : 'output' name '{' (object)+ '}'
+  : OUTPUT name AO (object)+ AF
   ;
 
 name
@@ -58,10 +58,10 @@ providerType
 
 type
   : TYPE
-  | 'list'
-  | 'list' '(' type ')'
-  | 'map' '(' type ')'
-  | 'object' '(' object ')'
+  | LIST
+  | LIST PO type PF
+  | MAP PO type PF
+  | OBJECT PO object PF
   ;
 
 object
@@ -69,17 +69,17 @@ object
   ;
 
 field
-  : (IDENTIFIER|SOURCE) '=' expression
+  : (IDENTIFIER|SOURCE) EQUAL expression
   ;
 
 complexField
-  : IDENTIFIER '{' object '}'
-  | IDENTIFIER '=' '{' (STRING '=' STRING)+ '}'
+  : IDENTIFIER AO object AF
+  | IDENTIFIER EQUAL AO (STRING EQUAL STRING)+ AF
   ;
 
 validation
-  : '{' 'condition' '=' condition+
-        'error_message' '=' STRING '}'
+  : AO CONDITION EQUAL condition+
+        ERROR EQUAL STRING AF
   ;
 
 condition
@@ -100,26 +100,26 @@ expression
   ;
 
 functionCall
-  : IDENTIFIER '(' expression ( ',' expression )* ','? ')'
+  : IDENTIFIER PO expression ( VIRG expression )* VIRG? PF
   ;
 
 complexExpression
   : IDENTIFIER
-  | (IDENTIFIER|'-')+
-  | complexExpression '.' complexExpression // attribute access
-  | complexExpression '[' index ']' // indexed array access
-  | complexExpression '.' index // indexed attribute access
+  | (IDENTIFIER|TIRET)+
+  | complexExpression POINT complexExpression // attribute access
+  | complexExpression CO index CF // indexed array access
+  | complexExpression POINT index // indexed attribute access
   | '<<EOF' (IDENTIFIERS|AUTRE|WSS+)+ 'EOF'
   | STRING complexExpression STRING
   | functionCall
   ;
 
 array
-  : '[' ']'
-  | '[' expression ( ',' expression )* ','? ']'
+  : CO CF
+  | CO expression ( VIRG expression )* VIRG? CF
   ;
 
 index
   : NUMBER
-  | '*'
+  | MULT
   ;

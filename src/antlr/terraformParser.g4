@@ -7,7 +7,7 @@ file
   ;
 
 dataDirective
-  : DATA providerType name AO (object)+ AF
+  : DATA providerType name AO object* AF
   ;
 
 moduleDirective
@@ -19,19 +19,19 @@ moduleSource
   ;
 
 providerDirective
-  : PROVIDER name AO object AF
+  : PROVIDER name AO object* AF
   ;
 
 terraformDirective
-  : TERRAFORM AO (object)+ AF
+  : TERRAFORM AO object* AF
   ;
 
 resourceDirective
-  : RESOURCE providerType name AO object AF
+  : RESOURCE providerType name AO object* AF
   ;
 
 variableDirective
-  : VARIABLE name AO (object)+ AF
+  : VARIABLE name AO object* AF
   ;
 
 outputDirective

@@ -3,17 +3,7 @@ parser grammar terraformParser;
 options { tokenVocab=terraformLexer; }
 
 file
-  : directive+
-  ;
-
-directive
-  : providerDirective
-  | terraformDirective
-  | resourceDirective
-  | variableDirective
-  | outputDirective
-  | moduleDirective
-  | dataDirective
+  : (providerDirective|terraformDirective|resourceDirective|variableDirective|outputDirective|moduleDirective|dataDirective)+ EOF
   ;
 
 dataDirective

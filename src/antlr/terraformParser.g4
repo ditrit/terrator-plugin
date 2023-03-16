@@ -55,16 +55,19 @@ type
   ;
 
 object
-  : (complexField|field)+ 
+  : (attributeBlock|dynamicBlock|field)+ 
   ;
 
 field
   : (IDENTIFIER|SOURCE) EQUAL expression
   ;
 
-complexField
-  : IDENTIFIER AO object AF
-  | IDENTIFIER EQUAL AO (STRING EQUAL STRING)+ AF
+attributeBlock
+  : IDENTIFIER EQUAL AO object* AF
+  ;
+
+dynamicBlock
+  : IDENTIFIER AO object* AF
   ;
 
 validation

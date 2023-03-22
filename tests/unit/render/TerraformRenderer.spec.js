@@ -319,6 +319,100 @@ describe('Test TerraformRenderer', () => {
 
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
+      it('Should parse and differentiate attribute and dynamic blocks', () => {
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: fs.readFileSync('tests/resources/tf/complex_field.tf', 'utf8'),
+        });
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+
+        metadata.parse();
+
+        const parser = new TerraformParser(metadata.pluginData);
+
+        parser.parse([input]);
+
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
+      });
+
+      it('Should render an empty resource', () => {
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: fs.readFileSync('tests/resources/tf/empty_resource.tf', 'utf8'),
+        });
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+
+        metadata.parse();
+
+        const parser = new TerraformParser(metadata.pluginData);
+
+        parser.parse([input]);
+
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
+      });
+
+      it('Should render a resource with attributes and blocks', () => {
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: fs.readFileSync('tests/resources/tf/attributes_and_blocks.tf', 'utf8'),
+        });
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+
+        metadata.parse();
+
+        const parser = new TerraformParser(metadata.pluginData);
+
+        parser.parse([input]);
+
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
+      });
+
+      it('Should render a resource with 2 tags block', () => {
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: fs.readFileSync('tests/resources/tf/double_tags.tf', 'utf8'),
+        });
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+
+        metadata.parse();
+
+        const parser = new TerraformParser(metadata.pluginData);
+
+        parser.parse([input]);
+
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
+      });
+
+      it('Should render a resource with a reference attribute', () => {
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: fs.readFileSync('tests/resources/tf/double_tags.tf', 'utf8'),
+        });
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+
+        metadata.parse();
+
+        const parser = new TerraformParser(metadata.pluginData);
+
+        parser.parse([input]);
+
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
+      });
     });
   });
 });

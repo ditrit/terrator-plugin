@@ -37,7 +37,7 @@ class TerraformParser extends DefaultParser {
         const tokens = new antlr4.CommonTokenStream(lexer);
         const parser = new Parser(tokens);
         parser.buildParseTrees = true;
-        const tree = parser.file();
+        const tree = parser.file_();
         antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
       });
 

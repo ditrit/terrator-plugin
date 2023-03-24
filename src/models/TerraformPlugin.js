@@ -6,7 +6,7 @@ import TerraformDrawer from 'src/draw/TerraformDrawer';
 import TerraformMetadata from 'src/metadata/TerraformMetadata';
 import TerraformParser from 'src/parser/TerraformParser';
 import TerraformRenderer from 'src/render/TerraformRenderer';
-import { name, version } from 'package.json';
+import packageInfo from 'package.json';
 
 /**
  * Terraform plugin.
@@ -17,8 +17,8 @@ class TerraformPlugin extends DefaultPlugin {
    */
   constructor() {
     const pluginData = new DefaultData({
-      name,
-      version,
+      name: packageInfo.name,
+      version: packageInfo.version,
       defaultFileName: 'new_file.tf',
     });
 

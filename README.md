@@ -1,5 +1,21 @@
 # terrator-plugin
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ditrit_terrator-plugin&metric=alert_status)](https://sonarcloud.io/summary/overall?id=ditrit_terrator-plugin)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=ditrit_terrator-plugin&metric=reliability_rating)](https://sonarcloud.io/summary/overall?id=ditrit_terrator-plugin)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=ditrit_terrator-plugin&metric=sqale_rating)](https://sonarcloud.io/summary/overall?id=ditrit_terrator-plugin)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=ditrit_terrator-plugin&metric=security_rating)](https://sonarcloud.io/summary/overall?id=ditrit_terrator-plugin)
+
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=ditrit_terrator-plugin&metric=code_smells)](https://sonarcloud.io/summary/overall?id=ditrit_terrator-plugin)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=ditrit_terrator-plugin&metric=bugs)](https://sonarcloud.io/summary/overall?id=ditrit_terrator-plugin)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=ditrit_terrator-plugin&metric=vulnerabilities)](https://sonarcloud.io/summary/overall?id=ditrit_terrator-plugin)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=ditrit_terrator-plugin&metric=sqale_index)](https://sonarcloud.io/summary/overall?id=ditrit_terrator-plugin)
+
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=ditrit_terrator-plugin&metric=ncloc)](https://sonarcloud.io/summary/overall?id=ditrit_terrator-plugin)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ditrit_terrator-plugin&metric=coverage)](https://sonarcloud.io/summary/overall?id=ditrit_terrator-plugin)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=ditrit_terrator-plugin&metric=duplicated_lines_density)](https://sonarcloud.io/summary/overall?id=ditrit_terrator-plugin)
+
+[![](https://dcbadge.vercel.app/api/server/zkKfj9gj2C?style=flat&theme=default-inverted)](https://discord.gg/zkKfj9gj2C)
+
 Plugin for managing Terraform files in [Leto-Modelizer](https://github.com/ditrit/leto-modelizer).
 
 ## Build your plugin

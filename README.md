@@ -8,7 +8,42 @@ Plugin for managing Terraform files in [Leto-Modelizer](https://github.com/ditri
 npm run build
 ```
 
+## Grammar
+
+We use the grammar from the [official antlr4 grammar repository](https://github.com/antlr/grammars-v4/tree/master/terraform).
+
+| Supported block types | Unsupported block types |
+| --------------------- | ----------------------- |
+| resource              | terraform               |
+| data                  | local                   |
+| provider              | provisioner             |
+| output                |                         |
+| module                |                         |
+| variable              |                         |
+
 ## Development
+
+### Generate the parser
+
+We use antlr4 to generate the Terraform parser. Follow [these steps](https://github.com/antlr/antlr4/blob/master/doc/getting-started.md#unix) from the official antlr4 repository to install it.
+
+Make sure your `CLASSPATH` environment variable is set.
+
+The default antlr4 executable path is set to `/usr/local/lib/antlr-4.11.0-complete.jar` on Linux and `C:\Javalib\antlr-4.11.0-complete.jar` on Windows.
+
+You  can use the `ANTLR4_PATH` environment variable to specify your own antlr4 executable path. For example, on Linux:
+
+
+```
+export ANTLR4_PATH="/usr/local/lib/antlr-4.11.0-complete.jar"
+```
+
+
+You can then run:
+
+```
+npm run parser:generate
+```
 
 ### How to release
 

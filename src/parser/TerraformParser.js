@@ -24,13 +24,44 @@ class TerraformParser extends DefaultParser {
    * Convert the content of files into Components.
    *
    * @param {FileInput[]} [inputs=[]] - Data you want to parse.
+   * @param {string} [parentEventId=null] - Parent event id.
    */
-  parse(inputs = []) {
+  parse(inputs = [], parentEventId = null) {
     this.pluginData.components = [];
+
     const listener = new TerraformListener(this.pluginData.definitions.components);
+
     inputs
-      .filter(({ content }) => content !== null)
+      .filter(({ content }) => {
+        if (content !== null || content?.trim() === '') {
+          return true;
+        }
+
+        this.pluginData.emitEvent({
+          parent: parentEventId,
+          type: 'Parser',
+          action: 'read',
+          status: 'warning',
+          data: {
+            code: 'no_content',
+            global: false,
+          },
+        });
+
+        return false;
+      })
       .forEach((input) => {
+        const id = this.pluginData.emitEvent({
+          parent: parentEventId,
+          type: 'Parser',
+          action: 'read',
+          status: 'running',
+          files: [input.path],
+          data: {
+            global: false,
+          },
+        });
+
         listener.currentFile = input;
         const stream = new antlr4.InputStream(input.content);
         const lexer = new Lexer(stream);
@@ -39,6 +70,7 @@ class TerraformParser extends DefaultParser {
         parser.buildParseTrees = true;
         const tree = parser.file_();
         antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
+        this.pluginData.emitEvent({ id, status: 'success' });
       });
 
     listener.components.forEach((component) => {
@@ -47,6 +79,7 @@ class TerraformParser extends DefaultParser {
       }
       this.pluginData.components.push(component);
     });
+
     this.pluginData.parseErrors = listener.errors;
   }
 }

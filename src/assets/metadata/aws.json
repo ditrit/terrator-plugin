@@ -131,6 +131,16 @@
               "name": "instance_protocol",
               "type": "String",
               "required": true
+            },
+            {
+              "name": "ip",
+              "type": "Object",
+              "required": true,
+              "attributes": [{
+                "name": "value",
+                "type": "String",
+                "required": true
+              }]
             }
           ]
         },

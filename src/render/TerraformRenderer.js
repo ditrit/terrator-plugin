@@ -35,9 +35,10 @@ class TerraformRenderer extends DefaultRender {
   /**
    * Convert all provided components and links in terraform files.
    *
+   * @param {string} [parentEventId=null] - Parent event id.
    * @returns {FileInput[]} Array of generated files from components and links.
    */
-  renderFiles() {
+  renderFiles(parentEventId = null) {
     return this.generateFilesFromComponentsMap(
       this.pluginData.components.reduce(
         (map, component) => {
@@ -50,6 +51,7 @@ class TerraformRenderer extends DefaultRender {
         },
         new Map(),
       ),
+      parentEventId,
     );
   }
 
@@ -57,16 +59,32 @@ class TerraformRenderer extends DefaultRender {
    * Render files from related components.
    *
    * @param {Map<string,Component>} map - Component mapped by file name.
+   * @param {string} parentEventId - Parent event id.
    * @returns {FileInput[]} Render files array.
    */
-  generateFilesFromComponentsMap(map) {
+  generateFilesFromComponentsMap(map, parentEventId) {
     const files = [];
+
     map.forEach((components, path) => {
+      const id = this.pluginData.emitEvent({
+        parent: parentEventId,
+        type: 'Render',
+        action: 'write',
+        status: 'running',
+        files: [path],
+        data: {
+          global: false,
+        },
+      });
+
       files.push(new FileInput({
         path,
         content: `${this.template.render({ components }).trim()}\n`,
       }));
+
+      this.pluginData.emitEvent({ id, status: 'success' });
     });
+
     return files;
   }
 }

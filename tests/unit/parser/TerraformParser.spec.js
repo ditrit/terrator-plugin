@@ -306,7 +306,7 @@ describe('Test TerraformParser', () => {
       it('Should fix missing object attribute definition, https://github.com/ditrit/terrator-plugin/issues/67', () => {
         const metadata = getTerraformMetadata(
           'aws',
-          'src/assets/metadata/aws.json',
+          'tests/resources/metadata/bug67_missingDefinitionOnAttribute.json',
         );
         metadata.parse();
         metadata.pluginData.initLinkDefinitions();

@@ -1,0 +1,96 @@
+{
+    "name": "aws",
+    "model": "DefaultModel",
+    "icon": "Aws",
+    "isContainer": false,
+    "attributes": [],
+    "data": [],
+    "modules": [],
+    "resources": [
+        {
+            "type": "resourcea",
+            "model": "resourcea_model",
+            "icon": "resourcea_icon",
+            "isContainer": false,
+            "attributes": [
+                {
+                    "name": "listener",
+                    "type": "Object",
+                    "required": true,
+                    "attributes": [
+                        {
+                            "name": "instance_port",
+                            "type": "Number",
+                            "required": true
+                        },
+                        {
+                            "name": "otherObject",
+                            "type": "Object",
+                            "required": true,
+                            "attributes": [
+                                {
+                                    "name": "otherAttribute",
+                                    "type": "Number",
+                                    "required": true
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "aws_elb",
+            "model": "DefaultModel",
+            "icon": "Aws_Elastic-Load-Balancing_Network-Load-Balancer",
+            "attributes": [
+                {
+                    "name": "listener",
+                    "type": "Object",
+                    "required": true,
+                    "attributes": [
+                        {
+                            "name": "instance_port",
+                            "type": "String",
+                            "required": true
+                        },
+                        {
+                            "name": "lb_port",
+                            "type": "Number",
+                            "required": true
+                        },
+                        {
+                            "name": "lb_protocol",
+                            "type": "String",
+                            "required": true
+                        },
+                        {
+                            "name": "instance_protocol",
+                            "type": "String",
+                            "required": true
+                        }
+                    ]
+                },
+                {
+                    "name": "subnets",
+                    "type": "Link",
+                    "linkType": "Default",
+                    "linkRef": "aws_subnet"
+                },
+                {
+                    "name": "security_groups",
+                    "type": "Link",
+                    "linkType": "Default",
+                    "linkRef": "aws_security_group"
+                },
+                {
+                    "name": "instances",
+                    "type": "Link",
+                    "linkType": "Default",
+                    "linkRef": "aws_instance"
+                }
+            ]
+        }
+    ],
+    "variables": []
+}

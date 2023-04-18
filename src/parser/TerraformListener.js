@@ -215,7 +215,23 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   }
 
   // Enter a parse tree produced by terraformParser#argument.
-  enterArgument() {
+  enterArgument(ctx) {
+    if (ctx.expression()?.section()?.map_()) {
+      if (this.currentObjectField) {
+        this.fieldsTree.push(this.currentObjectField);
+      }
+      const name = ctx.identifier().getText();
+
+      this.currentObjectField = new TerraformComponentAttribute({
+        name,
+        type: 'Object',
+        value: [],
+        definition: this.getAttributeDefinition(
+          this.currentObjectField || this.currentComponent,
+          name,
+        ),
+      });
+    }
   }
 
   // Exit a parse tree produced by terraformParser#argument.
@@ -224,15 +240,12 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
       this.currentField.name = ctx.identifier().getText();
       if (this.currentObjectField) {
         this.currentObjectField.value.push(this.currentField);
-      } else {
-        this.currentComponent.attributes.push(this.currentField);
-      }
-      if (this.currentObjectField) {
         this.currentField.definition = this.getAttributeDefinition(
           this.currentObjectField,
           this.currentField.name,
         );
       } else {
+        this.currentComponent.attributes.push(this.currentField);
         this.currentField.definition = this.getAttributeDefinition(
           this.currentComponent,
           this.currentField.name,
@@ -240,13 +253,8 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
       }
     } else {
       this.currentObjectField.name = ctx.identifier().getText();
-      this.currentObjectField.definition = this.getAttributeDefinition(
-        this.currentComponent,
-        this.currentObjectField.name,
-      );
       if (this.fieldsTree.length > 0) {
         const field = this.fieldsTree.pop();
-
         field.value.push(this.currentObjectField);
         this.currentObjectField = field;
       } else {
@@ -387,13 +395,6 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
 
   // Enter a parse tree produced by terraformParser#map_.
   enterMap_() {
-    if (this.currentObjectField) {
-      this.fieldsTree.push(this.currentObjectField);
-    }
-    this.currentObjectField = new TerraformComponentAttribute({
-      value: [],
-      type: 'Object',
-    });
   }
 
   // Exit a parse tree produced by terraformParser#map_.

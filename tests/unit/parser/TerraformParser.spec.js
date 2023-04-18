@@ -17,6 +17,7 @@ import linkReverseMultiple from 'tests/resources/js/linkReverseMultiple';
 import subObject from 'tests/resources/js/subObject';
 import objectAttributeDefinition from 'tests/resources/js/objectAttributeDefinition';
 import referenceAttribute from 'tests/resources/js/referenceAttribute';
+import missingDefinitionOnAttribute from 'tests/resources/js/bug67_missingDefinitionOnAttribute';
 
 describe('Test TerraformParser', () => {
   describe('Test methods', () => {
@@ -300,6 +301,24 @@ describe('Test TerraformParser', () => {
         parser.parse([input]);
 
         expect(metadata.pluginData.components).toEqual(referenceAttribute);
+      });
+
+      it('Should fix missing object attribute definition, https://github.com/ditrit/terrator-plugin/issues/67', () => {
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+        metadata.parse();
+        metadata.pluginData.initLinkDefinitions();
+        const parser = new TerraformParser(metadata.pluginData);
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: fs.readFileSync('tests/resources/tf/bug67_missingDefinitionOnAttribute.tf', 'utf8'),
+        });
+
+        parser.parse([input]);
+
+        expect(metadata.pluginData.components).toEqual(missingDefinitionOnAttribute);
       });
     });
   });

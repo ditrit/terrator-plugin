@@ -240,6 +240,10 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
       }
     } else {
       this.currentObjectField.name = ctx.identifier().getText();
+      this.currentObjectField.definition = this.getAttributeDefinition(
+        this.currentComponent,
+        this.currentObjectField.name,
+      );
       if (this.fieldsTree.length > 0) {
         const field = this.fieldsTree.pop();
 

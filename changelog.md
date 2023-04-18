@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Parsing error when a component had an empty body
+- Fix missing object attribute definition, [bug link](https://github.com/ditrit/terrator-plugin/issues/67).
 
 ## [0.1.12] - 2023/02/09
 

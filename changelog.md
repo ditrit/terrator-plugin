@@ -7,15 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
-
-- Update plugin-core to version 0.14.0
-- ANTLR parser and lexer with [official ANTLR terraform grammar](https://github.com/antlr/grammars-v4/tree/master/terraform)
-
 ### Added
 
 - Differentiate between attribute blocks and dynamic blocks
 - Script to generate the parser from the grammar using npm cli
+- Add events related to parsing and rendering
+
+### Changed
+
+- Update plugin-core to version 0.15.1
+- ANTLR parser and lexer with [official ANTLR terraform grammar](https://github.com/antlr/grammars-v4/tree/master/terraform)
 
 ### Fixed
 

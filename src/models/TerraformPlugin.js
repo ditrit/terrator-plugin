@@ -1,12 +1,12 @@
 import {
   DefaultPlugin,
-  DefaultData,
 } from 'leto-modelizer-plugin-core';
 import TerraformDrawer from 'src/draw/TerraformDrawer';
 import TerraformMetadata from 'src/metadata/TerraformMetadata';
 import TerraformParser from 'src/parser/TerraformParser';
 import TerraformRenderer from 'src/render/TerraformRenderer';
 import TerraformConfiguration from 'src/models/TerraformConfiguration';
+import TerraformData from 'src/models/TerraformData';
 import packageInfo from 'package.json';
 
 /**
@@ -26,7 +26,7 @@ class TerraformPlugin extends DefaultPlugin {
       defaultFileName: 'new_file.tf',
       defaultFileExtension: 'tf',
     });
-    const pluginData = new DefaultData(configuration, {
+    const pluginData = new TerraformData(configuration, {
       name: packageInfo.name,
       version: packageInfo.version,
     }, props.event);

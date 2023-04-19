@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Differentiate between attribute blocks and dynamic blocks
 - Script to generate the parser from the grammar using npm cli
 - Add events related to parsing and rendering
+- Configuration for syntax color in Monaco
 
 ### Changed
 

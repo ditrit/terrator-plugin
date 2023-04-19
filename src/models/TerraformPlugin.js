@@ -6,6 +6,7 @@ import TerraformDrawer from 'src/draw/TerraformDrawer';
 import TerraformMetadata from 'src/metadata/TerraformMetadata';
 import TerraformParser from 'src/parser/TerraformParser';
 import TerraformRenderer from 'src/render/TerraformRenderer';
+import TerraformConfiguration from 'src/models/TerraformConfiguration';
 import packageInfo from 'package.json';
 
 /**
@@ -34,6 +35,7 @@ class TerraformPlugin extends DefaultPlugin {
       pluginMetadata: new TerraformMetadata(pluginData),
       pluginParser: new TerraformParser(pluginData),
       pluginRenderer: new TerraformRenderer(pluginData),
+      configuration: new TerraformConfiguration(),
     });
   }
 }

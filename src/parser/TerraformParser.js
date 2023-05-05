@@ -21,6 +21,25 @@ class TerraformParser extends DefaultParser {
   }
 
   /**
+   * Get the list of model paths from all files.
+   *
+   * @param {FileInformation[]} [files=[]] - List of files.
+   * @returns {string[]} List of folder paths that represent a model.
+   */
+  getModels(files = []) {
+    return files.filter((file) => this.isParsable(file))
+      .reduce((acc, { path }) => {
+        const model = path.split('/').slice(0, -1).join('/');
+
+        if (!acc.includes(model)) {
+          acc.push(model);
+        }
+
+        return acc;
+      }, []);
+  }
+
+  /**
    * Convert the content of files into Components.
    *
    * @param {FileInput[]} [inputs=[]] - Data you want to parse.

@@ -16,8 +16,8 @@ class TerraformParser extends DefaultParser {
    * @param {FileInformation} [fileInformation] - File information.
    * @returns {boolean} Boolean that indicates if this file can be parsed or not.
    */
-  isParsable(fileInformation) {
-    return /^.*\.tf$/.test(fileInformation.path);
+  isParsable({ path }) {
+    return /^.*\.tf$/.test(path);
   }
 
   /**

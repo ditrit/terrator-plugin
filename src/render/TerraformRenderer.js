@@ -11,7 +11,6 @@ import {
 class TerraformRenderer extends DefaultRender {
   /**
    * Default constructor, initialize nunjucks library and template.
-   *
    * @param {object} pluginData - Plugin data with components
    */
   constructor(pluginData) {
@@ -34,7 +33,6 @@ class TerraformRenderer extends DefaultRender {
 
   /**
    * Convert all provided components and links in terraform files.
-   *
    * @param {string} [parentEventId=null] - Parent event id.
    * @returns {FileInput[]} Array of generated files from components and links.
    */
@@ -57,7 +55,6 @@ class TerraformRenderer extends DefaultRender {
 
   /**
    * Render files from related components.
-   *
    * @param {Map<string,Component>} map - Component mapped by file name.
    * @param {string} parentEventId - Parent event id.
    * @returns {FileInput[]} Render files array.

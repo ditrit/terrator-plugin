@@ -37,6 +37,34 @@ describe('Test TerraformParser', () => {
       });
     });
 
+    describe('Test method: getModels', () => {
+      it('should return an empty array without parameter', () => {
+        const parser = new TerraformParser();
+
+        expect(parser.getModels()).toEqual([]);
+      });
+
+      it('should return an empty array if there are no files', () => {
+        const parser = new TerraformParser();
+
+        expect(parser.getModels([])).toEqual([]);
+      });
+
+      it('should return only folder path models that contain parsable files', () => {
+        const parser = new TerraformParser();
+        const files = [
+          new FileInformation({ path: 'terraform/file.tf' }),
+          new FileInformation({ path: 'terraform/readme.md' }),
+          new FileInformation({ path: 'terraform/infra1/main.tf' }),
+          new FileInformation({ path: 'terraform/infra1/main2.tf' }),
+          new FileInformation({ path: 'common/README.md' }),
+          new FileInformation({ path: 'tests/units/example.tf' }),
+        ];
+
+        expect(parser.getModels(files)).toEqual(['terraform', 'terraform/infra1', 'tests/units']);
+      });
+    });
+
     describe('Test method: parse', () => {
       it('Test default parse', () => {
         const { pluginData } = getTerraformMetadata(

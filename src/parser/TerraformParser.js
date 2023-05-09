@@ -12,7 +12,6 @@ import Parser from 'src/antlr/terraformParser';
 class TerraformParser extends DefaultParser {
   /**
    * Indicate if this parser can parse this file.
-   *
    * @param {FileInformation} [fileInformation] - File information.
    * @returns {boolean} Boolean that indicates if this file can be parsed or not.
    */
@@ -22,7 +21,6 @@ class TerraformParser extends DefaultParser {
 
   /**
    * Get the list of model paths from all files.
-   *
    * @param {FileInformation[]} [files=[]] - List of files.
    * @returns {string[]} List of folder paths that represent a model.
    */
@@ -41,7 +39,6 @@ class TerraformParser extends DefaultParser {
 
   /**
    * Convert the content of files into Components.
-   *
    * @param {FileInput[]} [inputs=[]] - Data you want to parse.
    * @param {string} [parentEventId=null] - Parent event id.
    */

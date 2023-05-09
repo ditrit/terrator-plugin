@@ -21,7 +21,6 @@ class TerraformMetadata extends DefaultMetadata {
 
   /**
    * Validate the provided metadata with a schemas.
-   *
    * @returns {boolean} True if metadata is valid.
    */
   validate() {
@@ -55,7 +54,6 @@ class TerraformMetadata extends DefaultMetadata {
 
   /**
    * Get all component definitions from metadata.
-   *
    * @returns {ComponentDefinition[]} Array of component definitions.
    */
   getComponentDefinitions() {
@@ -93,7 +91,6 @@ class TerraformMetadata extends DefaultMetadata {
 
   /**
    * Get provider definition.
-   *
    * @param {object} provider - Provider from metadata to parse.
    * @returns {TerraformComponentDefinition} Parsed provider component Definition.
    */
@@ -118,7 +115,6 @@ class TerraformMetadata extends DefaultMetadata {
 
   /**
    * Get block definition.
-   *
    * @param {string} blockType - Block type, can be module/data/resource/variable.
    * @param {string} providerName - Name of related provider.
    * @param {object} block - Block to parse.
@@ -146,7 +142,6 @@ class TerraformMetadata extends DefaultMetadata {
 
   /**
    * Get attribute definition.
-   *
    * @param {object} attribute - Attribute to parse.
    * @returns {ComponentAttributeDefinition} Parsed attribute.
    */
@@ -160,7 +155,6 @@ class TerraformMetadata extends DefaultMetadata {
 
   /**
    * Get all possible parent container types.
-   *
    * @param {TerraformComponentDefinition} componentDefinition - Definition to get all parent
    * container types.
    * @returns {string[]} All possible parent container types.
@@ -179,7 +173,6 @@ class TerraformMetadata extends DefaultMetadata {
 
   /**
    * Set all possible children container types.
-   *
    * @param {ComponentDefinition[]} componentDefinitions - Array of component definitions.
    * container types.
    */

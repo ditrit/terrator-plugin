@@ -22,10 +22,13 @@ class TerraformPlugin extends DefaultPlugin {
   constructor(props = {
     event: null,
   }) {
-    const pluginData = new DefaultData({
+    const configuration = new TerraformConfiguration({
+      defaultFileName: 'new_file.tf',
+      defaultFileExtension: 'tf',
+    });
+    const pluginData = new DefaultData(configuration, {
       name: packageInfo.name,
       version: packageInfo.version,
-      defaultFileName: 'new_file.tf',
     }, props.event);
 
     super({
@@ -34,7 +37,7 @@ class TerraformPlugin extends DefaultPlugin {
       pluginMetadata: new TerraformMetadata(pluginData),
       pluginParser: new TerraformParser(pluginData),
       pluginRenderer: new TerraformRenderer(pluginData),
-      configuration: new TerraformConfiguration(),
+      configuration,
     });
   }
 }

@@ -7,10 +7,16 @@ import syntax from 'src/configuration/syntax';
 class TerraformConfiguration extends DefaultConfiguration {
   /**
    * Default constructor.
+   * @param {object} [props] - Object that contains all properties to set.
    */
-  constructor() {
+  constructor(props) {
     super({
-      editor: { syntax },
+      ...props,
+      editor: {
+        ...props.editor,
+        syntax,
+      },
+      tags: ['Terraform', 'Infrastructure', 'IaC'],
     });
   }
 }

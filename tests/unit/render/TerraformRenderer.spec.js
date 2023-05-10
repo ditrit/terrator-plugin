@@ -4,13 +4,13 @@ import TerraformParser from 'src/parser/TerraformParser';
 import {
   Component,
   ComponentAttribute,
-  ComponentAttributeDefinition,
-  DefaultData,
   FileInformation,
   FileInput,
 } from 'leto-modelizer-plugin-core';
+import TerraformData from 'src/models/TerraformData';
 import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
 import { getTerraformMetadata } from 'tests/resources/utils';
+import TerraformComponentAttributeDefinition from 'src/models/TerraformComponentAttributeDefinition';
 
 describe('Test TerraformRenderer', () => {
   it('Test constructor', () => {
@@ -54,16 +54,7 @@ describe('Test TerraformRenderer', () => {
         ];
         parser.parse(new FileInformation({ path: './' }), inputs);
 
-        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([
-          new FileInput({
-            path: './link_default_single.tf',
-            content: fs.readFileSync('tests/resources/tf/link_default_single.tf', 'utf8'),
-          }),
-          new FileInput({
-            path: './link_reverse_single.tf',
-            content: fs.readFileSync('tests/resources/tf/link_reverse_single.tf', 'utf8'),
-          }),
-        ]);
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual(inputs);
       });
 
       it('Should render container with empty attributes', () => {
@@ -167,7 +158,7 @@ describe('Test TerraformRenderer', () => {
           content: fs.readFileSync('tests/resources/tf/link_default_multiple.tf', 'utf8'),
         });
 
-        const pluginData = new DefaultData();
+        const pluginData = new TerraformData();
         pluginData.components = [
           new Component({
             name: 'parent_default_multiple_1',
@@ -179,7 +170,7 @@ describe('Test TerraformRenderer', () => {
               type: 'parent',
               icon: 'parent',
               model: 'DefaultModel',
-              definedAttributes: [new ComponentAttributeDefinition({
+              definedAttributes: [new TerraformComponentAttributeDefinition({
                 name: 'toChild',
                 type: 'Link',
                 linkType: 'Default',
@@ -193,7 +184,7 @@ describe('Test TerraformRenderer', () => {
             }), new ComponentAttribute({
               name: 'toChild',
               value: ['child_default_multiple_1', 'child_default_multiple_2'],
-              type: 'String',
+              type: 'Link',
             })],
           }),
           new Component({
@@ -234,76 +225,135 @@ describe('Test TerraformRenderer', () => {
 
         expect(new TerraformRender(pluginData).renderFiles()).toEqual([input]);
       });
-    });
 
-    describe('Fix related bugs', () => {
-      it('Should fix prodiver rendering, https://github.com/ditrit/terrator-plugin/issues/22', () => {
+      it('Should render a resource with a reference variable', () => {
         const input = new FileInput({
           path: 'new_file.tf',
-          content: fs.readFileSync('tests/resources/tf/bug22_providerRendering.tf', 'utf8'),
-        });
-
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
-        metadata.parse();
-
-        metadata.pluginData.components = [
-          new Component({
-            path: 'new_file.tf',
-            id: 'object_64f4f095',
-            name: 'object_64f4f095',
-            definition: metadata.pluginData.definitions.components
-              .find((definition) => definition.blockType === 'provider'),
-          }),
-        ];
-        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
-      });
-
-      it('Should fix module rendering, https://github.com/ditrit/terrator-plugin/issues/25', () => {
-        const input = new FileInput({
-          path: 'new_file.tf',
-          content: fs.readFileSync('tests/resources/tf/bug25_moduleRendering.tf', 'utf8'),
+          content: fs.readFileSync('tests/resources/tf/variable_reference.tf', 'utf8'),
         });
         const metadata = getTerraformMetadata(
           'aws',
           'src/assets/metadata/aws.json',
         );
-
         metadata.parse();
-
-        metadata.pluginData.components = [
-          new Component({
-            path: 'new_file.tf',
-            id: 'object_64f4f095',
-            name: 'object_64f4f095',
-            definition: metadata.pluginData.definitions.components
-              .find(({ blockType, type }) => blockType === 'module' && type === 'server'),
-          }),
-        ];
-
-        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
-      });
-
-      it('Should fix render of an object attribute, https://github.com/ditrit/terrator-plugin/issues/46', () => {
-        const input = new FileInput({
-          path: 'new_file.tf',
-          content: fs.readFileSync('tests/resources/tf/bug41_subObject.tf', 'utf8'),
-        });
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
-
-        metadata.parse();
-
         const parser = new TerraformParser(metadata.pluginData);
-
         parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
 
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
+
+      it('Should render a resource with an ID reference', () => {
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: fs.readFileSync('tests/resources/tf/id_reference.tf', 'utf8'),
+        });
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+        metadata.parse();
+        const parser = new TerraformParser(metadata.pluginData);
+        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
+      });
+
+      it('Should render a resource with an name reference', () => {
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: fs.readFileSync('tests/resources/tf/name_reference.tf', 'utf8'),
+        });
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+        metadata.parse();
+        const parser = new TerraformParser(metadata.pluginData);
+        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
+      });
+
+      it('Should render an output variable', () => {
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: fs.readFileSync('tests/resources/tf/output.tf', 'utf8'),
+        });
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+        metadata.parse();
+        const parser = new TerraformParser(metadata.pluginData);
+        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
+      });
+
+      it('Should render resources referencing other resources', () => {
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: fs.readFileSync('tests/resources/tf/multiple_references.tf', 'utf8'),
+        });
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+        metadata.parse();
+        const parser = new TerraformParser(metadata.pluginData);
+        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
+      });
+
+      it('Should render a resource containing multiple references in one argument', () => {
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: fs.readFileSync('tests/resources/tf/multiple_links.tf', 'utf8'),
+        });
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+        metadata.parse();
+        const parser = new TerraformParser(metadata.pluginData);
+        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
+      });
+
+      it('Should render a resource with a local variable reference', () => {
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: fs.readFileSync('tests/resources/tf/local_reference.tf', 'utf8'),
+        });
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+        metadata.parse();
+        const parser = new TerraformParser(metadata.pluginData);
+        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
+      });
+
+      it('Should render main file', () => {
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: fs.readFileSync('tests/resources/tf/main.tf', 'utf8'),
+        });
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+        metadata.parse();
+        const parser = new TerraformParser(metadata.pluginData);
+        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
+      });
+
       it('Should parse and differentiate attribute and dynamic blocks', () => {
         const input = new FileInput({
           path: 'new_file.tf',
@@ -384,6 +434,114 @@ describe('Test TerraformRenderer', () => {
         const input = new FileInput({
           path: 'new_file.tf',
           content: fs.readFileSync('tests/resources/tf/double_tags.tf', 'utf8'),
+        });
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+
+        metadata.parse();
+
+        const parser = new TerraformParser(metadata.pluginData);
+
+        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
+      });
+
+      it('Should render an argument with an index', () => {
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: fs.readFileSync('tests/resources/tf/index_argument.tf', 'utf8'),
+        });
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+
+        metadata.parse();
+
+        const parser = new TerraformParser(metadata.pluginData);
+
+        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
+      });
+
+      it('Should render a variable with a list as default value', () => {
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: fs.readFileSync('tests/resources/tf/array_variable.tf', 'utf8'),
+        });
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+
+        metadata.parse();
+
+        const parser = new TerraformParser(metadata.pluginData);
+
+        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
+      });
+    });
+
+    describe('Fix related bugs', () => {
+      it('Should fix prodiver rendering, https://github.com/ditrit/terrator-plugin/issues/22', () => {
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: fs.readFileSync('tests/resources/tf/bug22_providerRendering.tf', 'utf8'),
+        });
+
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+        metadata.parse();
+
+        metadata.pluginData.components = [
+          new Component({
+            path: 'new_file.tf',
+            id: 'object_64f4f095',
+            name: 'object_64f4f095',
+            definition: metadata.pluginData.definitions.components
+              .find((definition) => definition.blockType === 'provider'),
+          }),
+        ];
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
+      });
+
+      it('Should fix module rendering, https://github.com/ditrit/terrator-plugin/issues/25', () => {
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: fs.readFileSync('tests/resources/tf/bug25_moduleRendering.tf', 'utf8'),
+        });
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+
+        metadata.parse();
+
+        metadata.pluginData.components = [
+          new Component({
+            path: 'new_file.tf',
+            id: 'object_64f4f095',
+            name: 'object_64f4f095',
+            definition: metadata.pluginData.definitions.components
+              .find(({ blockType, type }) => blockType === 'module' && type === 'server'),
+          }),
+        ];
+
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
+      });
+
+      it('Should fix render of an object attribute, https://github.com/ditrit/terrator-plugin/issues/46', () => {
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: fs.readFileSync('tests/resources/tf/bug41_subObject.tf', 'utf8'),
         });
         const metadata = getTerraformMetadata(
           'aws',

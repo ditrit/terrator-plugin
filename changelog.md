@@ -10,51 +10,56 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Add `getModels` function in `TerraformParser` to get the list of folder paths that represent a model.
+- Add default terraform icon.
+
+### Changed
+
+- Update plugin-core to version 0.16.0.
 
 ## [0.2.0] - 2023/04/19
 
 ### Added
 
-- Differentiate between attribute blocks and dynamic blocks
-- Script to generate the parser from the grammar using npm cli
-- Add events related to parsing and rendering
-- Configuration for syntax color in Monaco
+- Differentiate between attribute blocks and dynamic blocks.
+- Script to generate the parser from the grammar using npm cli.
+- Add events related to parsing and rendering.
+- Configuration for syntax color in Monaco.
 
 ### Changed
 
-- Update plugin-core to version 0.15.1
-- ANTLR parser and lexer with [official ANTLR terraform grammar](https://github.com/antlr/grammars-v4/tree/master/terraform)
+- Update plugin-core to version 0.15.1.
+- ANTLR parser and lexer with [official ANTLR terraform grammar](https://github.com/antlr/grammars-v4/tree/master/terraform).
 
 ### Fixed
 
-- Parsing error when a component had an empty body
+- Parsing error when a component had an empty body.
 - Fix missing object attribute definition, [bug link](https://github.com/ditrit/terrator-plugin/issues/67).
 
 ## [0.1.12] - 2023/02/09
 
 ### Changed
 
-- Update plugin-core to version 0.13.0
+- Update plugin-core to version 0.13.0.
 
 ## [0.1.11] - 2023/02/07
 
 ### Fixed
 
-- Update plugin-core to version 0.12.1 to fix some bugs
+- Update plugin-core to version 0.12.1 to fix some bugs.
 
 ## [0.1.10] - 2023/02/02
 
 ### Changed
 
-- Update plugin-core to version 0.12.0
+- Update plugin-core to version 0.12.0.
 
 ## [0.1.9] - 2023/01/31
 
 ### Changed
 
-- Template of models (container and component)
-- Icons size to fit into the new models
-- Update all project dependencies
+- Template of models (container and component).
+- Icons size to fit into the new models.
+- Update all project dependencies.
 
 ### Fixed
 
@@ -67,36 +72,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Replace documentation generation library ESDoc by JSDoc
-- Update plugin-core to version 0.11.0
+- Replace documentation generation library ESDoc by JSDoc.
+- Update plugin-core to version 0.11.0.
 
 ### Removed
 
-- Children management in parser and render
+- Children management in parser and render.
 
 ## [0.1.7] - 2022/11/28
 
 ### Fixed
 
-- Fix package-lock of plugin-core
+- Fix package-lock of plugin-core.
 
 ## [0.1.6] - 2022/11/28
 
 ### Changed
 
-- Update plugin-core to version 0.10.0
+- Update plugin-core to version 0.10.0.
 
 ## [0.1.5] - 2022/11/25
 
 ### Fixed
 
-- Fix default file name for new component
+- Fix default file name for new component.
 
 ## [0.1.4] - 2022/11/24
 
 ### Changed
 
-- Update plugin-core to version 0.9.1
+- Update plugin-core to version 0.9.1.
 
 ### Fixed
 
@@ -107,35 +112,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Add missing icon for aws provider and aws db instance
-- Fix oversize of all icons
-- Fix container metadata in aws metadata
-- Fix empty display for aws provider
-- Add default values to metadata properties `attributes` and `isContainer`
+- Add missing icon for aws provider and aws db instance.
+- Fix oversize of all icons.
+- Fix container metadata in aws metadata.
+- Fix empty display for aws provider.
+- Add default values to metadata properties `attributes` and `isContainer`.
 
 ## [0.1.2] - 2022/10/05
 
 ### Fixed
 
-- Fix icons size in models
+- Fix icons size in models.
 
 ## [0.1.1] - 2022/10/05
 
 ### Changed
 
-- Update plugin-core to version 0.6.0
+- Update plugin-core to version 0.6.0.
 
 ## [0.1.0] - 2022/09/20
 
 ### Added
 
-- Setup GitHub workflow
-- Setup default plugin structure
-- Set default metadata parser and validator
-- Add metadata for aws
-- Add parser for terraform files
-- Add renderer for terraform files
-- Import metadata instead of passing it through constructor in TerraformMetadata
+- Setup GitHub workflow.
+- Setup default plugin structure.
+- Set default metadata parser and validator.
+- Add metadata for aws.
+- Add parser for terraform files.
+- Add renderer for terraform files.
+- Import metadata instead of passing it through constructor in TerraformMetadata.
 
 [0.2.0]: https://github.com/ditrit/terrator-plugin/blob/0.2.0/changelog.md
 [0.1.12]: https://github.com/ditrit/terrator-plugin/blob/0.1.12/changelog.md

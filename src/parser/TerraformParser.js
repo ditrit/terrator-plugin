@@ -21,7 +21,7 @@ class TerraformParser extends DefaultParser {
 
   /**
    * Get the list of model paths from all files.
-   * @param {FileInformation[]} [files=[]] - List of files.
+   * @param {FileInformation[]} [files] - List of files.
    * @returns {string[]} List of folder paths that represent a model.
    */
   getModels(files = []) {
@@ -39,8 +39,8 @@ class TerraformParser extends DefaultParser {
 
   /**
    * Convert the content of files into Components.
-   * @param {FileInput[]} [inputs=[]] - Data you want to parse.
-   * @param {string} [parentEventId=null] - Parent event id.
+   * @param {FileInput[]} [inputs] - Data you want to parse.
+   * @param {string} [parentEventId] - Parent event id.
    */
   parse(inputs = [], parentEventId = null) {
     this.pluginData.components = [];

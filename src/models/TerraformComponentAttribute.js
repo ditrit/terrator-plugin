@@ -8,7 +8,7 @@ class TerraformComponentAttribute extends ComponentAttribute {
   /**
    * Override ComponentAttribute constructor with isDynamic property.
    * @param {object} props - Terraform block properties.
-   * @param {boolean} [props.isDynamic=false] - Whether the block is dynamic or not.
+   * @param {boolean} [props.isDynamic] - Whether the block is dynamic or not.
    * @see ComponentAttribute
    */
   constructor(props = {
@@ -18,6 +18,7 @@ class TerraformComponentAttribute extends ComponentAttribute {
     /**
      * Whether the block is dynamic or not.
      * @type {boolean}
+     * @default false
      */
     this.isDynamic = props.isDynamic || false;
   }

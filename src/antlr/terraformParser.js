@@ -1,4 +1,4 @@
-// Generated from java-escape by ANTLR 4.11.0-SNAPSHOT
+// Generated from src/antlr/terraform.g4 by ANTLR 4.13.0
 // jshint ignore: start
 import antlr4 from 'antlr4';
 import terraformListener from 'src/parser/TerraformListener.js';
@@ -105,11 +105,11 @@ const atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
 
 const decisionsToDFA = atn.decisionToState.map( (ds, index) => new antlr4.dfa.DFA(ds, index) );
 
-const sharedContextCache = new antlr4.PredictionContextCache();
+const sharedContextCache = new antlr4.atn.PredictionContextCache();
 
 export default class terraformParser extends antlr4.Parser {
 
-    static grammarFileName = "java-escape";
+    static grammarFileName = "terraform.g4";
     static literalNames = [ null, "'terraform'", "'resource'", "'data'", 
                             "'output'", "'locals'", "'module'", "'='", "'local'", 
                             "'var'", "'?'", "':'", "'for'", "'jsonencode'", 
@@ -143,10 +143,6 @@ export default class terraformParser extends antlr4.Parser {
         this.symbolicNames = terraformParser.symbolicNames;
     }
 
-    get atn() {
-        return atn;
-    }
-
     sempred(localctx, ruleIndex, predIndex) {
     	switch(ruleIndex) {
     	case 19:
@@ -173,7 +169,7 @@ export default class terraformParser extends antlr4.Parser {
 	file_() {
 	    let localctx = new File_Context(this, this._ctx, this.state);
 	    this.enterRule(localctx, 0, terraformParser.RULE_file_);
-	    var _la = 0; // Token type
+	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 76; 
@@ -221,7 +217,7 @@ export default class terraformParser extends antlr4.Parser {
 	            this.state = 78; 
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	        } while((((_la) & ~0x1f) == 0 && ((1 << _la) & 3221225598) !== 0));
+	        } while((((_la) & ~0x1f) === 0 && ((1 << _la) & 3221225598) !== 0));
 	        this.state = 80;
 	        this.match(terraformParser.EOF);
 	    } catch (re) {
@@ -459,7 +455,7 @@ export default class terraformParser extends antlr4.Parser {
 	block() {
 	    let localctx = new BlockContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 18, terraformParser.RULE_block);
-	    var _la = 0; // Token type
+	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 114;
@@ -587,7 +583,7 @@ export default class terraformParser extends antlr4.Parser {
 	blockbody() {
 	    let localctx = new BlockbodyContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 28, terraformParser.RULE_blockbody);
-	    var _la = 0; // Token type
+	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 131;
@@ -595,7 +591,7 @@ export default class terraformParser extends antlr4.Parser {
 	        this.state = 136;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        while((((_la) & ~0x1f) == 0 && ((1 << _la) & 3221226312) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & 16899) !== 0)) {
+	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 3221226312) !== 0) || ((((_la - 32)) & ~0x1f) === 0 && ((1 << (_la - 32)) & 16899) !== 0)) {
 	            this.state = 134;
 	            this._errHandler.sync(this);
 	            var la_ = this._interp.adaptivePredict(this._input,3,this._ctx);
@@ -663,16 +659,16 @@ export default class terraformParser extends antlr4.Parser {
 	identifier() {
 	    let localctx = new IdentifierContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 32, terraformParser.RULE_identifier);
-	    var _la = 0; // Token type
+	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 147;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if((((_la) & ~0x1f) == 0 && ((1 << _la) & 840) !== 0)) {
+	        if((((_la) & ~0x1f) === 0 && ((1 << _la) & 840) !== 0)) {
 	            this.state = 145;
 	            _la = this._input.LA(1);
-	            if(!((((_la) & ~0x1f) == 0 && ((1 << _la) & 840) !== 0))) {
+	            if(!((((_la) & ~0x1f) === 0 && ((1 << _la) & 840) !== 0))) {
 	            this._errHandler.recoverInline(this);
 	            }
 	            else {
@@ -704,7 +700,7 @@ export default class terraformParser extends antlr4.Parser {
 	identifierchain() {
 	    let localctx = new IdentifierchainContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 34, terraformParser.RULE_identifierchain);
-	    var _la = 0; // Token type
+	    var _la = 0;
 	    try {
 	        this.state = 178;
 	        this._errHandler.sync(this);
@@ -716,7 +712,7 @@ export default class terraformParser extends antlr4.Parser {
 	            this.enterOuterAlt(localctx, 1);
 	            this.state = 151;
 	            _la = this._input.LA(1);
-	            if(!(((((_la - 30)) & ~0x1f) == 0 && ((1 << (_la - 30)) & 65543) !== 0))) {
+	            if(!(((((_la - 30)) & ~0x1f) === 0 && ((1 << (_la - 30)) & 65543) !== 0))) {
 	            this._errHandler.recoverInline(this);
 	            }
 	            else {
@@ -1207,7 +1203,7 @@ export default class terraformParser extends antlr4.Parser {
 	functionarguments() {
 	    let localctx = new FunctionargumentsContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 50, terraformParser.RULE_functionarguments);
-	    var _la = 0; // Token type
+	    var _la = 0;
 	    try {
 	        this.state = 256;
 	        this._errHandler.sync(this);
@@ -1334,7 +1330,7 @@ export default class terraformParser extends antlr4.Parser {
 	list_() {
 	    let localctx = new List_Context(this, this._ctx, this.state);
 	    this.enterRule(localctx, 56, terraformParser.RULE_list_);
-	    var _la = 0; // Token type
+	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 267;
@@ -1342,7 +1338,7 @@ export default class terraformParser extends antlr4.Parser {
 	        this.state = 279;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if((((_la) & ~0x1f) == 0 && ((1 << _la) & 3222188872) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & 32683) !== 0)) {
+	        if((((_la) & ~0x1f) === 0 && ((1 << _la) & 3222188872) !== 0) || ((((_la - 32)) & ~0x1f) === 0 && ((1 << (_la - 32)) & 32683) !== 0)) {
 	            this.state = 268;
 	            this.expression(0);
 	            this.state = 273;
@@ -1391,7 +1387,7 @@ export default class terraformParser extends antlr4.Parser {
 	map_() {
 	    let localctx = new Map_Context(this, this._ctx, this.state);
 	    this.enterRule(localctx, 58, terraformParser.RULE_map_);
-	    var _la = 0; // Token type
+	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 283;
@@ -1399,7 +1395,7 @@ export default class terraformParser extends antlr4.Parser {
 	        this.state = 290;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        while((((_la) & ~0x1f) == 0 && ((1 << _la) & 3221226312) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & 16899) !== 0)) {
+	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 3221226312) !== 0) || ((((_la - 32)) & ~0x1f) === 0 && ((1 << (_la - 32)) & 16899) !== 0)) {
 	            this.state = 284;
 	            this.argument();
 	            this.state = 286;
@@ -1435,7 +1431,7 @@ export default class terraformParser extends antlr4.Parser {
 	string() {
 	    let localctx = new StringContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 60, terraformParser.RULE_string);
-	    var _la = 0; // Token type
+	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 295;
@@ -1466,7 +1462,7 @@ export default class terraformParser extends antlr4.Parser {
 	signed_number() {
 	    let localctx = new Signed_numberContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 62, terraformParser.RULE_signed_number);
-	    var _la = 0; // Token type
+	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 298;
@@ -1505,12 +1501,12 @@ export default class terraformParser extends antlr4.Parser {
 	operator_() {
 	    let localctx = new Operator_Context(this, this._ctx, this.state);
 	    this.enterRule(localctx, 64, terraformParser.RULE_operator_);
-	    var _la = 0; // Token type
+	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 302;
 	        _la = this._input.LA(1);
-	        if(!(((((_la - 18)) & ~0x1f) == 0 && ((1 << (_la - 18)) & 36863) !== 0))) {
+	        if(!(((((_la - 18)) & ~0x1f) === 0 && ((1 << (_la - 18)) & 36863) !== 0))) {
 	        this._errHandler.recoverInline(this);
 	        }
 	        else {

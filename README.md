@@ -45,7 +45,7 @@ We use antlr4 to generate the Terraform parser. Follow [these steps](https://git
 
 Make sure your `CLASSPATH` environment variable is set.
 
-The default antlr4 executable path is set to `/usr/local/lib/antlr-4.11.0-complete.jar` on Linux and `C:\Javalib\antlr-4.11.0-complete.jar` on Windows.
+The default antlr4 executable path is set to `/usr/local/lib/antlr-4.13.0-complete.jar` on Linux and `C:\Javalib\antlr-4.13.0-complete.jar` on Windows.
 
 You  can use the `ANTLR4_PATH` environment variable to specify your own antlr4 executable path. For example, on Linux:
 

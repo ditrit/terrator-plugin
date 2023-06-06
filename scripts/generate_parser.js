@@ -7,12 +7,12 @@ let classpath = '$CLASSPATH';
 let antlr4_path = process.env.ANTLR4_PATH
 
 if(!antlr4_path || antlr4_path == '' || antlr4_path === undefined) {
-    antlr4_path = '/usr/local/lib/antlr-4.11.0-complete.jar'
+    antlr4_path = '/usr/local/lib/antlr-4.13.0-complete.jar'
 }
 
 if (os.type() == 'Windows_NT') {
     classpath = '%CLASSPATH%'
-    antlr4_path = 'C:\\Javalib\\antlr-4.11.0-complete.jar'
+    antlr4_path = 'C:\\Javalib\\antlr-4.13.0-complete.jar'
 }
 
 new Promise(() => {

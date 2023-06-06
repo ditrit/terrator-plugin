@@ -1,9 +1,5 @@
-/*! Browser bundle of nunjucks 3.2.3  */
+/*! Browser bundle of nunjucks 3.2.4  */
 
 /*! For license information please see leto-modelizer-plugin-core.js.LICENSE.txt */
-
-/*! https://mths.be/codepointat v0.2.0 by @mathias */
-
-/*! https://mths.be/fromcodepoint v0.2.1 by @mathias */
 
 /** @license URI.js v4.4.1 (c) 2011 Gary Court. License: http://github.com/garycourt/uri-js */

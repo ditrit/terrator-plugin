@@ -338,6 +338,8 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
           value: val === 'null' ? null : val,
         });
       }
+    } else if (this.currentField.type === 'Array') {
+      this.currentField.value.push(getText(ctx));
     }
   }
 
@@ -383,14 +385,16 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
 
   // Enter a parse tree produced by terraformParser#list_.
   enterList_() {
+    if (!this.currentField) {
+      this.currentField = new TerraformComponentAttribute({
+        type: 'Array',
+        value: [],
+      });
+    }
   }
 
   // Exit a parse tree produced by terraformParser#list_.
-  exitList_(ctx) {
-    this.currentField.type = 'Array';
-    this.currentField.value = ctx.children
-      .map((value) => getText(value))
-      .filter((value) => value !== '[' && value !== ']' && value !== ',');
+  exitList_() {
   }
 
   // Enter a parse tree produced by terraformParser#map_.

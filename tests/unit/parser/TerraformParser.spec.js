@@ -18,6 +18,7 @@ import subObject from 'tests/resources/js/subObject';
 import objectAttributeDefinition from 'tests/resources/js/objectAttributeDefinition';
 import referenceAttribute from 'tests/resources/js/referenceAttribute';
 import missingDefinitionOnAttribute from 'tests/resources/js/bug67_missingDefinitionOnAttribute';
+import emptyListAttribute from 'tests/resources/js/bug78_emptyListAttribute';
 
 describe('Test TerraformParser', () => {
   describe('Test methods', () => {
@@ -347,6 +348,24 @@ describe('Test TerraformParser', () => {
         parser.parse([input]);
 
         expect(metadata.pluginData.components).toEqual(missingDefinitionOnAttribute);
+      });
+
+      it('Should fix empty list attribute, https://github.com/ditrit/terrator-plugin/issues/78', () => {
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+        metadata.parse();
+        metadata.pluginData.initLinkDefinitions();
+        const parser = new TerraformParser(metadata.pluginData);
+        const input = new FileInput({
+          path: 'bug78_emptyListAttribute.tf',
+          content: fs.readFileSync('tests/resources/tf/bug78_emptyListAttribute.tf', 'utf8'),
+        });
+
+        parser.parse([input]);
+
+        expect(metadata.pluginData.components).toEqual(emptyListAttribute);
       });
     });
   });

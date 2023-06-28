@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Update plugin-core to version 0.17.0.
+
 ### Fixed
 
 - Fix empty list attribute, [bug link](https://github.com/ditrit/terrator-plugin/issues/78).

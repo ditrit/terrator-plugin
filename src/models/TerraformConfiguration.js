@@ -1,4 +1,4 @@
-import { DefaultConfiguration } from 'leto-modelizer-plugin-core';
+import { DefaultConfiguration, Tag } from 'leto-modelizer-plugin-core';
 import syntax from 'src/configuration/syntax';
 
 /**
@@ -16,7 +16,10 @@ class TerraformConfiguration extends DefaultConfiguration {
         ...props.editor,
         syntax,
       },
-      tags: ['Terraform', 'Infrastructure', 'IaC'],
+      tags: [
+        new Tag({ type: 'language', value: 'Terraform' }),
+        new Tag({ type: 'category', value: 'Infrastructure' }),
+      ],
     });
   }
 }

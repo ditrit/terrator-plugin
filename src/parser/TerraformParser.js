@@ -39,15 +39,17 @@ class TerraformParser extends DefaultParser {
 
   /**
    * Convert the content of files into Components.
+   * @param {FileInformation} diagram - Diagram file information.
    * @param {FileInput[]} [inputs] - Data you want to parse.
    * @param {string} [parentEventId] - Parent event id.
    */
-  parse(inputs = [], parentEventId = null) {
+  parse(diagram, inputs = [], parentEventId = null) {
     this.pluginData.components = [];
 
     const listener = new TerraformListener(this.pluginData.definitions.components);
 
     inputs
+      .filter(({ path }) => path.startsWith(diagram.path))
       .filter(({ content, path }) => {
         if (content && content.trim() !== '') {
           return true;

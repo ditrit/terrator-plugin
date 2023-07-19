@@ -11,7 +11,9 @@ module "server" {
 data "aws_ami" "web" {
     filter {
         name = "state"
-        values = ["available"]
+        values = [
+            "available",
+        ]
     }
     most_recent = true
 }
@@ -23,5 +25,5 @@ resource "aws_route53_zone" "publicdns" {
 }
 
 variable "image_id" {
-    type = "string"
+    type = string
 }

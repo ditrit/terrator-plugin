@@ -1,6 +1,7 @@
 import { Component } from 'leto-modelizer-plugin-core';
 import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
 import { getTerraformMetadata } from 'tests/resources/utils';
+import TerraformVariable from 'src/models/TerraformVariable';
 
 const metadata = getTerraformMetadata(
   'aws',
@@ -14,9 +15,8 @@ const serverDefinition = metadata.pluginData.definitions.components.find(({ type
 const awsAmiDefinition = metadata.pluginData.definitions.components.find(({ type }) => type === 'aws_ami');
 const awsRoute53ZoneDefinition = metadata.pluginData.definitions.components.find(({ type }) => type === 'aws_route53_zone');
 const nameDefinition = awsRoute53ZoneDefinition.definedAttributes.find(({ name }) => name === 'name');
-const imageIdDefinition = metadata.pluginData.definitions.components.find(({ type }) => type === 'image_id');
 
-export default [
+export const appComponents = [
   new Component({
     id: 'aws_1',
     name: null,
@@ -108,15 +108,14 @@ export default [
       }),
     ],
   }),
-  new Component({
-    id: 'image_id',
-    name: null,
+];
+
+export const appVariables = [
+  new TerraformVariable({
+    name: 'image_id',
+    type: 'string',
+    category: 'variable',
     path: './app.tf',
-    definition: imageIdDefinition,
-    attributes: [new TerraformComponentAttribute({
-      name: 'type',
-      type: 'String',
-      value: 'string',
-    })],
+    defaultValue: null,
   }),
 ];

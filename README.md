@@ -28,14 +28,212 @@ npm run build
 
 We use the grammar from the [official antlr4 grammar repository](https://github.com/antlr/grammars-v4/tree/master/terraform).
 
-| Supported block types | Unsupported block types |
-| --------------------- | ----------------------- |
-| resource              | terraform               |
-| data                  | local                   |
-| provider              | provisioner             |
-| output                |                         |
-| module                |                         |
-| variable              |                         |
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">Legends</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center">$\textcolor{green}{\textbf{\Large{✓}}}$</td>
+      <td>Full support</td>
+    </tr>
+    <tr>
+      <td align="center">$\textcolor{orange}{\textsf{〜}}$</td>
+      <td>Partial support</td>
+    </tr>
+    <tr>
+      <td align="center">$\textcolor{red}{\textbf{\textsf{X}}}$</td>
+      <td>Not supported but planned</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="6">Functionalities</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="5">resource</td>
+      <td align="center">$\textcolor{green}{\Large{✓}}$</td>
+    </tr>
+    <tr>
+      <td colspan="5">data</td>
+      <td align="center">$\textcolor{green}{\Large{✓}}$</td>
+    </tr>
+    <tr>
+      <td colspan="5">module</td>
+      <td align="center">$\textcolor{green}{\Large{✓}}$</td>
+    </tr>
+    <tr>
+      <td colspan="5">provider</td>
+      <td align="center">$\textcolor{green}{\Large{✓}}$</td>
+    </tr>
+    <tr>
+      <td colspan="5">output</td>
+      <td align="center">$\textcolor{orange}{\textsf{〜}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td colspan="4">value</td>
+      <td align="center">$\textcolor{green}{\textbf{\Large{✓}}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td colspan="4">description</td>
+      <td align="center">$\textcolor{green}{\textbf{\Large{✓}}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td colspan="4">sensitive</td>
+      <td align="center">$\textcolor{green}{\textbf{\Large{✓}}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td colspan="4">depends_on</td>
+      <td align="center">$\textcolor{red}{\textbf{\textsf{X}}}$</td>
+    </tr>
+    <tr>
+      <td colspan="5">variable</td>
+      <td align="center">$\textcolor{orange}{\textsf{〜}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td colspan="4">value</td>
+      <td align="center">$\textcolor{orange}{\textsf{〜}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td colspan="4">default</td>
+      <td align="center">$\textcolor{green}{\textbf{\Large{✓}}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td colspan="4">sensitive</td>
+      <td align="center">$\textcolor{green}{\textbf{\Large{✓}}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td colspan="4">nullable</td>
+      <td align="center">$\textcolor{green}{\textbf{\Large{✓}}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td colspan="4">validation</td>
+      <td align="center">$\textcolor{red}{\textbf{\textsf{X}}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td colspan="4">type</td>
+      <td align="center">$\textcolor{orange}{\textsf{〜}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td width="5px" padding="0"></td>
+      <td colspan="3">string</td>
+      <td align="center">$\textcolor{green}{\textbf{\Large{✓}}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td width="5px" padding="0"></td>
+      <td colspan="3">bool</td>
+      <td align="center">$\textcolor{green}{\textbf{\Large{✓}}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td width="5px" padding="0"></td>
+      <td colspan="3">number</td>
+      <td align="center">$\textcolor{green}{\textbf{\Large{✓}}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td width="5px" padding="0"></td>
+      <td colspan="3">list</td>
+      <td align="center">$\textcolor{green}{\textbf{\Large{✓}}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td width="5px" padding="0"></td>
+      <td colspan="3">set</td>
+      <td align="center">$\textcolor{green}{\textbf{\Large{✓}}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td width="5px" padding="0"></td>
+      <td colspan="3">map</td>
+      <td align="center">$\textcolor{red}{\textbf{\textsf{X}}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td width="5px" padding="0"></td>
+      <td colspan="3">object</td>
+      <td align="center">$\textcolor{red}{\textbf{\textsf{X}}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td width="5px" padding="0"></td>
+      <td colspan="3">tuple</td>
+      <td align="center">$\textcolor{red}{\textbf{\textsf{X}}}$</td>
+    </tr>
+    <tr>
+      <td colspan="5">locals</td>
+      <td align="center">$\textcolor{orange}{\textsf{〜}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td colspan="4">string</td>
+      <td align="center">$\textcolor{green}{\textbf{\Large{✓}}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td colspan="4">bool</td>
+      <td align="center">$\textcolor{green}{\textbf{\Large{✓}}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td colspan="4">number</td>
+      <td align="center">$\textcolor{green}{\textbf{\Large{✓}}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td colspan="4">list</td>
+      <td align="center">$\textcolor{green}{\textbf{\Large{✓}}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td colspan="4">set</td>
+      <td align="center">$\textcolor{red}{\textbf{\textsf{X}}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td colspan="4">object</td>
+      <td align="center">$\textcolor{red}{\textbf{\textsf{X}}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td colspan="4">tuple</td>
+      <td align="center">$\textcolor{red}{\textbf{\textsf{X}}}$</td>
+    </tr>
+    <tr>
+      <td width="5px" padding="0"></td>
+      <td colspan="4">map</td>
+      <td align="center">$\textcolor{red}{\textbf{\textsf{X}}}$</td>
+    </tr>
+    <tr>
+      <td colspan="5">terraform</td>
+      <td align="center">$\textcolor{red}{\textbf{\textsf{X}}}$</td>
+    </tr>
+    <tr>
+      <td colspan="5">provisionner</td>
+      <td align="center">$\textcolor{red}{\textbf{\textsf{X}}}$</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Development
 

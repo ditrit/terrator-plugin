@@ -3,8 +3,9 @@ import antlr4 from 'antlr4';
 import {
   Component,
 } from 'leto-modelizer-plugin-core';
-
+import TerraformVariable from 'src/models/TerraformVariable';
 import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
+import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
 
 const getText = (ctx) => ctx.getText().replaceAll('"', '').trim();
 
@@ -13,6 +14,7 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
     super();
     this.definitions = definitions;
     this.components = [];
+    this.variables = [];
     this.errors = [];
 
     this.currentComponent = null;
@@ -21,6 +23,8 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
     this.currentObjectField = null;
     this.currentFile = null;
     this.fieldsTree = [];
+    this.currentVariable = null;
+    this.currentVariableField = null;
   }
 
   addComponent() {
@@ -31,8 +35,37 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
     this.fieldsTree = [];
   }
 
+  addVariable() {
+    this.currentVariable.path = this.currentFile.path;
+    this.variables.push(this.currentVariable);
+    this.currentVariable = null;
+    this.currentVariableField = null;
+  }
+
   getAttributeDefinition(object, name) {
     return object.definition?.definedAttributes.find((def) => def.name === name) || null;
+  }
+
+  isVariable() {
+    return (this.currentBlockType === 'variable' || this.currentBlockType === 'output');
+  }
+
+  /**
+   * Convert the type to match one of a variable.
+   * @param {string} type - Attribute type.
+   * @returns {string} Type of the variable.
+   */
+  attributeTypeToVariableType(type) {
+    switch (type) {
+      case 'String':
+        return 'string';
+      case 'Number':
+        return 'number';
+      case 'Boolean':
+        return 'bool';
+      default:
+        return 'string';
+    }
   }
 
   // Enter a parse tree produced by terraformParser#file_.
@@ -88,20 +121,23 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   // Enter a parse tree produced by terraformParser#output.
   enterOutput() {
     this.currentBlockType = 'output';
-    this.currentComponent = new Component();
+    this.currentVariable = new TerraformVariable({ category: 'output' });
   }
 
   // Exit a parse tree produced by terraformParser#output.
   exitOutput() {
-    this.addComponent();
+    this.addVariable();
+    this.currentBlockType = null;
   }
 
   // Enter a parse tree produced by terraformParser#local.
   enterLocal() {
+    this.currentBlockType = 'local';
   }
 
   // Exit a parse tree produced by terraformParser#local.
   exitLocal() {
+    this.currentBlockType = null;
   }
 
   // Enter a parse tree produced by terraformParser#module.
@@ -120,17 +156,15 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   }
 
   // Enter a parse tree produced by terraformParser#variable.
-  enterVariable(ctx) {
-    const type = getText(ctx.name());
+  enterVariable() {
     this.currentBlockType = 'variable';
-    this.currentComponent = new Component();
-    this.currentComponent.definition = this.definitions
-      .find((definition) => definition.blockType === 'variable' && definition.type === type) || null;
+    this.currentVariable = new TerraformVariable({ category: 'variable' });
   }
 
   // Exit a parse tree produced by terraformParser#variable.
   exitVariable() {
-    this.addComponent();
+    this.addVariable();
+    this.currentBlockType = null;
   }
 
   // Enter a parse tree produced by terraformParser#block.
@@ -178,9 +212,13 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   // Enter a parse tree produced by terraformParser#resourcetype.
   enterResourcetype(ctx) {
     const type = getText(ctx);
+
     this.currentComponent.definition = this.definitions
       .find((definition) => definition.blockType === this.currentBlockType
-        && definition.type === type) || null;
+        && definition.type === type) || new TerraformComponentDefinition({
+      blockType: this.currentBlockType,
+      type,
+    });
   }
 
   // Exit a parse tree produced by terraformParser#resourcetype.
@@ -193,7 +231,11 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
 
   // Exit a parse tree produced by terraformParser#name.
   exitName(ctx) {
-    this.currentComponent.id = getText(ctx);
+    if (this.currentComponent) {
+      this.currentComponent.id = getText(ctx);
+    } else if (this.currentVariable) {
+      this.currentVariable.name = getText(ctx);
+    }
   }
 
   // Enter a parse tree produced by terraformParser#label.
@@ -232,12 +274,39 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
         ),
       });
     }
+
+    if (this.isVariable()) {
+      this.currentVariableField = ctx.identifier().getText();
+
+      if (this.currentVariableField === 'default') {
+        this.currentVariableField = 'defaultValue';
+      }
+    } else if (this.currentBlockType === 'local') {
+      this.currentVariable = new TerraformVariable({
+        category: 'local',
+        name: getText(ctx.identifier()),
+      });
+      this.currentVariableField = 'value';
+    } else {
+      this.currentField = new TerraformComponentAttribute();
+    }
   }
 
   // Exit a parse tree produced by terraformParser#argument.
   exitArgument(ctx) {
-    if (this.currentField) {
+    if (this.isVariable()) {
+      const argName = ctx.identifier().getText();
+
+      if (argName === 'description') {
+        this.currentVariable.description = getText(ctx.expression());
+      } else if (argName === 'sensitive' || argName === 'nullable') {
+        this.currentVariable[argName] = getText(ctx.expression()) === 'true';
+      }
+    } else if (this.currentBlockType === 'local') {
+      this.addVariable();
+    } else if (this.currentField) {
       this.currentField.name = ctx.identifier().getText();
+
       if (this.currentObjectField) {
         this.currentObjectField.value.push(this.currentField);
         this.currentField.definition = this.getAttributeDefinition(
@@ -253,6 +322,7 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
       }
     } else {
       this.currentObjectField.name = ctx.identifier().getText();
+
       if (this.fieldsTree.length > 0) {
         const field = this.fieldsTree.pop();
         field.value.push(this.currentObjectField);
@@ -307,7 +377,17 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   }
 
   // Enter a parse tree produced by terraformParser#section.
-  enterSection() {
+  enterSection(ctx) {
+    if (!this.currentField && !this.isVariable()) {
+      if (ctx.val()?.identifier()) {
+        const val = getText(ctx.val());
+
+        this.currentField = new TerraformComponentAttribute({
+          type: 'String',
+          value: val === 'null' ? null : val,
+        });
+      }
+    }
   }
 
   // Exit a parse tree produced by terraformParser#section.
@@ -318,28 +398,54 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   enterVal() {
   }
 
+  getFieldValueTypeFromContext(ctx) {
+    if (ctx.BOOL()) {
+      return {
+        value: ctx.BOOL().getText() === 'true',
+        type: 'Boolean',
+      };
+    }
+
+    if (ctx.signed_number()) {
+      return {
+        value: parseFloat(ctx.signed_number().getText()),
+        type: 'Number',
+      };
+    }
+
+    const value = getText(ctx);
+
+    return {
+      value: value === 'null' ? null : value,
+      type: 'String',
+    };
+  }
+
   // Exit a parse tree produced by terraformParser#val.
   exitVal(ctx) {
-    if (!this.currentField) {
-      if (ctx.BOOL()) {
-        this.currentField = new TerraformComponentAttribute({
-          type: 'Boolean',
-          value: ctx.BOOL().getText() === 'true',
-        });
-      } else if (ctx.signed_number()) {
-        this.currentField = new TerraformComponentAttribute({
-          type: 'Number',
-          value: parseFloat(ctx.signed_number().getText()),
-        });
+    const { value, type } = this.getFieldValueTypeFromContext(ctx);
+
+    if (this.isVariable() || this.currentBlockType === 'local') {
+      const listType = this.attributeTypeToVariableType(type);
+
+      if (Array.isArray(this.currentVariable[this.currentVariableField])) {
+        this.currentVariable[this.currentVariableField].push(value);
+
+        if (this.currentVariableField === 'defaultValue' || this.currentVariableField === 'value') {
+          this.currentVariable.type = `list(${listType})`;
+        }
       } else {
-        const val = getText(ctx);
-        this.currentField = new TerraformComponentAttribute({
-          type: 'String',
-          value: val === 'null' ? null : val,
-        });
+        this.currentVariable[this.currentVariableField] = value;
+
+        if (this.currentVariableField === 'defaultValue' || this.currentVariableField === 'value') {
+          this.currentVariable.type = listType;
+        }
       }
     } else if (this.currentField.type === 'Array') {
-      this.currentField.value.push(getText(ctx));
+      this.currentField.value.push(value);
+    } else {
+      this.currentField.value = value;
+      this.currentField.type = type;
     }
   }
 
@@ -390,11 +496,23 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
         type: 'Array',
         value: [],
       });
+    } else if (this.currentField) {
+      this.currentField.type = 'Array';
+      this.currentField.value = [];
+    }
+
+    if (this.isVariable()) {
+      this.currentVariable[this.currentVariableField] = [];
+    } else if (this.currentBlockType === 'local') {
+      this.currentVariable.value = [];
     }
   }
 
   // Exit a parse tree produced by terraformParser#list_.
   exitList_() {
+    if (this.currentField) {
+      this.currentField.type = 'Array';
+    }
   }
 
   // Enter a parse tree produced by terraformParser#map_.

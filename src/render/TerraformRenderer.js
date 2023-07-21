@@ -7,6 +7,7 @@ import {
 
 /**
  * Class to render Terraform files from components/links.
+ * @augments {DefaultRender}
  */
 class TerraformRenderer extends DefaultRender {
   /**
@@ -37,32 +38,43 @@ class TerraformRenderer extends DefaultRender {
    * @returns {FileInput[]} Array of generated files from components and links.
    */
   renderFiles(parentEventId = null) {
-    return this.generateFilesFromComponentsMap(
-      this.pluginData.components.reduce(
-        (map, component) => {
-          if (!map.has(component.path)) {
-            map.set(component.path, [component]);
-          } else {
-            map.get(component.path).push(component);
-          }
-          return map;
-        },
-        new Map(),
-      ),
-      parentEventId,
+    const componentsMap = this.pluginData.components.reduce(
+      (map, component) => {
+        if (!map.has(component.path)) {
+          map.set(component.path, [component]);
+        } else {
+          map.get(component.path).push(component);
+        }
+
+        return map;
+      },
+      new Map(),
     );
+    const variablesMap = this.pluginData.variables.reduce((map, variable) => {
+      if (!map.has(variable.path)) {
+        map.set(variable.path, [variable]);
+      } else {
+        map.get(variable.path).push(variable);
+      }
+
+      return map;
+    }, new Map());
+
+    return this.generateFiles(componentsMap, variablesMap, parentEventId);
   }
 
   /**
    * Render files from related components.
-   * @param {Map<string,Component>} map - Component mapped by file name.
+   * @param {Map<string,Component>} componentsMap - Components mapped by file name.
+   * @param {Map<string,TerraformVariable>} variablesMap - Variables mapped by file name.
    * @param {string} parentEventId - Parent event id.
    * @returns {FileInput[]} Render files array.
    */
-  generateFilesFromComponentsMap(map, parentEventId) {
+  generateFiles(componentsMap, variablesMap, parentEventId) {
     const files = [];
+    const map = (componentsMap.size === 0) ? variablesMap : componentsMap;
 
-    map.forEach((components, path) => {
+    map.forEach((_, path) => {
       const id = this.pluginData.emitEvent({
         parent: parentEventId,
         type: 'Render',
@@ -74,9 +86,21 @@ class TerraformRenderer extends DefaultRender {
         },
       });
 
+      const allVariables = variablesMap?.get(path) || [];
+      const allComponents = componentsMap?.get(path) || [];
+
       files.push(new FileInput({
         path,
-        content: `${this.template.render({ components }).trim()}\n`,
+        content: `${this.template.render({
+          components: allComponents,
+          variables: allVariables.filter((v) => v.category === 'variable'),
+          locals: allVariables.filter((v) => v.category === 'local'),
+          outputs: allVariables.filter((v) => v.category === 'output'),
+          // XXX: This might cause issues with other providers.
+          isValueReference: (value) => value?.match(/^(data.|var.|local.|module.|aws_|random_)/),
+          isList: (type) => type?.startsWith('list(') || type?.startsWith('set('),
+          getListType: (value) => value.split(/\(([^)]+)\)/)[1],
+        }).trim()}\n`,
       }));
 
       this.pluginData.emitEvent({ id, status: 'success' });

@@ -17,7 +17,7 @@ const resourceaListenerAttributeDefinition = resourceaDefinition.definedAttribut
 
 const resourceaListenerInstancePortAttributeDefinition = resourceaListenerAttributeDefinition.definedAttributes.find(({ name }) => name === 'instance_port');
 const resourceaListenerOtherObjectAttributeDefinition = resourceaListenerAttributeDefinition.definedAttributes.find(({ name }) => name === 'otherObject');
-const resourceaListenerOtherObjectOtherAttributeAttributeDefinition = resourceaListenerOtherObjectAttributeDefinition.definedAttributes.find(({ name }) => name === 'otherAttribute')
+const resourceaListenerOtherObjectOtherAttributeAttributeDefinition = resourceaListenerOtherObjectAttributeDefinition.definedAttributes.find(({ name }) => name === 'otherAttribute');
 
 export default [
   new Component({
@@ -69,9 +69,9 @@ export default [
                 value: 2,
                 definition: resourceaListenerOtherObjectOtherAttributeAttributeDefinition,
               }),
-            ]
+            ],
           }),
-        ]
+        ],
       }),
     ],
   }),

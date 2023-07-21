@@ -39,7 +39,8 @@
           "name": "vpc_id",
           "type": "Link",
           "linkType": "Default",
-          "linkRef": "aws_vpc"
+          "linkRef": "aws_vpc",
+          "linkAttribute": "id"
         }
       ]
     },
@@ -52,19 +53,22 @@
           "name": "security_groups",
           "type": "Link",
           "linkType": "Reverse",
-          "linkRef": "aws_security_group"
+          "linkRef": "aws_security_group",
+          "linkAttribute": "name"
         },
         {
           "name": "vpc_security_group_ids",
           "type": "Link",
           "linkType": "Reverse",
-          "linkRef": "aws_security_group"
+          "linkRef": "aws_security_group",
+          "linkAttribute": "id"
         },
         {
           "name": "subnet_id",
           "type": "Link",
           "linkType": "Default",
-          "linkRef": "aws_subnet"
+          "linkRef": "aws_subnet",
+          "linkAttribute": "id"
         }
       ]
     },
@@ -81,13 +85,15 @@
           "name": "volume_id",
           "type": "Link",
           "linkType": "Default",
-          "linkRef": "aws_ebs_volume"
+          "linkRef": "aws_ebs_volume",
+          "linkAttribute": "id"
         },
         {
           "name": "instance_id",
           "type": "Link",
           "linkType": "Default",
-          "linkRef": "aws_instance"
+          "linkRef": "aws_instance",
+          "linkAttribute": "id"
         }
       ]
     },
@@ -138,19 +144,22 @@
           "name": "subnets",
           "type": "Link",
           "linkType": "Default",
-          "linkRef": "aws_subnet"
+          "linkRef": "aws_subnet",
+          "linkAttribute": "id"
         },
         {
           "name": "security_groups",
           "type": "Link",
           "linkType": "Default",
-          "linkRef": "aws_security_group"
+          "linkRef": "aws_security_group",
+          "linkAttribute": "id"
         },
         {
           "name": "instances",
           "type": "Link",
           "linkType": "Default",
-          "linkRef": "aws_instance"
+          "linkRef": "aws_instance",
+          "linkAttribute": "id"
         }
       ]
     },
@@ -187,7 +196,8 @@
           "name": "gateway_id",
           "type": "Link",
           "linkType": "Default",
-          "linkRef": "aws_internet_gateway"
+          "linkRef": "aws_internet_gateway",
+          "linkAttribute": "id"
         }
       ]
     },
@@ -199,13 +209,15 @@
         {
           "name": "vpc_id",
           "type": "Reference",
-          "containerRef": "aws_vpc"
+          "containerRef": "aws_vpc",
+          "linkAttribute": "id"
         },
         {
           "name": "gateway_id",
           "type": "Link",
           "linkType": "Default",
-          "linkRef": "aws_internet_gateway"
+          "linkRef": "aws_internet_gateway",
+          "linkAttribute": "id"
         }
       ]
     },
@@ -251,7 +263,8 @@
           "name": "records",
           "type": "Link",
           "linkType": "Default",
-          "linkRef": "aws_route53_record"
+          "linkRef": "aws_route53_record",
+          "linkAttribute": "name"
         }
       ]
     },
@@ -269,14 +282,16 @@
           "name": "db_subnet_group_name",
           "type": "Link",
           "linkType": "Default",
-          "linkRef": "aws_db_subnet_group"
+          "linkRef": "aws_db_subnet_group",
+          "linkAttribute": "name"
         },
         {
           "name": "vpc_security_group_ids",
           "type": "Link",
           "required": true,
           "linkType": "Default",
-          "linkRef": "aws_security_group"
+          "linkRef": "aws_security_group",
+          "linkAttribute": "id"
         }
       ]
     },

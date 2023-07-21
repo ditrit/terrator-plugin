@@ -98,7 +98,7 @@ class TerraformParser extends DefaultParser {
       }
       this.pluginData.components.push(component);
     });
-
+    this.pluginData.variables = listener.variables;
     this.pluginData.parseErrors = listener.errors;
   }
 }

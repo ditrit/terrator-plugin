@@ -22,6 +22,16 @@ class TerraformComponentAttribute extends ComponentAttribute {
      */
     this.isDynamic = props.isDynamic || false;
   }
+
+  /**
+   * Check if the attribute is a variable.
+   * @returns {boolean} - true if the attribute is a variable otherwise false.
+   */
+  get isVariable() {
+    return this.value !== null
+      && !Array.isArray(this.value)
+      && (this.value.startsWith('var.') || this.value.startsWith('local.'));
+  }
 }
 
 export default TerraformComponentAttribute;

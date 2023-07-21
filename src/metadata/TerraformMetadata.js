@@ -1,9 +1,7 @@
 import Ajv from 'ajv';
-import {
-  ComponentAttributeDefinition,
-  DefaultMetadata,
-} from 'leto-modelizer-plugin-core';
+import { DefaultMetadata } from 'leto-modelizer-plugin-core';
 import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
+import TerraformComponentAttributeDefinition from 'src/models/TerraformComponentAttributeDefinition';
 import Schema from 'src/metadata/ValidationSchema';
 import providers from 'src/assets/metadata';
 
@@ -143,11 +141,11 @@ class TerraformMetadata extends DefaultMetadata {
   /**
    * Get attribute definition.
    * @param {object} attribute - Attribute to parse.
-   * @returns {ComponentAttributeDefinition} Parsed attribute.
+   * @returns {TerraformComponentAttributeDefinition} Parsed attribute.
    */
   getAttributeDefinition(attribute) {
     const subAttributes = attribute.attributes || [];
-    return new ComponentAttributeDefinition({
+    return new TerraformComponentAttributeDefinition({
       ...attribute,
       definedAttributes: subAttributes.map(this.getAttributeDefinition),
     });

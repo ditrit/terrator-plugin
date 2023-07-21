@@ -1,11 +1,17 @@
 import fs from 'fs';
 import TerraformMetadata from 'src/metadata/TerraformMetadata';
-import { DefaultData } from 'leto-modelizer-plugin-core';
+import TerraformData from 'src/models/TerraformData';
 
-export function getTerraformMetadata(metadataName, metadataUrl) {
-  const metadata = JSON.parse(fs.readFileSync(metadataUrl, 'utf8'));
-  const terraformMetadata = new TerraformMetadata(new DefaultData());
+/**
+ * Parse and initialize metadata.
+ * @param {string} providerName - Name of provider.
+ * @param {string} metadataPath - Path of metadata file to load.
+ * @returns {TerraformMetadata} Initialized metadata.
+ */
+export function getTerraformMetadata(providerName, metadataPath) {
+  const metadata = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
+  const terraformMetadata = new TerraformMetadata(new TerraformData());
   terraformMetadata.providers = {};
-  terraformMetadata.providers[metadataName] = metadata;
+  terraformMetadata.providers[providerName] = metadata;
   return terraformMetadata;
 }

@@ -1,8 +1,8 @@
 import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
 import {
-  ComponentAttributeDefinition,
   ComponentLinkDefinition,
 } from 'leto-modelizer-plugin-core';
+import TerraformComponentAttributeDefinition from 'src/models/TerraformComponentAttributeDefinition';
 import { getTerraformMetadata } from 'tests/resources/utils';
 
 describe('Test TerraformMetadata', () => {
@@ -62,7 +62,7 @@ describe('Test TerraformMetadata', () => {
             icon: 'provider_icon',
             model: 'provider_model',
             definedAttributes: [
-              new ComponentAttributeDefinition({ name: 'name1', type: 'String' }),
+              new TerraformComponentAttributeDefinition({ name: 'name1', type: 'String' }),
             ],
           }),
           new TerraformComponentDefinition({
@@ -72,13 +72,13 @@ describe('Test TerraformMetadata', () => {
             icon: 'data_icon',
             model: 'data_model',
             definedAttributes: [
-              new ComponentAttributeDefinition({ name: 'boolean1', type: 'Boolean' }),
-              new ComponentAttributeDefinition({ name: 'number1', type: 'Number' }),
-              new ComponentAttributeDefinition({ name: 'array1', type: 'Array' }),
-              new ComponentAttributeDefinition({
+              new TerraformComponentAttributeDefinition({ name: 'boolean1', type: 'Boolean' }),
+              new TerraformComponentAttributeDefinition({ name: 'number1', type: 'Number' }),
+              new TerraformComponentAttributeDefinition({ name: 'array1', type: 'Array' }),
+              new TerraformComponentAttributeDefinition({
                 name: 'object1',
                 type: 'Object',
-                definedAttributes: [new ComponentAttributeDefinition({ name: 'name2', type: 'String' })],
+                definedAttributes: [new TerraformComponentAttributeDefinition({ name: 'name2', type: 'String' })],
               }),
             ],
           }),
@@ -98,8 +98,8 @@ describe('Test TerraformMetadata', () => {
             model: 'resource_model',
             isContainer: true,
             definedAttributes: [
-              new ComponentAttributeDefinition({ name: 'name3', type: 'String' }),
-              new ComponentAttributeDefinition({
+              new TerraformComponentAttributeDefinition({ name: 'name3', type: 'String' }),
+              new TerraformComponentAttributeDefinition({
                 name: 'link1',
                 type: 'Link',
                 linkType: 'Default',
@@ -203,7 +203,7 @@ describe('Test TerraformMetadata', () => {
           icon: 'AwsInternetGateway',
           model: 'DefaultModel',
           definedAttributes: [
-            new ComponentAttributeDefinition({
+            new TerraformComponentAttributeDefinition({
               name: 'vpc_id',
               type: 'Reference',
               containerRef: 'aws_vpc',

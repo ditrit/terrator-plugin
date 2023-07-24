@@ -29,7 +29,7 @@ class TerraformComponentAttribute extends ComponentAttribute {
    */
   get isVariable() {
     return this.value !== null
-      && !Array.isArray(this.value)
+      && typeof this.value === 'string'
       && (this.value.startsWith('var.') || this.value.startsWith('local.'));
   }
 }

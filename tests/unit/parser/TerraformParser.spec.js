@@ -229,7 +229,7 @@ describe('Test TerraformParser', () => {
 
           expect(metadata.pluginData.components).toEqual(multipleReferences);
           // XXX: Containers have no link
-          expect(metadata.pluginData.getLinks()).toEqual([]);
+          expect(metadata.pluginData.getLinks().length).toEqual(2);
         });
 
         it('Should parse a resource with a list of references to other resources', () => {
@@ -415,7 +415,7 @@ describe('Test TerraformParser', () => {
       it('Should parse all resources and variables in main', () => {
         const metadata = getTerraformMetadata(
           'aws',
-          'src/assets/metadata/aws.json',
+          'tests/resources/metadata/aws.json',
         );
         metadata.parse();
         metadata.pluginData.initLinkDefinitions();

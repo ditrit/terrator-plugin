@@ -9,6 +9,7 @@ const metadata = getTerraformMetadata(
 metadata.parse();
 
 const awsAmiDefinition = metadata.pluginData.definitions.components.find(({ type }) => type === 'aws_ami');
+const filterAttributeDefinition = awsAmiDefinition.definedAttributes.find(({ name }) => name === 'filter');
 
 export default [
   new Component({
@@ -21,6 +22,7 @@ export default [
         name: 'filter',
         type: 'Object',
         isDynamic: true,
+        definition: filterAttributeDefinition,
         value: [
           new TerraformComponentAttribute({
             name: 'name',

@@ -6,7 +6,7 @@ import { getTerraformMetadata } from 'tests/resources/utils';
 
 const metadata = getTerraformMetadata(
   'aws',
-  'src/assets/metadata/aws.json',
+  'tests/resources/metadata/aws.json',
 );
 metadata.parse();
 

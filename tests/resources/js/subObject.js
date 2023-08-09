@@ -1,4 +1,4 @@
-import { Component } from 'leto-modelizer-plugin-core';
+import TerraformComponent from 'src/models/TerraformComponent';
 import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
 import { getTerraformMetadata } from 'tests/resources/utils';
 
@@ -12,7 +12,7 @@ const awsAmiDefinition = metadata.pluginData.definitions.components.find(({ type
 const filterAttributeDefinition = awsAmiDefinition.definedAttributes.find(({ name }) => name === 'filter');
 
 export default [
-  new Component({
+  new TerraformComponent({
     id: 'web',
     name: null,
     path: 'new_file.tf',

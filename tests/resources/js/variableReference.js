@@ -1,6 +1,4 @@
-import {
-  Component,
-} from 'leto-modelizer-plugin-core';
+import TerraformComponent from 'src/models/TerraformComponent';
 import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
 import { getTerraformMetadata } from 'tests/resources/utils';
 import TerraformVariable from 'src/models/TerraformVariable';
@@ -29,7 +27,7 @@ export const variableReference = [
 ];
 
 export const variableComponentReference = [
-  new Component({
+  new TerraformComponent({
     name: null,
     id: 'database',
     path: 'new_file.tf',

@@ -1,4 +1,4 @@
-import { Component } from 'leto-modelizer-plugin-core';
+import TerraformComponent from 'src/models/TerraformComponent';
 import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
 import { getTerraformMetadata } from 'tests/resources/utils';
 
@@ -12,7 +12,7 @@ const awsSubnetDefinition = metadata.pluginData.definitions.components.find(({ t
 const availabilityZoneDefinition = awsSubnetDefinition.definedAttributes.find(({ name }) => name === 'availability_zone');
 
 export default [
-  new Component({
+  new TerraformComponent({
     id: 'subnet',
     name: null,
     path: 'new_file.tf',

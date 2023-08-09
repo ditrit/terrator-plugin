@@ -1,4 +1,4 @@
-import { Component } from 'leto-modelizer-plugin-core';
+import TerraformComponent from 'src/models/TerraformComponent';
 import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
 import { getTerraformMetadata } from 'tests/resources/utils';
 
@@ -13,7 +13,7 @@ const awsVpcDefinition = metadata.pluginData.definitions.components.find(({ type
 const vpcIdAttributeDefinition = awsSecurityGroupDefinition.definedAttributes.find(({ name }) => name === 'vpc_id');
 
 export default [
-  new Component({
+  new TerraformComponent({
     id: 'aws_security_group_1',
     name: null,
     path: 'bug78_emptyListAttribute.tf',
@@ -27,7 +27,7 @@ export default [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'aws_vpc_1',
     name: null,
     path: 'bug78_emptyListAttribute.tf',

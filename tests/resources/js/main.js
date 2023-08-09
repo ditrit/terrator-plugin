@@ -1,4 +1,4 @@
-import { Component } from 'leto-modelizer-plugin-core';
+import TerraformComponent from 'src/models/TerraformComponent';
 import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
 import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
 import TerraformVariable from 'src/models/TerraformVariable';
@@ -40,7 +40,7 @@ const awsDbSubnetGroupDefinition = metadata.pluginData.definitions.components.fi
 const subnetGroupSubnetIdsDefinition = awsDbSubnetGroupDefinition.definedAttributes.find(({ name }) => name === 'subnet_ids');
 
 export const mainComponents = [
-  new Component({
+  new TerraformComponent({
     id: 'aws_1',
     name: null,
     path: 'new_file.tf',
@@ -85,7 +85,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     name: null,
     id: 'ubuntu',
     path: 'new_file.tf',
@@ -137,7 +137,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_db_version',
     name: null,
     path: 'new_file.tf',
@@ -158,7 +158,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'available',
     name: null,
     path: 'new_file.tf',
@@ -174,7 +174,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_main_vpc',
     name: null,
     path: 'new_file.tf',
@@ -192,7 +192,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_frontend_subnet_az1',
     name: null,
     path: 'new_file.tf',
@@ -223,7 +223,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_frontend_subnet_az2',
     name: null,
     path: 'new_file.tf',
@@ -254,7 +254,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_internet_gw',
     name: null,
     path: 'new_file.tf',
@@ -280,7 +280,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_routing_tbl',
     name: null,
     path: 'new_file.tf',
@@ -325,7 +325,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_lb_subnet_az1',
     name: null,
     path: 'new_file.tf',
@@ -356,7 +356,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_lb_subnet_az2',
     name: null,
     path: 'new_file.tf',
@@ -387,7 +387,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_lb_subnet_az1_gw_assoc',
     name: null,
     path: 'new_file.tf',
@@ -405,7 +405,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_lb_subnet_az2_gw_assoc',
     name: null,
     path: 'new_file.tf',
@@ -423,7 +423,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_backend_subnet_az1',
     name: null,
     path: 'new_file.tf',
@@ -459,7 +459,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_backend_subnet_az2',
     name: null,
     path: 'new_file.tf',
@@ -495,7 +495,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_dmz_subnet',
     name: null,
     path: 'new_file.tf',
@@ -526,7 +526,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_frontend_secgroup',
     name: null,
     path: 'new_file.tf',
@@ -674,7 +674,7 @@ export const mainComponents = [
 
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_backend_secgroup',
     name: null,
     path: 'new_file.tf',
@@ -762,7 +762,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_lb_secgroup',
     name: null,
     path: 'new_file.tf',
@@ -867,7 +867,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_lb_logs_bucket',
     name: null,
     path: 'new_file.tf',
@@ -883,7 +883,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_lb_logs_bucket_acl',
     name: null,
     path: 'new_file.tf',
@@ -905,7 +905,7 @@ export const mainComponents = [
     ],
   }),
 
-  new Component({
+  new TerraformComponent({
     id: 'cms_frontend_lb',
     name: null,
     path: 'new_file.tf',
@@ -968,7 +968,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_lb_target',
     name: null,
     path: 'new_file.tf',
@@ -1004,7 +1004,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_launch_conf',
     name: null,
     path: 'new_file.tf',
@@ -1035,7 +1035,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_asg',
     name: null,
     path: 'new_file.tf',
@@ -1098,7 +1098,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_policy_up',
     name: null,
     path: 'new_file.tf',
@@ -1134,7 +1134,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_cpu_alarm_up',
     name: null,
     path: 'new_file.tf',
@@ -1207,7 +1207,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_policy_down',
     name: null,
     path: 'new_file.tf',
@@ -1243,7 +1243,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_cpu_alarm_down',
     name: null,
     path: 'new_file.tf',
@@ -1316,7 +1316,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_fileshare',
     name: null,
     path: 'new_file.tf',
@@ -1339,7 +1339,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_lb_listener',
     name: null,
     path: 'new_file.tf',
@@ -1382,7 +1382,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_fileshare_mount',
     name: null,
     path: 'new_file.tf',
@@ -1403,7 +1403,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_db_subnets',
     name: null,
     path: 'new_file.tf',
@@ -1425,7 +1425,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_db_username',
     name: null,
     path: 'new_file.tf',
@@ -1446,7 +1446,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_db_passwd',
     name: null,
     path: 'new_file.tf',
@@ -1472,7 +1472,7 @@ export const mainComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'cms_db',
     name: null,
     path: 'new_file.tf',

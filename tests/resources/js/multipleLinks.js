@@ -1,4 +1,5 @@
-import { Component, ComponentLink, ComponentLinkDefinition } from 'leto-modelizer-plugin-core';
+import { ComponentLink, ComponentLinkDefinition } from 'leto-modelizer-plugin-core';
+import TerraformComponent from 'src/models/TerraformComponent';
 import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
 import { getTerraformMetadata } from 'tests/resources/utils';
 
@@ -14,19 +15,19 @@ const awsDbInstanceDefinition = metadata.pluginData.definitions.components.find(
 const awsDbInstanceVpcSecurityGroupsAttributeDefinition = awsDbInstanceDefinition.definedAttributes.find(({ name }) => name === 'vpc_security_group_ids');
 
 export const multipleLinks = [
-  new Component({
+  new TerraformComponent({
     id: 'security_group_1',
     name: null,
     path: 'new_file.tf',
     definition: awsSecGroupDefinition,
   }),
-  new Component({
+  new TerraformComponent({
     id: 'security_group_2',
     name: null,
     path: 'new_file.tf',
     definition: awsSecGroupDefinition,
   }),
-  new Component({
+  new TerraformComponent({
     id: 'db_instance',
     name: null,
     path: 'new_file.tf',

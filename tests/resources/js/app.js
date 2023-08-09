@@ -1,4 +1,4 @@
-import { Component } from 'leto-modelizer-plugin-core';
+import TerraformComponent from 'src/models/TerraformComponent';
 import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
 import { getTerraformMetadata } from 'tests/resources/utils';
 import TerraformVariable from 'src/models/TerraformVariable';
@@ -22,7 +22,7 @@ const awsRoute53ZoneDefinition = metadata.pluginData.definitions.components.find
 const nameAttributeDefinition = awsRoute53ZoneDefinition.definedAttributes.find(({ name }) => name === 'name');
 
 export const appComponents = [
-  new Component({
+  new TerraformComponent({
     definition: awsDefinition,
     id: 'aws_1',
     name: null,
@@ -48,7 +48,7 @@ export const appComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     name: null,
     id: 'server_1',
     path: './app.tf',
@@ -60,7 +60,7 @@ export const appComponents = [
       definition: sourceAttributeDefinition,
     })],
   }),
-  new Component({
+  new TerraformComponent({
     name: null,
     id: 'web',
     path: './app.tf',
@@ -92,7 +92,7 @@ export const appComponents = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     name: null,
     id: 'publicdns',
     path: './app.tf',

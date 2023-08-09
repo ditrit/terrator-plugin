@@ -1,4 +1,5 @@
-import { Component, ComponentLink, ComponentLinkDefinition } from 'leto-modelizer-plugin-core';
+import { ComponentLink, ComponentLinkDefinition } from 'leto-modelizer-plugin-core';
+import TerraformComponent from 'src/models/TerraformComponent';
 import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
 import { getTerraformMetadata } from 'tests/resources/utils';
 
@@ -14,7 +15,7 @@ const awsDbDefinition = metadata.pluginData.definitions.components.find(({ type 
 const awsDbSubnetGroupNameAttributeDefinition = awsDbDefinition.definedAttributes.find(({ name }) => name === 'db_subnet_group_name');
 
 export const nameReference = [
-  new Component({
+  new TerraformComponent({
     id: 'db_subnet_group',
     name: null,
     path: 'new_file.tf',
@@ -28,7 +29,7 @@ export const nameReference = [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'db',
     name: null,
     path: 'new_file.tf',

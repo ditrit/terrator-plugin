@@ -2,7 +2,6 @@ import TerraformRender from 'src/render/TerraformRenderer';
 import fs from 'fs';
 import TerraformParser from 'src/parser/TerraformParser';
 import {
-  Component,
   ComponentAttribute,
   FileInformation,
   FileInput,
@@ -11,6 +10,7 @@ import TerraformData from 'src/models/TerraformData';
 import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
 import { getTerraformMetadata } from 'tests/resources/utils';
 import TerraformComponentAttributeDefinition from 'src/models/TerraformComponentAttributeDefinition';
+import TerraformComponent from 'src/models/TerraformComponent';
 
 describe('Test TerraformRenderer', () => {
   it('Test constructor', () => {
@@ -160,7 +160,7 @@ describe('Test TerraformRenderer', () => {
 
         const pluginData = new TerraformData();
         pluginData.components = [
-          new Component({
+          new TerraformComponent({
             name: 'parent_default_multiple_1',
             id: 'parent_default_multiple_1',
             path: './link_default_multiple.tf',
@@ -187,7 +187,7 @@ describe('Test TerraformRenderer', () => {
               type: 'Link',
             })],
           }),
-          new Component({
+          new TerraformComponent({
             name: 'child_default_multiple_1',
             id: 'child_default_multiple_1',
             path: './link_default_multiple.tf',
@@ -204,7 +204,7 @@ describe('Test TerraformRenderer', () => {
               type: 'String',
             })],
           }),
-          new Component({
+          new TerraformComponent({
             name: 'child_default_multiple_2',
             id: 'child_default_multiple_2',
             path: './link_default_multiple.tf',
@@ -502,7 +502,7 @@ describe('Test TerraformRenderer', () => {
         metadata.parse();
 
         metadata.pluginData.components = [
-          new Component({
+          new TerraformComponent({
             path: 'new_file.tf',
             id: 'object_64f4f095',
             name: 'object_64f4f095',
@@ -526,7 +526,7 @@ describe('Test TerraformRenderer', () => {
         metadata.parse();
 
         metadata.pluginData.components = [
-          new Component({
+          new TerraformComponent({
             path: 'new_file.tf',
             id: 'object_64f4f095',
             name: 'object_64f4f095',

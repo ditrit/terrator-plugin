@@ -1,6 +1,7 @@
 import {
   DefaultData,
 } from 'leto-modelizer-plugin-core';
+import TerraformComponent from 'src/models/TerraformComponent';
 
 /**
  * Specific Terraform data.
@@ -112,6 +113,26 @@ class TerraformData extends DefaultData {
     return this.components
       .find((component) => component.id === resourceId)?.attributes
       .find((attribute) => attribute.name === argName)?.value;
+  }
+
+  /**
+   * Create new Terraform component.
+   * @param {ComponentDefinition} definition - Component definition.
+   * @param {string} [folder] - Folder path.
+   * @param {string} [fileName] - File name.
+   * @returns {string} Component id.
+   */
+  addComponent(definition, folder = '', fileName = this.configuration.defaultFileName || '') {
+    const id = this.generateComponentId(definition);
+
+    this.components.push(new TerraformComponent({
+      id,
+      name: id,
+      definition,
+      path: `${folder}${fileName}`,
+    }));
+
+    return id;
   }
 }
 

@@ -1,5 +1,5 @@
-import TerraformRender from 'src/render/TerraformRenderer';
 import fs from 'fs';
+import TerraformRender from 'src/render/TerraformRenderer';
 import TerraformParser from 'src/parser/TerraformParser';
 import {
   ComponentAttribute,

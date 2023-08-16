@@ -1,4 +1,4 @@
-import { Component } from 'leto-modelizer-plugin-core';
+import TerraformComponent from 'src/models/TerraformComponent';
 import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
 import { getTerraformMetadata } from 'tests/resources/utils';
 
@@ -13,13 +13,13 @@ const awsSubnetDefinition = metadata.pluginData.definitions.components.find(({ t
 const vpcIdDefinition = awsSubnetDefinition.definedAttributes.find(({ name }) => name === 'vpc_id');
 
 export default [
-  new Component({
+  new TerraformComponent({
     id: 'vpc',
     name: null,
     path: 'new_file.tf',
     definition: awsVpcDefinition,
   }),
-  new Component({
+  new TerraformComponent({
     id: 'subnet',
     name: null,
     path: 'new_file.tf',

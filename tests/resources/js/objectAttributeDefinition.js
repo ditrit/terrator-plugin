@@ -1,4 +1,4 @@
-import { Component } from 'leto-modelizer-plugin-core';
+import TerraformComponent from 'src/models/TerraformComponent';
 import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
 import { getTerraformMetadata } from 'tests/resources/utils';
 
@@ -13,7 +13,7 @@ const listenerAttributeDefinition = awsElbDefinition.definedAttributes.find(({ n
 const lbPortAttributeDefinition = listenerAttributeDefinition.definedAttributes.find(({ name }) => name === 'lb_port');
 
 export default [
-  new Component({
+  new TerraformComponent({
     id: 'aws_elb_620fea2f',
     name: null,
     path: 'new_file.tf',

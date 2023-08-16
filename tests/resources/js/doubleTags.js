@@ -1,4 +1,4 @@
-import { Component } from 'leto-modelizer-plugin-core';
+import TerraformComponent from 'src/models/TerraformComponent';
 import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
 import { getTerraformMetadata } from 'tests/resources/utils';
 
@@ -11,7 +11,7 @@ metadata.parse();
 const instanceDefinition = metadata.pluginData.definitions.components.find(({ type }) => type === 'aws_instance');
 
 export default [
-  new Component({
+  new TerraformComponent({
     id: 'test',
     name: null,
     path: 'new_file.tf',

@@ -1,11 +1,9 @@
 /* eslint class-methods-use-this: 0 */
 import antlr4 from 'antlr4';
-import {
-  Component,
-} from 'leto-modelizer-plugin-core';
 import TerraformVariable from 'src/models/TerraformVariable';
 import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
 import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
+import TerraformComponent from 'src/models/TerraformComponent';
 
 const getText = (ctx) => ctx.getText().replaceAll('"', '').trim();
 
@@ -87,7 +85,7 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   // Enter a parse tree produced by terraformParser#resource.
   enterResource() {
     this.currentBlockType = 'resource';
-    this.currentComponent = new Component();
+    this.currentComponent = new TerraformComponent();
   }
 
   // Exit a parse tree produced by terraformParser#resource.
@@ -98,7 +96,7 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   // Enter a parse tree produced by terraformParser#data.
   enterData() {
     this.currentBlockType = 'data';
-    this.currentComponent = new Component();
+    this.currentComponent = new TerraformComponent();
   }
 
   // Exit a parse tree produced by terraformParser#data.
@@ -109,7 +107,7 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   // Enter a parse tree produced by terraformParser#provider.
   enterProvider() {
     this.currentBlockType = 'provider';
-    this.currentComponent = new Component();
+    this.currentComponent = new TerraformComponent();
   }
 
   // Exit a parse tree produced by terraformParser#provider.
@@ -143,7 +141,7 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   // Enter a parse tree produced by terraformParser#module.
   enterModule(ctx) {
     this.currentBlockType = 'module';
-    this.currentComponent = new Component();
+    this.currentComponent = new TerraformComponent();
     const type = getText(ctx.name());
     this.currentComponent.definition = this.definitions
       .find((definition) => definition.blockType === 'module' && definition.type === type) || null;

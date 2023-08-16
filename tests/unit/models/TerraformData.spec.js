@@ -3,7 +3,8 @@ import TerraformComponentAttributeDefinition
   from 'src/models/TerraformComponentAttributeDefinition';
 import TerraformData from 'src/models/TerraformData';
 import TerraformVariable from 'src/models/TerraformVariable';
-import { Component } from 'leto-modelizer-plugin-core';
+import TerraformComponent from 'src/models/TerraformComponent';
+import { ComponentDefinition } from 'leto-modelizer-plugin-core';
 
 describe('Test class: TerraformData', () => {
   const terraformData = new TerraformData();
@@ -180,7 +181,7 @@ describe('Test class: TerraformData', () => {
         name: 'test_name',
         value: 'test_value',
       });
-      const component = new Component({
+      const component = new TerraformComponent({
         attribute,
         id: 'test_id',
       });
@@ -189,6 +190,63 @@ describe('Test class: TerraformData', () => {
       terraformData.components[0].attributes.push(attribute);
       expect(terraformData.expandLinkAttribute('test_resource.test_id.test_value', 'test_name'))
         .toEqual('test_value');
+    });
+  });
+
+  describe('Test method: addComponent', () => {
+    it('Should create new terraform component and add it to the components list', () => {
+      terraformData.components = [];
+      terraformData.configuration = {};
+
+      const definition = new ComponentDefinition();
+      const id = terraformData.addComponent(definition);
+
+      expect(terraformData.components).toEqual([
+        new TerraformComponent({
+          id,
+          name: id,
+          definition,
+          path: null,
+        }),
+      ]);
+    });
+
+    it('Should create new terraform component and set correct path without folder', () => {
+      terraformData.components = [];
+      terraformData.configuration = {
+        defaultFileName: 'test.tf',
+      };
+
+      const definition = new ComponentDefinition();
+      const id = terraformData.addComponent(definition);
+
+      expect(terraformData.components).toEqual([
+        new TerraformComponent({
+          id,
+          name: id,
+          definition,
+          path: 'test.tf',
+        }),
+      ]);
+    });
+
+    it('Should create new terraform component and set correct path with folder', () => {
+      terraformData.components = [];
+      terraformData.configuration = {
+        defaultFileName: 'test.tf',
+      };
+
+      const definition = new ComponentDefinition();
+      const id = terraformData.addComponent(definition, 'src/');
+
+      expect(terraformData.components).toEqual([
+        new TerraformComponent({
+          id,
+          name: id,
+          definition,
+          path: 'src/test.tf',
+        }),
+      ]);
     });
   });
 });

@@ -1,4 +1,4 @@
-import { Component } from 'leto-modelizer-plugin-core';
+import TerraformComponent from 'src/models/TerraformComponent';
 import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
 import { getTerraformMetadata } from 'tests/resources/utils';
 
@@ -18,13 +18,13 @@ const awsDbSubnetGroupDefinition = metadata.pluginData.definitions.components.fi
 const subnetIdsAttributeDefinition = awsDbSubnetGroupDefinition.definedAttributes.find(({ name }) => name === 'subnet_ids');
 
 export default [
-  new Component({
+  new TerraformComponent({
     id: 'vpc_test',
     name: null,
     path: 'new_file.tf',
     definition: awsVpcDefinition,
   }),
-  new Component({
+  new TerraformComponent({
     id: 'subnet1',
     name: null,
     path: 'new_file.tf',
@@ -38,7 +38,7 @@ export default [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'subnet2',
     name: null,
     path: 'new_file.tf',
@@ -52,7 +52,7 @@ export default [
       }),
     ],
   }),
-  new Component({
+  new TerraformComponent({
     id: 'db_subnet_group',
     name: null,
     path: 'new_file.tf',

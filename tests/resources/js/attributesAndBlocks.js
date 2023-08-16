@@ -1,4 +1,4 @@
-import { Component } from 'leto-modelizer-plugin-core';
+import TerraformComponent from 'src/models/TerraformComponent';
 import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
 import { getTerraformMetadata } from 'tests/resources/utils';
 
@@ -22,7 +22,7 @@ const egressProtocolAttributeDefinition = egressAttributeDefinition.definedAttri
 const tagsAttributeDefinition = awsSecGroupDefinition.definedAttributes.find(({ name }) => name === 'tags');
 
 export default [
-  new Component({
+  new TerraformComponent({
     id: 'allow_all',
     name: null,
     path: 'new_file.tf',

@@ -28,7 +28,7 @@ export default [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'String',
-        value: 'aws_vpc.vpc.id',
+        value: 'vpc',
         definition: vpcIdDefinition,
       }),
     ],

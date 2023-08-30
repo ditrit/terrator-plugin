@@ -33,7 +33,7 @@ export default [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'String',
-        value: 'aws_vpc.vpc_test.id',
+        value: 'vpc_test',
         definition: vpcIdDefinition,
       }),
     ],
@@ -47,7 +47,7 @@ export default [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'String',
-        value: 'aws_vpc.vpc_test.id',
+        value: 'vpc_test',
         definition: vpcIdDefinition,
       }),
     ],
@@ -61,7 +61,7 @@ export default [
       new TerraformComponentAttribute({
         name: 'subnet_ids',
         type: 'Array',
-        value: ['aws_subnet.subnet1.id', 'aws_subnet.subnet2.id'],
+        value: ['subnet1', 'subnet2'],
         definition: subnetIdsAttributeDefinition,
       }),
     ],

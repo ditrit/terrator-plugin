@@ -138,7 +138,7 @@ describe('Test TerraformParser', () => {
       describe('Test parse: links', () => {
         const metadata = getTerraformMetadata(
           'aws',
-          'tests/resources/tf/link.json',
+          'tests/resources/metadata/simpleLink.json',
         );
         metadata.parse();
         metadata.pluginData.initLinkDefinitions();
@@ -160,7 +160,6 @@ describe('Test TerraformParser', () => {
             content: fs.readFileSync('tests/resources/tf/link_default_multiple.tf', 'utf8'),
           });
           parser.parse(new FileInformation({ path: './link_default_multiple.tf' }), [input]);
-
           expect(parser.pluginData.getLinks()).toEqual(linkDefaultMultiple);
         });
 

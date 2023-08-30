@@ -12,6 +12,7 @@ export default [
       sourceRef: 'parent',
       targetRef: 'child',
       type: 'Default',
+      linkAttribute: 'name',
     }),
   }),
 ];

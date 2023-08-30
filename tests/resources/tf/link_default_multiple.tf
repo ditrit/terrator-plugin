@@ -1,8 +1,8 @@
 resource "parent" "parent_default_multiple_1" {
     name = "parent_default_multiple_1"
     toChild = [
-        "child_default_multiple_1",
-        "child_default_multiple_2",
+        child.child_default_multiple_1.name,
+        child.child_default_multiple_2.name,
     ]
 }
 

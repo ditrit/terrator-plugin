@@ -12,6 +12,7 @@ export default [
       sourceRef: 'parent',
       targetRef: 'child',
       type: 'Reverse',
+      linkAttribute: 'name',
     }),
   }),
   new ComponentLink({

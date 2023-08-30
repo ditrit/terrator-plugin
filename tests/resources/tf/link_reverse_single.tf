@@ -1,7 +1,7 @@
 resource "parent" "parent_reverse_single_1" {
     name = "parent_reverse_single_1"
     fromChild = [
-        "child_reverse_single_1",
+        child.child_reverse_single_1.name,
     ]
 }
 

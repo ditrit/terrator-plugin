@@ -4,5 +4,5 @@ resource "aws_vpc" "parent" {
 
 resource "aws_internet_gateway" "child" {
     name = "child"
-    vpc_id = "parent"
+    vpc_id = aws_vpc.parent
 }

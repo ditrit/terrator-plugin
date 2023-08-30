@@ -201,7 +201,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'String',
-        value: 'aws_vpc.cms_main_vpc.id',
+        value: 'cms_main_vpc',
         definition: awsSubnetVpcIdDefinition,
       }),
       new TerraformComponentAttribute({
@@ -232,7 +232,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'String',
-        value: 'aws_vpc.cms_main_vpc.id',
+        value: 'cms_main_vpc',
         definition: awsSubnetVpcIdDefinition,
       }),
       new TerraformComponentAttribute({
@@ -263,7 +263,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'String',
-        value: 'aws_vpc.cms_main_vpc.id',
+        value: 'cms_main_vpc',
         definition: awsInternetGatewayVpcIdDefinition,
       }),
       new TerraformComponentAttribute({
@@ -292,7 +292,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'String',
-        value: 'aws_vpc.cms_main_vpc.id',
+        value: 'aws_vpc.cms_main_vpc',
       }),
       new TerraformComponentAttribute({
         name: 'route',
@@ -307,7 +307,7 @@ export const mainComponents = [
           new TerraformComponentAttribute({
             name: 'gateway_id',
             type: 'String',
-            value: 'aws_internet_gateway.cms_internet_gw.id',
+            value: 'aws_internet_gateway.cms_internet_gw',
           }),
         ],
       }),
@@ -334,7 +334,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'String',
-        value: 'aws_vpc.cms_main_vpc.id',
+        value: 'cms_main_vpc',
         definition: awsSubnetVpcIdDefinition,
       }),
       new TerraformComponentAttribute({
@@ -365,7 +365,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'String',
-        value: 'aws_vpc.cms_main_vpc.id',
+        value: 'cms_main_vpc',
         definition: awsSubnetVpcIdDefinition,
       }),
       new TerraformComponentAttribute({
@@ -432,7 +432,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'String',
-        value: 'aws_vpc.cms_main_vpc.id',
+        value: 'cms_main_vpc',
         definition: awsSubnetVpcIdDefinition,
       }),
       new TerraformComponentAttribute({
@@ -468,7 +468,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'String',
-        value: 'aws_vpc.cms_main_vpc.id',
+        value: 'cms_main_vpc',
         definition: awsSubnetVpcIdDefinition,
       }),
       new TerraformComponentAttribute({
@@ -504,7 +504,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'String',
-        value: 'aws_vpc.cms_main_vpc.id',
+        value: 'cms_main_vpc',
         definition: awsSubnetVpcIdDefinition,
       }),
       new TerraformComponentAttribute({
@@ -544,8 +544,8 @@ export const mainComponents = [
       }),
       new TerraformComponentAttribute({
         name: 'vpc_id',
-        type: 'String',
-        value: 'aws_vpc.cms_main_vpc.id',
+        type: 'Array',
+        value: ['cms_main_vpc'],
         definition: awsSecurityGroupVpcIdDefinition,
       }),
       new TerraformComponentAttribute({
@@ -692,8 +692,8 @@ export const mainComponents = [
       }),
       new TerraformComponentAttribute({
         name: 'vpc_id',
-        type: 'String',
-        value: 'aws_vpc.cms_main_vpc.id',
+        type: 'Array',
+        value: ['cms_main_vpc'],
         definition: awsSecurityGroupVpcIdDefinition,
       }),
       new TerraformComponentAttribute({
@@ -780,8 +780,8 @@ export const mainComponents = [
       }),
       new TerraformComponentAttribute({
         name: 'vpc_id',
-        type: 'String',
-        value: 'aws_vpc.cms_main_vpc.id',
+        type: 'Array',
+        value: ['cms_main_vpc'],
         definition: awsSecurityGroupVpcIdDefinition,
       }),
       new TerraformComponentAttribute({
@@ -1000,7 +1000,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'String',
-        value: 'aws_vpc.cms_main_vpc.id',
+        value: 'aws_vpc.cms_main_vpc',
       }),
     ],
   }),
@@ -1418,10 +1418,7 @@ export const mainComponents = [
         name: 'subnet_ids',
         type: 'Array',
         definition: subnetGroupSubnetIdsDefinition,
-        value: [
-          'aws_subnet.cms_backend_subnet_az1.id',
-          'aws_subnet.cms_backend_subnet_az2.id',
-        ],
+        value: 'cms_backend_subnet_az1',
       }),
     ],
   }),
@@ -1496,7 +1493,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'vpc_security_group_ids',
         type: 'Array',
-        value: ['aws_security_group.cms_backend_secgroup.id'],
+        value: ['cms_backend_secgroup'],
         definition: dbInstanceVpcSecurityGroupIdsDefinition,
       }),
       new TerraformComponentAttribute({
@@ -1512,8 +1509,8 @@ export const mainComponents = [
       }),
       new TerraformComponentAttribute({
         name: 'db_subnet_group_name',
-        type: 'String',
-        value: 'aws_db_subnet_group.cms_db_subnets.name',
+        type: 'Array',
+        value: ['cms_db_subnets'],
         definition: dbInstanceSubnetGroupNameDefinition,
       }),
       new TerraformComponentAttribute({

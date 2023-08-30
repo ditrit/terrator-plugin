@@ -38,7 +38,7 @@ export const nameReference = [
       new TerraformComponentAttribute({
         name: 'db_subnet_group_name',
         type: 'Array',
-        value: ['aws_db_subnet_group.db_subnet_group.name'],
+        value: ['db_subnet_group'],
         definition: awsDbSubnetGroupNameAttributeDefinition,
       }),
     ],

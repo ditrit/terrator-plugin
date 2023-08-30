@@ -1,4 +1,13 @@
-const root = `{% include "local" ignore missing %}
+const macro = `{% macro displayAttributeValue(attribute, value, level) %}
+{% if attribute.isVariable %}{{ value | dump | indent(level * 4, true) }},
+{% elif attribute.definition.type == 'Link' %}{{ attribute.definition.linkRef | indent(level * 4, true) }}.{{ value }}.{{attribute.definition.linkAttribute}},
+{% elif isValueReference(value) %}{{ value | indent(level * 4, true) }},
+{% else %}{{ value | dump | indent(level * 4, true) }},
+{% endif %}
+{% endmacro %}
+`;
+
+const root = `${macro}{% include "local" ignore missing %}
 {% include "block" ignore missing %}
 {% include "variable" ignore missing %}
 {% include "output" ignore missing %}
@@ -21,15 +30,16 @@ const attribute = `{% if attribute.type == 'Object' %}
 {% endfor %}{% set level = level-1 %}
 {{ "}" | indent(level * 4, true)  }}
 {% else %}
-{{ attribute.name | indent(level * 4, true) }} = {% if attribute.type == 'Array' or attribute.type == 'Link' %}[
+{{ attribute.name | indent(level * 4, true) }} = {% if attribute.type == 'Array' %}[
 {% set level = level+1 %}{% for value in attribute.value %}
-{% if attribute.type == 'Boolean' or attribute.type == 'Number' or isValueReference(value) %}{{ value | indent(level * 4, true) }},
-{% else %}{{ value | dump | indent(level * 4, true) }},
-{% endif %}
+{% call displayAttributeValue(attribute, value, level) -%}{%- endcall %}
 {% endfor %}{% set level = level-1 %}
 {{ "]" | indent(level * 4, true) }}
 {% else %}
-{% if attribute.type == 'Boolean' or attribute.type == 'Number' or isValueReference(attribute.value) or attribute.name == 'user_data' %}{{ attribute.value }}
+{% if attribute.isVariable %}{{ attribute.value }}
+{% elif attribute.definition.type == 'Reference' %}{{ attribute.definition.containerRef }}.{{ attribute.value }}
+{% elif attribute.type == 'Boolean' or attribute.type == 'Number' or attribute.name == 'user_data' %}{{ attribute.value }}
+{% elif attribute.type == 'String' and isValueReference(attribute.value) %}{{ attribute.value }}
 {% else %}{{ attribute.value | dump }}
 {% endif %}
 {% endif %}

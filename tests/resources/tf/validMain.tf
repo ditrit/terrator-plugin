@@ -93,13 +93,21 @@ resource "aws_subnet" "cms_lb_subnet_az2" {
 }
 
 resource "aws_route_table_association" "cms_lb_subnet_az1_gw_assoc" {
-    subnet_id = aws_subnet.cms_lb_subnet_az1.id
-    route_table_id = aws_route_table.cms_routing_tbl.id
+    subnet_id = [
+        aws_subnet.cms_lb_subnet_az1.id,
+    ]
+    route_table_id = [
+        aws_route_table.cms_routing_tbl.id,
+    ]
 }
 
 resource "aws_route_table_association" "cms_lb_subnet_az2_gw_assoc" {
-    subnet_id = aws_subnet.cms_lb_subnet_az2.id
-    route_table_id = aws_route_table.cms_routing_tbl.id
+    subnet_id = [
+        aws_subnet.cms_lb_subnet_az2.id,
+    ]
+    route_table_id = [
+        aws_route_table.cms_routing_tbl.id,
+    ]
 }
 
 resource "aws_subnet" "cms_backend_subnet_az1" {
@@ -131,7 +139,9 @@ resource "aws_subnet" "cms_dmz_subnet" {
 resource "aws_security_group" "cms_frontend_secgroup" {
     name = "cms_frontend_secgroup"
     description = "Default Rules for the CMS Front-End servers"
-    vpc_id = aws_vpc.cms_main_vpc
+    vpc_id = [
+        aws_vpc.cms_main_vpc.id,
+    ]
     ingress {
         description = "HTTP from VPC"
         from_port = 8000
@@ -172,7 +182,9 @@ resource "aws_security_group" "cms_frontend_secgroup" {
 resource "aws_security_group" "cms_backend_secgroup" {
     name = "cms_backend_secgroup"
     description = "Default Rules for the CMS Back-End servers"
-    vpc_id = aws_vpc.cms_main_vpc
+    vpc_id = [
+        aws_vpc.cms_main_vpc.id,
+    ]
     ingress {
         description = "MySQL from VPC"
         from_port = 3306
@@ -198,7 +210,9 @@ resource "aws_security_group" "cms_backend_secgroup" {
 resource "aws_security_group" "cms_lb_secgroup" {
     name = "cms_lb_secgroup"
     description = "Default Rules for the CMS LoadBalancer"
-    vpc_id = aws_vpc.cms_main_vpc
+    vpc_id = [
+        aws_vpc.cms_main_vpc.id,
+    ]
     ingress {
         from_port = 443
         to_port = 443
@@ -226,7 +240,9 @@ resource "aws_s3_bucket" "cms_lb_logs_bucket" {
 }
 
 resource "aws_s3_bucket_acl" "cms_lb_logs_bucket_acl" {
-    bucket = aws_s3_bucket.cms_lb_logs_bucket.id
+    bucket = [
+        aws_s3_bucket.cms_lb_logs_bucket.id,
+    ]
     acl = "private"
 }
 
@@ -243,7 +259,9 @@ resource "aws_lb" "cms_frontend_lb" {
     ]
     enable_deletion_protection = true
     access_logs {
-        bucket = aws_s3_bucket.cms_lb_logs_bucket.bucket
+        bucket = [
+            aws_s3_bucket.cms_lb_logs_bucket.id,
+        ]
         prefix = "lb-logs-"
         enabled = false
     }
@@ -254,12 +272,16 @@ resource "aws_lb_target_group" "cms_lb_target" {
     target_type = "instance"
     port = 8000
     protocol = "HTTP"
-    vpc_id = aws_vpc.cms_main_vpc
+    vpc_id = [
+        aws_vpc.cms_main_vpc.id,
+    ]
 }
 
 resource "aws_launch_configuration" "cms_launch_conf" {
     name_prefix = "web-"
-    image_id = data.aws_ami.ubuntu.id
+    image_id = [
+        aws_ami.aws_ami.id,
+    ]
     instance_type = var.ec2_frontend_sku
     security_groups = [
         aws_security_group.cms_frontend_secgroup.id,
@@ -290,7 +312,9 @@ resource "aws_autoscaling_policy" "cms_policy_up" {
     scaling_adjustment = 1
     adjustment_type = "ChangeInCapacity"
     cooldown = 300
-    autoscaling_group_name = aws_autoscaling_group.cms_asg.name
+    autoscaling_group_name = [
+        aws_autoscaling_group.cms_asg.id,
+    ]
 }
 
 resource "aws_cloudwatch_metric_alarm" "cms_cpu_alarm_up" {
@@ -303,7 +327,9 @@ resource "aws_cloudwatch_metric_alarm" "cms_cpu_alarm_up" {
     statistic = "Average"
     threshold = "85"
     dimensions = {
-        AutoScalingGroupName = aws_autoscaling_group.cms_asg.name
+        AutoScalingGroupName = [
+            aws_autoscaling_group.cms_asg.id,
+        ]
     }
     alarm_description = "This metric monitor EC2 instance CPU utilization"
     alarm_actions = [
@@ -316,7 +342,9 @@ resource "aws_autoscaling_policy" "cms_policy_down" {
     scaling_adjustment = -1
     adjustment_type = "ChangeInCapacity"
     cooldown = 300
-    autoscaling_group_name = aws_autoscaling_group.cms_asg.name
+    autoscaling_group_name = [
+        aws_autoscaling_group.cms_asg.id,
+    ]
 }
 
 resource "aws_cloudwatch_metric_alarm" "cms_cpu_alarm_down" {
@@ -329,7 +357,9 @@ resource "aws_cloudwatch_metric_alarm" "cms_cpu_alarm_down" {
     statistic = "Average"
     threshold = "30"
     dimensions = {
-        AutoScalingGroupName = aws_autoscaling_group.cms_asg.name
+        AutoScalingGroupName = [
+            aws_autoscaling_group.cms_asg.id,
+        ]
     }
     alarm_description = "This metric monitor EC2 instance CPU utilization"
     alarm_actions = [
@@ -344,18 +374,26 @@ resource "aws_efs_file_system" "cms_fileshare" {
 }
 
 resource "aws_lb_listener" "cms_lb_listener" {
-    load_balancer_arn = aws_lb.cms_frontend_lb.arn
+    load_balancer_arn = [
+        aws_lb.cms_frontend_lb.id,
+    ]
     port = "80"
     protocol = "HTTP"
     default_action {
         type = "forward"
-        target_group_arn = aws_lb_target_group.cms_lb_target.arn
+        target_group_arn = [
+            aws_lb_target_group.cms_lb_target.id,
+        ]
     }
 }
 
 resource "aws_efs_mount_target" "cms_fileshare_mount" {
-    file_system_id = aws_efs_file_system.cms_fileshare.id
-    subnet_id = aws_subnet.cms_frontend_subnet_az1.id
+    file_system_id = [
+        aws_efs_file_system.cms_fileshare.id,
+    ]
+    subnet_id = [
+        aws_subnet.cms_frontend_subnet_az1.id,
+    ]
 }
 
 resource "aws_db_subnet_group" "cms_db_subnets" {
@@ -380,13 +418,17 @@ resource "random_password" "cms_db_passwd" {
 resource "aws_db_instance" "cms_db" {
     allocated_storage = 10
     db_name = "cmsdbmain"
-    engine = data.aws_rds_engine_version.cms_db_version.engine
+    engine = [
+        aws_rds_engine_version.aws_rds_engine_version.id,
+    ]
     vpc_security_group_ids = [
         aws_security_group.cms_backend_secgroup.id,
     ]
     engine_version = data.aws_rds_engine_version.cms_db_version.version
     instance_class = var.rds_sku
-    db_subnet_group_name = aws_db_subnet_group.cms_db_subnets.name
+    db_subnet_group_name = [
+        aws_db_subnet_group.cms_db_subnets.name,
+    ]
     username = random_string.cms_db_username.result
     password = random_password.cms_db_passwd.result
     skip_final_snapshot = true

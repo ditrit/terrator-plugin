@@ -20,7 +20,8 @@
           "linkRef": "child",
           "required": false,
           "attributes": [],
-          "rules": {}
+          "rules": {},
+          "linkAttribute": "name"
         },
         {
           "name": "fromChild",
@@ -29,7 +30,8 @@
           "linkRef": "child",
           "required": false,
           "attributes": [],
-          "rules": {}
+          "rules": {},
+          "linkAttribute": "name"
         }
       ]
     },

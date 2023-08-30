@@ -36,7 +36,7 @@ export const multipleLinks = [
       new TerraformComponentAttribute({
         name: 'vpc_security_group_ids',
         type: 'Array',
-        value: ['aws_security_group.security_group_1.id', 'aws_security_group.security_group_2.id'],
+        value: ['security_group_1', 'security_group_2'],
         definition: awsDbInstanceVpcSecurityGroupsAttributeDefinition,
       }),
     ],

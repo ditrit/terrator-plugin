@@ -331,6 +331,36 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
       }
     }
 
+    if (this.currentField?.definition?.type === 'Reference') {
+      const match = /[^.]+\.([^.]+)/.exec(this.currentField.value);
+
+      if (match) {
+        [, this.currentField.value] = match;
+      }
+    }
+
+    if (this.currentField?.definition?.type === 'Link') {
+      this.currentField.type = 'Array';
+
+      if (Array.isArray(this.currentField.value)) {
+        this.currentField.value = this.currentField.value.map((v) => {
+          const match = /[^.]+\.([^.]+)\.([^.]+)/.exec(v);
+
+          if (match) {
+            return match[1];
+          }
+
+          return undefined;
+        });
+      }
+
+      const match = /[^.]+\.([^.]+)(\.([^.]+))?/.exec(this.currentField.value);
+
+      if (match) {
+        this.currentField.value = [match[1]];
+      }
+    }
+
     this.currentField = null;
   }
 

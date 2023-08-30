@@ -1065,7 +1065,6 @@
           "displayName": "VPC ID",
           "description": "The VPC ID to create the subnet in.",
           "containerRef": "aws_vpc",
-          "linkAttribute": "id",
           "required": true,
           "type": "Reference",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet#vpc_id"

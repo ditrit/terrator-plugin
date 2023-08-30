@@ -1,7 +1,7 @@
 resource "parent" "parent_default_single_1" {
     name = "parent_default_single_1"
     toChild = [
-        "child_default_single_1",
+        child.child_default_single_1.name,
     ]
 }
 

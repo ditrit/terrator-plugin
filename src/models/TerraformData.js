@@ -56,25 +56,6 @@ class TerraformData extends DefaultData {
   }
 
   /**
-   * Get the ID of a linked resource.
-   * @param {string} value - Value of the link.
-   * @returns {string} ID of the linked resource.
-   */
-  getComponentIdFromValue(value) {
-    const args = value.split('.');
-
-    if (args.length === 1) {
-      return value;
-    }
-
-    if (args.length === 3) {
-      return args[1];
-    }
-
-    return args[2];
-  }
-
-  /**
    * Get the ID of the linked component.
    * @param {TerraformComponentAttribute} attribute - Link to get value.
    * @returns {string[]} ID of the linked component.
@@ -88,13 +69,13 @@ class TerraformData extends DefaultData {
 
     if (attribute.definition?.type === 'Link' || attribute.definition?.type === 'Array') {
       attribute.value.forEach((element) => {
-        linkedComponentsIds.push(this.getComponentIdFromValue(element));
+        linkedComponentsIds.push(element);
       });
 
       return linkedComponentsIds;
     }
 
-    return [this.getComponentIdFromValue(attribute.value)];
+    return [attribute.value];
   }
 
   /**

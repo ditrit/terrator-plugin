@@ -96,7 +96,7 @@ class TerraformRenderer extends DefaultRender {
           variables: allVariables.filter((v) => v.category === 'variable'),
           locals: allVariables.filter((v) => v.category === 'local'),
           outputs: allVariables.filter((v) => v.category === 'output'),
-          // XXX: This might cause issues with other providers.
+          // This might cause issues with other providers.
           isValueReference: (value) => value?.match(/^(data.|var.|local.|module.|aws_|random_)/),
           isList: (type) => type?.startsWith('list(') || type?.startsWith('set('),
           getListType: (value) => value.split(/\(([^)]+)\)/)[1],

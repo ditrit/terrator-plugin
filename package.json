@@ -32,13 +32,13 @@
   },
   "homepage": "https://github.com/ditrit/terrator-plugin#readme",
   "dependencies": {
-    "antlr4": "=4.13.0",
+    "antlr4": "=4.13.1",
     "leto-modelizer-plugin-core": "github:ditrit/leto-modelizer-plugin-core#0.20.0",
     "nunjucks": "=3.2.4"
   },
   "devDependencies": {
-    "@babel/core": "=7.22.11",
-    "@babel/preset-env": "=7.22.10",
+    "@babel/core": "=7.22.15",
+    "@babel/preset-env": "=7.22.15",
     "babel-jest": "=29.6.4",
     "babel-loader": "=9.1.3",
     "better-docs": "=2.7.2",

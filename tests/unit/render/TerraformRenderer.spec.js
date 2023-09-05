@@ -30,7 +30,7 @@ describe('Test TerraformRenderer', () => {
           path: './container.tf',
           content: fs.readFileSync('tests/resources/tf/container.tf', 'utf8'),
         });
-        parser.parse(new FileInformation({ path: './container.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '.' }), [input]);
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
 
@@ -51,7 +51,7 @@ describe('Test TerraformRenderer', () => {
             content: fs.readFileSync('tests/resources/tf/link_reverse_single.tf', 'utf8'),
           }),
         ];
-        parser.parse(new FileInformation({ path: './' }), inputs);
+        parser.parse(new FileInformation({ path: '.' }), inputs);
 
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual(inputs);
       });
@@ -67,7 +67,7 @@ describe('Test TerraformRenderer', () => {
           path: './container.tf',
           content: fs.readFileSync('tests/resources/tf/container.tf', 'utf8'),
         });
-        parser.parse(new FileInformation({ path: './' }), [input]);
+        parser.parse(new FileInformation({ path: '.' }), [input]);
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
 
@@ -82,7 +82,7 @@ describe('Test TerraformRenderer', () => {
           path: './link_default_single.tf',
           content: fs.readFileSync('tests/resources/tf/link_default_single.tf', 'utf8'),
         });
-        parser.parse(new FileInformation({ path: './' }), [input]);
+        parser.parse(new FileInformation({ path: '.' }), [input]);
 
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
@@ -98,7 +98,7 @@ describe('Test TerraformRenderer', () => {
           path: './link_default_multiple.tf',
           content: fs.readFileSync('tests/resources/tf/link_default_multiple.tf', 'utf8'),
         });
-        parser.parse(new FileInformation({ path: './' }), [input]);
+        parser.parse(new FileInformation({ path: '.' }), [input]);
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
 
@@ -113,7 +113,7 @@ describe('Test TerraformRenderer', () => {
           path: './link_reverse_single.tf',
           content: fs.readFileSync('tests/resources/tf/link_reverse_single.tf', 'utf8'),
         });
-        parser.parse(new FileInformation({ path: './' }), [input]);
+        parser.parse(new FileInformation({ path: '.' }), [input]);
 
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
@@ -129,7 +129,7 @@ describe('Test TerraformRenderer', () => {
           path: './link_reverse_multiple.tf',
           content: fs.readFileSync('tests/resources/tf/link_reverse_multiple.tf', 'utf8'),
         });
-        parser.parse(new FileInformation({ path: './' }), [input]);
+        parser.parse(new FileInformation({ path: '.' }), [input]);
 
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
@@ -145,7 +145,7 @@ describe('Test TerraformRenderer', () => {
           path: './app.tf',
           content: fs.readFileSync('tests/resources/tf/app.tf', 'utf8'),
         });
-        parser.parse(new FileInformation({ path: './' }), [input]);
+        parser.parse(new FileInformation({ path: '.' }), [input]);
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
 
@@ -237,7 +237,7 @@ describe('Test TerraformRenderer', () => {
         );
         metadata.parse();
         const parser = new TerraformParser(metadata.pluginData);
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
@@ -253,7 +253,7 @@ describe('Test TerraformRenderer', () => {
         );
         metadata.parse();
         const parser = new TerraformParser(metadata.pluginData);
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
@@ -269,7 +269,7 @@ describe('Test TerraformRenderer', () => {
         );
         metadata.parse();
         const parser = new TerraformParser(metadata.pluginData);
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
@@ -285,7 +285,7 @@ describe('Test TerraformRenderer', () => {
         );
         metadata.parse();
         const parser = new TerraformParser(metadata.pluginData);
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
@@ -301,7 +301,7 @@ describe('Test TerraformRenderer', () => {
         );
         metadata.parse();
         const parser = new TerraformParser(metadata.pluginData);
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
@@ -317,7 +317,7 @@ describe('Test TerraformRenderer', () => {
         );
         metadata.parse();
         const parser = new TerraformParser(metadata.pluginData);
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
@@ -333,7 +333,7 @@ describe('Test TerraformRenderer', () => {
         );
         metadata.parse();
         const parser = new TerraformParser(metadata.pluginData);
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
@@ -353,7 +353,7 @@ describe('Test TerraformRenderer', () => {
         );
         metadata.parse();
         const parser = new TerraformParser(metadata.pluginData);
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([validnput]);
       });
@@ -372,7 +372,7 @@ describe('Test TerraformRenderer', () => {
 
         const parser = new TerraformParser(metadata.pluginData);
 
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
@@ -391,7 +391,7 @@ describe('Test TerraformRenderer', () => {
 
         const parser = new TerraformParser(metadata.pluginData);
 
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
@@ -410,7 +410,7 @@ describe('Test TerraformRenderer', () => {
 
         const parser = new TerraformParser(metadata.pluginData);
 
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
@@ -429,7 +429,7 @@ describe('Test TerraformRenderer', () => {
 
         const parser = new TerraformParser(metadata.pluginData);
 
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
@@ -448,7 +448,7 @@ describe('Test TerraformRenderer', () => {
 
         const parser = new TerraformParser(metadata.pluginData);
 
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
@@ -467,7 +467,7 @@ describe('Test TerraformRenderer', () => {
 
         const parser = new TerraformParser(metadata.pluginData);
 
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
@@ -486,7 +486,7 @@ describe('Test TerraformRenderer', () => {
 
         const parser = new TerraformParser(metadata.pluginData);
 
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
@@ -556,7 +556,7 @@ describe('Test TerraformRenderer', () => {
 
         const parser = new TerraformParser(metadata.pluginData);
 
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });

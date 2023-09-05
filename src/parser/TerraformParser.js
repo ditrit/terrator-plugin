@@ -47,9 +47,11 @@ class TerraformParser extends DefaultParser {
     this.pluginData.components = [];
 
     const listener = new TerraformListener(this.pluginData.definitions.components);
+    const diagramPath = (!diagram?.path || diagram.path.length === 0) ? '' : `${diagram.path}/`;
+    const regex = new RegExp(`^${diagramPath}[^/]+\\.tf$`);
 
     inputs
-      .filter(({ path }) => path.startsWith(diagram.path))
+      .filter(({ path }) => regex.test(path))
       .filter(({ content, path }) => {
         if (content && content.trim() !== '') {
           return true;

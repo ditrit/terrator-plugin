@@ -107,7 +107,7 @@ describe('Test TerraformParser', () => {
             path: './app.tf',
             content: fs.readFileSync('tests/resources/tf/app.tf', 'utf8'),
           });
-          parser.parse(new FileInformation({ path: './app.tf' }), [input]);
+          parser.parse(new FileInformation({ path: '.' }), [input]);
 
           expect(parser.pluginData.components).toEqual(appComponents);
           expect(parser.pluginData.variables).toEqual(appVariables);
@@ -127,7 +127,7 @@ describe('Test TerraformParser', () => {
             path: './container.tf',
             content: fs.readFileSync('tests/resources/tf/container.tf', 'utf8'),
           });
-          parser.parse(new FileInformation({ path: './container.tf' }), [input]);
+          parser.parse(new FileInformation({ path: '.' }), [input]);
 
           expect(parser.pluginData.components.length).toEqual(2);
           expect(parser.pluginData.components[0].id).toEqual('parent');
@@ -149,7 +149,7 @@ describe('Test TerraformParser', () => {
             path: './link_default_single.tf',
             content: fs.readFileSync('tests/resources/tf/link_default_single.tf', 'utf8'),
           });
-          parser.parse(new FileInformation({ path: './link_default_single.tf' }), [input]);
+          parser.parse(new FileInformation({ path: '.' }), [input]);
 
           expect(parser.pluginData.getLinks()).toEqual(linkDefaultSingle);
         });
@@ -159,7 +159,7 @@ describe('Test TerraformParser', () => {
             path: './link_default_multiple.tf',
             content: fs.readFileSync('tests/resources/tf/link_default_multiple.tf', 'utf8'),
           });
-          parser.parse(new FileInformation({ path: './link_default_multiple.tf' }), [input]);
+          parser.parse(new FileInformation({ path: '.' }), [input]);
           expect(parser.pluginData.getLinks()).toEqual(linkDefaultMultiple);
         });
 
@@ -168,7 +168,7 @@ describe('Test TerraformParser', () => {
             path: './link_reverse_single.tf',
             content: fs.readFileSync('tests/resources/tf/link_reverse_single.tf', 'utf8'),
           });
-          parser.parse(new FileInformation({ path: './link_reverse_single.tf' }), [input]);
+          parser.parse(new FileInformation({ path: '.' }), [input]);
 
           expect(parser.pluginData.getLinks()).toEqual(linkReverseSingle);
         });
@@ -179,7 +179,7 @@ describe('Test TerraformParser', () => {
             content: fs.readFileSync('tests/resources/tf/link_reverse_multiple.tf', 'utf8'),
           });
 
-          parser.parse(new FileInformation({ path: './link_reverse_multiple.tf' }), [input]);
+          parser.parse(new FileInformation({ path: '.' }), [input]);
 
           expect(parser.pluginData.getLinks()).toEqual(linkReverseMultiple);
         });
@@ -200,7 +200,7 @@ describe('Test TerraformParser', () => {
             content: fs.readFileSync('tests/resources/tf/id_reference.tf', 'utf8'),
           });
 
-          parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+          parser.parse(new FileInformation({ path: '' }), [input]);
 
           expect(metadata.pluginData.components).toEqual(idReference);
           expect(metadata.pluginData.getLinks()).toEqual([]);
@@ -212,7 +212,7 @@ describe('Test TerraformParser', () => {
             content: fs.readFileSync('tests/resources/tf/name_reference.tf', 'utf8'),
           });
 
-          parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+          parser.parse(new FileInformation({ path: '' }), [input]);
 
           expect(metadata.pluginData.components).toEqual(nameReference);
           expect(metadata.pluginData.getLinks()).toEqual(nameReferenceLink);
@@ -224,7 +224,7 @@ describe('Test TerraformParser', () => {
             content: fs.readFileSync('tests/resources/tf/multiple_references.tf', 'utf8'),
           });
 
-          parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+          parser.parse(new FileInformation({ path: '' }), [input]);
 
           expect(metadata.pluginData.components).toEqual(multipleReferences);
           // XXX: Containers have no link
@@ -237,7 +237,7 @@ describe('Test TerraformParser', () => {
             content: fs.readFileSync('tests/resources/tf/multiple_links.tf', 'utf8'),
           });
 
-          parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+          parser.parse(new FileInformation({ path: '' }), [input]);
 
           expect(metadata.pluginData.components).toEqual(multipleLinks);
           expect(metadata.pluginData.getLinks()).toEqual(multipleLinksLinks);
@@ -249,7 +249,7 @@ describe('Test TerraformParser', () => {
             content: fs.readFileSync('tests/resources/tf/variable_reference.tf', 'utf8'),
           });
 
-          parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+          parser.parse(new FileInformation({ path: '' }), [input]);
 
           expect(metadata.pluginData.components).toEqual(variableComponentReference);
           expect(metadata.pluginData.variables).toEqual(variableReference);
@@ -261,7 +261,7 @@ describe('Test TerraformParser', () => {
             content: fs.readFileSync('tests/resources/tf/local_reference.tf', 'utf8'),
           });
 
-          parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+          parser.parse(new FileInformation({ path: '' }), [input]);
 
           expect(metadata.pluginData.components).toEqual(localComponentReference);
           expect(metadata.pluginData.variables).toEqual(localReference);
@@ -281,7 +281,7 @@ describe('Test TerraformParser', () => {
           content: fs.readFileSync('tests/resources/tf/attributes_and_blocks.tf', 'utf8'),
         });
 
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(metadata.pluginData.components).toEqual(attributesAndBlocks);
       });
@@ -298,7 +298,7 @@ describe('Test TerraformParser', () => {
           path: 'new_file.tf',
           content: fs.readFileSync('tests/resources/tf/double_tags.tf', 'utf8'),
         });
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
         expect(parser.pluginData.components).toEqual(doubleTags);
       });
 
@@ -315,7 +315,7 @@ describe('Test TerraformParser', () => {
           content: fs.readFileSync('tests/resources/tf/complex_field.tf', 'utf8'),
         });
 
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(metadata.pluginData.components).toEqual(complexField);
       });
@@ -333,7 +333,7 @@ describe('Test TerraformParser', () => {
           content: fs.readFileSync('tests/resources/tf/empty_resource.tf', 'utf8'),
         });
 
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(metadata.pluginData.components).toEqual(emptyResource);
       });
@@ -353,7 +353,7 @@ describe('Test TerraformParser', () => {
 
         // Expect the parser to log an error to the console
         const spy = jest.spyOn(console, 'error').mockImplementation(() => { });
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
         expect(spy).toHaveBeenCalled();
       });
 
@@ -370,7 +370,7 @@ describe('Test TerraformParser', () => {
           content: fs.readFileSync('tests/resources/tf/reference_attribute.tf', 'utf8'),
         });
 
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(metadata.pluginData.components).toEqual(referenceAttribute);
       });
@@ -388,7 +388,7 @@ describe('Test TerraformParser', () => {
           content: fs.readFileSync('tests/resources/tf/output.tf', 'utf8'),
         });
 
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(metadata.pluginData.variables).toEqual(output);
       });
@@ -406,7 +406,7 @@ describe('Test TerraformParser', () => {
           content: fs.readFileSync('tests/resources/tf/index_argument.tf', 'utf8'),
         });
 
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(metadata.pluginData.components).toEqual(indexArgument);
       });
@@ -424,7 +424,7 @@ describe('Test TerraformParser', () => {
           content: fs.readFileSync('tests/resources/tf/main.tf', 'utf8'),
         });
 
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(metadata.pluginData.components).toEqual(mainComponents);
         expect(metadata.pluginData.variables).toEqual(mainVariables);
@@ -443,7 +443,7 @@ describe('Test TerraformParser', () => {
           content: fs.readFileSync('tests/resources/tf/array_variable.tf', 'utf8'),
         });
 
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(metadata.pluginData.variables).toEqual(arrayVariable);
         expect(metadata.pluginData.components).toEqual([]);
@@ -464,7 +464,7 @@ describe('Test TerraformParser', () => {
           content: fs.readFileSync('tests/resources/tf/bug41_subObject.tf', 'utf8'),
         });
 
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(metadata.pluginData.components).toEqual(subObject);
       });
@@ -505,7 +505,7 @@ describe('Test TerraformParser', () => {
           content: fs.readFileSync('tests/resources/tf/bug48_objectAttributeDefinition.tf', 'utf8'),
         });
 
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(metadata.pluginData.components).toEqual(objectAttributeDefinition);
       });
@@ -523,7 +523,7 @@ describe('Test TerraformParser', () => {
           content: fs.readFileSync('tests/resources/tf/bug67_missingDefinitionOnAttribute.tf', 'utf8'),
         });
 
-        parser.parse(new FileInformation({ path: 'new_file.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(metadata.pluginData.components).toEqual(missingDefinitionOnAttribute);
       });
@@ -541,9 +541,39 @@ describe('Test TerraformParser', () => {
           content: fs.readFileSync('tests/resources/tf/bug78_emptyListAttribute.tf', 'utf8'),
         });
 
-        parser.parse(new FileInformation({ path: 'bug78_emptyListAttribute.tf' }), [input]);
+        parser.parse(new FileInformation({ path: '' }), [input]);
 
         expect(metadata.pluginData.components).toEqual(emptyListAttribute);
+      });
+
+      it('Should only parse files into diagram folder and not in sub-folder', () => {
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+
+        metadata.parse();
+        metadata.pluginData.initLinkDefinitions();
+
+        const parser = new TerraformParser(metadata.pluginData);
+        const inputs = [
+          new FileInput({
+            path: 'other/main.tf',
+            content: fs.readFileSync('tests/resources/tf/complex_field.tf', 'utf8'),
+          }),
+          new FileInput({
+            path: 'new_file.tf',
+            content: fs.readFileSync('tests/resources/tf/empty_resource.tf', 'utf8'),
+          }),
+        ];
+        const diagram = new FileInformation({ path: '' });
+
+        parser.parse(new FileInformation({ path: '' }), inputs);
+        expect(metadata.pluginData.components).toEqual(emptyResource);
+
+        diagram.path = '';
+        parser.parse(new FileInformation({ path: '' }), inputs);
+        expect(metadata.pluginData.components).toEqual(emptyResource);
       });
     });
   });

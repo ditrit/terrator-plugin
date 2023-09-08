@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Update plugin-core to version 0.21.0.
+
 ### Fixed
 
 - Fix loading wrong files on Parse.

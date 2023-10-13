@@ -99,18 +99,18 @@ class TerraformData extends DefaultData {
   /**
    * Create new Terraform component.
    * @param {ComponentDefinition} definition - Component definition.
-   * @param {string} [folder] - Folder path.
-   * @param {string} [fileName] - File name.
+   * @param {string} diagramPath - Diagram path.
    * @returns {string} Component id.
    */
-  addComponent(definition, folder = '', fileName = this.configuration.defaultFileName || '') {
+  addComponent(definition, diagramPath) {
     const id = this.generateComponentId(definition);
+    const { defaultFileName } = this.configuration;
 
     this.components.push(new TerraformComponent({
       id,
       name: id,
       definition,
-      path: `${folder}${fileName}`,
+      path: diagramPath ? `${diagramPath}/${defaultFileName}` : defaultFileName,
     }));
 
     return id;

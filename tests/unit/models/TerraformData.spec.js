@@ -142,7 +142,7 @@ describe('Test class: TerraformData', () => {
       };
 
       const definition = new ComponentDefinition();
-      const id = terraformData.addComponent(definition, 'src/');
+      const id = terraformData.addComponent(definition, 'src');
 
       expect(terraformData.components).toEqual([
         new TerraformComponent({

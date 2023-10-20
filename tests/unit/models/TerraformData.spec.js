@@ -101,7 +101,9 @@ describe('Test class: TerraformData', () => {
   describe('Test method: addComponent', () => {
     it('Should create new terraform component and add it to the components list', () => {
       terraformData.components = [];
-      terraformData.configuration = {};
+      terraformData.configuration = {
+        defaultFileName: '',
+      };
 
       const definition = new ComponentDefinition();
       const id = terraformData.addComponent(definition);
@@ -111,7 +113,7 @@ describe('Test class: TerraformData', () => {
           id,
           name: id,
           definition,
-          path: null,
+          path: '',
         }),
       ]);
     });
@@ -142,7 +144,7 @@ describe('Test class: TerraformData', () => {
       };
 
       const definition = new ComponentDefinition();
-      const id = terraformData.addComponent(definition, 'src/');
+      const id = terraformData.addComponent(definition, 'src');
 
       expect(terraformData.components).toEqual([
         new TerraformComponent({

@@ -41,7 +41,8 @@ const subnetGroupSubnetIdsDefinition = awsDbSubnetGroupDefinition.definedAttribu
 
 export const mainComponents = [
   new TerraformComponent({
-    id: 'aws_1',
+    id: 'id_1',
+    externalId: 'aws',
     name: null,
     path: 'new_file.tf',
     definition: awsDefinition,
@@ -87,7 +88,8 @@ export const mainComponents = [
   }),
   new TerraformComponent({
     name: null,
-    id: 'ubuntu',
+    id: 'id_2',
+    externalId: 'ubuntu',
     path: 'new_file.tf',
     definition: awsAmiDefinition,
     attributes: [
@@ -138,7 +140,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_db_version',
+    id: 'id_3',
+    externalId: 'cms_db_version',
     name: null,
     path: 'new_file.tf',
     definition: new TerraformComponentDefinition({
@@ -159,7 +162,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'available',
+    id: 'id_4',
+    externalId: 'available',
     name: null,
     path: 'new_file.tf',
     definition: new TerraformComponentDefinition({
@@ -175,7 +179,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_main_vpc',
+    id: 'id_5',
+    externalId: 'cms_main_vpc',
     name: null,
     path: 'new_file.tf',
     definition: awsVpcDefinition,
@@ -193,7 +198,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_frontend_subnet_az1',
+    id: 'id_6',
+    externalId: 'cms_frontend_subnet_az1',
     name: null,
     path: 'new_file.tf',
     definition: awsSubnetDefinition,
@@ -201,7 +207,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'String',
-        value: 'cms_main_vpc',
+        value: 'id_5',
         definition: awsSubnetVpcIdDefinition,
       }),
       new TerraformComponentAttribute({
@@ -224,7 +230,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_frontend_subnet_az2',
+    id: 'id_7',
+    externalId: 'cms_frontend_subnet_az2',
     name: null,
     path: 'new_file.tf',
     definition: awsSubnetDefinition,
@@ -232,7 +239,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'String',
-        value: 'cms_main_vpc',
+        value: 'id_5',
         definition: awsSubnetVpcIdDefinition,
       }),
       new TerraformComponentAttribute({
@@ -255,7 +262,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_internet_gw',
+    id: 'id_8',
+    externalId: 'cms_internet_gw',
     name: null,
     path: 'new_file.tf',
     definition: awsInternetGatewayDefinition,
@@ -263,7 +271,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'String',
-        value: 'cms_main_vpc',
+        value: 'id_5',
         definition: awsInternetGatewayVpcIdDefinition,
       }),
       new TerraformComponentAttribute({
@@ -281,7 +289,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_routing_tbl',
+    id: 'id_9',
+    externalId: 'cms_routing_tbl',
     name: null,
     path: 'new_file.tf',
     definition: new TerraformComponentDefinition({
@@ -326,7 +335,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_lb_subnet_az1',
+    id: 'id_10',
+    externalId: 'cms_lb_subnet_az1',
     name: null,
     path: 'new_file.tf',
     definition: awsSubnetDefinition,
@@ -334,7 +344,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'String',
-        value: 'cms_main_vpc',
+        value: 'id_5',
         definition: awsSubnetVpcIdDefinition,
       }),
       new TerraformComponentAttribute({
@@ -357,7 +367,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_lb_subnet_az2',
+    id: 'id_11',
+    externalId: 'cms_lb_subnet_az2',
     name: null,
     path: 'new_file.tf',
     definition: awsSubnetDefinition,
@@ -365,7 +376,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'String',
-        value: 'cms_main_vpc',
+        value: 'id_5',
         definition: awsSubnetVpcIdDefinition,
       }),
       new TerraformComponentAttribute({
@@ -388,7 +399,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_lb_subnet_az1_gw_assoc',
+    id: 'id_12',
+    externalId: 'cms_lb_subnet_az1_gw_assoc',
     name: null,
     path: 'new_file.tf',
     definition: awsRouteTableAssociationDefinition,
@@ -406,7 +418,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_lb_subnet_az2_gw_assoc',
+    id: 'id_13',
+    externalId: 'cms_lb_subnet_az2_gw_assoc',
     name: null,
     path: 'new_file.tf',
     definition: awsRouteTableAssociationDefinition,
@@ -424,7 +437,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_backend_subnet_az1',
+    id: 'id_14',
+    externalId: 'cms_backend_subnet_az1',
     name: null,
     path: 'new_file.tf',
     definition: awsSubnetDefinition,
@@ -432,7 +446,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'String',
-        value: 'cms_main_vpc',
+        value: 'id_5',
         definition: awsSubnetVpcIdDefinition,
       }),
       new TerraformComponentAttribute({
@@ -460,7 +474,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_backend_subnet_az2',
+    id: 'id_15',
+    externalId: 'cms_backend_subnet_az2',
     name: null,
     path: 'new_file.tf',
     definition: awsSubnetDefinition,
@@ -468,7 +483,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'String',
-        value: 'cms_main_vpc',
+        value: 'id_5',
         definition: awsSubnetVpcIdDefinition,
       }),
       new TerraformComponentAttribute({
@@ -496,7 +511,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_dmz_subnet',
+    id: 'id_16',
+    externalId: 'cms_dmz_subnet',
     name: null,
     path: 'new_file.tf',
     definition: awsSubnetDefinition,
@@ -504,7 +520,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'String',
-        value: 'cms_main_vpc',
+        value: 'id_5',
         definition: awsSubnetVpcIdDefinition,
       }),
       new TerraformComponentAttribute({
@@ -527,7 +543,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_frontend_secgroup',
+    id: 'id_17',
+    externalId: 'cms_frontend_secgroup',
     name: null,
     path: 'new_file.tf',
     definition: awsSecurityGroupDefinition,
@@ -545,7 +562,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'Array',
-        value: ['cms_main_vpc'],
+        value: ['id_5'],
         definition: awsSecurityGroupVpcIdDefinition,
       }),
       new TerraformComponentAttribute({
@@ -675,7 +692,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_backend_secgroup',
+    id: 'id_18',
+    externalId: 'cms_backend_secgroup',
     name: null,
     path: 'new_file.tf',
     definition: awsSecurityGroupDefinition,
@@ -693,7 +711,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'Array',
-        value: ['cms_main_vpc'],
+        value: ['id_5'],
         definition: awsSecurityGroupVpcIdDefinition,
       }),
       new TerraformComponentAttribute({
@@ -763,7 +781,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_lb_secgroup',
+    id: 'id_19',
+    externalId: 'cms_lb_secgroup',
     name: null,
     path: 'new_file.tf',
     definition: awsSecurityGroupDefinition,
@@ -781,7 +800,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'Array',
-        value: ['cms_main_vpc'],
+        value: ['id_5'],
         definition: awsSecurityGroupVpcIdDefinition,
       }),
       new TerraformComponentAttribute({
@@ -868,7 +887,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_lb_logs_bucket',
+    id: 'id_20',
+    externalId: 'cms_lb_logs_bucket',
     name: null,
     path: 'new_file.tf',
     definition: new TerraformComponentDefinition({
@@ -884,7 +904,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_lb_logs_bucket_acl',
+    id: 'id_21',
+    externalId: 'cms_lb_logs_bucket_acl',
     name: null,
     path: 'new_file.tf',
     definition: new TerraformComponentDefinition({
@@ -906,7 +927,8 @@ export const mainComponents = [
   }),
 
   new TerraformComponent({
-    id: 'cms_frontend_lb',
+    id: 'id_22',
+    externalId: 'cms_frontend_lb',
     name: null,
     path: 'new_file.tf',
     definition: new TerraformComponentDefinition({
@@ -969,7 +991,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_lb_target',
+    id: 'id_23',
+    externalId: 'cms_lb_target',
     name: null,
     path: 'new_file.tf',
     definition: new TerraformComponentDefinition({
@@ -1005,7 +1028,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_launch_conf',
+    id: 'id_24',
+    externalId: 'cms_launch_conf',
     name: null,
     path: 'new_file.tf',
     definition: new TerraformComponentDefinition({
@@ -1036,7 +1060,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_asg',
+    id: 'id_25',
+    externalId: 'cms_asg',
     name: null,
     path: 'new_file.tf',
     definition: new TerraformComponentDefinition({
@@ -1099,7 +1124,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_policy_up',
+    id: 'id_26',
+    externalId: 'cms_policy_up',
     name: null,
     path: 'new_file.tf',
     definition: new TerraformComponentDefinition({
@@ -1135,7 +1161,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_cpu_alarm_up',
+    id: 'id_27',
+    externalId: 'cms_cpu_alarm_up',
     name: null,
     path: 'new_file.tf',
     definition: new TerraformComponentDefinition({
@@ -1208,7 +1235,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_policy_down',
+    id: 'id_28',
+    externalId: 'cms_policy_down',
     name: null,
     path: 'new_file.tf',
     definition: new TerraformComponentDefinition({
@@ -1244,7 +1272,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_cpu_alarm_down',
+    id: 'id_29',
+    externalId: 'cms_cpu_alarm_down',
     name: null,
     path: 'new_file.tf',
     definition: new TerraformComponentDefinition({
@@ -1317,7 +1346,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_fileshare',
+    id: 'id_30',
+    externalId: 'cms_fileshare',
     name: null,
     path: 'new_file.tf',
     definition: new TerraformComponentDefinition({
@@ -1340,7 +1370,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_lb_listener',
+    id: 'id_31',
+    externalId: 'cms_lb_listener',
     name: null,
     path: 'new_file.tf',
     definition: new TerraformComponentDefinition({
@@ -1383,7 +1414,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_fileshare_mount',
+    id: 'id_32',
+    externalId: 'cms_fileshare_mount',
     name: null,
     path: 'new_file.tf',
     definition: new TerraformComponentDefinition({
@@ -1404,7 +1436,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_db_subnets',
+    id: 'id_33',
+    externalId: 'cms_db_subnets',
     name: null,
     path: 'new_file.tf',
     definition: awsDbSubnetGroupDefinition,
@@ -1418,12 +1451,13 @@ export const mainComponents = [
         name: 'subnet_ids',
         type: 'Array',
         definition: subnetGroupSubnetIdsDefinition,
-        value: 'cms_backend_subnet_az1',
+        value: ['id_14', 'id_15'],
       }),
     ],
   }),
   new TerraformComponent({
-    id: 'cms_db_username',
+    id: 'id_34',
+    externalId: 'cms_db_username',
     name: null,
     path: 'new_file.tf',
     definition: new TerraformComponentDefinition({
@@ -1444,7 +1478,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_db_passwd',
+    id: 'id_35',
+    externalId: 'cms_db_passwd',
     name: null,
     path: 'new_file.tf',
     definition: new TerraformComponentDefinition({
@@ -1470,7 +1505,8 @@ export const mainComponents = [
     ],
   }),
   new TerraformComponent({
-    id: 'cms_db',
+    id: 'id_36',
+    externalId: 'cms_db',
     name: null,
     path: 'new_file.tf',
     definition: awsDbInstanceDefinition,
@@ -1493,7 +1529,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'vpc_security_group_ids',
         type: 'Array',
-        value: ['cms_backend_secgroup'],
+        value: ['id_18'],
         definition: dbInstanceVpcSecurityGroupIdsDefinition,
       }),
       new TerraformComponentAttribute({
@@ -1510,7 +1546,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'db_subnet_group_name',
         type: 'Array',
-        value: ['cms_db_subnets'],
+        value: ['id_33'],
         definition: dbInstanceSubnetGroupNameDefinition,
       }),
       new TerraformComponentAttribute({

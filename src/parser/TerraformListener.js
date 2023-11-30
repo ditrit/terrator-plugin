@@ -8,12 +8,10 @@ import TerraformComponent from 'src/models/TerraformComponent';
 const getText = (ctx) => ctx.getText().replaceAll('"', '').trim();
 
 class TerraformListener extends antlr4.tree.ParseTreeListener {
-  constructor(definitions) {
+  constructor(pluginData) {
     super();
-    this.definitions = definitions;
-    this.components = [];
-    this.variables = [];
-    this.errors = [];
+    this.pluginData = pluginData;
+    this.definitions = pluginData.definitions.components;
 
     this.currentComponent = null;
     this.currentBlockType = null;
@@ -23,11 +21,19 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
     this.fieldsTree = [];
     this.currentVariable = null;
     this.currentVariableField = null;
+    // Map of ids in order to have for each externalId, the associated id.
+    // key -> type.externalId, value -> id
+    this.ids = new Map();
+    // We need this idCounter because we can't use pluginData to generate the id.
+    this.idCounter = 1;
   }
 
   addComponent() {
+    const typeExternalId = `${this.currentComponent.definition.type}.${this.currentComponent.externalId}`;
+
     this.currentComponent.path = this.currentFile.path;
-    this.components.push(this.currentComponent);
+    this.currentComponent.id = this.createIdFromTypeExternalId(typeExternalId);
+    this.pluginData.components.push(this.currentComponent);
     this.currentComponent = null;
     this.currentBlockType = null;
     this.fieldsTree = [];
@@ -35,7 +41,7 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
 
   addVariable() {
     this.currentVariable.path = this.currentFile.path;
-    this.variables.push(this.currentVariable);
+    this.pluginData.variables.push(this.currentVariable);
     this.currentVariable = null;
     this.currentVariableField = null;
   }
@@ -112,7 +118,6 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
 
   // Exit a parse tree produced by terraformParser#provider.
   exitProvider() {
-    this.currentComponent.id = null;
     this.addComponent();
   }
 
@@ -149,7 +154,6 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
 
   // Exit a parse tree produced by terraformParser#module.
   exitModule() {
-    this.currentComponent.id = null;
     this.addComponent();
   }
 
@@ -217,6 +221,15 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
       blockType: this.currentBlockType,
       type,
     });
+
+    if (this.currentBlockType === 'provider') {
+      // special case for provider, we do not have any externalId
+      // so we will use the `type` as the externalId
+      const typeExternalId = `${type}.${type}`;
+
+      this.currentComponent.externalId = type;
+      this.currentComponent.id = this.createIdFromTypeExternalId(typeExternalId);
+    }
   }
 
   // Exit a parse tree produced by terraformParser#resourcetype.
@@ -230,7 +243,7 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   // Exit a parse tree produced by terraformParser#name.
   exitName(ctx) {
     if (this.currentComponent) {
-      this.currentComponent.id = getText(ctx);
+      this.currentComponent.externalId = getText(ctx);
     } else if (this.currentVariable) {
       this.currentVariable.name = getText(ctx);
     }
@@ -332,36 +345,60 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
     }
 
     if (this.currentField?.definition?.type === 'Reference') {
-      const match = /[^.]+\.([^.]+)/.exec(this.currentField.value);
+      const match = /([^.]+\.[^.]+)/.exec(this.currentField.value);
 
       if (match) {
-        [, this.currentField.value] = match;
+        if (Array.isArray(this.currentField.value)) {
+          this.currentField.value = this.currentField.value.map((v) => {
+            const matching = /([^.]+\.[^.]+)\.([^.]+)/.exec(v);
+            // matching[1] is `type.externalId`
+            return this.createIdFromTypeExternalId(matching[1]);
+          });
+        } else {
+          this.currentField.value = this.createIdFromTypeExternalId(this.currentField.value);
+        }
       }
     }
 
     if (this.currentField?.definition?.type === 'Link') {
       this.currentField.type = 'Array';
-
       if (Array.isArray(this.currentField.value)) {
         this.currentField.value = this.currentField.value.map((v) => {
-          const match = /[^.]+\.([^.]+)\.([^.]+)/.exec(v);
-
-          if (match) {
-            return match[1];
-          }
-
-          return undefined;
+          const match = /([^.]+\.[^.]+)\.([^.]+)/.exec(v);
+          // match[1] is `type.externalId`
+          return this.createIdFromTypeExternalId(match[1]);
         });
       }
 
-      const match = /[^.]+\.([^.]+)(\.([^.]+))?/.exec(this.currentField.value);
+      const match = /([^.]+\.[^.]+)(\.([^.]+))?/.exec(this.currentField.value);
 
       if (match) {
-        this.currentField.value = [match[1]];
+        this.currentField.value = [this.createIdFromTypeExternalId(match[1])];
       }
     }
 
     this.currentField = null;
+  }
+
+  /**
+   * Create the id of a component associated to its typeExternalId.
+   * The typeExternalId is the unique composition of component's type and externalId.
+   * The created id will be like `id_X` with `X` an increasing integer and will be unique for each
+   * component.
+   * @param {string} typeExternalId - The typeExternalId is the unique concatenation of the
+   * component's type and externalId and represented as `type.externalId`.
+   * @returns {string} The id of the component.
+   */
+  createIdFromTypeExternalId(typeExternalId) {
+    if (this.ids.has(typeExternalId)) {
+      return this.ids.get(typeExternalId);
+    }
+
+    const id = `id_${this.idCounter}`;
+    this.idCounter += 1;
+    this.ids.set(typeExternalId, id);
+
+    return id;
   }
 
   // Enter a parse tree produced by terraformParser#identifier.
@@ -409,7 +446,6 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
     if (!this.currentField && !this.isVariable()) {
       if (ctx.val()?.identifier()) {
         const val = getText(ctx.val());
-
         this.currentField = new TerraformComponentAttribute({
           type: 'String',
           value: val === 'null' ? null : val,

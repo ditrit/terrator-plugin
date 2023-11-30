@@ -19,13 +19,15 @@ const subnetIdsAttributeDefinition = awsDbSubnetGroupDefinition.definedAttribute
 
 export default [
   new TerraformComponent({
-    id: 'vpc_test',
+    id: 'id_1',
+    externalId: 'vpc_test',
     name: null,
     path: 'new_file.tf',
     definition: awsVpcDefinition,
   }),
   new TerraformComponent({
-    id: 'subnet1',
+    id: 'id_2',
+    externalId: 'subnet1',
     name: null,
     path: 'new_file.tf',
     definition: awsSubnetDefinition,
@@ -33,13 +35,14 @@ export default [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'String',
-        value: 'vpc_test',
+        value: 'id_1',
         definition: vpcIdDefinition,
       }),
     ],
   }),
   new TerraformComponent({
-    id: 'subnet2',
+    id: 'id_3',
+    externalId: 'subnet2',
     name: null,
     path: 'new_file.tf',
     definition: awsSubnetDefinition,
@@ -47,13 +50,14 @@ export default [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'String',
-        value: 'vpc_test',
+        value: 'id_1',
         definition: vpcIdDefinition,
       }),
     ],
   }),
   new TerraformComponent({
-    id: 'db_subnet_group',
+    id: 'id_4',
+    externalId: 'db_subnet_group',
     name: null,
     path: 'new_file.tf',
     definition: awsDbSubnetGroupDefinition,
@@ -61,7 +65,7 @@ export default [
       new TerraformComponentAttribute({
         name: 'subnet_ids',
         type: 'Array',
-        value: ['subnet1', 'subnet2'],
+        value: ['id_2', 'id_3'],
         definition: subnetIdsAttributeDefinition,
       }),
     ],

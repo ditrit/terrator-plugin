@@ -23,7 +23,8 @@ const tagsAttributeDefinition = awsSecGroupDefinition.definedAttributes.find(({ 
 
 export default [
   new TerraformComponent({
-    id: 'allow_all',
+    id: 'id_1',
+    externalId: 'allow_all',
     name: null,
     path: 'new_file.tf',
     definition: awsSecGroupDefinition,

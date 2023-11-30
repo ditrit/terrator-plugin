@@ -24,7 +24,8 @@ const nameAttributeDefinition = awsRoute53ZoneDefinition.definedAttributes.find(
 export const appComponents = [
   new TerraformComponent({
     definition: awsDefinition,
-    id: 'aws_1',
+    id: 'id_1',
+    externalId: 'aws',
     name: null,
     path: './app.tf',
     attributes: [
@@ -50,7 +51,8 @@ export const appComponents = [
   }),
   new TerraformComponent({
     name: null,
-    id: 'server_1',
+    id: 'id_2',
+    externalId: 'server',
     path: './app.tf',
     definition: serverDefinition,
     attributes: [new TerraformComponentAttribute({
@@ -62,7 +64,8 @@ export const appComponents = [
   }),
   new TerraformComponent({
     name: null,
-    id: 'web',
+    id: 'id_3',
+    externalId: 'web',
     path: './app.tf',
     definition: awsAmiDefinition,
     attributes: [
@@ -94,7 +97,8 @@ export const appComponents = [
   }),
   new TerraformComponent({
     name: null,
-    id: 'publicdns',
+    id: 'id_4',
+    externalId: 'publicdns',
     path: './app.tf',
     definition: awsRoute53ZoneDefinition,
     attributes: [

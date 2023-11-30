@@ -130,8 +130,10 @@ describe('Test TerraformParser', () => {
           parser.parse(new FileInformation({ path: '.' }), [input]);
 
           expect(parser.pluginData.components.length).toEqual(2);
-          expect(parser.pluginData.components[0].id).toEqual('parent');
-          expect(parser.pluginData.components[1].id).toEqual('child');
+          expect(parser.pluginData.components[0].id).toEqual('id_1');
+          expect(parser.pluginData.components[1].id).toEqual('id_2');
+          expect(parser.pluginData.components[0].externalId).toEqual('parent');
+          expect(parser.pluginData.components[1].externalId).toEqual('child');
         });
       });
 
@@ -260,7 +262,6 @@ describe('Test TerraformParser', () => {
             path: 'new_file.tf',
             content: fs.readFileSync('tests/resources/tf/local_reference.tf', 'utf8'),
           });
-
           parser.parse(new FileInformation({ path: '' }), [input]);
 
           expect(metadata.pluginData.components).toEqual(localComponentReference);

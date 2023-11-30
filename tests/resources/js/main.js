@@ -1045,7 +1045,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'image_id',
         type: 'String',
-        value: 'data.aws_ami.ubuntu.id',
+        value: 'aws_ami.ubuntu.id',
       }),
       new TerraformComponentAttribute({
         name: 'instance_type',
@@ -1524,7 +1524,7 @@ export const mainComponents = [
       new TerraformComponentAttribute({
         name: 'engine',
         type: 'String',
-        value: 'data.aws_rds_engine_version.cms_db_version.engine',
+        value: 'aws_rds_engine_version.cms_db_version.engine',
       }),
       new TerraformComponentAttribute({
         name: 'vpc_security_group_ids',

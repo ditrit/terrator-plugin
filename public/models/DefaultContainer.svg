@@ -33,7 +33,7 @@
         <text class="component-name"
               font-size="10"
               text-anchor="middle"
-              x="50%" y="62">{{ id }}</text>
+              x="50%" y="62">{{ externalId }}</text>
         <text class="component-type"
               text-anchor="middle"
               font-size="8"

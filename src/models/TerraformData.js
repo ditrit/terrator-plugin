@@ -80,7 +80,7 @@ class TerraformData extends DefaultData {
 
   /**
    * Expand the attribute name of a link from a string.
-   * @param {string} value - Value to expand.a
+   * @param {string} value - Value to expand.
    * @param {string} argName - Name of the argument to expand.
    * @returns {string} Value of the linked argument.
    */
@@ -103,7 +103,7 @@ class TerraformData extends DefaultData {
    * @returns {string} Component id.
    */
   addComponent(definition, diagramPath) {
-    const id = this.generateComponentId(definition);
+    const id = this.generateComponentId();
     const { defaultFileName } = this.configuration;
 
     this.components.push(new TerraformComponent({
@@ -114,6 +114,21 @@ class TerraformData extends DefaultData {
     }));
 
     return id;
+  }
+
+  /**
+   * Get component by configuration the key `type.externalId`.
+   * The configuration file is using a certain type of key for the components, this key is
+   * used to define their position. So in order to retrieve the component's position from the
+   * configuration file, we need to know which kind of key is used.
+   * Overriden from plugin-core.
+   * @param {string} key - Key to use for finding the component, the key is `type.externalId`.
+   * @returns {Component} Component or null.
+   */
+  getComponentByConfigurationKey(key) {
+    const [, type, externalId] = /([^.]*)\.([^.]*)/.exec(key);
+    return this.components.find((component) => component.definition.type === type
+                                 && component.externalId === externalId);
   }
 }
 

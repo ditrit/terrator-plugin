@@ -156,4 +156,57 @@ describe('Test class: TerraformData', () => {
       ]);
     });
   });
+
+  describe('Test method: getComponentByConfigurationKey', () => {
+    it('Should return the correct component using the correct configuration key', () => {
+      terraformData.components = [];
+      terraformData.configuration = {
+        defaultFileName: '',
+      };
+
+      const definition1 = new ComponentDefinition({ type: 'testType' });
+      terraformData.addComponent(definition1);
+
+      const definition2 = new ComponentDefinition({ type: 'testType2' });
+      terraformData.addComponent(definition2);
+
+      expect(terraformData.getComponentByConfigurationKey('testType.id_1')).toEqual(terraformData.components[0]);
+    });
+
+    it('Should return the correct component (among components with same external ids) using the correct configuration key', () => {
+      terraformData.components = [];
+      terraformData.configuration = {
+        defaultFileName: '',
+      };
+
+      const definition1 = new ComponentDefinition({ type: 'testType' });
+      terraformData.addComponent(definition1);
+      terraformData.components[0].externalId = 'externalId';
+
+      const definition2 = new ComponentDefinition({ type: 'testType2' });
+      terraformData.addComponent(definition2);
+      terraformData.components[1].externalId = 'externalId';
+
+      const definition3 = new ComponentDefinition({ type: 'testType3' });
+      terraformData.addComponent(definition3);
+      terraformData.components[2].externalId = 'externalId';
+
+      expect(terraformData.getComponentByConfigurationKey('testType2.externalId')).toEqual(terraformData.components[1]);
+    });
+
+    it('Should not return any component due to a wrong configuration key', () => {
+      terraformData.components = [];
+      terraformData.configuration = {
+        defaultFileName: '',
+      };
+
+      const definition1 = new ComponentDefinition({ type: 'testType' });
+      terraformData.addComponent(definition1);
+
+      const definition2 = new ComponentDefinition({ type: 'testType2' });
+      terraformData.addComponent(definition2);
+
+      expect(terraformData.getComponentByConfigurationKey('FakeType.random_id')).toBeUndefined();
+    });
+  });
 });

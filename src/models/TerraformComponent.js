@@ -14,6 +14,15 @@ class TerraformComponent extends Component {
   createAttribute(props) {
     return new TerraformComponentAttribute(props);
   }
+
+  /**
+   * Get configuration key of the component.
+   * Overriden from plugin-core.
+   * @returns {string} Component's configuration key.
+   */
+  getConfigurationKey() {
+    return `${this.definition.type}.${this.externalId}`;
+  }
 }
 
 export default TerraformComponent;

@@ -18,7 +18,7 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
     this.currentComponent = null;
     this.currentBlockType = null;
     this.currentField = null;
-    this.currentObjectField = null;
+    this.currentArrayOfObjectField = null;
     this.currentFile = null;
     this.fieldsTree = [];
     this.currentVariable = null;
@@ -41,7 +41,13 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   }
 
   getAttributeDefinition(object, name) {
-    return object.definition?.definedAttributes.find((def) => def.name === name) || null;
+    let definition = object.definition?.definedAttributes.find((def) => def.name === name);
+
+    if (!definition) {
+      definition = object.definition?.itemDefinition?.at(0)
+        ?.definedAttributes.find((def) => def.name === name);
+    }
+    return definition || null;
   }
 
   isVariable() {
@@ -177,20 +183,50 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
       definition = this.getAttributeDefinition(this.currentComponent, name);
     }
 
-    this.currentObjectField = new TerraformComponentAttribute({
-      name,
-      value: [],
-      type: 'Object',
-      definition,
-      isDynamic: true,
-    });
+    if (definition?.type === 'Array') {
+      const attribute = this.currentComponent.attributes.find((attr) => attr?.name === name);
+      if (attribute) {
+        this.currentArrayOfObjectField = attribute;
+      } else {
+        this.currentArrayOfObjectField = new TerraformComponentAttribute({
+          name,
+          value: [],
+          type: 'Array',
+          definition,
+          isDynamic: true,
+        });
+      }
+      this.currentObjectField = new TerraformComponentAttribute({
+        value: [],
+        type: 'Object',
+        definition: definition.itemDefinition[0],
+        isDynamic: true,
+      });
+    } else {
+      this.currentObjectField = new TerraformComponentAttribute({
+        name,
+        value: [],
+        type: 'Object',
+        definition,
+        isDynamic: true,
+      });
+    }
   }
 
   // Exit a parse tree produced by terraformParser#block.
   exitBlock() {
-    if (this.fieldsTree.length > 0) {
-      const field = this.fieldsTree.pop();
+    if (this.currentArrayOfObjectField) {
+      this.currentArrayOfObjectField.value.push(this.currentObjectField);
+      const attribute = this.currentComponent.attributes
+        .find(({ name }) => name === this.currentArrayOfObjectField.name);
 
+      if (!attribute) {
+        this.currentComponent.attributes.push(this.currentArrayOfObjectField);
+      }
+      this.currentObjectField = null;
+      this.currentArrayOfObjectField = null;
+    } else if (this.fieldsTree.length > 0) {
+      const field = this.fieldsTree.pop();
       field.value.push(this.currentObjectField);
       this.currentObjectField = field;
     } else {

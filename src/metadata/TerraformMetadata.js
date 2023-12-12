@@ -145,9 +145,11 @@ class TerraformMetadata extends DefaultMetadata {
    */
   getAttributeDefinition(attribute) {
     const subAttributes = attribute.attributes || [];
+    const itemDefinition = attribute.itemDefinition || [];
     return new TerraformComponentAttributeDefinition({
       ...attribute,
       definedAttributes: subAttributes.map(this.getAttributeDefinition),
+      itemDefinition: itemDefinition.map(this.getAttributeDefinition),
     });
   }
 

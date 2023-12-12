@@ -28,7 +28,7 @@ import output from 'tests/resources/js/output';
 import indexArgument from 'tests/resources/js/indexArgument';
 import { mainComponents, mainVariables } from 'tests/resources/js/main';
 import arrayVariable from 'tests/resources/js/arrayVariable';
-
+import arrayOfObjectComponents from 'tests/resources/js/arrayOfObject';
 import subObject from 'tests/resources/js/subObject';
 import objectAttributeDefinition from 'tests/resources/js/objectAttributeDefinition';
 import missingDefinitionOnAttribute from 'tests/resources/js/bug67_missingDefinitionOnAttribute';
@@ -81,6 +81,24 @@ describe('Test TerraformParser', () => {
     });
 
     describe('Test method: parse', () => {
+      it('Test parse array of objects', () => {
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+        metadata.parse();
+        const parser = new TerraformParser(metadata.pluginData);
+
+        const input = new FileInput({
+          path: './array_of_object.tf',
+          content: fs.readFileSync('tests/resources/tf/array_of_object.tf', 'utf8'),
+        });
+        parser.parse(new FileInformation({ path: '.' }), [input]);
+
+        expect(parser.pluginData.components).toEqual(arrayOfObjectComponents);
+        expect(parser.pluginData.parseErrors).toEqual([]);
+      });
+
       it('Test default parse', () => {
         const { pluginData } = getTerraformMetadata(
           'aws',

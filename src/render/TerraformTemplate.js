@@ -22,13 +22,29 @@ const block = `{% for _block in components %}
 
 {% endfor %}`;
 
-const attribute = `{% if attribute.type == 'Object' %}
-{{ attribute.name | indent(level * 4, true) }} {% if not attribute.isDynamic %}= {% endif %}{
-{% set level = level+1 %}{% for attr in attribute.value %}{% set attribute = attr %}
+const attribute = `{% if attribute.type == 'Array' and attribute.definition.itemType == 'Object' %}
+{% set name = attribute.name %}
+{% for attr in attribute.value %}
+{{ name | indent(level * 4, true)}} {
+{% set attribute = attr %}
+{% include "attribute" ignore missing %}
+{{"}" | indent(level * 4, true) }}
+{% endfor %}
+{% elif attribute.type == 'Object' %}
+{% set name = attribute.name %}
+{% if not name is null %}
+{{ attribute.name | indent(level * 4, true) }}{% if not attribute.isDynamic %} ={% endif %} {
+{% endif %}
+{% set level = level + 1 %}
+{% for attr in attribute.value %}
+{% set attribute = attr %}
 {% include "attribute" ignore missing %}
 {% set attribute = attr %}
-{% endfor %}{% set level = level-1 %}
-{{ "}" | indent(level * 4, true)  }}
+{% endfor %}
+{% set level = level - 1 %}
+{% if not name is null %}
+{{ "}" | indent(level * 4, true) }}
+{% endif %}
 {% else %}
 {{ attribute.name | indent(level * 4, true) }} = {% if attribute.type == 'Array' %}[
 {% set level = level+1 %}{% for value in attribute.value %}

@@ -32,6 +32,10 @@ class TerraformRenderer extends DefaultRender {
     this.template = nunjucks.compile(templates.root, env);
   }
 
+  getListType(value) {
+    return value.split(/\(([^)]+)\)/)[1];
+  }
+
   /**
    * Convert all provided components and links in terraform files.
    * @param {string} [parentEventId] - Parent event id.
@@ -97,9 +101,9 @@ class TerraformRenderer extends DefaultRender {
           locals: allVariables.filter((v) => v.category === 'local'),
           outputs: allVariables.filter((v) => v.category === 'output'),
           // This might cause issues with other providers.
-          isValueReference: (value) => value?.match(/^(data.|var.|local.|module.|aws_|random_)/),
+          isValueReference: (value) => typeof value === 'string' && value?.match(/^(data.|var.|local.|module.|aws_|random_)/),
           isList: (type) => type?.startsWith('list(') || type?.startsWith('set('),
-          getListType: (value) => value.split(/\(([^)]+)\)/)[1],
+          getListType: (value) => this.getListType(value),
         }).trim()}\n`,
       }));
 

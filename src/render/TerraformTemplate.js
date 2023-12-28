@@ -30,7 +30,7 @@ const attribute = `{% if attribute.type == 'Object' %}
 {% endfor %}{% set level = level-1 %}
 {{ "}" | indent(level * 4, true)  }}
 {% else %}
-{{ attribute.name | indent(level * 4, true) }} = {% if attribute.type == 'Array' %}[
+{{ attribute.name | indent(level * 4, true) }} = {% if attribute.type == 'Array' or attribute.type == 'Link' %}[
 {% set level = level+1 %}{% for value in attribute.value %}
 {% call displayAttributeValue(attribute, value, level) -%}{%- endcall %}
 {% endfor %}{% set level = level-1 %}

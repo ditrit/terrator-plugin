@@ -34,14 +34,21 @@
            fill="#224F7C"
            font-family="Source Sans Pro"
            transform="translate(0 -40)">
+            {% if definition.blockType == "module" %}
+            <text class="component-type"
+                text-anchor="middle"
+                font-size="10"
+                x="50%" y="62">{{ definition.type }}</text>
+            {% else %}
             <text class="component-name"
                   font-size="10"
                   text-anchor="middle"
-                  x="50%" y="62">{{ id }}</text>
+                  x="50%" y="62">{{ externalId }}</text>
             <text class="component-type"
                   text-anchor="middle"
                   font-size="8"
                   x="50%" y="72">{{ definition.type }}</text>
+            {% endif %}
         </g>
     </svg>
 

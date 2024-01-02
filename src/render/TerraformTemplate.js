@@ -1,6 +1,6 @@
 const macro = `{% macro displayAttributeValue(attribute, value, level) %}
 {% if attribute.isVariable %}{{ value | dump | indent(level * 4, true) }},
-{% elif attribute.definition.type == 'Link' %}{{ attribute.definition.linkRef | indent(level * 4, true) }}.{{ value }}.{{attribute.definition.linkAttribute}},
+{% elif attribute.definition.type == 'Link' %}{{ attribute.definition.linkRef | indent(level * 4, true) }}.{{ getExternalId(value) }}.{{attribute.definition.linkAttribute}},
 {% elif isValueReference(value) %}{{ value | indent(level * 4, true) }},
 {% else %}{{ value | dump | indent(level * 4, true) }},
 {% endif %}
@@ -14,7 +14,7 @@ const root = `${macro}{% include "local" ignore missing %}
 `;
 
 const block = `{% for _block in components %}
-{{ _block.definition.blockType }} {% if ['resource','data'].includes(_block.definition.blockType) %}"{{ _block.definition.type }}" {% endif %}{% if ['provider', 'module'].includes(_block.definition.blockType) %}"{{ _block.definition.type }}"{% else %}"{{ _block.id }}"{% endif %} {
+{{ _block.definition.blockType }} {% if ['resource','data'].includes(_block.definition.blockType) %}"{{ _block.definition.type }}" {% endif %}{% if ['provider', 'module'].includes(_block.definition.blockType) %}"{{ _block.definition.type }}"{% else %}"{{ _block.externalId }}"{% endif %} {
 {% for attribute in _block.attributes %}{% set level = 1 %}
 {% include "attribute" ignore missing %}
 {% endfor %}
@@ -30,14 +30,14 @@ const attribute = `{% if attribute.type == 'Object' %}
 {% endfor %}{% set level = level-1 %}
 {{ "}" | indent(level * 4, true)  }}
 {% else %}
-{{ attribute.name | indent(level * 4, true) }} = {% if attribute.type == 'Array' %}[
+{{ attribute.name | indent(level * 4, true) }} = {% if attribute.type == 'Array' or attribute.type == 'Link' %}[
 {% set level = level+1 %}{% for value in attribute.value %}
 {% call displayAttributeValue(attribute, value, level) -%}{%- endcall %}
 {% endfor %}{% set level = level-1 %}
 {{ "]" | indent(level * 4, true) }}
 {% else %}
 {% if attribute.isVariable %}{{ attribute.value }}
-{% elif attribute.definition.type == 'Reference' %}{{ attribute.definition.containerRef }}.{{ attribute.value }}
+{% elif attribute.definition.type == 'Reference' %}{{ attribute.definition.containerRef }}.{{ getExternalId(attribute.value) }}
 {% elif attribute.type == 'Boolean' or attribute.type == 'Number' or attribute.name == 'user_data' %}{{ attribute.value }}
 {% elif attribute.type == 'String' and isValueReference(attribute.value) %}{{ attribute.value }}
 {% else %}{{ attribute.value | dump }}

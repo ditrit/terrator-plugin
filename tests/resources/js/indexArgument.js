@@ -13,7 +13,8 @@ const availabilityZoneDefinition = awsSubnetDefinition.definedAttributes.find(({
 
 export default [
   new TerraformComponent({
-    id: 'subnet',
+    id: 'id_1',
+    externalId: 'subnet',
     name: null,
     path: 'new_file.tf',
     definition: awsSubnetDefinition,

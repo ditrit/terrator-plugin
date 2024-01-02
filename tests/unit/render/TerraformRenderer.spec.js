@@ -343,7 +343,7 @@ describe('Test TerraformRenderer', () => {
           path: 'new_file.tf',
           content: fs.readFileSync('tests/resources/tf/main.tf', 'utf8'),
         });
-        const validnput = new FileInput({
+        const validInput = new FileInput({
           path: 'new_file.tf',
           content: fs.readFileSync('tests/resources/tf/validMain.tf', 'utf8'),
         });
@@ -355,7 +355,7 @@ describe('Test TerraformRenderer', () => {
         const parser = new TerraformParser(metadata.pluginData);
         parser.parse(new FileInformation({ path: '' }), [input]);
 
-        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([validnput]);
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([validInput]);
       });
 
       it('Should parse and differentiate attribute and dynamic blocks', () => {

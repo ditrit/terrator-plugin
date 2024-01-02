@@ -5,8 +5,8 @@ import {
 
 export default [
   new ComponentLink({
-    source: 'parent_reverse_single_1',
-    target: 'child_reverse_single_1',
+    source: 'id_2',
+    target: 'id_1',
     definition: new ComponentLinkDefinition({
       attributeRef: 'fromChild',
       sourceRef: 'parent',

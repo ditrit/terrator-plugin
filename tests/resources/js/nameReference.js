@@ -16,7 +16,8 @@ const awsDbSubnetGroupNameAttributeDefinition = awsDbDefinition.definedAttribute
 
 export const nameReference = [
   new TerraformComponent({
-    id: 'db_subnet_group',
+    id: 'id_1',
+    externalId: 'db_subnet_group',
     name: null,
     path: 'new_file.tf',
     definition: dbSubnetGroupDefinition,
@@ -30,7 +31,8 @@ export const nameReference = [
     ],
   }),
   new TerraformComponent({
-    id: 'db',
+    id: 'id_2',
+    externalId: 'db',
     name: null,
     path: 'new_file.tf',
     definition: awsDbDefinition,
@@ -38,7 +40,7 @@ export const nameReference = [
       new TerraformComponentAttribute({
         name: 'db_subnet_group_name',
         type: 'Array',
-        value: ['db_subnet_group'],
+        value: ['id_1'],
         definition: awsDbSubnetGroupNameAttributeDefinition,
       }),
     ],
@@ -47,8 +49,8 @@ export const nameReference = [
 
 export const nameReferenceLink = [
   new ComponentLink({
-    source: 'db',
-    target: 'db_subnet_group',
+    source: 'id_2',
+    target: 'id_1',
     definition: new ComponentLinkDefinition({
       attributeRef: 'db_subnet_group_name',
       sourceRef: 'aws_db_instance',

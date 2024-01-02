@@ -29,7 +29,8 @@ export const variableReference = [
 export const variableComponentReference = [
   new TerraformComponent({
     name: null,
-    id: 'database',
+    id: 'id_1',
+    externalId: 'database',
     path: 'new_file.tf',
     definition: awsDbInstanceDefinition,
     attributes: [

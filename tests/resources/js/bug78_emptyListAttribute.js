@@ -14,7 +14,8 @@ const vpcIdAttributeDefinition = awsSecurityGroupDefinition.definedAttributes.fi
 
 export default [
   new TerraformComponent({
-    id: 'aws_security_group_1',
+    id: 'id_1',
+    externalId: 'aws_security_group_1',
     name: null,
     path: 'bug78_emptyListAttribute.tf',
     definition: awsSecurityGroupDefinition,
@@ -28,7 +29,8 @@ export default [
     ],
   }),
   new TerraformComponent({
-    id: 'aws_vpc_1',
+    id: 'id_2',
+    externalId: 'aws_vpc_1',
     name: null,
     path: 'bug78_emptyListAttribute.tf',
     definition: awsVpcDefinition,

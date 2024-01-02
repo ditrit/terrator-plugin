@@ -14,13 +14,15 @@ const vpcIdDefinition = awsSubnetDefinition.definedAttributes.find(({ name }) =>
 
 export default [
   new TerraformComponent({
-    id: 'vpc',
+    id: 'id_1',
+    externalId: 'vpc',
     name: null,
     path: 'new_file.tf',
     definition: awsVpcDefinition,
   }),
   new TerraformComponent({
-    id: 'subnet',
+    id: 'id_2',
+    externalId: 'subnet',
     name: null,
     path: 'new_file.tf',
     definition: awsSubnetDefinition,
@@ -28,7 +30,7 @@ export default [
       new TerraformComponentAttribute({
         name: 'vpc_id',
         type: 'String',
-        value: 'vpc',
+        value: 'id_1',
         definition: vpcIdDefinition,
       }),
     ],

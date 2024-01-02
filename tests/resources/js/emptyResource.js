@@ -11,7 +11,8 @@ const instanceDefinition = metadata.pluginData.definitions.components.find(({ ty
 
 export default [
   new TerraformComponent({
-    id: 'instance',
+    id: 'id_1',
+    externalId: 'instance',
     name: null,
     path: 'new_file.tf',
     definition: instanceDefinition,

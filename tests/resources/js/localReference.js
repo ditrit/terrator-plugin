@@ -26,7 +26,8 @@ export const localReference = [
 export const localComponentReference = [
   new TerraformComponent({
     name: null,
-    id: 'database',
+    id: 'id_1',
+    externalId: 'database',
     path: 'new_file.tf',
     definition: awsDbInstanceDefinition,
     attributes: [

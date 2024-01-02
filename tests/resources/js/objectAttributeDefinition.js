@@ -14,7 +14,8 @@ const lbPortAttributeDefinition = listenerAttributeDefinition.definedAttributes.
 
 export default [
   new TerraformComponent({
-    id: 'aws_elb_620fea2f',
+    id: 'id_1',
+    externalId: 'aws_elb_620fea2f',
     name: null,
     path: 'new_file.tf',
     definition: awsElbDefinition,

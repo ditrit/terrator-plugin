@@ -21,7 +21,8 @@ const resourceaListenerOtherObjectOtherAttributeAttributeDefinition = resourceaL
 
 export default [
   new TerraformComponent({
-    id: 'aws_elb_1',
+    id: 'id_1',
+    externalId: 'aws_elb_1',
     name: null,
     path: 'new_file.tf',
     definition: awsElbDefinition,
@@ -42,7 +43,8 @@ export default [
     ],
   }),
   new TerraformComponent({
-    id: 'b',
+    id: 'id_2',
+    externalId: 'b',
     name: null,
     path: 'new_file.tf',
     definition: resourceaDefinition,

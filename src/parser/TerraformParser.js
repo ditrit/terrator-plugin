@@ -45,8 +45,9 @@ class TerraformParser extends DefaultParser {
    */
   parse(diagram, inputs = [], parentEventId = null) {
     this.pluginData.components = [];
+    this.pluginData.variables = [];
 
-    const listener = new TerraformListener(this.pluginData.definitions.components);
+    const listener = new TerraformListener(this.pluginData);
     const diagramPath = (!diagram?.path || diagram.path.length === 0) ? '' : `${diagram.path}/`;
     const regex = new RegExp(`^${diagramPath}[^/]+\\.tf$`);
 
@@ -93,15 +94,6 @@ class TerraformParser extends DefaultParser {
         antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
         this.pluginData.emitEvent({ id, status: 'success' });
       });
-
-    listener.components.forEach((component) => {
-      if (component.id === null) {
-        component.id = this.pluginData.generateComponentId(component.definition);
-      }
-      this.pluginData.components.push(component);
-    });
-    this.pluginData.variables = listener.variables;
-    this.pluginData.parseErrors = listener.errors;
   }
 }
 

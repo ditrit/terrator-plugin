@@ -13,7 +13,8 @@ const filterAttributeDefinition = awsAmiDefinition.definedAttributes.find(({ nam
 
 export default [
   new TerraformComponent({
-    id: 'web',
+    id: 'id_1',
+    externalId: 'web',
     name: null,
     path: 'new_file.tf',
     definition: awsAmiDefinition,

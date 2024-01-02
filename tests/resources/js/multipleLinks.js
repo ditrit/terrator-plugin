@@ -16,19 +16,22 @@ const awsDbInstanceVpcSecurityGroupsAttributeDefinition = awsDbInstanceDefinitio
 
 export const multipleLinks = [
   new TerraformComponent({
-    id: 'security_group_1',
+    id: 'id_1',
+    externalId: 'security_group_1',
     name: null,
     path: 'new_file.tf',
     definition: awsSecGroupDefinition,
   }),
   new TerraformComponent({
-    id: 'security_group_2',
+    id: 'id_2',
+    externalId: 'security_group_2',
     name: null,
     path: 'new_file.tf',
     definition: awsSecGroupDefinition,
   }),
   new TerraformComponent({
-    id: 'db_instance',
+    id: 'id_3',
+    externalId: 'db_instance',
     name: null,
     path: 'new_file.tf',
     definition: awsDbInstanceDefinition,
@@ -36,7 +39,7 @@ export const multipleLinks = [
       new TerraformComponentAttribute({
         name: 'vpc_security_group_ids',
         type: 'Array',
-        value: ['security_group_1', 'security_group_2'],
+        value: ['id_1', 'id_2'],
         definition: awsDbInstanceVpcSecurityGroupsAttributeDefinition,
       }),
     ],
@@ -45,8 +48,8 @@ export const multipleLinks = [
 
 export const multipleLinksLinks = [
   new ComponentLink({
-    source: 'db_instance',
-    target: 'security_group_1',
+    source: 'id_3',
+    target: 'id_1',
     definition: new ComponentLinkDefinition({
       attributeRef: 'vpc_security_group_ids',
       sourceRef: 'aws_db_instance',
@@ -55,8 +58,8 @@ export const multipleLinksLinks = [
     }),
   }),
   new ComponentLink({
-    source: 'db_instance',
-    target: 'security_group_2',
+    source: 'id_3',
+    target: 'id_2',
     definition: new ComponentLinkDefinition({
       attributeRef: 'vpc_security_group_ids',
       sourceRef: 'aws_db_instance',

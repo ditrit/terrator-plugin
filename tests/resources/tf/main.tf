@@ -259,7 +259,7 @@ resource "aws_lb_target_group" "cms_lb_target" {
 
 resource "aws_launch_configuration" "cms_launch_conf" {
     name_prefix = "web-"
-    image_id = data.aws_ami.ubuntu.id
+    image_id = aws_ami.ubuntu.id
     instance_type = var.ec2_frontend_sku
     security_groups = [
         aws_security_group.cms_frontend_secgroup.id,
@@ -380,7 +380,7 @@ resource "random_password" "cms_db_passwd" {
 resource "aws_db_instance" "cms_db" {
     allocated_storage = 10
     db_name = "cmsdbmain"
-    engine = data.aws_rds_engine_version.cms_db_version.engine
+    engine = aws_rds_engine_version.cms_db_version.engine
     vpc_security_group_ids = [
         aws_security_group.cms_backend_secgroup.id,
     ]

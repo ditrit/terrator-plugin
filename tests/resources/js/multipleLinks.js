@@ -55,6 +55,7 @@ export const multipleLinksLinks = [
       sourceRef: 'aws_db_instance',
       targetRef: 'aws_security_group',
       type: 'Default',
+      model: 'defaultLink',
     }),
   }),
   new ComponentLink({
@@ -65,6 +66,7 @@ export const multipleLinksLinks = [
       sourceRef: 'aws_db_instance',
       targetRef: 'aws_security_group',
       type: 'Default',
+      model: 'defaultLink',
     }),
   }),
 ];

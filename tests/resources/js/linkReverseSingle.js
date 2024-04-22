@@ -7,6 +7,7 @@ export default [
   new ComponentLink({
     source: 'id_2',
     target: 'id_1',
+    isReverse: true,
     definition: new ComponentLinkDefinition({
       attributeRef: 'fromChild',
       sourceRef: 'parent',

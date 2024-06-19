@@ -7,19 +7,44 @@ import syntax from 'src/configuration/syntax';
 class TerraformConfiguration extends DefaultConfiguration {
   /**
    * Default constructor.
-   * @param {object} [props] - Object that contains all properties to set.
    */
-  constructor(props) {
+  constructor() {
     super({
-      ...props,
       editor: {
-        ...props.editor,
         syntax,
       },
       tags: [
         new Tag({ type: 'language', value: 'Terraform' }),
         new Tag({ type: 'category', value: 'Infrastructure' }),
       ],
+      extraResources: [{
+        type: 'markers',
+        name: 'startLinkMarker',
+      }, {
+        type: 'markers',
+        name: 'endLinkMarker',
+      }, {
+        type: 'links',
+        name: 'defaultLink',
+      }, {
+        type: 'links',
+        name: 'temporaryLink',
+      }, {
+        type: 'icons',
+        name: 'error',
+      }, {
+        type: 'icons',
+        name: 'menu',
+      }, {
+        type: 'icons',
+        name: 'resize',
+      }],
+      container: {
+        margin: 15,
+        gap: 50,
+      },
+      defaultFileName: 'new_file.tf',
+      defaultFileExtension: 'tf',
     });
   }
 }

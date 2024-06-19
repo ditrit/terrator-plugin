@@ -16,7 +16,17 @@ class TerraformComponentDefinition extends ComponentDefinition {
     blockType: null,
     provider: null,
   }) {
-    super(props);
+    super({
+      ...props,
+      defaultWidth: props.isContainer ? 186 : 96,
+      defaultHeight: props.isContainer ? 160 : 80,
+      minWidth: props.isContainer ? 186 : 96,
+      minHeight: props.isContainer ? 140 : 80,
+      reservedWidth: props.isContainer ? 12 : 0,
+      reservedHeight: props.isContainer ? 80 : 0,
+      margin: 15,
+      gap: 50,
+    });
     /**
      * Type of Terraform block.
      * @type {string}

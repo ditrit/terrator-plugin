@@ -575,6 +575,7 @@
           "linkAttribute": "id",
           "linkRef": "aws_vpc",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#vpc_id"
         },
@@ -696,6 +697,7 @@
           "linkAttribute": "name",
           "linkRef": "aws_security_group",
           "linkType": "Reverse",
+          "linkModel": "defaultLink",
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#security_groups"
         },
@@ -706,6 +708,7 @@
           "linkAttribute": "id",
           "linkRef": "aws_security_group",
           "linkType": "Reverse",
+          "linkModel": "defaultLink",
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#vpc_security_group_ids"
         },
@@ -716,6 +719,7 @@
           "linkAttribute": "id",
           "linkRef": "aws_subnet",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#subnet_id"
         }
@@ -744,6 +748,7 @@
           "linkAttribute": "id",
           "linkRef": "aws_ebs_volume",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "required": true,
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/volume_attachment#volume_id"
@@ -755,6 +760,7 @@
           "linkAttribute": "id",
           "linkRef": "aws_instance",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "required": true,
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/volume_attachment#instance_id"
@@ -836,6 +842,7 @@
           "linkAttribute": "id",
           "linkRef": "aws_subnet",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elb#subnets"
         },
@@ -846,6 +853,7 @@
           "linkAttribute": "id",
           "linkRef": "aws_security_group",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elb#security_groups"
         },
@@ -856,6 +864,7 @@
           "linkAttribute": "id",
           "linkRef": "aws_instance",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elb#instances"
         }
@@ -1047,6 +1056,7 @@
           "linkAttribute": "id",
           "linkRef": "aws_internet_gateway",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route#gateway_id"
         }
@@ -1074,7 +1084,8 @@
           "type": "Link",
           "linkAttribute": "id",
           "linkRef": "aws_internet_gateway",
-          "linkType": "Default"
+          "linkType": "Default",
+          "linkModel": "defaultLink"
         },
         {
           "name": "availability_zone",
@@ -1203,6 +1214,7 @@
           "description": "A list of VPC subnet IDs.",
           "linkRef": "aws_subnet",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "required": true,
           "type": "Link",
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html"
@@ -1231,6 +1243,7 @@
           "name": "records",
           "displayName": "Records",
           "type": "Link",
+          "linkModel": "defaultLink",
           "linkAttribute": "name",
           "linkRef": "aws_route53_record",
           "linkType": "Default"
@@ -1260,6 +1273,7 @@
           "description": "A string list of records.",
           "linkRef": "aws_route53_record",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record#records"
         }
@@ -1294,6 +1308,7 @@
           "description": "The database engine to use.",
           "linkRef": "aws_rds_engine_version",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "required": true,
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#engine"
@@ -1304,6 +1319,7 @@
           "description": "A list of VPC security groups to associate.",
           "linkRef": "aws_security_group",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "required": true,
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#vpc_security_group_ids"
@@ -1323,6 +1339,7 @@
           "linkAttribute": "name",
           "linkRef": "aws_db_subnet_group",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#db_subnet_group_name"
         },
@@ -1384,6 +1401,7 @@
           "linkAttribute": "id",
           "linkRef": "aws_availability_zones",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#availability_zone"
         },
@@ -1592,6 +1610,7 @@
               "description": "The identifier of the source DB instance from which to restore.",
               "linkRef": "aws_db_instance",
               "linkType": "Default",
+              "linkModel": "defaultLink",
               "type": "Link",
               "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#source_db_instance_identifier"
             },
@@ -1631,6 +1650,7 @@
               "description": "The name of the S3 bucket where the backup is stored.",
               "linkRef": "aws_s3_bucket",
               "linkType": "Default",
+              "linkModel": "defaultLink",
               "required": true,
               "type": "Link",
               "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#bucket_name"
@@ -1664,6 +1684,7 @@
               "description": "Version of the source engine used for the backup.",
               "linkRef": "aws_rds_engine_version",
               "linkType": "Default",
+              "linkModel": "defaultLink",
               "required": true,
               "type": "Link",
               "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#source_engine_version"
@@ -1816,6 +1837,7 @@
           "description": "The ID of the route table to associate the subnet with.",
           "linkRef": "aws_route_table",
           "linkType": "Reverse",
+          "linkModel": "defaultLink",
           "required": true,
           "type": "Link",
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html"
@@ -1826,6 +1848,7 @@
           "description": "The ID of the gateway to associate the route table with. Conflicts with subnet_id.",
           "linkRef": "aws_internet_gateway",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "type": "Link",
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html"
         },
@@ -1835,6 +1858,7 @@
           "description": "The ID of the subnet to associate the route table with. Conflicts with gateway_id.",
           "linkRef": "aws_subnet",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "type": "Link",
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html"
         }
@@ -1907,6 +1931,7 @@
           "description": "The name of the bucket to put the ACL in.",
           "linkRef": "aws_s3_bucket",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "required": true,
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl#bucket"
@@ -1987,6 +2012,7 @@
               "description": "The S3 bucket name to store the logs in.",
               "linkRef": "aws_s3_bucket",
               "linkType": "Default",
+              "linkModel": "defaultLink",
               "type": "Link",
               "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#bucket"
             },
@@ -2088,6 +2114,7 @@
           "description": "A list of security group IDs to assign to the LB. Only valid for Load Balancers of type application.",
           "linkRef": "aws_security_group",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#security_groups"
         },
@@ -2141,6 +2168,7 @@
           "description": "A list of subnet IDs to attach to the LB. Subnets cannot be updated for Load Balancers of type network.<br>Changing this value for load balancers of type network will force a recreation of the resource.",
           "linkRef": "aws_subnet",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#subnets"
         },
@@ -2295,6 +2323,7 @@
           "description": "Identifier of the VPC in which to create the target group.",
           "linkRef": "aws_vpc",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#vpc_id"
         },
@@ -2481,6 +2510,7 @@
           "description": "The EC2 image ID to launch.",
           "linkRef": "aws_ami",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "required": true,
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#image_id"
@@ -2541,6 +2571,7 @@
           "description": "A list of associated security group IDS.",
           "linkRef": "aws_security_group",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#security_groups"
         },
@@ -2584,6 +2615,7 @@
           "description": "The ID of a ClassicLink-enabled VPC.",
           "linkRef": "aws_vpc",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "type": "Link",
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html"
         },
@@ -2593,6 +2625,7 @@
           "description": "The IDs of one or more security groups for the specified ClassicLink-enabled VPC.",
           "linkRef": "aws_security_group",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "type": "Link",
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html"
         },
@@ -2843,6 +2876,7 @@
           "description": "Name of the autoscaling group.",
           "linkRef": "aws_autoscaling_group",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "required": true,
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_policy#autoscaling_group_name"
@@ -3057,6 +3091,7 @@
               "description": "Amazon EC2 Auto Scaling",
               "linkRef": "aws_autoscaling_group",
               "linkType": "Default",
+              "linkModel": "defaultLink",
               "type": "Link",
               "url": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html"
             }
@@ -3392,6 +3427,7 @@
           "description": "ARN of the load balancer.",
           "linkRef": "aws_lb",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "required": true,
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener#load_balancer_arn"
@@ -3427,6 +3463,7 @@
               "description": "ARN of the target group to which to route traffic.",
               "linkRef": "aws_lb_target_group",
               "linkType": "Default",
+              "linkModel": "defaultLink",
               "type": "Link",
               "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener#target_group_arn"
             }
@@ -3513,6 +3550,7 @@
           "description": "The ID of the file system for which the mount target is intended.",
           "linkRef": "aws_efs_file_system",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "required": true,
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_mount_target#file_system_id"
@@ -3523,6 +3561,7 @@
           "description": "The ID of the subnet to add the mount target in.",
           "linkRef": "aws_subnet",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "required": true,
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_mount_target#subnet_id"
@@ -3540,6 +3579,7 @@
           "description": "A list of up to 5 VPC security group IDs (that must be for the same VPC as subnet specified) in effect for the mount target.",
           "linkRef": "aws_security_group",
           "linkType": "Default",
+          "linkModel": "defaultLink",
           "type": "Link",
           "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_mount_target#security_groups"
         }

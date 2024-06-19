@@ -239,6 +239,10 @@ describe('Test TerraformMetadata', () => {
           targetRef: 'aws_vpc',
           type: 'Reverse',
         }),
+        new ComponentLinkDefinition({
+          isTemporary: true,
+          model: 'temporaryLink',
+        }),
       ]);
     });
   });

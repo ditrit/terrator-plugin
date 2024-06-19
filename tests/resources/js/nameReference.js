@@ -56,6 +56,7 @@ export const nameReferenceLink = [
       sourceRef: 'aws_db_instance',
       targetRef: 'aws_db_subnet_group',
       type: 'Default',
+      model: 'defaultLink',
     }),
   }),
 ];

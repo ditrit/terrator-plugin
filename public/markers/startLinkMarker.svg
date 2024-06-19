@@ -1,0 +1,16 @@
+<marker
+  id="startLinkMarker"
+  viewBox="0 0 10 10"
+  refX="5"
+  refY="5"
+  markerWidth="5"
+  markerHeight="5"
+  orient="auto"
+>
+  <circle
+    r="3"
+    cx="5"
+    cy="5"
+    fill="#5B81A5"
+  />
+</marker>

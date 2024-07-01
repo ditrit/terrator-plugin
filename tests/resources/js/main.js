@@ -26,6 +26,8 @@ const awsInternetGatewayVpcIdDefinition = awsInternetGatewayDefinition.definedAt
 const awsRouteTableAssociationDefinition = new TerraformComponentDefinition({
   blockType: 'resource',
   type: 'aws_route_table_association',
+  icon: 'unknown',
+  model: 'DefaultModel',
 });
 
 const awsSecurityGroupDefinition = metadata.pluginData.definitions.components.find(({ type }) => type === 'aws_security_group');
@@ -147,6 +149,8 @@ export const mainComponents = [
     definition: new TerraformComponentDefinition({
       blockType: 'data',
       type: 'aws_rds_engine_version',
+      icon: 'unknown',
+      model: 'DefaultModel',
     }),
     attributes: [
       new TerraformComponentAttribute({
@@ -169,6 +173,8 @@ export const mainComponents = [
     definition: new TerraformComponentDefinition({
       blockType: 'data',
       type: 'aws_availability_zones',
+      icon: 'unknown',
+      model: 'DefaultModel',
     }),
     attributes: [
       new TerraformComponentAttribute({
@@ -296,6 +302,8 @@ export const mainComponents = [
     definition: new TerraformComponentDefinition({
       blockType: 'resource',
       type: 'aws_route_table',
+      icon: 'unknown',
+      model: 'DefaultModel',
     }),
     attributes: [
       new TerraformComponentAttribute({
@@ -894,6 +902,8 @@ export const mainComponents = [
     definition: new TerraformComponentDefinition({
       blockType: 'resource',
       type: 'aws_s3_bucket',
+      icon: 'unknown',
+      model: 'DefaultModel',
     }),
     attributes: [
       new TerraformComponentAttribute({
@@ -911,6 +921,8 @@ export const mainComponents = [
     definition: new TerraformComponentDefinition({
       blockType: 'resource',
       type: 'aws_s3_bucket_acl',
+      icon: 'unknown',
+      model: 'DefaultModel',
     }),
     attributes: [
       new TerraformComponentAttribute({
@@ -934,6 +946,8 @@ export const mainComponents = [
     definition: new TerraformComponentDefinition({
       blockType: 'resource',
       type: 'aws_lb',
+      icon: 'unknown',
+      model: 'DefaultModel',
     }),
     attributes: [
       new TerraformComponentAttribute({
@@ -998,6 +1012,8 @@ export const mainComponents = [
     definition: new TerraformComponentDefinition({
       blockType: 'resource',
       type: 'aws_lb_target_group',
+      icon: 'unknown',
+      model: 'DefaultModel',
     }),
     attributes: [
       new TerraformComponentAttribute({
@@ -1035,6 +1051,8 @@ export const mainComponents = [
     definition: new TerraformComponentDefinition({
       blockType: 'resource',
       type: 'aws_launch_configuration',
+      icon: 'unknown',
+      model: 'DefaultModel',
     }),
     attributes: [
       new TerraformComponentAttribute({
@@ -1067,6 +1085,8 @@ export const mainComponents = [
     definition: new TerraformComponentDefinition({
       blockType: 'resource',
       type: 'aws_autoscaling_group',
+      icon: 'unknown',
+      model: 'DefaultModel',
     }),
     attributes: [
       new TerraformComponentAttribute({
@@ -1131,6 +1151,8 @@ export const mainComponents = [
     definition: new TerraformComponentDefinition({
       blockType: 'resource',
       type: 'aws_autoscaling_policy',
+      icon: 'unknown',
+      model: 'DefaultModel',
     }),
     attributes: [
       new TerraformComponentAttribute({
@@ -1168,6 +1190,8 @@ export const mainComponents = [
     definition: new TerraformComponentDefinition({
       blockType: 'resource',
       type: 'aws_cloudwatch_metric_alarm',
+      icon: 'unknown',
+      model: 'DefaultModel',
     }),
     attributes: [
       new TerraformComponentAttribute({
@@ -1242,6 +1266,8 @@ export const mainComponents = [
     definition: new TerraformComponentDefinition({
       blockType: 'resource',
       type: 'aws_autoscaling_policy',
+      icon: 'unknown',
+      model: 'DefaultModel',
     }),
     attributes: [
       new TerraformComponentAttribute({
@@ -1279,6 +1305,8 @@ export const mainComponents = [
     definition: new TerraformComponentDefinition({
       blockType: 'resource',
       type: 'aws_cloudwatch_metric_alarm',
+      icon: 'unknown',
+      model: 'DefaultModel',
     }),
     attributes: [
       new TerraformComponentAttribute({
@@ -1353,6 +1381,8 @@ export const mainComponents = [
     definition: new TerraformComponentDefinition({
       blockType: 'resource',
       type: 'aws_efs_file_system',
+      icon: 'unknown',
+      model: 'DefaultModel',
     }),
     attributes: [
       new TerraformComponentAttribute({
@@ -1377,6 +1407,8 @@ export const mainComponents = [
     definition: new TerraformComponentDefinition({
       blockType: 'resource',
       type: 'aws_lb_listener',
+      icon: 'unknown',
+      model: 'DefaultModel',
     }),
     attributes: [
       new TerraformComponentAttribute({
@@ -1421,6 +1453,8 @@ export const mainComponents = [
     definition: new TerraformComponentDefinition({
       blockType: 'resource',
       type: 'aws_efs_mount_target',
+      icon: 'unknown',
+      model: 'DefaultModel',
     }),
     attributes: [
       new TerraformComponentAttribute({
@@ -1463,6 +1497,8 @@ export const mainComponents = [
     definition: new TerraformComponentDefinition({
       blockType: 'resource',
       type: 'random_string',
+      icon: 'unknown',
+      model: 'DefaultModel',
     }),
     attributes: [
       new TerraformComponentAttribute({
@@ -1485,6 +1521,8 @@ export const mainComponents = [
     definition: new TerraformComponentDefinition({
       blockType: 'resource',
       type: 'random_password',
+      icon: 'unknown',
+      model: 'DefaultModel',
     }),
     attributes: [
       new TerraformComponentAttribute({

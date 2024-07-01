@@ -2,8 +2,8 @@
 import antlr4 from 'antlr4';
 import TerraformVariable from 'src/models/TerraformVariable';
 import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
-import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
 import TerraformComponent from 'src/models/TerraformComponent';
+import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
 
 const getText = (ctx) => ctx.getText().replaceAll('"', '').trim();
 
@@ -26,6 +26,16 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
     this.ids = new Map();
     // We need this idCounter because we can't use pluginData to generate the id.
     this.idCounter = 1;
+  }
+
+  getUnknownDefinition(type) {
+    return new TerraformComponentDefinition({
+      isContainer: false,
+      model: 'DefaultModel',
+      icon: 'unknown',
+      type: type || 'unknown',
+      blockType: this.currentBlockType,
+    });
   }
 
   addComponent() {
@@ -149,7 +159,8 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
     this.currentComponent = new TerraformComponent();
     const type = getText(ctx.name());
     this.currentComponent.definition = this.definitions
-      .find((definition) => definition.blockType === 'module' && definition.type === type) || null;
+      .find((definition) => definition.blockType === 'module' && definition.type === type)
+      || this.getUnknownDefinition(type);
   }
 
   // Exit a parse tree produced by terraformParser#module.
@@ -217,10 +228,7 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
 
     this.currentComponent.definition = this.definitions
       .find((definition) => definition.blockType === this.currentBlockType
-        && definition.type === type) || new TerraformComponentDefinition({
-      blockType: this.currentBlockType,
-      type,
-    });
+        && definition.type === type) || this.getUnknownDefinition(type);
 
     if (this.currentBlockType === 'provider') {
       // special case for provider, we do not have any externalId

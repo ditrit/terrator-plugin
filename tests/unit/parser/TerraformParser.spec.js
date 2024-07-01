@@ -33,6 +33,7 @@ import subObject from 'tests/resources/js/subObject';
 import objectAttributeDefinition from 'tests/resources/js/objectAttributeDefinition';
 import missingDefinitionOnAttribute from 'tests/resources/js/bug67_missingDefinitionOnAttribute';
 import emptyListAttribute from 'tests/resources/js/bug78_emptyListAttribute';
+import unknownDefinition from 'tests/resources/js/unknown_components';
 
 describe('Test TerraformParser', () => {
   describe('Test methods', () => {
@@ -575,6 +576,27 @@ describe('Test TerraformParser', () => {
         diagram.path = '';
         parser.parse(new FileInformation({ path: '' }), inputs);
         expect(metadata.pluginData.components).toEqual(emptyResource);
+      });
+
+      it('Should set unknown definition', () => {
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+
+        metadata.parse();
+        metadata.pluginData.initLinkDefinitions();
+
+        const parser = new TerraformParser(metadata.pluginData);
+        const inputs = [
+          new FileInput({
+            path: 'new_file.tf',
+            content: fs.readFileSync('tests/resources/tf/unknown_components.tf', 'utf8'),
+          }),
+        ];
+
+        parser.parse(new FileInformation({ path: '' }), inputs);
+        expect(metadata.pluginData.components).toEqual(unknownDefinition);
       });
     });
   });

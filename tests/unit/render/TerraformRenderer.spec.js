@@ -560,6 +560,25 @@ describe('Test TerraformRenderer', () => {
 
         expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
       });
+
+      it('Should generate unknown definition', () => {
+        const input = new FileInput({
+          path: 'new_file.tf',
+          content: fs.readFileSync('tests/resources/tf/unknown_components.tf', 'utf8'),
+        });
+        const metadata = getTerraformMetadata(
+          'aws',
+          'src/assets/metadata/aws.json',
+        );
+
+        metadata.parse();
+
+        const parser = new TerraformParser(metadata.pluginData);
+
+        parser.parse(new FileInformation({ path: '' }), [input]);
+
+        expect(new TerraformRender(metadata.pluginData).renderFiles()).toEqual([input]);
+      });
     });
   });
 });

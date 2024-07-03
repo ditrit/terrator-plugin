@@ -1,12 +1,10 @@
 import TerraformComponent from 'src/models/TerraformComponent';
 import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
-import { getTerraformMetadata } from 'tests/resources/utils';
 import TerraformVariable from 'src/models/TerraformVariable';
+import TerraformMetadata from 'src/metadata/TerraformMetadata';
+import TerraformData from 'src/models/TerraformData';
 
-const metadata = getTerraformMetadata(
-  'aws',
-  'src/assets/metadata/aws.json',
-);
+const metadata = new TerraformMetadata(new TerraformData());
 metadata.parse();
 
 const awsDbInstanceDefinition = metadata.pluginData.definitions.components.find(({ type }) => type === 'aws_db_instance');

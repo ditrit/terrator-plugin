@@ -7,35 +7,6 @@ import { getTerraformMetadata } from 'tests/resources/utils';
 
 describe('Test TerraformMetadata', () => {
   describe('Test methods', () => {
-    describe('Test method: validate', () => {
-      it('Should return true on valid metadata', () => {
-        const metadata = getTerraformMetadata('validMetadata', 'tests/resources/metadata/valid.json');
-        expect(metadata.validate()).toBeTruthy();
-      });
-
-      it('Should return false on invalid metadata', () => {
-        const metadata = getTerraformMetadata('invalidMetadata', 'tests/resources/metadata/invalid.json');
-        let error = null;
-        try {
-          metadata.validate();
-        } catch (e) {
-          error = e;
-        }
-        expect(error).not.toBeNull();
-        expect(error.message).toEqual('Metadata are not valid');
-        expect(error.cause).toEqual([{
-          errors: [{
-            dataPath: '',
-            keyword: 'required',
-            message: "should have required property 'name'",
-            params: { missingProperty: 'name' },
-            schemaPath: '#/required',
-          }],
-          provider: 'invalidMetadata',
-        }]);
-      });
-    });
-
     describe('Test method: parse', () => {
       const metadata = getTerraformMetadata('validMetadata', 'tests/resources/metadata/valid.json');
 
@@ -51,10 +22,12 @@ describe('Test TerraformMetadata', () => {
     });
 
     describe('Test method: getComponentDefinitions', () => {
-      const metadata = getTerraformMetadata('validMetadata', 'tests/resources/metadata/valid.json');
-
       it('Should return components', () => {
-        expect(metadata.getComponentDefinitions()).toEqual([
+        const metadata = getTerraformMetadata('validMetadata', 'tests/resources/metadata/valid.json');
+
+        metadata.parse();
+
+        expect(metadata.pluginData.definitions.components).toEqual([
           new TerraformComponentDefinition({
             blockType: 'provider',
             provider: 'provider',
@@ -177,8 +150,9 @@ describe('Test TerraformMetadata', () => {
     it('Test example: container.json', () => {
       const metadata = getTerraformMetadata('container', 'tests/resources/metadata/container.json');
 
-      expect(metadata.validate()).toBeTruthy();
-      expect(metadata.getComponentDefinitions()).toEqual([
+      metadata.parse();
+
+      expect(metadata.pluginData.definitions.components).toEqual([
         new TerraformComponentDefinition({
           blockType: 'provider',
           provider: 'aws',
@@ -215,10 +189,9 @@ describe('Test TerraformMetadata', () => {
 
     it('Test example: link.json', () => {
       const metadata = getTerraformMetadata('container', 'tests/resources/metadata/link.json');
+
       metadata.parse();
       metadata.pluginData.initLinkDefinitions();
-
-      expect(metadata.validate()).toBeTruthy();
 
       expect(metadata.pluginData.definitions.links).toEqual([
         new ComponentLinkDefinition({

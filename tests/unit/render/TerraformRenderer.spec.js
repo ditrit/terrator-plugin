@@ -11,6 +11,7 @@ import TerraformComponentDefinition from 'src/models/TerraformComponentDefinitio
 import { getTerraformMetadata } from 'tests/resources/utils';
 import TerraformComponentAttributeDefinition from 'src/models/TerraformComponentAttributeDefinition';
 import TerraformComponent from 'src/models/TerraformComponent';
+import TerraformMetadata from 'src/metadata/TerraformMetadata';
 
 describe('Test TerraformRenderer', () => {
   it('Test constructor', () => {
@@ -36,7 +37,7 @@ describe('Test TerraformRenderer', () => {
 
       it('Should render multiple files', () => {
         const metadata = getTerraformMetadata(
-          'aws',
+          'awsLink',
           'tests/resources/metadata/simpleLink.json',
         );
         metadata.parse();
@@ -135,10 +136,7 @@ describe('Test TerraformRenderer', () => {
       });
 
       it('Should render app', () => {
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         const parser = new TerraformParser(metadata.pluginData);
         const input = new FileInput({
@@ -231,10 +229,7 @@ describe('Test TerraformRenderer', () => {
           path: 'new_file.tf',
           content: fs.readFileSync('tests/resources/tf/variable_reference.tf', 'utf8'),
         });
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         const parser = new TerraformParser(metadata.pluginData);
         parser.parse(new FileInformation({ path: '' }), [input]);
@@ -247,10 +242,7 @@ describe('Test TerraformRenderer', () => {
           path: 'new_file.tf',
           content: fs.readFileSync('tests/resources/tf/id_reference.tf', 'utf8'),
         });
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         const parser = new TerraformParser(metadata.pluginData);
         parser.parse(new FileInformation({ path: '' }), [input]);
@@ -263,10 +255,7 @@ describe('Test TerraformRenderer', () => {
           path: 'new_file.tf',
           content: fs.readFileSync('tests/resources/tf/name_reference.tf', 'utf8'),
         });
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         const parser = new TerraformParser(metadata.pluginData);
         parser.parse(new FileInformation({ path: '' }), [input]);
@@ -279,10 +268,7 @@ describe('Test TerraformRenderer', () => {
           path: 'new_file.tf',
           content: fs.readFileSync('tests/resources/tf/output.tf', 'utf8'),
         });
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         const parser = new TerraformParser(metadata.pluginData);
         parser.parse(new FileInformation({ path: '' }), [input]);
@@ -295,10 +281,7 @@ describe('Test TerraformRenderer', () => {
           path: 'new_file.tf',
           content: fs.readFileSync('tests/resources/tf/multiple_references.tf', 'utf8'),
         });
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         const parser = new TerraformParser(metadata.pluginData);
         parser.parse(new FileInformation({ path: '' }), [input]);
@@ -311,10 +294,7 @@ describe('Test TerraformRenderer', () => {
           path: 'new_file.tf',
           content: fs.readFileSync('tests/resources/tf/multiple_links.tf', 'utf8'),
         });
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         const parser = new TerraformParser(metadata.pluginData);
         parser.parse(new FileInformation({ path: '' }), [input]);
@@ -327,10 +307,7 @@ describe('Test TerraformRenderer', () => {
           path: 'new_file.tf',
           content: fs.readFileSync('tests/resources/tf/local_reference.tf', 'utf8'),
         });
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         const parser = new TerraformParser(metadata.pluginData);
         parser.parse(new FileInformation({ path: '' }), [input]);
@@ -347,10 +324,7 @@ describe('Test TerraformRenderer', () => {
           path: 'new_file.tf',
           content: fs.readFileSync('tests/resources/tf/validMain.tf', 'utf8'),
         });
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         const parser = new TerraformParser(metadata.pluginData);
         parser.parse(new FileInformation({ path: '' }), [input]);
@@ -363,10 +337,7 @@ describe('Test TerraformRenderer', () => {
           path: 'new_file.tf',
           content: fs.readFileSync('tests/resources/tf/complex_field.tf', 'utf8'),
         });
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
 
         metadata.parse();
 
@@ -382,10 +353,7 @@ describe('Test TerraformRenderer', () => {
           path: 'new_file.tf',
           content: fs.readFileSync('tests/resources/tf/empty_resource.tf', 'utf8'),
         });
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
 
         metadata.parse();
 
@@ -401,10 +369,7 @@ describe('Test TerraformRenderer', () => {
           path: 'new_file.tf',
           content: fs.readFileSync('tests/resources/tf/attributes_and_blocks.tf', 'utf8'),
         });
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
 
         metadata.parse();
 
@@ -420,10 +385,7 @@ describe('Test TerraformRenderer', () => {
           path: 'new_file.tf',
           content: fs.readFileSync('tests/resources/tf/double_tags.tf', 'utf8'),
         });
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
 
         metadata.parse();
 
@@ -439,10 +401,7 @@ describe('Test TerraformRenderer', () => {
           path: 'new_file.tf',
           content: fs.readFileSync('tests/resources/tf/double_tags.tf', 'utf8'),
         });
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
 
         metadata.parse();
 
@@ -458,10 +417,7 @@ describe('Test TerraformRenderer', () => {
           path: 'new_file.tf',
           content: fs.readFileSync('tests/resources/tf/index_argument.tf', 'utf8'),
         });
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
 
         metadata.parse();
 
@@ -477,10 +433,7 @@ describe('Test TerraformRenderer', () => {
           path: 'new_file.tf',
           content: fs.readFileSync('tests/resources/tf/array_variable.tf', 'utf8'),
         });
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
 
         metadata.parse();
 
@@ -498,11 +451,7 @@ describe('Test TerraformRenderer', () => {
           path: 'new_file.tf',
           content: fs.readFileSync('tests/resources/tf/bug22_providerRendering.tf', 'utf8'),
         });
-
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
 
         metadata.pluginData.components = [
@@ -522,10 +471,7 @@ describe('Test TerraformRenderer', () => {
           path: 'new_file.tf',
           content: fs.readFileSync('tests/resources/tf/bug25_moduleRendering.tf', 'utf8'),
         });
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
 
         metadata.parse();
 
@@ -547,10 +493,7 @@ describe('Test TerraformRenderer', () => {
           path: 'new_file.tf',
           content: fs.readFileSync('tests/resources/tf/bug41_subObject.tf', 'utf8'),
         });
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
 
         metadata.parse();
 
@@ -566,10 +509,7 @@ describe('Test TerraformRenderer', () => {
           path: 'new_file.tf',
           content: fs.readFileSync('tests/resources/tf/unknown_components.tf', 'utf8'),
         });
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
 
         metadata.parse();
 

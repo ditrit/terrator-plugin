@@ -1,10 +1,8 @@
 import TerraformComponent from 'src/models/TerraformComponent';
-import { getTerraformMetadata } from 'tests/resources/utils';
+import TerraformMetadata from 'src/metadata/TerraformMetadata';
+import TerraformData from 'src/models/TerraformData';
 
-const metadata = getTerraformMetadata(
-  'aws',
-  'src/assets/metadata/aws.json',
-);
+const metadata = new TerraformMetadata(new TerraformData());
 metadata.parse();
 
 const instanceDefinition = metadata.pluginData.definitions.components.find(({ type }) => type === 'aws_instance');

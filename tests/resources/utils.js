@@ -11,7 +11,8 @@ import TerraformData from 'src/models/TerraformData';
 export function getTerraformMetadata(providerName, metadataPath) {
   const metadata = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
   const terraformMetadata = new TerraformMetadata(new TerraformData());
-  terraformMetadata.providers = {};
-  terraformMetadata.providers[providerName] = metadata;
+
+  terraformMetadata.providers = metadata;
+
   return terraformMetadata;
 }

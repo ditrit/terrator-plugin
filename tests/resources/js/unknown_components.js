@@ -1,12 +1,10 @@
 import TerraformComponent from 'src/models/TerraformComponent';
 import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
-import { getTerraformMetadata } from 'tests/resources/utils';
 import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
+import TerraformMetadata from 'src/metadata/TerraformMetadata';
+import TerraformData from 'src/models/TerraformData';
 
-const metadata = getTerraformMetadata(
-  'aws',
-  'src/assets/metadata/aws.json',
-);
+const metadata = new TerraformMetadata(new TerraformData());
 metadata.parse();
 
 export default [

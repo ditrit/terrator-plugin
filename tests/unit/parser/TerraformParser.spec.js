@@ -34,6 +34,8 @@ import objectAttributeDefinition from 'tests/resources/js/objectAttributeDefinit
 import missingDefinitionOnAttribute from 'tests/resources/js/bug67_missingDefinitionOnAttribute';
 import emptyListAttribute from 'tests/resources/js/bug78_emptyListAttribute';
 import unknownDefinition from 'tests/resources/js/unknown_components';
+import TerraformMetadata from 'src/metadata/TerraformMetadata';
+import TerraformData from 'src/models/TerraformData';
 
 describe('Test TerraformParser', () => {
   describe('Test methods', () => {
@@ -96,10 +98,7 @@ describe('Test TerraformParser', () => {
       });
 
       describe('Test parse: app.tf', () => {
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         const parser = new TerraformParser(metadata.pluginData);
 
@@ -189,10 +188,7 @@ describe('Test TerraformParser', () => {
       });
 
       describe('Test parse: references', () => {
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         metadata.pluginData.initLinkDefinitions();
         const parser = new TerraformParser(metadata.pluginData);
@@ -271,10 +267,7 @@ describe('Test TerraformParser', () => {
       });
 
       it('Should parse a resource containing attributes and blocks', () => {
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         metadata.pluginData.initLinkDefinitions();
         const parser = new TerraformParser(metadata.pluginData);
@@ -289,10 +282,7 @@ describe('Test TerraformParser', () => {
       });
 
       it('Should parse a resource with 2 blocks with the same name but different types', () => {
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         metadata.pluginData.initLinkDefinitions();
         const parser = new TerraformParser(metadata.pluginData);
@@ -305,10 +295,7 @@ describe('Test TerraformParser', () => {
       });
 
       it('Should parse the tag attribute as a key/value list', () => {
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         metadata.pluginData.initLinkDefinitions();
         const parser = new TerraformParser(metadata.pluginData);
@@ -323,10 +310,7 @@ describe('Test TerraformParser', () => {
       });
 
       it('Should parse an empty resource body', () => {
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         metadata.pluginData.initLinkDefinitions();
         const parser = new TerraformParser(metadata.pluginData);
@@ -341,10 +325,7 @@ describe('Test TerraformParser', () => {
       });
 
       it('Should throw an error when parsing a resource with an invalid body syntax', () => {
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         metadata.pluginData.initLinkDefinitions();
         const parser = new TerraformParser(metadata.pluginData);
@@ -360,10 +341,7 @@ describe('Test TerraformParser', () => {
       });
 
       it('Should parse a resource with a reference to another resource', () => {
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         metadata.pluginData.initLinkDefinitions();
         const parser = new TerraformParser(metadata.pluginData);
@@ -378,10 +356,7 @@ describe('Test TerraformParser', () => {
       });
 
       it('Should parse an output value', () => {
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         metadata.pluginData.initLinkDefinitions();
         const parser = new TerraformParser(metadata.pluginData);
@@ -396,10 +371,7 @@ describe('Test TerraformParser', () => {
       });
 
       it('Should parse a resource with an index value', () => {
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         metadata.pluginData.initLinkDefinitions();
         const parser = new TerraformParser(metadata.pluginData);
@@ -414,10 +386,7 @@ describe('Test TerraformParser', () => {
       });
 
       it('Should parse all resources and variables in main', () => {
-        const metadata = getTerraformMetadata(
-          'aws',
-          'tests/resources/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         metadata.pluginData.initLinkDefinitions();
         const parser = new TerraformParser(metadata.pluginData);
@@ -433,10 +402,7 @@ describe('Test TerraformParser', () => {
       });
 
       it('Should parse a variable with a list as default value', () => {
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         metadata.pluginData.initLinkDefinitions();
         const parser = new TerraformParser(metadata.pluginData);
@@ -454,10 +420,7 @@ describe('Test TerraformParser', () => {
 
     describe('Fix related bugs', () => {
       it('Should parsing object inside object, https://github.com/ditrit/terrator-plugin/issues/41', () => {
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         metadata.pluginData.initLinkDefinitions();
         const parser = new TerraformParser(metadata.pluginData);
@@ -472,10 +435,7 @@ describe('Test TerraformParser', () => {
       });
 
       it('Should fix file content null, https://github.com/ditrit/terrator-plugin/issues/43', () => {
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         metadata.pluginData.initLinkDefinitions();
         const parser = new TerraformParser(metadata.pluginData);
@@ -495,10 +455,7 @@ describe('Test TerraformParser', () => {
       });
 
       it('Should fix missing attribute definition for an object, https://github.com/ditrit/terrator-plugin/issues/48', () => {
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         metadata.pluginData.initLinkDefinitions();
         const parser = new TerraformParser(metadata.pluginData);
@@ -531,10 +488,7 @@ describe('Test TerraformParser', () => {
       });
 
       it('Should fix empty list attribute, https://github.com/ditrit/terrator-plugin/issues/78', () => {
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
         metadata.parse();
         metadata.pluginData.initLinkDefinitions();
         const parser = new TerraformParser(metadata.pluginData);
@@ -549,10 +503,7 @@ describe('Test TerraformParser', () => {
       });
 
       it('Should only parse files into diagram folder and not in sub-folder', () => {
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
 
         metadata.parse();
         metadata.pluginData.initLinkDefinitions();
@@ -579,10 +530,7 @@ describe('Test TerraformParser', () => {
       });
 
       it('Should set unknown definition', () => {
-        const metadata = getTerraformMetadata(
-          'aws',
-          'src/assets/metadata/aws.json',
-        );
+        const metadata = new TerraformMetadata(new TerraformData());
 
         metadata.parse();
         metadata.pluginData.initLinkDefinitions();

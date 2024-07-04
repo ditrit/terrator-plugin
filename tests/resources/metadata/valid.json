@@ -1,62 +1,86 @@
-{
-  "name": "provider",
-  "model": "provider_model",
-  "icon": "provider_icon",
-  "attributes": [{
-    "name": "name1",
-    "type": "String"
-  }],
-  "data": [{
+[
+  {
+    "type": "provider",
+    "provider": "provider",
+    "blockType": "provider",
+    "model": "provider_model",
+    "icon": "provider_icon",
+    "definedAttributes": [
+      {
+        "name": "name1",
+        "type": "String"
+      }
+    ]
+  },
+  {
     "type": "data_type",
+    "provider": "provider",
+    "blockType": "data",
     "model": "data_model",
     "icon": "data_icon",
     "isContainer": false,
-    "attributes": [{
-      "name": "boolean1",
-      "type": "Boolean"
-    }, {
-      "name": "number1",
-      "type": "Number"
-    }, {
-      "name": "array1",
-      "type": "Array"
-    }, {
-      "name": "object1",
-      "type": "Object",
-      "attributes": [{
-        "name": "name2",
-        "type": "String"
-      }]
-    }]
-  }],
-  "modules": [{
+    "definedAttributes": [
+      {
+        "name": "boolean1",
+        "type": "Boolean"
+      },
+      {
+        "name": "number1",
+        "type": "Number"
+      },
+      {
+        "name": "array1",
+        "type": "Array"
+      },
+      {
+        "name": "object1",
+        "type": "Object",
+        "definedAttributes": [
+          {
+            "name": "name2",
+            "type": "String"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "type": "module_type",
+    "provider": "provider",
+    "blockType": "module",
     "model": "module_model",
     "icon": "module_icon",
     "isContainer": false,
-    "attributes": []
-  }],
-  "resources": [{
+    "definedAttributes": []
+  },
+  {
     "type": "resource_type",
+    "provider": "provider",
+    "blockType": "resource",
     "model": "resource_model",
     "icon": "resource_icon",
     "isContainer": true,
-    "attributes": [{
-      "name": "name3",
-      "type": "String"
-    }, {
-      "name": "link1",
-      "type": "Link",
-      "linkType": "Default",
-      "linkRef": "module_type"
-    }]
-  }],
-  "variables": [{
+    "definedAttributes": [
+      {
+        "name": "name3",
+        "type": "String"
+      },
+      {
+        "name": "link1",
+        "type": "Link",
+        "linkType": "Default",
+        "linkRef": "module_type"
+      }
+    ]
+  },
+  {
     "type": "variable_type",
+    "provider": "provider",
+    "blockType": "variable",
     "model": "variable_model",
     "icon": "variable_icon",
     "isContainer": false,
     "required": false,
-    "attributes": []
-  }]
-}
+    "definedAttributes": []
+  }
+]

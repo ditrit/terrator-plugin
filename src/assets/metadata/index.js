@@ -1,5 +1,5 @@
-import aws from 'src/assets/metadata/aws.json';
+import aws from 'src/assets/metadata/aws';
 
-export default {
-  aws,
-};
+export default [
+  ...aws,
+];

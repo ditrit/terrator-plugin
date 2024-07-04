@@ -1,8 +1,6 @@
-import Ajv from 'ajv';
 import { DefaultMetadata } from 'leto-modelizer-plugin-core';
 import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
 import TerraformComponentAttributeDefinition from 'src/models/TerraformComponentAttributeDefinition';
-import Schema from 'src/metadata/ValidationSchema';
 import providers from 'src/assets/metadata';
 
 /**
@@ -12,41 +10,19 @@ class TerraformMetadata extends DefaultMetadata {
   constructor(pluginData) {
     super(pluginData);
     this.providers = providers;
-    this.ajv = new Ajv();
-    this.schema = Schema;
     this.getAttributeDefinition = this.getAttributeDefinition.bind(this);
-  }
-
-  /**
-   * Validate the provided metadata with a schemas.
-   * @returns {boolean} True if metadata is valid.
-   */
-  validate() {
-    const errors = [];
-    Object.keys(this.providers).forEach((provider) => {
-      const validate = this.ajv.compile(this.schema);
-
-      if (!validate(this.providers[provider])) {
-        errors.push({
-          provider,
-          errors: validate.errors,
-        });
-      }
-    });
-
-    if (errors.length > 0) {
-      throw new Error('Metadata are not valid', { cause: errors });
-    }
-
-    return true;
   }
 
   /**
    * Parse all component/link definitions from metadata.
    */
   parse() {
+    const definitions = this.getComponentDefinitions();
+
+    this.setChildrenTypes(definitions);
+
     this.pluginData.definitions = {
-      components: this.getComponentDefinitions(),
+      components: definitions,
     };
   }
 
@@ -55,87 +31,12 @@ class TerraformMetadata extends DefaultMetadata {
    * @returns {ComponentDefinition[]} Array of component definitions.
    */
   getComponentDefinitions() {
-    const definitions = [];
-    Object.keys(this.providers)
-      .map((key) => this.providers[key])
-      .forEach((provider) => {
-        const providerDefinitions = [];
-        providerDefinitions.push(this.getProviderDefinition(provider));
-
-        provider.data.forEach((data) => providerDefinitions.push(
-          this.getBlockDefinition('data', provider.name, data),
-        ));
-
-        provider.modules.forEach((module) => providerDefinitions.push(
-          this.getBlockDefinition('module', provider.name, module),
-        ));
-
-        provider.resources.forEach((resource) => providerDefinitions.push(
-          this.getBlockDefinition('resource', provider.name, resource),
-        ));
-
-        provider.variables.forEach((variable) => providerDefinitions.push(
-          this.getBlockDefinition('variable', provider.name, variable),
-        ));
-
-        this.setChildrenTypes(providerDefinitions);
-
-        providerDefinitions.forEach((def) => {
-          definitions.push(def);
-        });
-      });
-    return definitions;
-  }
-
-  /**
-   * Get provider definition.
-   * @param {object} provider - Provider from metadata to parse.
-   * @returns {TerraformComponentDefinition} Parsed provider component Definition.
-   */
-  getProviderDefinition(provider) {
-    const definition = new TerraformComponentDefinition({
-      blockType: 'provider',
-      provider: provider.name,
-      type: provider.name,
-      icon: provider.icon,
-      model: provider.model,
-      definedAttributes: provider.attributes.map(this.getAttributeDefinition),
-      isContainer: provider.isContainer,
-      displayName: provider.displayName,
-      description: provider.description,
-      url: provider.url,
-    });
-
-    definition.parentTypes = this.getParentTypes(definition);
-
-    return definition;
-  }
-
-  /**
-   * Get block definition.
-   * @param {string} blockType - Block type, can be module/data/resource/variable.
-   * @param {string} providerName - Name of related provider.
-   * @param {object} block - Block to parse.
-   * @returns {TerraformComponentDefinition} Parsed component definition.
-   */
-  getBlockDefinition(blockType, providerName, block) {
-    const attributes = block.attributes || [];
-    const definition = new TerraformComponentDefinition({
-      blockType,
-      provider: providerName,
-      type: block.type,
-      model: block.model,
-      icon: block.icon,
-      isContainer: block.isContainer || false,
-      definedAttributes: attributes.map(this.getAttributeDefinition),
-      displayName: block.displayName,
-      description: block.description,
-      url: block.url,
-    });
-
-    definition.parentTypes = this.getParentTypes(definition);
-
-    return definition;
+    return this.providers
+      .map((definition) => new TerraformComponentDefinition({
+        ...definition,
+        definedAttributes: definition.definedAttributes.map(this.getAttributeDefinition),
+        parentTypes: this.getParentTypes(definition),
+      }));
   }
 
   /**
@@ -144,7 +45,7 @@ class TerraformMetadata extends DefaultMetadata {
    * @returns {TerraformComponentAttributeDefinition} Parsed attribute.
    */
   getAttributeDefinition(attribute) {
-    const subAttributes = attribute.attributes || [];
+    const subAttributes = attribute.definedAttributes || [];
     return new TerraformComponentAttributeDefinition({
       ...attribute,
       definedAttributes: subAttributes.map(this.getAttributeDefinition),
@@ -183,6 +84,7 @@ class TerraformMetadata extends DefaultMetadata {
         });
         return acc;
       }, {});
+
     componentDefinitions.filter((def) => children[def.type])
       .forEach((def) => {
         def.childrenTypes = children[def.type];

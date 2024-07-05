@@ -11,12 +11,7 @@
   style="filter: drop-shadow(0 4px 4px #aaa);"
   {% endif %}
 >
-  <g
-    {% if drawOption.hide %}
-    opacity="0.4"
-    cursor="not-allowed"
-    {% endif %}
-  >
+  <g class="canBeHidden {% if drawOption.hide %}hide{% endif %}">
     <rect
       class="background"
       stroke="#224F7C"

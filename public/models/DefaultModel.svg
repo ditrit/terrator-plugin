@@ -1,5 +1,5 @@
 <svg
-  class="model"
+  class="model canBeHidden {% if drawOption.hide %}hide{% endif %}"
   width="96"
   height="80"
   overflow="visible"
@@ -9,10 +9,6 @@
   style="outline: 2px solid deepskyblue; outline-offset: 2px; filter: drop-shadow(0 4px 4px #aaa);"
   {% else %}
   style="filter: drop-shadow(0 4px 4px #aaa);"
-  {% endif %}
-  {% if drawOption.hide %}
-  opacity="0.4"
-  cursor="not-allowed"
   {% endif %}
 >
   <rect

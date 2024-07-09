@@ -7,9 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Display count attribute on models.
+
 ### Changed
 
 - Update metadata files structure.
+- Update plugin-core to version 0.25.0.
 
 ### Fixed
 

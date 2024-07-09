@@ -1,0 +1,3 @@
+.component .canBeHidden.hide {
+    opacity: 0.4; cursor: not-allowed
+}

@@ -55,12 +55,13 @@ describe('Test class: TerraformComponentRenderer', () => {
         definition: new TerraformComponentDefinition(),
         attributes: [new TerraformComponentAttribute({
           name: 'count',
-          type: 'Number',
-          value: 2,
+          type: 'String',
+          value: '2',
         })],
       });
       const result = renderer.getTemplateData(component);
 
+      expect(result.hasCount).toEqual(true);
       expect(result.count).toBe(2);
     });
 

@@ -38,6 +38,9 @@ class TerraformConfiguration extends DefaultConfiguration {
       }, {
         type: 'icons',
         name: 'resize',
+      }, {
+        type: 'icons',
+        name: 'unknown',
       }],
       container: {
         margin: 15,

@@ -11,11 +11,12 @@ class TerraformComponentRenderer extends ComponentRenderer {
    */
   getTemplateData(component) {
     const countAttribute = component.getAttributeByName('count');
-    const hasCount = !!countAttribute && countAttribute.value !== 1;
+    const countValue = parseInt(countAttribute?.value, 10);
+    const hasCount = !!countAttribute && countValue !== 1;
     let count = '?';
 
-    if (hasCount && countAttribute.type === 'Number') {
-      count = countAttribute.value;
+    if (hasCount && Number.isInteger(countValue)) {
+      count = countValue;
     }
 
     return {

@@ -108,7 +108,7 @@
       <circle class="anchor" name="right" r="3" cx="100%" cy="50%" />
     </g>
     {% endif %}
-    {% if hasError %}
+    {% if hasError and not isReadOnly %}
     <g>
       <svg
         class="error-button"
@@ -130,6 +130,7 @@
       </svg>
     </g>
     {% endif %}
+    {% if not isReadOnly %}
     <g transform="translate(-18 -18)">
       <svg
         class="resize-button"
@@ -172,6 +173,7 @@
         </g>
       </svg>
     </g>
+    {% endif %}
     {% if hasCount %}
     <g transform="translate(0 -18)">
       <svg

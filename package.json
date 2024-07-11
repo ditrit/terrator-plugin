@@ -1,6 +1,6 @@
 {
   "name": "terrator-plugin",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "Terraform plugin for Leto-Modelizer.",
   "main": "dist/terrator-plugin.js",
   "exports": "./dist/terrator-plugin.js",

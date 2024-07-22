@@ -1,3 +1,5 @@
+import { securityGroups, subnetId } from 'src/assets/metadata/aws/default';
+
 const awsInstance = {
   type: 'aws_instance',
   blockType: 'resource',
@@ -11,14 +13,8 @@ const awsInstance = {
   tags: [],
   definedAttributes: [
     {
-      name: 'security_groups',
-      displayName: 'Security groups',
-      description: 'List of security group names to associate with.',
-      linkAttribute: 'name',
-      linkRef: 'aws_security_group',
+      ...securityGroups,
       linkType: 'Reverse',
-      linkModel: 'defaultLink',
-      type: 'Link',
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#security_groups',
     },
     {
@@ -33,14 +29,8 @@ const awsInstance = {
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#vpc_security_group_ids',
     },
     {
-      name: 'subnet_id',
-      displayName: 'Subnet ID',
+      ...subnetId,
       description: 'The VPC Subnet ID to launch in.',
-      linkAttribute: 'id',
-      linkRef: 'aws_subnet',
-      linkType: 'Default',
-      linkModel: 'defaultLink',
-      type: 'Link',
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#subnet_id',
     },
   ],
@@ -120,13 +110,7 @@ const awsLaunchConfiguration = {
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#name_prefix',
     },
     {
-      name: 'security_groups',
-      displayName: 'Security groups',
-      description: 'A list of associated security group IDS.',
-      linkRef: 'aws_security_group',
-      linkType: 'Default',
-      linkModel: 'defaultLink',
-      type: 'Link',
+      ...securityGroups,
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration.html#security_groups',
     },
     {

@@ -1,3 +1,5 @@
+import { securityGroups, subnetId, tags } from 'src/assets/metadata/aws/default';
+
 const awsEbsVolume = {
   type: 'aws_ebs_volume',
   blockType: 'resource',
@@ -117,10 +119,7 @@ const awsS3Bucket = {
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#object_lock_enabled',
     },
     {
-      name: 'tags',
-      displayName: 'Tags',
-      description: 'A map of tags to assign to the resource.',
-      type: 'Object',
+      ...tags,
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#tags',
     },
   ],
@@ -304,10 +303,7 @@ const awsEfsFileSystem = {
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/efs_file_system#size_in_bytes',
     },
     {
-      name: 'tags',
-      displayName: 'Tags',
-      description: 'A mapping of tags to assign to the file system.',
-      type: 'Object',
+      ...tags,
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_file_system#tags',
     },
   ],
@@ -337,14 +333,9 @@ const awsEfsMountTarget = {
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_mount_target#file_system_id',
     },
     {
-      name: 'subnet_id',
-      displayName: 'Subnet ID',
+      ...subnetId,
       description: 'The ID of the subnet to add the mount target in.',
-      linkRef: 'aws_subnet',
-      linkType: 'Default',
-      linkModel: 'defaultLink',
       required: true,
-      type: 'Link',
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_mount_target#subnet_id',
     },
     {
@@ -355,13 +346,7 @@ const awsEfsMountTarget = {
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_mount_target#ip_address',
     },
     {
-      name: 'security_groups',
-      displayName: 'Security groups',
-      description: 'A list of up to 5 VPC security group IDs (that must be for the same VPC as subnet specified) in effect for the mount target.',
-      linkRef: 'aws_security_group',
-      linkType: 'Default',
-      linkModel: 'defaultLink',
-      type: 'Link',
+      ...securityGroups,
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_mount_target#security_groups',
     },
   ],

@@ -1,3 +1,5 @@
+import { subnetId, tags, vpcIdReference } from 'src/assets/metadata/aws/default';
+
 const awsVpc = {
   type: 'aws_vpc',
   blockType: 'resource',
@@ -130,13 +132,7 @@ const awsVpc = {
       type: 'Boolean',
       url: 'https://docs.aws.amazon.com/vpc/latest/userguide/network-address-usage.html',
     },
-    {
-      name: 'tags',
-      displayName: 'Tags',
-      description: 'A map of tags to assign to the resource.',
-      type: 'Object',
-      url: 'https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html',
-    },
+    tags,
   ],
 };
 
@@ -153,12 +149,9 @@ const awsSubnet = {
   tags: [],
   definedAttributes: [
     {
-      name: 'vpc_id',
-      displayName: 'VPC ID',
+      ...vpcIdReference,
       description: 'The VPC ID to create the subnet in.',
-      containerRef: 'aws_vpc',
       required: true,
-      type: 'Reference',
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet#vpc_id',
     },
     {
@@ -274,10 +267,7 @@ const awsSubnet = {
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet#outpost_arn',
     },
     {
-      name: 'tags',
-      displayName: 'Tags',
-      description: 'A map of tags to assign to the resource.',
-      type: 'Object',
+      ...tags,
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet#tags',
     },
   ],
@@ -357,12 +347,9 @@ const awsRouteTable = {
   tags: [],
   definedAttributes: [
     {
-      name: 'vpc_id',
-      displayName: 'VPC ID',
+      ...vpcIdReference,
       description: 'The ID of the VPC for which to create the route table.',
-      containerRef: 'aws_vpc',
       required: true,
-      type: 'Reference',
       url: 'https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html',
     },
     {
@@ -372,13 +359,7 @@ const awsRouteTable = {
       type: 'Array',
       url: 'https://docs.aws.amazon.com/directconnect/latest/UserGuide/virtualgateways.html',
     },
-    {
-      name: 'tags',
-      displayName: 'Tags',
-      description: 'A map of tags to assign to the resource.',
-      type: 'Object',
-      url: 'https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html',
-    },
+    tags,
   ],
 };
 
@@ -395,11 +376,8 @@ const awsRouteTableAssociation = {
   tags: [],
   definedAttributes: [
     {
-      name: 'vpc_id',
-      displayName: 'VPC ID',
+      ...vpcIdReference,
       description: 'The ID of the VPC for which to create the route table association.',
-      containerRef: 'aws_vpc',
-      type: 'Reference',
       url: 'https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html',
     },
     {
@@ -424,13 +402,8 @@ const awsRouteTableAssociation = {
       url: 'https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html',
     },
     {
-      name: 'subnet_id',
-      displayName: 'Subnet ID',
+      ...subnetId,
       description: 'The ID of the subnet to associate the route table with. Conflicts with gateway_id.',
-      linkRef: 'aws_subnet',
-      linkType: 'Default',
-      linkModel: 'defaultLink',
-      type: 'Link',
       url: 'https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html',
     },
   ],
@@ -449,20 +422,11 @@ const awsInternetGateway = {
   tags: [],
   definedAttributes: [
     {
-      name: 'vpc_id',
-      displayName: 'VPC ID',
+      ...vpcIdReference,
       description: 'The VPC ID to create the gateway in.',
-      containerRef: 'aws_vpc',
-      type: 'Reference',
       url: 'https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html',
     },
-    {
-      name: 'tags',
-      displayName: 'Tags',
-      description: 'A map of tags to assign to the resource.',
-      type: 'Object',
-      url: 'https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html',
-    },
+    tags,
   ],
 };
 

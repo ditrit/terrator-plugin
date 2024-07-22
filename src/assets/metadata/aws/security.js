@@ -1,3 +1,5 @@
+import { tags, vpcIdLink } from 'src/assets/metadata/aws/default';
+
 const awsSecurityGroup = {
   type: 'aws_security_group',
   blockType: 'resource',
@@ -39,15 +41,8 @@ const awsSecurityGroup = {
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#revoke_rules_on_delete',
     },
     {
-      name: 'vpc_id',
-      displayName: 'VPC ID',
+      ...vpcIdLink,
       description: 'The ID of the VPC for which to create the security group.',
-      containerRef: 'aws_vpc',
-      linkAttribute: 'id',
-      linkRef: 'aws_vpc',
-      linkType: 'Default',
-      linkModel: 'defaultLink',
-      type: 'Link',
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#vpc_id',
     },
     {
@@ -144,13 +139,7 @@ const awsSecurityGroup = {
         },
       ],
     },
-    {
-      name: 'tags',
-      displayName: 'Tags',
-      description: 'A map of tags to assign to the resource.',
-      type: 'Object',
-      url: 'https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html',
-    },
+    tags,
   ],
 };
 
@@ -189,10 +178,7 @@ const awsKeyPair = {
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair#key_name_prefix',
     },
     {
-      name: 'tags',
-      displayName: 'Tags',
-      description: 'A mapping of tags to assign to the resource.',
-      type: 'Object',
+      ...tags,
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair#tags',
     },
   ],

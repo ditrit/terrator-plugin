@@ -1,3 +1,5 @@
+import { tags } from 'src/assets/metadata/aws/default';
+
 export default [{
   blockType: 'provider',
   type: 'aws',
@@ -237,13 +239,7 @@ export default [{
           type: 'String',
           url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs#source_identity',
         },
-        {
-          name: 'tags',
-          displayName: 'Tags',
-          description: 'Map of assume role session tags.',
-          type: 'Array',
-          url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs#tags',
-        },
+        tags,
         {
           name: 'transitive_tag_keys',
           displayName: 'Transitive tag keys',
@@ -319,13 +315,7 @@ export default [{
       type: 'Object',
       url: 'https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html',
       definedAttributes: [
-        {
-          name: 'tags',
-          displayName: 'Tags',
-          description: 'Key-value map of tags to apply to all resources.',
-          type: 'Object',
-          url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs#tags',
-        },
+        tags,
       ],
     },
     {

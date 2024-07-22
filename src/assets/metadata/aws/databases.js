@@ -1,3 +1,5 @@
+import { port, tags } from 'src/assets/metadata/aws/default';
+
 const awsDbInstance = {
   type: 'aws_db_instance',
   blockType: 'resource',
@@ -290,15 +292,9 @@ const awsDbInstance = {
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#performance_insights_retention_period',
     },
     {
-      name: 'port',
-      displayName: 'Port',
+      ...port,
       description: 'The port on which the DB accepts connections.',
-      type: 'Number',
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#port',
-      rules: {
-        max: '65535',
-        min: '1',
-      },
     },
     {
       name: 'replica_mode',
@@ -458,10 +454,7 @@ const awsDbInstance = {
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#customer_owned_ip_enabled',
     },
     {
-      name: 'tags',
-      displayName: 'Tags',
-      description: 'A mapping of tags to assign to the DB instance.',
-      type: 'Object',
+      ...tags,
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#tags',
     },
   ],

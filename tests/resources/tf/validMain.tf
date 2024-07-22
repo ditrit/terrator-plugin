@@ -251,7 +251,7 @@ resource "aws_lb" "cms_frontend_lb" {
     internal = false
     load_balancer_type = "application"
     security_groups = [
-        aws_security_group.cms_lb_secgroup.id,
+        aws_security_group.cms_lb_secgroup.name,
     ]
     subnets = [
         aws_subnet.cms_lb_subnet_az1.id,
@@ -284,7 +284,7 @@ resource "aws_launch_configuration" "cms_launch_conf" {
     ]
     instance_type = var.ec2_frontend_sku
     security_groups = [
-        aws_security_group.cms_frontend_secgroup.id,
+        aws_security_group.cms_frontend_secgroup.name,
     ]
 }
 

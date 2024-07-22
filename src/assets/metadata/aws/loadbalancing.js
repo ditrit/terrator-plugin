@@ -675,7 +675,7 @@ const awsLbListener = {
     },
     {
       name: 'certificate_arn',
-      displayName: 'Cerificate ARN',
+      displayName: 'Certificate ARN',
       description: 'ARN of the default SSL server certificate.',
       type: 'String',
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener#certificate_arn',

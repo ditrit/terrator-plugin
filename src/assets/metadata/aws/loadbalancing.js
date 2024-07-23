@@ -1,3 +1,12 @@
+import {
+  ipv6Address,
+  port,
+  securityGroups, subnetId,
+  tags,
+  vpcIdLink,
+  vpcIdReference,
+} from 'src/assets/metadata/aws/default';
+
 const awsElb = {
   type: 'aws_elb',
   blockType: 'resource',
@@ -64,14 +73,7 @@ const awsElb = {
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elb#subnets',
     },
     {
-      name: 'security_groups',
-      displayName: 'Security groups',
-      description: 'A list of security group IDs to assign to the ELB.',
-      linkAttribute: 'id',
-      linkRef: 'aws_security_group',
-      linkType: 'Default',
-      linkModel: 'defaultLink',
-      type: 'Link',
+      ...securityGroups,
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elb#security_groups',
     },
     {
@@ -101,11 +103,8 @@ const awsLb = {
   tags: [],
   definedAttributes: [
     {
-      name: 'vpc_id',
-      displayName: 'VPC ID',
+      ...vpcIdReference,
       description: 'The ID of the VPC to create the ALB in.',
-      containerRef: 'aws_vpc',
-      type: 'Reference',
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#vpc_id',
     },
     {
@@ -249,13 +248,7 @@ const awsLb = {
       },
     },
     {
-      name: 'security_groups',
-      displayName: 'Security groups',
-      description: 'A list of security group IDs to assign to the LB. Only valid for Load Balancers of type application.',
-      linkRef: 'aws_security_group',
-      linkType: 'Default',
-      linkModel: 'defaultLink',
-      type: 'Link',
+      ...securityGroups,
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#security_groups',
     },
     {
@@ -273,10 +266,8 @@ const awsLb = {
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#subnet_mapping',
       definedAttributes: [
         {
-          name: 'subnet_id',
-          displayName: 'Subnet ID',
+          ...subnetId,
           description: 'ID of the subnet of which to attach to the load balancer. You can specify only one subnet per Availability Zone.',
-          type: 'String',
           url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#subnet_id',
         },
         {
@@ -287,10 +278,8 @@ const awsLb = {
           url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#allocation_id',
         },
         {
-          name: 'ipv6_address',
-          displayName: 'IPv6 address',
+          ...ipv6Address,
           description: 'The IPv6 address. You associate IPv6 CIDR blocks with your VPC and choose the subnets <br>where you launch both internet-facing and internal Application Load Balancers or Network Load Balancers.',
-          type: 'String',
           url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#ipv6_address',
         },
         {
@@ -320,10 +309,7 @@ const awsLb = {
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#name_prefix',
     },
     {
-      name: 'tags',
-      displayName: 'Tags',
-      description: 'A map of tags to assign to the resource. If configured with a provider default_tags configuration block present,<br>tags with matching keys will overwrite those defined at the provider-level.',
-      type: 'Object',
+      ...tags,
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#tags',
     },
   ],
@@ -390,10 +376,8 @@ const awsLbTargetGroup = {
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#name_prefix',
     },
     {
-      name: 'port',
-      displayName: 'Port',
+      ...port,
       description: 'Port on which targets receive traffic, unless overridden when registering a specific target.',
-      type: 'Number',
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#port',
     },
     {
@@ -463,13 +447,8 @@ const awsLbTargetGroup = {
       },
     },
     {
-      name: 'vpc_id',
-      displayName: 'VPC ID',
+      ...vpcIdLink,
       description: 'Identifier of the VPC in which to create the target group.',
-      linkRef: 'aws_vpc',
-      linkType: 'Default',
-      linkModel: 'defaultLink',
-      type: 'Link',
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#vpc_id',
     },
     {
@@ -515,10 +494,8 @@ const awsLbTargetGroup = {
           url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#path',
         },
         {
-          name: 'port',
-          displayName: 'Port',
+          ...port,
           description: 'The port the load balancer uses when performing health checks on targets.',
-          type: 'Number',
           url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#port',
         },
         {
@@ -597,13 +574,7 @@ const awsLbTargetGroup = {
         },
       ],
     },
-    {
-      name: 'tags',
-      displayName: 'Tags',
-      description: 'A map of tags to assign to the resource.',
-      type: 'Object',
-      url: 'https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html',
-    },
+    tags,
     {
       name: 'target_failover',
       displayName: 'Target failover',
@@ -704,21 +675,15 @@ const awsLbListener = {
     },
     {
       name: 'certificate_arn',
-      displayName: 'Cerificate ARN',
+      displayName: 'Certificate ARN',
       description: 'ARN of the default SSL server certificate.',
       type: 'String',
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener#certificate_arn',
     },
     {
-      name: 'port',
-      displayName: 'Port',
+      ...port,
       description: 'Port on which the load balancer is listening.',
-      type: 'Number',
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener#port',
-      rules: {
-        max: 65535,
-        min: 1,
-      },
     },
     {
       name: 'protocol',
@@ -761,10 +726,7 @@ const awsLbListener = {
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener#ssl_policy',
     },
     {
-      name: 'tags',
-      displayName: 'Tags',
-      description: 'A mapping of tags to assign to the resource.',
-      type: 'Object',
+      ...tags,
       url: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener#tags',
     },
   ],

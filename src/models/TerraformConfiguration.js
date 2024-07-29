@@ -48,6 +48,15 @@ class TerraformConfiguration extends DefaultConfiguration {
       },
       defaultFileName: 'new_file.tf',
       defaultFileExtension: 'tf',
+      i18n: {
+        'en-US': {
+          parser: {
+            error: {
+              noExternalId: 'Id can\'t be null.',
+            },
+          },
+        },
+      },
     });
   }
 }

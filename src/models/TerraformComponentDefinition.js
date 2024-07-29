@@ -10,11 +10,13 @@ class TerraformComponentDefinition extends ComponentDefinition {
    * @param {object} props - Terraform block properties.
    * @param {string} [props.blockType] - Type of Terraform block.
    * @param {string} [props.provider] - Related provider of terraform block.
+   * @param {boolean} [props.isUnknown] - Indicates if definition is isUnknown or not.
    * @see ComponentDefinition
    */
   constructor(props = {
     blockType: null,
     provider: null,
+    isUnknown: false,
   }) {
     super({
       ...props,
@@ -37,6 +39,11 @@ class TerraformComponentDefinition extends ComponentDefinition {
      * @type {string}
      */
     this.provider = props.provider || null;
+    /**
+     * Indicates if definition is isUnknown or not.
+     * @type {boolean}
+     */
+    this.isUnknown = props.isUnknown || false;
   }
 }
 

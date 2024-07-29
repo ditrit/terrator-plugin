@@ -5,8 +5,8 @@ import {
 
 export default [
   new ComponentLink({
-    source: 'id_2',
-    target: 'id_1',
+    source: 'id_1',
+    target: 'id_2',
     definition: new ComponentLinkDefinition({
       attributeRef: 'toChild',
       sourceRef: 'parent',

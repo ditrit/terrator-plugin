@@ -5,8 +5,8 @@ import {
 
 export default [
   new ComponentLink({
-    source: 'id_3',
-    target: 'id_1',
+    source: 'id_1',
+    target: 'id_2',
     isReverse: true,
     definition: new ComponentLinkDefinition({
       attributeRef: 'fromChild',
@@ -17,8 +17,8 @@ export default [
     }),
   }),
   new ComponentLink({
-    source: 'id_3',
-    target: 'id_2',
+    source: 'id_1',
+    target: 'id_3',
     isReverse: true,
     definition: new ComponentLinkDefinition({
       attributeRef: 'fromChild',

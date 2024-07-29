@@ -7,7 +7,7 @@ describe('Test class: TerraformComponentDefinition', () => {
 
       expect(definition.blockType).toBeNull();
       expect(definition.provider).toBeNull();
-      expect(definition.isUnknown).toBeNull();
+      expect(definition.isUnknown).toEqual(false);
     });
 
     it('Check passing undefined variables to constructor', () => {
@@ -15,7 +15,7 @@ describe('Test class: TerraformComponentDefinition', () => {
 
       expect(definition.blockType).toBeNull();
       expect(definition.provider).toBeNull();
-      expect(definition.isUnknown).toBeNull();
+      expect(definition.isUnknown).toEqual(false);
     });
 
     it('Check passing variable to constructor', () => {

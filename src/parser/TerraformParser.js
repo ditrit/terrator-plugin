@@ -5,6 +5,7 @@ import {
 import TerraformListener from 'src/parser/TerraformListener';
 import Lexer from 'src/antlr/terraformLexer';
 import Parser from 'src/antlr/terraformParser';
+import TerraformErrorListener from 'src/parser/TerraformErrorListener';
 
 /**
  * Class to parse and retrieve components/links from Terraform files.
@@ -46,10 +47,11 @@ class TerraformParser extends DefaultParser {
   parse(diagram, inputs = [], parentEventId = null) {
     this.pluginData.components = [];
     this.pluginData.variables = [];
+    this.pluginData.parseLogs = [];
 
-    const listener = new TerraformListener(this.pluginData);
     const diagramPath = (!diagram?.path || diagram.path.length === 0) ? '' : `${diagram.path}/`;
     const regex = new RegExp(`^${diagramPath}[^/]+\\.tf$`);
+    const listener = new TerraformListener(this.pluginData);
 
     inputs
       .filter(({ path }) => regex.test(path))
@@ -89,10 +91,18 @@ class TerraformParser extends DefaultParser {
         const lexer = new Lexer(stream);
         const tokens = new antlr4.CommonTokenStream(lexer);
         const parser = new Parser(tokens);
+        const errorListener = new TerraformErrorListener(this.pluginData, input);
+
+        parser.removeErrorListeners();
+        parser.addErrorListener(errorListener);
         parser.buildParseTrees = true;
+
         const tree = parser.file_();
         antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
-        this.pluginData.emitEvent({ id, status: 'success' });
+        this.pluginData.emitEvent({
+          id,
+          status: 'success',
+        });
       });
   }
 }

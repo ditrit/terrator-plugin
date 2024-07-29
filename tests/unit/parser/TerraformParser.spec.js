@@ -3,9 +3,11 @@ import TerraformParser from 'src/parser/TerraformParser';
 import { getTerraformMetadata } from 'tests/resources/utils';
 import {
   FileInformation,
-  FileInput,
+  FileInput, ParserLog,
 } from 'leto-modelizer-plugin-core';
 import { appComponents, appVariables } from 'tests/resources/js/app';
+
+import parseErrors from 'tests/resources/js/parserError';
 
 import linkDefaultSingle from 'tests/resources/js/linkDefaultSingle';
 import linkDefaultMultiple from 'tests/resources/js/linkDefaultMultiple';
@@ -94,7 +96,7 @@ describe('Test TerraformParser', () => {
         parser.parse();
 
         expect(parser.pluginData.components).toEqual([]);
-        expect(parser.pluginData.parseErrors).toEqual([]);
+        expect(parser.pluginData.parseLogs).toEqual([]);
       });
 
       describe('Test parse: app.tf', () => {
@@ -334,10 +336,19 @@ describe('Test TerraformParser', () => {
           content: fs.readFileSync('tests/resources/tf/wrong_body.tf', 'utf8'),
         });
 
-        // Expect the parser to log an error to the console
-        const spy = jest.spyOn(console, 'error').mockImplementation(() => { });
         parser.parse(new FileInformation({ path: '' }), [input]);
-        expect(spy).toHaveBeenCalled();
+        expect(metadata.pluginData.parseLogs
+          .find(({ message }) => message === 'terrator-plugin.parser.error.parsing'))
+          .toEqual(new ParserLog({
+            startLineNumber: 1,
+            startColumn: 37,
+            endLineNumber: 1,
+            endColumn: 38,
+            path: 'new_file.tf',
+            severity: ParserLog.SEVERITY_ERROR,
+            message: 'terrator-plugin.parser.error.parsing',
+            initialErrorMessage: 'extraneous input \'=\' expecting \'{\'',
+          }));
       });
 
       it('Should parse a resource with a reference to another resource', () => {
@@ -545,6 +556,24 @@ describe('Test TerraformParser', () => {
 
         parser.parse(new FileInformation({ path: '' }), inputs);
         expect(metadata.pluginData.components).toEqual(unknownDefinition);
+      });
+
+      it('Should retrieves errors', () => {
+        const metadata = new TerraformMetadata(new TerraformData());
+
+        metadata.parse();
+        metadata.pluginData.initLinkDefinitions();
+
+        const parser = new TerraformParser(metadata.pluginData);
+        const inputs = [
+          new FileInput({
+            path: 'parserError.tf',
+            content: fs.readFileSync('tests/resources/tf/parserError.tf', 'utf8'),
+          }),
+        ];
+
+        parser.parse(new FileInformation({ path: '' }), inputs);
+        expect(metadata.pluginData.parseLogs).toEqual(parseErrors);
       });
     });
   });

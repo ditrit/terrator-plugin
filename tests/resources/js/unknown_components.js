@@ -18,6 +18,7 @@ export default [
       icon: 'unknown',
       type: 'unknown_ressource',
       blockType: 'resource',
+      isUnknown: true,
     }),
     attributes: [
       new TerraformComponentAttribute({
@@ -37,6 +38,7 @@ export default [
       model: 'DefaultModel',
       icon: 'unknown',
       type: 'unknown_module',
+      isUnknown: true,
       blockType: 'module',
     }),
     attributes: [

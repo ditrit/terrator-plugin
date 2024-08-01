@@ -26,6 +26,7 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
     this.ids = new Map();
     // We need this idCounter because we can't use pluginData to generate the id.
     this.idCounter = 1;
+    this.componentErrors = [];
   }
 
   getUnknownDefinition(type) {
@@ -35,15 +36,20 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
       icon: 'unknown',
       type: type || 'unknown',
       blockType: this.currentBlockType,
+      isUnknown: true,
     });
   }
 
   addComponent() {
-    const typeExternalId = `${this.currentComponent.definition.type}.${this.currentComponent.externalId}`;
-
     this.currentComponent.path = this.currentFile.path;
-    this.currentComponent.id = this.createIdFromTypeExternalId(typeExternalId);
     this.pluginData.components.push(this.currentComponent);
+    this.componentErrors.forEach((error) => {
+      error.componentId = this.currentComponent.id;
+      error.path = this.currentFile.path;
+
+      this.pluginData.parseLogs.push(error);
+    });
+    this.componentErrors = [];
     this.currentComponent = null;
     this.currentBlockType = null;
     this.fieldsTree = [];
@@ -54,6 +60,15 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
     this.pluginData.variables.push(this.currentVariable);
     this.currentVariable = null;
     this.currentVariableField = null;
+  }
+
+  addError(ctx, error) {
+    error.startLineNumber = ctx.start.line;
+    error.startColumn = ctx.start.column + 1;
+    error.endLineNumber = ctx.stop.line;
+    error.endColumn = ctx.stop.column + ctx.getText().length + 1;
+
+    this.componentErrors.push(error);
   }
 
   getAttributeDefinition(object, name) {
@@ -230,6 +245,9 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
       .find((definition) => definition.blockType === this.currentBlockType
         && definition.type === type) || this.getUnknownDefinition(type);
 
+    this.currentComponent.validateDefinition()
+      .forEach((error) => this.addError(ctx, error));
+
     if (this.currentBlockType === 'provider') {
       // special case for provider, we do not have any externalId
       // so we will use the `type` as the externalId
@@ -252,6 +270,11 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   exitName(ctx) {
     if (this.currentComponent) {
       this.currentComponent.externalId = getText(ctx);
+      this.currentComponent.validateExternalId()
+        .forEach((error) => this.addError(ctx, error));
+
+      const typeExternalId = `${this.currentComponent.definition.type}.${this.currentComponent.externalId}`;
+      this.currentComponent.id = this.createIdFromTypeExternalId(typeExternalId);
     } else if (this.currentVariable) {
       this.currentVariable.name = getText(ctx);
     }
@@ -307,7 +330,13 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
       });
       this.currentVariableField = 'value';
     } else {
-      this.currentField = new TerraformComponentAttribute();
+      this.currentField = new TerraformComponentAttribute({
+        name: ctx.identifier().getText(),
+      });
+      this.currentField.definition = this.getAttributeDefinition(
+        this.currentComponent,
+        this.currentField.name,
+      );
     }
   }
 
@@ -513,12 +542,24 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
           this.currentVariable.type = listType;
         }
       }
-    } else if (this.currentField.type === 'Array') {
+      return;
+    }
+
+    if (this.currentField.type === 'Array') {
       this.currentField.value.push(value);
     } else {
       this.currentField.value = value;
       this.currentField.type = type;
     }
+
+    this.currentField.validateDefinitionType();
+    this.currentField.validateType();
+    this.currentField.validateRequired();
+    this.currentField.validateRuleMinMax();
+    this.currentField.validateRuleValues();
+    this.currentField.validateRuleRegex();
+    this.currentField.getErrors()
+      .forEach((error) => this.addError(ctx, error));
   }
 
   // Enter a parse tree produced by terraformParser#functioncall.

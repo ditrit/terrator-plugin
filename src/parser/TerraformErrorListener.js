@@ -24,7 +24,7 @@ class TerraformErrorListener extends antlr4.error.ErrorListener {
       endColumn: column + offendingSymbol.stop - offendingSymbol.start + 2,
       severity: ParserLog.SEVERITY_ERROR,
       path: this.file.path,
-      message: 'terrator-plugin.parser.error.parsing',
+      message: 'parser.error.parsing',
       initialErrorMessage: msg,
     }));
   }

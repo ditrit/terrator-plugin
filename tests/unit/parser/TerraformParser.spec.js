@@ -338,7 +338,7 @@ describe('Test TerraformParser', () => {
 
         parser.parse(new FileInformation({ path: '' }), [input]);
         expect(metadata.pluginData.parseLogs
-          .find(({ message }) => message === 'terrator-plugin.parser.error.parsing'))
+          .find(({ message }) => message === 'parser.error.parsing'))
           .toEqual(new ParserLog({
             startLineNumber: 1,
             startColumn: 37,
@@ -346,7 +346,7 @@ describe('Test TerraformParser', () => {
             endColumn: 38,
             path: 'new_file.tf',
             severity: ParserLog.SEVERITY_ERROR,
-            message: 'terrator-plugin.parser.error.parsing',
+            message: 'parser.error.parsing',
             initialErrorMessage: 'extraneous input \'=\' expecting \'{\'',
           }));
       });

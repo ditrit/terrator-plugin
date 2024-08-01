@@ -9,7 +9,7 @@ const errors = [
     startColumn: 1,
     endLineNumber: 13,
     endColumn: 7,
-    message: 'terrator-plugin.parser.error.parsing',
+    message: 'parser.error.parsing',
     severity: ParserLog.SEVERITY_ERROR,
     initialErrorMessage: 'extraneous input \'blabla\' expecting {<EOF>, \'terraform\', \'resource\', \'data\', \'output\', \'locals\', \'module\', \'variable\', \'provider\'}',
   }),

@@ -11,3 +11,5 @@ resource "unknown" "test3" {}
 resource "aws_lb_target_group" "" {}
 
 blabla "test" {}
+
+provider "aws" {}

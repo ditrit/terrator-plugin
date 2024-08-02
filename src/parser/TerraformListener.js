@@ -40,6 +40,11 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
     });
   }
 
+  checkMissingAttributes(ctx) {
+    this.currentComponent.validateRequiredAttributes()
+      .forEach((error) => this.addError(ctx, error));
+  }
+
   addComponent() {
     this.currentComponent.path = this.currentFile.path;
     this.pluginData.components.push(this.currentComponent);
@@ -120,7 +125,8 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   }
 
   // Exit a parse tree produced by terraformParser#resource.
-  exitResource() {
+  exitResource(ctx) {
+    this.checkMissingAttributes(ctx);
     this.addComponent();
   }
 
@@ -131,7 +137,8 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   }
 
   // Exit a parse tree produced by terraformParser#data.
-  exitData() {
+  exitData(ctx) {
+    this.checkMissingAttributes(ctx);
     this.addComponent();
   }
 
@@ -142,7 +149,8 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   }
 
   // Exit a parse tree produced by terraformParser#provider.
-  exitProvider() {
+  exitProvider(ctx) {
+    this.checkMissingAttributes(ctx);
     this.addComponent();
   }
 
@@ -179,7 +187,8 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
   }
 
   // Exit a parse tree produced by terraformParser#module.
-  exitModule() {
+  exitModule(ctx) {
+    this.checkMissingAttributes(ctx);
     this.addComponent();
   }
 
@@ -552,12 +561,6 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
       this.currentField.type = type;
     }
 
-    this.currentField.validateDefinitionType();
-    this.currentField.validateType();
-    this.currentField.validateRequired();
-    this.currentField.validateRuleMinMax();
-    this.currentField.validateRuleValues();
-    this.currentField.validateRuleRegex();
     this.currentField.getErrors()
       .forEach((error) => this.addError(ctx, error));
   }

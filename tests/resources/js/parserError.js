@@ -75,6 +75,18 @@ const errors = [
     severity: ParserLog.SEVERITY_ERROR,
     initialErrorMessage: null,
   }),
+  new ParserLog({
+    path: 'parserError.tf',
+    componentId: 'id_5',
+    attribute: 'region',
+    startLineNumber: 15,
+    startColumn: 1,
+    endLineNumber: 15,
+    endColumn: 32,
+    message: 'parser.error.required',
+    severity: ParserLog.SEVERITY_ERROR,
+    initialErrorMessage: null,
+  }),
 ];
 
 export default errors;

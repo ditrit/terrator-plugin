@@ -12,11 +12,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Default attributes for metadata.
 - Error management.
 - I18n management.
-- Unknown definition attribute.
+- New attribute for Unknown component definition.
 
 ### Changed
 
-- Update plugin-core to version 0.26.0.
+- Update plugin-core to version 0.26.2.
 
 ## [0.10.0] - 2024/07/11
 

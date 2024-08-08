@@ -18,6 +18,12 @@
 
 Plugin for managing Terraform files in [Leto-Modelizer](https://github.com/ditrit/leto-modelizer).
 
+
+## Requirements
+
+* node - [v20.16.0](https://nodejs.org/en/blog/release/v20.16.0)
+* npm - [v10.8.1](https://www.npmjs.com/package/npm/v/10.8.1)
+
 ## Build your plugin
 
 ```

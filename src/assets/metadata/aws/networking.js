@@ -1,4 +1,4 @@
-import { subnetId, tags, vpcIdReference } from 'src/assets/metadata/aws/default';
+import { subnetId, tags, vpcIdReference } from './default';
 
 const awsVpc = {
   type: 'aws_vpc',

@@ -1,7 +1,7 @@
 // Generated from src/antlr/terraform.g4 by ANTLR 4.13.0
 // jshint ignore: start
 import antlr4 from 'antlr4';
-import terraformListener from 'src/parser/TerraformListener.js';
+import terraformListener from '../parser/TerraformListener.js';
 const serializedATN = [4,1,49,310,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
 4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,
 2,13,7,13,2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,
@@ -110,29 +110,29 @@ const sharedContextCache = new antlr4.atn.PredictionContextCache();
 export default class terraformParser extends antlr4.Parser {
 
     static grammarFileName = "terraform.g4";
-    static literalNames = [ null, "'terraform'", "'resource'", "'data'", 
-                            "'output'", "'locals'", "'module'", "'='", "'local'", 
-                            "'var'", "'?'", "':'", "'for'", "'jsonencode'", 
-                            "','", "'['", "']'", "'file'", "'+'", "'-'", 
-                            "'/'", "'%'", "'>'", "'>='", "'<'", "'<='", 
-                            "'=='", "'!='", "'&&'", "'||'", "'variable'", 
-                            "'provider'", "'in'", "'*'", "'.'", "'{'", "'}'", 
+    static literalNames = [ null, "'terraform'", "'resource'", "'data'",
+                            "'output'", "'locals'", "'module'", "'='", "'local'",
+                            "'var'", "'?'", "':'", "'for'", "'jsonencode'",
+                            "','", "'['", "']'", "'file'", "'+'", "'-'",
+                            "'/'", "'%'", "'>'", "'>='", "'<'", "'<='",
+                            "'=='", "'!='", "'&&'", "'||'", "'variable'",
+                            "'provider'", "'in'", "'*'", "'.'", "'{'", "'}'",
                             "'('", "')'", null, "'nul'" ];
-    static symbolicNames = [ null, null, null, null, null, null, null, null, 
-                             null, null, null, null, null, null, null, null, 
-                             null, null, null, null, null, null, null, null, 
-                             null, null, null, null, null, null, "VARIABLE", 
-                             "PROVIDER", "IN", "STAR", "DOT", "LCURL", "RCURL", 
-                             "LPAREN", "RPAREN", "EOF_", "NULL_", "NATURAL_NUMBER", 
-                             "BOOL", "DESCRIPTION", "MULTILINESTRING", "STRING", 
+    static symbolicNames = [ null, null, null, null, null, null, null, null,
+                             null, null, null, null, null, null, null, null,
+                             null, null, null, null, null, null, null, null,
+                             null, null, null, null, null, null, "VARIABLE",
+                             "PROVIDER", "IN", "STAR", "DOT", "LCURL", "RCURL",
+                             "LPAREN", "RPAREN", "EOF_", "NULL_", "NATURAL_NUMBER",
+                             "BOOL", "DESCRIPTION", "MULTILINESTRING", "STRING",
                              "IDENTIFIER", "COMMENT", "BLOCKCOMMENT", "WS" ];
-    static ruleNames = [ "file_", "terraform", "resource", "data", "provider", 
-                         "output", "local", "module", "variable", "block", 
-                         "blocktype", "resourcetype", "name", "label", "blockbody", 
-                         "argument", "identifier", "identifierchain", "inline_index", 
-                         "expression", "forloop", "section", "val", "functioncall", 
-                         "functionname", "functionarguments", "index", "filedecl", 
-                         "list_", "map_", "string", "signed_number", "operator_", 
+    static ruleNames = [ "file_", "terraform", "resource", "data", "provider",
+                         "output", "local", "module", "variable", "block",
+                         "blocktype", "resourcetype", "name", "label", "blockbody",
+                         "argument", "identifier", "identifierchain", "inline_index",
+                         "expression", "forloop", "section", "val", "functioncall",
+                         "functionname", "functionarguments", "index", "filedecl",
+                         "list_", "map_", "string", "signed_number", "operator_",
                          "number" ];
 
     constructor(input) {
@@ -172,7 +172,7 @@ export default class terraformParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 76; 
+	        this.state = 76;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        do {
@@ -214,7 +214,7 @@ export default class terraformParser extends antlr4.Parser {
 	            default:
 	                throw new antlr4.error.NoViableAltException(this);
 	            }
-	            this.state = 78; 
+	            this.state = 78;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        } while((((_la) & ~0x1f) === 0 && ((1 << _la) & 3221225598) !== 0));
@@ -735,7 +735,7 @@ export default class terraformParser extends antlr4.Parser {
 	                    this.state = 155;
 	                    this.match(terraformParser.DOT);
 	                    this.state = 156;
-	                    this.identifierchain(); 
+	                    this.identifierchain();
 	                }
 	                this.state = 161;
 	                this._errHandler.sync(this);
@@ -755,7 +755,7 @@ export default class terraformParser extends antlr4.Parser {
 	                    this.state = 163;
 	                    this.match(terraformParser.DOT);
 	                    this.state = 164;
-	                    this.identifierchain(); 
+	                    this.identifierchain();
 	                }
 	                this.state = 169;
 	                this._errHandler.sync(this);
@@ -775,7 +775,7 @@ export default class terraformParser extends antlr4.Parser {
 	                    this.state = 171;
 	                    this.match(terraformParser.DOT);
 	                    this.state = 172;
-	                    this.identifierchain(); 
+	                    this.identifierchain();
 	                }
 	                this.state = 177;
 	                this._errHandler.sync(this);
@@ -923,7 +923,7 @@ export default class terraformParser extends antlr4.Parser {
 	                    this.expression(3);
 	                    break;
 
-	                } 
+	                }
 	            }
 	            this.state = 205;
 	            this._errHandler.sync(this);
@@ -1148,7 +1148,7 @@ export default class terraformParser extends antlr4.Parser {
 	            while(_alt!=1 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	                if(_alt===1+1) {
 	                    this.state = 236;
-	                    this.matchWildcard(); 
+	                    this.matchWildcard();
 	                }
 	                this.state = 241;
 	                this._errHandler.sync(this);
@@ -1349,7 +1349,7 @@ export default class terraformParser extends antlr4.Parser {
 	                    this.state = 269;
 	                    this.match(terraformParser.T__13);
 	                    this.state = 270;
-	                    this.expression(0); 
+	                    this.expression(0);
 	                }
 	                this.state = 275;
 	                this._errHandler.sync(this);
@@ -3211,37 +3211,37 @@ class NumberContext extends antlr4.ParserRuleContext {
 
 
 
-terraformParser.File_Context = File_Context; 
-terraformParser.TerraformContext = TerraformContext; 
-terraformParser.ResourceContext = ResourceContext; 
-terraformParser.DataContext = DataContext; 
-terraformParser.ProviderContext = ProviderContext; 
-terraformParser.OutputContext = OutputContext; 
-terraformParser.LocalContext = LocalContext; 
-terraformParser.ModuleContext = ModuleContext; 
-terraformParser.VariableContext = VariableContext; 
-terraformParser.BlockContext = BlockContext; 
-terraformParser.BlocktypeContext = BlocktypeContext; 
-terraformParser.ResourcetypeContext = ResourcetypeContext; 
-terraformParser.NameContext = NameContext; 
-terraformParser.LabelContext = LabelContext; 
-terraformParser.BlockbodyContext = BlockbodyContext; 
-terraformParser.ArgumentContext = ArgumentContext; 
-terraformParser.IdentifierContext = IdentifierContext; 
-terraformParser.IdentifierchainContext = IdentifierchainContext; 
-terraformParser.Inline_indexContext = Inline_indexContext; 
-terraformParser.ExpressionContext = ExpressionContext; 
-terraformParser.ForloopContext = ForloopContext; 
-terraformParser.SectionContext = SectionContext; 
-terraformParser.ValContext = ValContext; 
-terraformParser.FunctioncallContext = FunctioncallContext; 
-terraformParser.FunctionnameContext = FunctionnameContext; 
-terraformParser.FunctionargumentsContext = FunctionargumentsContext; 
-terraformParser.IndexContext = IndexContext; 
-terraformParser.FiledeclContext = FiledeclContext; 
-terraformParser.List_Context = List_Context; 
-terraformParser.Map_Context = Map_Context; 
-terraformParser.StringContext = StringContext; 
-terraformParser.Signed_numberContext = Signed_numberContext; 
-terraformParser.Operator_Context = Operator_Context; 
-terraformParser.NumberContext = NumberContext; 
+terraformParser.File_Context = File_Context;
+terraformParser.TerraformContext = TerraformContext;
+terraformParser.ResourceContext = ResourceContext;
+terraformParser.DataContext = DataContext;
+terraformParser.ProviderContext = ProviderContext;
+terraformParser.OutputContext = OutputContext;
+terraformParser.LocalContext = LocalContext;
+terraformParser.ModuleContext = ModuleContext;
+terraformParser.VariableContext = VariableContext;
+terraformParser.BlockContext = BlockContext;
+terraformParser.BlocktypeContext = BlocktypeContext;
+terraformParser.ResourcetypeContext = ResourcetypeContext;
+terraformParser.NameContext = NameContext;
+terraformParser.LabelContext = LabelContext;
+terraformParser.BlockbodyContext = BlockbodyContext;
+terraformParser.ArgumentContext = ArgumentContext;
+terraformParser.IdentifierContext = IdentifierContext;
+terraformParser.IdentifierchainContext = IdentifierchainContext;
+terraformParser.Inline_indexContext = Inline_indexContext;
+terraformParser.ExpressionContext = ExpressionContext;
+terraformParser.ForloopContext = ForloopContext;
+terraformParser.SectionContext = SectionContext;
+terraformParser.ValContext = ValContext;
+terraformParser.FunctioncallContext = FunctioncallContext;
+terraformParser.FunctionnameContext = FunctionnameContext;
+terraformParser.FunctionargumentsContext = FunctionargumentsContext;
+terraformParser.IndexContext = IndexContext;
+terraformParser.FiledeclContext = FiledeclContext;
+terraformParser.List_Context = List_Context;
+terraformParser.Map_Context = Map_Context;
+terraformParser.StringContext = StringContext;
+terraformParser.Signed_numberContext = Signed_numberContext;
+terraformParser.Operator_Context = Operator_Context;
+terraformParser.NumberContext = NumberContext;

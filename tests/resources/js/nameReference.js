@@ -1,4 +1,4 @@
-import { ComponentLink, ComponentLinkDefinition } from 'leto-modelizer-plugin-core';
+import { ComponentLink, ComponentLinkDefinition } from '@ditrit/leto-modelizer-plugin-core';
 import TerraformComponent from 'src/models/TerraformComponent';
 import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
 import TerraformMetadata from 'src/metadata/TerraformMetadata';

@@ -1,7 +1,7 @@
 import TerraformComponentRenderer from 'src/drawer/render/TerraformComponentRenderer';
 import TerraformComponent from 'src/models/TerraformComponent';
 import TerraformData from 'src/models/TerraformData';
-import { ComponentDrawOption } from 'leto-modelizer-plugin-core';
+import { ComponentDrawOption } from '@ditrit/leto-modelizer-plugin-core';
 import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
 import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
 

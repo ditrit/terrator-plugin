@@ -1,9 +1,9 @@
 /* eslint class-methods-use-this: 0 */
 import antlr4 from 'antlr4';
-import TerraformVariable from 'src/models/TerraformVariable';
-import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
-import TerraformComponent from 'src/models/TerraformComponent';
-import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
+import TerraformVariable from '../models/TerraformVariable';
+import TerraformComponentAttribute from '../models/TerraformComponentAttribute';
+import TerraformComponent from '../models/TerraformComponent';
+import TerraformComponentDefinition from '../models/TerraformComponentDefinition';
 
 const getText = (ctx) => ctx.getText().replaceAll('"', '').trim();
 

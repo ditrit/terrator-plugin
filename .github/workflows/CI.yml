@@ -35,9 +35,10 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.14
+          node-version: 20.16.0
+          registry-url: 'https://registry.npmjs.org'
       - name: Setup npm
-        run: npm install -g npm@8.19.3
+        run: npm install -g npm@10.8.1
       - uses: actions/cache/restore@v3
         with:
           path: node_modules
@@ -62,9 +63,10 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.14
+          node-version: 20.16.0
+          registry-url: 'https://registry.npmjs.org'
       - name: Setup npm
-        run: npm install -g npm@8.19.3
+        run: npm install -g npm@10.8.1
       - uses: actions/cache/restore@v3
         with:
           path: node_modules
@@ -81,9 +83,10 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.14
+          node-version: 20.16.0
+          registry-url: 'https://registry.npmjs.org'
       - name: Setup npm
-        run: npm install -g npm@8.19.3
+        run: npm install -g npm@10.8.1
       - uses: actions/cache/restore@v3
         with:
           path: node_modules
@@ -105,9 +108,10 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.14
+          node-version: 20.16.0
+          registry-url: 'https://registry.npmjs.org'
       - name: Setup npm
-        run: npm install -g npm@8.19.3
+        run: npm install -g npm@10.8.1
       - uses: actions/cache/restore@v3
         with:
           path: node_modules

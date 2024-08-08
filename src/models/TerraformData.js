@@ -1,7 +1,7 @@
 import {
   DefaultData,
-} from 'leto-modelizer-plugin-core';
-import TerraformComponent from 'src/models/TerraformComponent';
+} from '@ditrit/leto-modelizer-plugin-core';
+import TerraformComponent from './TerraformComponent';
 
 /**
  * Specific Terraform data.

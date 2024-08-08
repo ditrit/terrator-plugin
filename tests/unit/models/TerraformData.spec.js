@@ -4,7 +4,7 @@ import TerraformComponentAttributeDefinition
 import TerraformData from 'src/models/TerraformData';
 import TerraformVariable from 'src/models/TerraformVariable';
 import TerraformComponent from 'src/models/TerraformComponent';
-import { ComponentDefinition } from 'leto-modelizer-plugin-core';
+import { ComponentDefinition } from '@ditrit/leto-modelizer-plugin-core';
 
 describe('Test class: TerraformData', () => {
   const terraformData = new TerraformData();

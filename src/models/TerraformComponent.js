@@ -1,5 +1,5 @@
-import { Component, ParserLog } from 'leto-modelizer-plugin-core';
-import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
+import { Component, ParserLog } from '@ditrit/leto-modelizer-plugin-core';
+import TerraformComponentAttribute from './TerraformComponentAttribute';
 
 /**
  * Specific Terraform component.

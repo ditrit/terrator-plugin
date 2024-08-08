@@ -1,13 +1,13 @@
 import {
   DefaultPlugin,
-} from 'leto-modelizer-plugin-core';
-import TerraformMetadata from 'src/metadata/TerraformMetadata';
-import TerraformParser from 'src/parser/TerraformParser';
-import TerraformRenderer from 'src/render/TerraformRenderer';
-import TerraformConfiguration from 'src/models/TerraformConfiguration';
-import TerraformData from 'src/models/TerraformData';
-import TerraformDrawer from 'src/drawer/TerraformDrawer';
-import packageInfo from 'package.json';
+} from '@ditrit/leto-modelizer-plugin-core';
+import TerraformMetadata from '../metadata/TerraformMetadata';
+import TerraformParser from '../parser/TerraformParser';
+import TerraformRenderer from '../render/TerraformRenderer';
+import TerraformConfiguration from './TerraformConfiguration';
+import TerraformData from './TerraformData';
+import TerraformDrawer from '../drawer/TerraformDrawer';
+import packageInfo from '../../package.json';
 
 /**
  * Terraform plugin.

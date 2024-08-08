@@ -1,6 +1,6 @@
 import TerraformComponent from 'src/models/TerraformComponent';
 import TerraformComponentAttribute from 'src/models/TerraformComponentAttribute';
-import { ComponentDefinition, ParserLog } from 'leto-modelizer-plugin-core';
+import { ComponentDefinition, ParserLog } from '@ditrit/leto-modelizer-plugin-core';
 import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
 
 describe('Test class: TerraformComponent', () => {

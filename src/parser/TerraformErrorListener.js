@@ -1,5 +1,5 @@
 import antlr4 from 'antlr4';
-import { ParserLog } from 'leto-modelizer-plugin-core';
+import { ParserLog } from '@ditrit/leto-modelizer-plugin-core';
 
 /**
  * Class to manage default error from antlr parser.

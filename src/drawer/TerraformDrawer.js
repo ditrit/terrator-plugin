@@ -1,5 +1,5 @@
-import { DefaultDrawer } from 'leto-modelizer-plugin-core';
-import TerraformComponentRenderer from 'src/drawer/render/TerraformComponentRenderer';
+import { DefaultDrawer } from '@ditrit/leto-modelizer-plugin-core';
+import TerraformComponentRenderer from './render/TerraformComponentRenderer';
 
 /**
  * Class to draw Terraform components.

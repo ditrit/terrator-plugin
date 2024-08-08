@@ -1,4 +1,4 @@
-import { ParserLog } from 'leto-modelizer-plugin-core';
+import { ParserLog } from '@ditrit/leto-modelizer-plugin-core';
 
 const errors = [
   new ParserLog({

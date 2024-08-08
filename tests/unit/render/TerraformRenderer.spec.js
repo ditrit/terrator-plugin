@@ -5,7 +5,7 @@ import {
   ComponentAttribute,
   FileInformation,
   FileInput,
-} from 'leto-modelizer-plugin-core';
+} from '@ditrit/leto-modelizer-plugin-core';
 import TerraformData from 'src/models/TerraformData';
 import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
 import { getTerraformMetadata } from 'tests/resources/utils';

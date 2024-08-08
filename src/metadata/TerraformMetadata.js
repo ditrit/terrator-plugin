@@ -1,7 +1,7 @@
-import { DefaultMetadata } from 'leto-modelizer-plugin-core';
-import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
-import TerraformComponentAttributeDefinition from 'src/models/TerraformComponentAttributeDefinition';
-import providers from 'src/assets/metadata';
+import { DefaultMetadata } from '@ditrit/leto-modelizer-plugin-core';
+import TerraformComponentDefinition from '../models/TerraformComponentDefinition';
+import TerraformComponentAttributeDefinition from '../models/TerraformComponentAttributeDefinition';
+import providers from '../assets/metadata';
 
 /**
  * Class to validate and retrieve components definitions from Terraform metadata.

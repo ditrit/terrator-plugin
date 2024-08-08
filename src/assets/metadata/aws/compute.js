@@ -1,4 +1,4 @@
-import { securityGroups, subnetId } from 'src/assets/metadata/aws/default';
+import { securityGroups, subnetId } from './default';
 
 const awsInstance = {
   type: 'aws_instance',

@@ -1,4 +1,4 @@
-import { tags } from 'src/assets/metadata/aws/default';
+import { tags } from './default';
 
 export default [{
   blockType: 'provider',

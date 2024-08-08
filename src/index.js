@@ -1,3 +1,3 @@
-import TerraformPlugin from 'src/models/TerraformPlugin';
+import TerraformPlugin from './models/TerraformPlugin';
 
 export default TerraformPlugin;

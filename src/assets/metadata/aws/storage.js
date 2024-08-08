@@ -1,4 +1,4 @@
-import { securityGroups, subnetId, tags } from 'src/assets/metadata/aws/default';
+import { securityGroups, subnetId, tags } from './default';
 
 const awsEbsVolume = {
   type: 'aws_ebs_volume',

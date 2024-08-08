@@ -5,7 +5,7 @@ import {
   tags,
   vpcIdLink,
   vpcIdReference,
-} from 'src/assets/metadata/aws/default';
+} from './default';
 
 const awsElb = {
   type: 'aws_elb',

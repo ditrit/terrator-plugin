@@ -1,4 +1,4 @@
-import aws from 'src/assets/metadata/aws';
+import aws from './aws';
 
 export default [
   ...aws,

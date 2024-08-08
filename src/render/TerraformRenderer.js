@@ -1,9 +1,9 @@
 import nunjucks from 'nunjucks';
-import templates from 'src/render/TerraformTemplate';
 import {
   DefaultRender,
   FileInput,
 } from '@ditrit/leto-modelizer-plugin-core';
+import templates from './TerraformTemplate';
 
 /**
  * Class to render Terraform files from components/links.

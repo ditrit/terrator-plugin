@@ -1,4 +1,4 @@
-import { port, tags } from 'src/assets/metadata/aws/default';
+import { port, tags } from './default';
 
 const awsDbInstance = {
   type: 'aws_db_instance',

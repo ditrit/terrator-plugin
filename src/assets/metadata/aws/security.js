@@ -1,4 +1,4 @@
-import { tags, vpcIdLink } from 'src/assets/metadata/aws/default';
+import { tags, vpcIdLink } from './default';
 
 const awsSecurityGroup = {
   type: 'aws_security_group',

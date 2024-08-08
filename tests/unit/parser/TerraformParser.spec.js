@@ -4,7 +4,7 @@ import { getTerraformMetadata } from 'tests/resources/utils';
 import {
   FileInformation,
   FileInput, ParserLog,
-} from 'leto-modelizer-plugin-core';
+} from '@ditrit/leto-modelizer-plugin-core';
 import { appComponents, appVariables } from 'tests/resources/js/app';
 
 import parseErrors from 'tests/resources/js/parserError';

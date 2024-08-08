@@ -1,4 +1,4 @@
-import { DefaultMetadata } from 'leto-modelizer-plugin-core';
+import { DefaultMetadata } from '@ditrit/leto-modelizer-plugin-core';
 import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
 import TerraformComponentAttributeDefinition from 'src/models/TerraformComponentAttributeDefinition';
 import providers from 'src/assets/metadata';

@@ -1,6 +1,6 @@
 import {
   DefaultPlugin,
-} from 'leto-modelizer-plugin-core';
+} from '@ditrit/leto-modelizer-plugin-core';
 import TerraformMetadata from 'src/metadata/TerraformMetadata';
 import TerraformParser from 'src/parser/TerraformParser';
 import TerraformRenderer from 'src/render/TerraformRenderer';

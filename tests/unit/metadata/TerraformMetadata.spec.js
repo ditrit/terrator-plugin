@@ -1,7 +1,7 @@
 import TerraformComponentDefinition from 'src/models/TerraformComponentDefinition';
 import {
   ComponentLinkDefinition,
-} from 'leto-modelizer-plugin-core';
+} from '@ditrit/leto-modelizer-plugin-core';
 import TerraformComponentAttributeDefinition from 'src/models/TerraformComponentAttributeDefinition';
 import { getTerraformMetadata } from 'tests/resources/utils';
 

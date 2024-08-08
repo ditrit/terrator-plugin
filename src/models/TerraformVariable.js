@@ -1,4 +1,4 @@
-import { Variable } from 'leto-modelizer-plugin-core';
+import { Variable } from '@ditrit/leto-modelizer-plugin-core';
 
 /**
  * Specific Terraform variable.

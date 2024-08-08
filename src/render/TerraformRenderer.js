@@ -3,7 +3,7 @@ import templates from 'src/render/TerraformTemplate';
 import {
   DefaultRender,
   FileInput,
-} from 'leto-modelizer-plugin-core';
+} from '@ditrit/leto-modelizer-plugin-core';
 
 /**
  * Class to render Terraform files from components/links.

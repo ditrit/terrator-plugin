@@ -1,4 +1,4 @@
-import { DefaultConfiguration, Tag } from 'leto-modelizer-plugin-core';
+import { DefaultConfiguration, Tag } from '@ditrit/leto-modelizer-plugin-core';
 import syntax from 'src/configuration/syntax';
 
 /**

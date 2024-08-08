@@ -1,4 +1,4 @@
-import { ComponentAttribute } from 'leto-modelizer-plugin-core';
+import { ComponentAttribute } from '@ditrit/leto-modelizer-plugin-core';
 
 /**
  * Specific Terraform component attribute.

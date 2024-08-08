@@ -1,7 +1,7 @@
 import {
   ComponentLink,
   ComponentLinkDefinition,
-} from 'leto-modelizer-plugin-core';
+} from '@ditrit/leto-modelizer-plugin-core';
 
 export default [
   new ComponentLink({

@@ -1,7 +1,7 @@
 import antlr4 from 'antlr4';
 import {
   DefaultParser,
-} from 'leto-modelizer-plugin-core';
+} from '@ditrit/leto-modelizer-plugin-core';
 import TerraformListener from 'src/parser/TerraformListener';
 import Lexer from 'src/antlr/terraformLexer';
 import Parser from 'src/antlr/terraformParser';

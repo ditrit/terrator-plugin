@@ -1,4 +1,4 @@
-import { ComponentRenderer } from 'leto-modelizer-plugin-core';
+import { ComponentRenderer } from '@ditrit/leto-modelizer-plugin-core';
 
 /**
  * Class to render Terraform components.

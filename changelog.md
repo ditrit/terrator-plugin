@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
+## [Unreleased]
+
+### Changed
+
+- Update plugin-core to version `0.28.0`.
+
+### Fixed
+
+- Fix bug when bad external id is set in tf. 
+
 ## [0.12.0] - 2024/08/08
 
 ### Added
@@ -15,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Update nodejs to version `20.16.0`.
 - Update npm to version `10.8.1`.
-- Update plugin-core to version 0.27.2.
+- Update plugin-core to version `0.27.2`.
 
 ## [0.11.0] - 2024/08/02
 
@@ -28,7 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Update plugin-core to version 0.26.2.
+- Update plugin-core to version `0.26.2`.
 
 ## [0.10.0] - 2024/07/11
 
@@ -50,7 +60,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Update metadata files structure.
-- Update plugin-core to version 0.25.0.
+- Update plugin-core to version `0.25.0`.
 
 ### Fixed
 
@@ -60,7 +70,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Update plugin-core to version 0.24.0.
+- Update plugin-core to version `0.24.0`.
 
 ## [0.8.0] - 2024/01/02
 
@@ -72,14 +82,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Update plugin-core to version 0.22.0.
+- Update plugin-core to version `0.22.0`.
 - Merge `folder` and `fileName` params in `addComponent` method inside `TerraformData`.
 
 ## [0.7.0] - 2023/09/08
 
 ### Changed
 
-- Update plugin-core to version 0.21.0.
+- Update plugin-core to version `0.21.0`.
 
 ### Fixed
 
@@ -89,7 +99,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Update plugin-core to version 0.20.0.
+- Update plugin-core to version `0.20.0`.
 - Migrate reference/link id from plugin-core to Parser/Renderer.
 
 ## [0.5.0] - 2023/08/16
@@ -102,7 +112,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Update plugin-core to version 0.19.0.
+- Update plugin-core to version `0.19.0`.
 
 ## [0.4.1] - 2023/08/02
 
@@ -125,7 +135,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Update plugin-core to version 0.17.0.
+- Update plugin-core to version `0.17.0`.
 
 ### Fixed
 
@@ -140,7 +150,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Update plugin-core to version 0.16.0.
+- Update plugin-core to version `0.16.0`.
 
 ## [0.2.0] - 2023/04/19
 
@@ -153,7 +163,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Update plugin-core to version 0.15.1.
+- Update plugin-core to version `0.15.1`.
 - ANTLR parser and lexer with [official ANTLR terraform grammar](https://github.com/antlr/grammars-v4/tree/master/terraform).
 
 ### Fixed
@@ -165,19 +175,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Update plugin-core to version 0.13.0.
+- Update plugin-core to version `0.13.0`.
 
 ## [0.1.11] - 2023/02/07
 
 ### Fixed
 
-- Update plugin-core to version 0.12.1 to fix some bugs.
+- Update plugin-core to version `0.12.1` to fix some bugs.
 
 ## [0.1.10] - 2023/02/02
 
 ### Changed
 
-- Update plugin-core to version 0.12.0.
+- Update plugin-core to version `0.12.0`.
 
 ## [0.1.9] - 2023/01/31
 
@@ -199,7 +209,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Replace documentation generation library ESDoc by JSDoc.
-- Update plugin-core to version 0.11.0.
+- Update plugin-core to version `0.11.0`.
 
 ### Removed
 
@@ -215,7 +225,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Update plugin-core to version 0.10.0.
+- Update plugin-core to version `0.10.0`.
 
 ## [0.1.5] - 2022/11/25
 
@@ -227,7 +237,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Update plugin-core to version 0.9.1.
+- Update plugin-core to version `0.9.1`.
 
 ### Fixed
 
@@ -254,7 +264,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Update plugin-core to version 0.6.0.
+- Update plugin-core to version `0.6.0`.
 
 ## [0.1.0] - 2022/09/20
 

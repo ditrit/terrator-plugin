@@ -131,7 +131,7 @@ resource "aws_subnet" "cms_dmz_subnet" {
 resource "aws_security_group" "cms_frontend_secgroup" {
     name = "cms_frontend_secgroup"
     description = "Default Rules for the CMS Front-End servers"
-    vpc_id = aws_vpc.cms_main_vpc
+    vpc_id = aws_vpc.cms_main_vpc.id
     ingress {
         description = "HTTP from VPC"
         from_port = 8000
@@ -172,7 +172,7 @@ resource "aws_security_group" "cms_frontend_secgroup" {
 resource "aws_security_group" "cms_backend_secgroup" {
     name = "cms_backend_secgroup"
     description = "Default Rules for the CMS Back-End servers"
-    vpc_id = aws_vpc.cms_main_vpc
+    vpc_id = aws_vpc.cms_main_vpc.id
     ingress {
         description = "MySQL from VPC"
         from_port = 3306
@@ -198,7 +198,7 @@ resource "aws_security_group" "cms_backend_secgroup" {
 resource "aws_security_group" "cms_lb_secgroup" {
     name = "cms_lb_secgroup"
     description = "Default Rules for the CMS LoadBalancer"
-    vpc_id = aws_vpc.cms_main_vpc
+    vpc_id = aws_vpc.cms_main_vpc.id
     ingress {
         from_port = 443
         to_port = 443
@@ -254,7 +254,7 @@ resource "aws_lb_target_group" "cms_lb_target" {
     target_type = "instance"
     port = 8000
     protocol = "HTTP"
-    vpc_id = aws_vpc.cms_main_vpc
+    vpc_id = aws_vpc.cms_main_vpc.id
 }
 
 resource "aws_launch_configuration" "cms_launch_conf" {
@@ -296,12 +296,12 @@ resource "aws_autoscaling_policy" "cms_policy_up" {
 resource "aws_cloudwatch_metric_alarm" "cms_cpu_alarm_up" {
     alarm_name = "cms_cpu_alarm_up"
     comparison_operator = "GreaterThanOrEqualToThreshold"
-    evaluation_periods = "2"
+    evaluation_periods = 2
     metric_name = "CPUUtilization"
     namespace = "AWS/EC2"
-    period = "120"
+    period = 120
     statistic = "Average"
-    threshold = "85"
+    threshold = 85
     dimensions = {
         AutoScalingGroupName = aws_autoscaling_group.cms_asg.name
     }
@@ -322,12 +322,12 @@ resource "aws_autoscaling_policy" "cms_policy_down" {
 resource "aws_cloudwatch_metric_alarm" "cms_cpu_alarm_down" {
     alarm_name = "cms_cpu_alarm_down"
     comparison_operator = "LessThanOrEqualToThreshold"
-    evaluation_periods = "2"
+    evaluation_periods = 2
     metric_name = "CPUUtilization"
     namespace = "AWS/EC2"
-    period = "120"
+    period = 120
     statistic = "Average"
-    threshold = "30"
+    threshold = 30
     dimensions = {
         AutoScalingGroupName = aws_autoscaling_group.cms_asg.name
     }
@@ -345,7 +345,7 @@ resource "aws_efs_file_system" "cms_fileshare" {
 
 resource "aws_lb_listener" "cms_lb_listener" {
     load_balancer_arn = aws_lb.cms_frontend_lb.arn
-    port = "80"
+    port = 80
     protocol = "HTTP"
     default_action {
         type = "forward"

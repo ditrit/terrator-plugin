@@ -1262,8 +1262,8 @@ export const mainComponents = [
       }),
       new TerraformComponentAttribute({
         name: 'evaluation_periods',
-        type: 'String',
-        value: '2',
+        type: 'Number',
+        value: 2,
         definition: defs.resource.aws_cloudwatch_metric_alarm.attrs.evaluation_periods.def,
       }),
       new TerraformComponentAttribute({
@@ -1280,8 +1280,8 @@ export const mainComponents = [
       }),
       new TerraformComponentAttribute({
         name: 'period',
-        type: 'String',
-        value: '120',
+        type: 'Number',
+        value: 120,
         definition: defs.resource.aws_cloudwatch_metric_alarm.attrs.period.def,
       }),
       new TerraformComponentAttribute({
@@ -1292,8 +1292,8 @@ export const mainComponents = [
       }),
       new TerraformComponentAttribute({
         name: 'threshold',
-        type: 'String',
-        value: '85',
+        type: 'Number',
+        value: 85,
         definition: defs.resource.aws_cloudwatch_metric_alarm.attrs.threshold.def,
       }),
       new TerraformComponentAttribute({
@@ -1385,8 +1385,8 @@ export const mainComponents = [
       }),
       new TerraformComponentAttribute({
         name: 'evaluation_periods',
-        type: 'String',
-        value: '2',
+        type: 'Number',
+        value: 2,
         definition: defs.resource.aws_cloudwatch_metric_alarm.attrs.evaluation_periods.def,
       }),
       new TerraformComponentAttribute({
@@ -1403,8 +1403,8 @@ export const mainComponents = [
       }),
       new TerraformComponentAttribute({
         name: 'period',
-        type: 'String',
-        value: '120',
+        type: 'Number',
+        value: 120,
         definition: defs.resource.aws_cloudwatch_metric_alarm.attrs.period.def,
       }),
       new TerraformComponentAttribute({
@@ -1415,8 +1415,8 @@ export const mainComponents = [
       }),
       new TerraformComponentAttribute({
         name: 'threshold',
-        type: 'String',
-        value: '30',
+        type: 'Number',
+        value: 30,
         definition: defs.resource.aws_cloudwatch_metric_alarm.attrs.threshold.def,
       }),
       new TerraformComponentAttribute({
@@ -1485,8 +1485,8 @@ export const mainComponents = [
       }),
       new TerraformComponentAttribute({
         name: 'port',
-        type: 'String',
-        value: '80',
+        type: 'Number',
+        value: 80,
         definition: defs.resource.aws_lb_listener.attrs.port.def,
       }),
       new TerraformComponentAttribute({

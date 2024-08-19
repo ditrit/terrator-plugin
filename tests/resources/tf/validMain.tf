@@ -320,12 +320,12 @@ resource "aws_autoscaling_policy" "cms_policy_up" {
 resource "aws_cloudwatch_metric_alarm" "cms_cpu_alarm_up" {
     alarm_name = "cms_cpu_alarm_up"
     comparison_operator = "GreaterThanOrEqualToThreshold"
-    evaluation_periods = "2"
+    evaluation_periods = 2
     metric_name = "CPUUtilization"
     namespace = "AWS/EC2"
-    period = "120"
+    period = 120
     statistic = "Average"
-    threshold = "85"
+    threshold = 85
     dimensions = {
         AutoScalingGroupName = [
             aws_autoscaling_group.cms_asg.id,
@@ -350,12 +350,12 @@ resource "aws_autoscaling_policy" "cms_policy_down" {
 resource "aws_cloudwatch_metric_alarm" "cms_cpu_alarm_down" {
     alarm_name = "cms_cpu_alarm_down"
     comparison_operator = "LessThanOrEqualToThreshold"
-    evaluation_periods = "2"
+    evaluation_periods = 2
     metric_name = "CPUUtilization"
     namespace = "AWS/EC2"
-    period = "120"
+    period = 120
     statistic = "Average"
-    threshold = "30"
+    threshold = 30
     dimensions = {
         AutoScalingGroupName = [
             aws_autoscaling_group.cms_asg.id,
@@ -377,7 +377,7 @@ resource "aws_lb_listener" "cms_lb_listener" {
     load_balancer_arn = [
         aws_lb.cms_frontend_lb.id,
     ]
-    port = "80"
+    port = 80
     protocol = "HTTP"
     default_action {
         type = "forward"

@@ -1,5 +1,6 @@
 /* eslint class-methods-use-this: 0 */
 import antlr4 from 'antlr4';
+import { ParserLog } from '@ditrit/leto-modelizer-plugin-core';
 import TerraformVariable from '../models/TerraformVariable';
 import TerraformComponentAttribute from '../models/TerraformComponentAttribute';
 import TerraformComponent from '../models/TerraformComponent';
@@ -309,6 +310,14 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
 
   // Enter a parse tree produced by terraformParser#argument.
   enterArgument(ctx) {
+    let definition = null;
+    if (!this.isVariable() && this.currentBlockType !== 'local') {
+      definition = this.getAttributeDefinition(
+        this.currentObjectField || this.currentComponent,
+        ctx.identifier().getText(),
+      );
+    }
+
     if (ctx.expression()?.section()?.map_()) {
       if (this.currentObjectField) {
         this.fieldsTree.push(this.currentObjectField);
@@ -319,10 +328,7 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
         name,
         type: 'Object',
         value: [],
-        definition: this.getAttributeDefinition(
-          this.currentObjectField || this.currentComponent,
-          name,
-        ),
+        definition,
       });
     }
 
@@ -342,10 +348,10 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
       this.currentField = new TerraformComponentAttribute({
         name: ctx.identifier().getText(),
       });
-      this.currentField.definition = this.getAttributeDefinition(
-        this.currentComponent,
-        this.currentField.name,
-      );
+    }
+
+    if (this.currentField) {
+      this.currentField.definition = definition;
     }
   }
 
@@ -366,16 +372,8 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
 
       if (this.currentObjectField) {
         this.currentObjectField.value.push(this.currentField);
-        this.currentField.definition = this.getAttributeDefinition(
-          this.currentObjectField,
-          this.currentField.name,
-        );
       } else {
         this.currentComponent.attributes.push(this.currentField);
-        this.currentField.definition = this.getAttributeDefinition(
-          this.currentComponent,
-          this.currentField.name,
-        );
       }
     } else {
       this.currentObjectField.name = ctx.identifier().getText();
@@ -403,23 +401,6 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
         } else {
           this.currentField.value = this.createIdFromTypeExternalId(this.currentField.value);
         }
-      }
-    }
-
-    if (this.currentField?.definition?.type === 'Link') {
-      this.currentField.type = 'Array';
-      if (Array.isArray(this.currentField.value)) {
-        this.currentField.value = this.currentField.value.map((v) => {
-          const match = /([^.]+\.[^.]+)\.([^.]+)/.exec(v);
-          // match[1] is `type.externalId`
-          return this.createIdFromTypeExternalId(match[1]);
-        });
-      }
-
-      const match = /([^.]+\.[^.]+)(\.([^.]+))?/.exec(this.currentField.value);
-
-      if (match) {
-        this.currentField.value = [this.createIdFromTypeExternalId(match[1])];
       }
     }
 
@@ -554,7 +535,25 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
       return;
     }
 
-    if (this.currentField.type === 'Array') {
+    if (this.currentField.definition?.type === 'Link') {
+      this.currentField.type = 'Array';
+      const match = /([^.]+\.[^.]+)\.([^.]+)/.exec(value);
+
+      if (!this.currentField.value) {
+        this.currentField.value = [];
+      }
+
+      if (!match) {
+        this.addError(ctx, new ParserLog({
+          attribute: this.currentField.name,
+          severity: ParserLog.SEVERITY_ERROR,
+          message: 'terrator-plugin.parser.error.badExternalId',
+          extraData: value,
+        }));
+      } else {
+        this.currentField.value.push(this.createIdFromTypeExternalId(match[1]));
+      }
+    } else if (this.currentField.type === 'Array') {
       this.currentField.value.push(value);
     } else {
       this.currentField.value = value;
@@ -612,8 +611,10 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
         type: 'Array',
         value: [],
       });
-    } else if (this.currentField) {
-      this.currentField.type = 'Array';
+    }
+
+    this.currentField.type = 'Array';
+    if (!this.currentField.value) {
       this.currentField.value = [];
     }
 

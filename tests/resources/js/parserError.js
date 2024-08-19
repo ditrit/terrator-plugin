@@ -87,6 +87,19 @@ const errors = [
     severity: ParserLog.SEVERITY_ERROR,
     initialErrorMessage: null,
   }),
+  new ParserLog({
+    path: 'parserError.tf',
+    componentId: 'id_6',
+    attribute: 'target_group_arn',
+    startLineNumber: 21,
+    startColumn: 25,
+    endLineNumber: 21,
+    endColumn: 36,
+    message: 'terrator-plugin.parser.error.badExternalId',
+    severity: ParserLog.SEVERITY_ERROR,
+    initialErrorMessage: null,
+    extraData: 'lb_target',
+  }),
 ];
 
 export default errors;

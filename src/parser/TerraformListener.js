@@ -547,7 +547,7 @@ class TerraformListener extends antlr4.tree.ParseTreeListener {
         this.addError(ctx, new ParserLog({
           attribute: this.currentField.name,
           severity: ParserLog.SEVERITY_ERROR,
-          message: 'terrator-plugin.parser.error.badExternalId',
+          message: '@ditrit/terrator-plugin.parser.error.badExternalId',
           extraData: value,
         }));
       } else {

@@ -62,7 +62,7 @@ class TerraformComponent extends Component {
       logs.push(new ParserLog({
         componentId: this.id,
         severity: ParserLog.SEVERITY_ERROR,
-        message: 'terrator-plugin.parser.error.noExternalId',
+        message: '@ditrit/terrator-plugin.parser.error.noExternalId',
       }));
     }
 

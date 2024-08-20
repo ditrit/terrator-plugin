@@ -36,7 +36,7 @@ describe('Test class: TerraformComponent', () => {
 
       expect(component.getErrors()).toEqual([new ParserLog({
         severity: ParserLog.SEVERITY_ERROR,
-        message: 'terrator-plugin.parser.error.noExternalId',
+        message: '@ditrit/terrator-plugin.parser.error.noExternalId',
       }), new ParserLog({
         severity: ParserLog.SEVERITY_WARNING,
         message: 'parser.warning.noComponentDefinition',
@@ -84,13 +84,13 @@ describe('Test class: TerraformComponent', () => {
       });
 
       expect(component.validateExternalId()).toEqual([new ParserLog({
-        message: 'terrator-plugin.parser.error.noExternalId',
+        message: '@ditrit/terrator-plugin.parser.error.noExternalId',
         severity: ParserLog.SEVERITY_ERROR,
       })]);
 
       component.externalId = '';
       expect(component.validateExternalId()).toEqual([new ParserLog({
-        message: 'terrator-plugin.parser.error.noExternalId',
+        message: '@ditrit/terrator-plugin.parser.error.noExternalId',
         severity: ParserLog.SEVERITY_ERROR,
       })]);
     });
